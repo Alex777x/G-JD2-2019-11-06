@@ -1,5 +1,0 @@
-<<<<<<< HEAD
-test master 1
-=======
-test testing
->>>>>>> testing
