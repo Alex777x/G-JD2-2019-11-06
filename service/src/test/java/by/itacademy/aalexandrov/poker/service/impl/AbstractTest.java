@@ -1,12 +1,15 @@
 package by.itacademy.aalexandrov.poker.service.impl;
 
+import by.itacademy.aalexandrov.poker.dao.api.entity.table.ICountry;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.ITiket;
+import by.itacademy.aalexandrov.poker.service.ICountryService;
 import by.itacademy.aalexandrov.poker.service.ITiketService;
 import java.util.Random;
 import org.junit.jupiter.api.BeforeEach;
 
 public abstract class AbstractTest {
 	protected ITiketService tiketService = new TiketServiceImpl();
+	protected ICountryService countryService = new CountryServiceImpl();
 
 	private static final Random RANDOM = new Random();
 
@@ -35,6 +38,13 @@ public abstract class AbstractTest {
 		entity.setTiketText("tiket-text" + getRandomPrefix());
 		entity.setStatus("tiket-status" + getRandomPrefix());
 		tiketService.save(entity);
+		return entity;
+	}
+	
+	protected ICountry saveNewCountry() {
+		ICountry entity = countryService.createEntity();
+		entity.setCountry("country" + getRandomPrefix());
+		countryService.save(entity);
 		return entity;
 	}
 
