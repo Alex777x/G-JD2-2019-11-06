@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.ITiket;
 
-public class BrandServiceTest extends AbstractTest {
+public class TiketServiceTest extends AbstractTest {
 
 	@Test
 	public void testCreate() {
