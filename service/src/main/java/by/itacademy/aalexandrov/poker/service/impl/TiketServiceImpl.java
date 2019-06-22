@@ -51,6 +51,19 @@ public class TiketServiceImpl implements ITiketService {
 		final List<ITiket> all = dao.selectAll();
 		return all;
 	}
+	
+	@Override
+    public void save(ITiket... entities) {
+        Date modified = new Date();
+        for (ITiket iTiket : entities) {
+
+        	iTiket.setUpdated(modified);
+        	iTiket.setCreated(modified);
+
+        }
+
+        dao.save(entities);
+    }
 
 	@Override
 	public List<ITiket> find(TiketFilter filter) {

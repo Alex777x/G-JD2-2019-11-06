@@ -10,8 +10,10 @@ public interface ITiketService {
 	ITiket get(Integer id);
 
 	List<ITiket> getAll();
-
+	
 	void save(ITiket entity);
+
+	void save(ITiket... entities);
 
 	void delete(Integer id);
 

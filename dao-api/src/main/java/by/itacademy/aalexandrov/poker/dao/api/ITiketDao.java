@@ -11,4 +11,6 @@ public interface ITiketDao extends IDao<ITiket, Integer> {
 
 	long getCount(TiketFilter filter);
 
+	void save(ITiket... entities);
+
 }

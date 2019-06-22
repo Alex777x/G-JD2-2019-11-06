@@ -1,11 +1,9 @@
 package by.itacademy.aalexandrov.poker.service.impl;
 
-import java.util.Random;
-
-import org.junit.jupiter.api.BeforeEach;
-
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.ITiket;
 import by.itacademy.aalexandrov.poker.service.ITiketService;
+import java.util.Random;
+import org.junit.jupiter.api.BeforeEach;
 
 public abstract class AbstractTest {
 	protected ITiketService tiketService = new TiketServiceImpl();
@@ -27,7 +25,7 @@ public abstract class AbstractTest {
 		return RANDOM.nextInt(9) + 1;
 	}
 
-	public Random getRANDOM() {
+	public Random getRandom() {
 		return RANDOM;
 	}
 
