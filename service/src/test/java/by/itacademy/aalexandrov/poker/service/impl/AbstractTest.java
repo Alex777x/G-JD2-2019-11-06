@@ -82,7 +82,7 @@ public abstract class AbstractTest {
 		entity.setCall(getRandomObjectsCount());
 		entity.setRaise(getRandomObjectsCount());
 		entity.setFold(false);
-		entity.setCheck(false);
+		entity.setCheck(true);
 		entity.setVaBank(getRandomObjectsCount());
 		entity.setSmallBlind(true);
 		entity.setBigBlind(false);

@@ -25,7 +25,7 @@ public class PokerActionDaoImpl extends AbstractDaoImpl<IPokerAction, Integer> i
 	@Override
 	public void insert(IPokerAction entity) {
 		executeStatement(new PreparedStatementAction<IPokerAction>(
-				String.format("insert into %s (bet, call, raise, fold, check, va_bank, small_blind, big_blind, created, updated) values(?,?,?,?,?,?,?,?,?,?)",
+				String.format("insert into %s (bet, call, raise, fold, check_check, va_bank, small_blind, big_blind, created, updated) values(?,?,?,?,?,?,?,?,?,?)",
 						getTableName()),
 				true) {
 			@Override
@@ -58,7 +58,7 @@ public class PokerActionDaoImpl extends AbstractDaoImpl<IPokerAction, Integer> i
 	@Override
 	public void update(IPokerAction entity) {
 		executeStatement(new PreparedStatementAction<IPokerAction>(String
-				.format("update %s set bet=?, call=?, raise=?, fold=?, check=?, va_bank=?, small_blind=?, big_blind=?, updated=? where id=?", getTableName())) {
+				.format("update %s set bet=?, call=?, raise=?, fold=?, check_check=?, va_bank=?, small_blind=?, big_blind=?, updated=? where id=?", getTableName())) {
 			@Override
 			public IPokerAction doWithPreparedStatement(final PreparedStatement pStmt) throws SQLException {
 				pStmt.setInt(1, entity.getBet());
@@ -92,7 +92,7 @@ public class PokerActionDaoImpl extends AbstractDaoImpl<IPokerAction, Integer> i
 		entity.setCall(resultSet.getInt("call"));
 		entity.setRaise(resultSet.getInt("raise"));
 		entity.setFold(resultSet.getBoolean("fold"));
-		entity.setCheck(resultSet.getBoolean("check"));
+		entity.setCheck(resultSet.getBoolean("check_check"));
 		entity.setVaBank(resultSet.getInt("va_bank"));
 		entity.setSmallBlind(resultSet.getBoolean("small_blind"));
 		entity.setBigBlind(resultSet.getBoolean("big_blind"));
@@ -109,7 +109,7 @@ public class PokerActionDaoImpl extends AbstractDaoImpl<IPokerAction, Integer> i
 
 				for (IPokerAction entity : entities) {
 					PreparedStatement pStmt = c.prepareStatement(String.format(
-							"insert into %s (bet, call, raise, fold, check, va_bank, small_blind, big_blind, created, updated) values(?,?,?,?,?,?,?,?,?,?)",
+							"insert into %s (bet, call, raise, fold, check_check, va_bank, small_blind, big_blind, created, updated) values(?,?,?,?,?,?,?,?,?,?)",
 							getTableName()), Statement.RETURN_GENERATED_KEYS);
 
 					pStmt.setInt(1, entity.getBet());
