@@ -1,10 +1,12 @@
 package by.itacademy.aalexandrov.poker.service.impl;
 
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.ICountry;
+import by.itacademy.aalexandrov.poker.dao.api.entity.table.IPokerAction;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IStatistic;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.ITiket;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.ITranzaction;
 import by.itacademy.aalexandrov.poker.service.ICountryService;
+import by.itacademy.aalexandrov.poker.service.IPokerActionService;
 import by.itacademy.aalexandrov.poker.service.IStatisticService;
 import by.itacademy.aalexandrov.poker.service.ITiketService;
 import by.itacademy.aalexandrov.poker.service.ITranzactionService;
@@ -17,6 +19,7 @@ public abstract class AbstractTest {
 	protected ICountryService countryService = new CountryServiceImpl();
 	protected IStatisticService statisticService = new StatisticServiceImpl();
 	protected ITranzactionService tranzactionService = new TranzactionServiceImpl();
+	protected IPokerActionService pokerActionService = new PokerActionServiceImpl();
 
 	private static final Random RANDOM = new Random();
 
@@ -64,12 +67,26 @@ public abstract class AbstractTest {
 		statisticService.save(entity);
 		return entity;
 	}
-	
+
 	protected ITranzaction saveNewTranzaction() {
 		ITranzaction entity = tranzactionService.createEntity();
 		entity.setAmount(getRandomObjectsCount());
 		entity.setComment("comment" + getRandomPrefix());
 		tranzactionService.save(entity);
+		return entity;
+	}
+	
+	protected IPokerAction saveNewPokerAction() {
+		IPokerAction entity = pokerActionService.createEntity();
+		entity.setBet(getRandomObjectsCount());
+		entity.setCall(getRandomObjectsCount());
+		entity.setRaise(getRandomObjectsCount());
+		entity.setFold(false);
+		entity.setCheck(false);
+		entity.setVaBank(getRandomObjectsCount());
+		entity.setSmallBlind(true);
+		entity.setBigBlind(false);
+		pokerActionService.save(entity);
 		return entity;
 	}
 

@@ -1,2 +1,4 @@
 Почему в таблице ticket создается только одна строка?
 Не проходит тест testCreateMultiple в statistic.
+Тесты по pokerAction не проходят вообще.
+
