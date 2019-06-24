@@ -62,7 +62,6 @@ public class CountryDaoImpl extends AbstractDaoImpl<ICountry, Integer> implement
 
 	@Override
 	protected String getTableName() {
-		// TODO Auto-generated method stub
 		return "country";
 	}
 

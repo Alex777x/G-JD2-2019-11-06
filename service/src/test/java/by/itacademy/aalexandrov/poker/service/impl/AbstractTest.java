@@ -1,8 +1,10 @@
 package by.itacademy.aalexandrov.poker.service.impl;
 
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.ICountry;
+import by.itacademy.aalexandrov.poker.dao.api.entity.table.IStatistic;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.ITiket;
 import by.itacademy.aalexandrov.poker.service.ICountryService;
+import by.itacademy.aalexandrov.poker.service.IStatisticService;
 import by.itacademy.aalexandrov.poker.service.ITiketService;
 import java.util.Random;
 import org.junit.jupiter.api.BeforeEach;
@@ -10,6 +12,7 @@ import org.junit.jupiter.api.BeforeEach;
 public abstract class AbstractTest {
 	protected ITiketService tiketService = new TiketServiceImpl();
 	protected ICountryService countryService = new CountryServiceImpl();
+	protected IStatisticService statisticService = new StatisticServiceImpl();
 
 	private static final Random RANDOM = new Random();
 
@@ -17,6 +20,8 @@ public abstract class AbstractTest {
 	public void setUpMethod() {
 		// clean DB recursive
 		tiketService.deleteAll();
+		countryService.deleteAll();
+		statisticService.deleteAll();
 
 	}
 
@@ -40,12 +45,21 @@ public abstract class AbstractTest {
 		tiketService.save(entity);
 		return entity;
 	}
-	
+
 	protected ICountry saveNewCountry() {
 		ICountry entity = countryService.createEntity();
 		entity.setCountry("country" + getRandomPrefix());
 		countryService.save(entity);
 		return entity;
+	}
+
+	protected IStatistic saveNewStatistic() {
+		IStatistic entity = statisticService.createEntity();
+		entity.setSumGames(getRandomObjectsCount());
+		entity.setWonGames(getRandomObjectsCount());
+		statisticService.save(entity);
+		return entity;
+
 	}
 
 }
