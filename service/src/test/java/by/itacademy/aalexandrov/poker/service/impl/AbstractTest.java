@@ -3,9 +3,12 @@ package by.itacademy.aalexandrov.poker.service.impl;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.ICountry;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IStatistic;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.ITiket;
+import by.itacademy.aalexandrov.poker.dao.api.entity.table.ITranzaction;
 import by.itacademy.aalexandrov.poker.service.ICountryService;
 import by.itacademy.aalexandrov.poker.service.IStatisticService;
 import by.itacademy.aalexandrov.poker.service.ITiketService;
+import by.itacademy.aalexandrov.poker.service.ITranzactionService;
+
 import java.util.Random;
 import org.junit.jupiter.api.BeforeEach;
 
@@ -13,6 +16,7 @@ public abstract class AbstractTest {
 	protected ITiketService tiketService = new TiketServiceImpl();
 	protected ICountryService countryService = new CountryServiceImpl();
 	protected IStatisticService statisticService = new StatisticServiceImpl();
+	protected ITranzactionService tranzactionService = new TranzactionServiceImpl();
 
 	private static final Random RANDOM = new Random();
 
@@ -59,7 +63,14 @@ public abstract class AbstractTest {
 		entity.setWonGames(getRandomObjectsCount());
 		statisticService.save(entity);
 		return entity;
-
+	}
+	
+	protected ITranzaction saveNewTranzaction() {
+		ITranzaction entity = tranzactionService.createEntity();
+		entity.setAmount(getRandomObjectsCount());
+		entity.setComment("comment" + getRandomPrefix());
+		tranzactionService.save(entity);
+		return entity;
 	}
 
 }
