@@ -1,15 +1,21 @@
 package by.itacademy.aalexandrov.poker.service.impl;
 
+import by.itacademy.aalexandrov.poker.dao.api.entity.enums.UserRole;
+import by.itacademy.aalexandrov.poker.dao.api.entity.enums.UserStatus;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.ICountry;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IPokerAction;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IStatistic;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.ITiket;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.ITranzaction;
+import by.itacademy.aalexandrov.poker.dao.api.entity.table.IUserAccount;
+import by.itacademy.aalexandrov.poker.jdbc.impl.entity.Country;
+import by.itacademy.aalexandrov.poker.jdbc.impl.entity.Tranzaction;
 import by.itacademy.aalexandrov.poker.service.ICountryService;
 import by.itacademy.aalexandrov.poker.service.IPokerActionService;
 import by.itacademy.aalexandrov.poker.service.IStatisticService;
 import by.itacademy.aalexandrov.poker.service.ITiketService;
 import by.itacademy.aalexandrov.poker.service.ITranzactionService;
+import by.itacademy.aalexandrov.poker.service.IUserAccountService;
 
 import java.util.Random;
 import org.junit.jupiter.api.BeforeEach;
@@ -20,6 +26,7 @@ public abstract class AbstractTest {
 	protected IStatisticService statisticService = new StatisticServiceImpl();
 	protected ITranzactionService tranzactionService = new TranzactionServiceImpl();
 	protected IPokerActionService pokerActionService = new PokerActionServiceImpl();
+	protected IUserAccountService userAccountService = new UserAccountServiceImpl();
 
 	private static final Random RANDOM = new Random();
 
@@ -45,7 +52,7 @@ public abstract class AbstractTest {
 	}
 
 	protected ITiket saveNewTiket() {
-		final ITiket entity = tiketService.createEntity();
+		ITiket entity = tiketService.createEntity();
 		entity.setTiketTitle("tiket-title" + getRandomPrefix());
 		entity.setTiketText("tiket-text" + getRandomPrefix());
 		entity.setStatus("tiket-status" + getRandomPrefix());
@@ -87,6 +94,20 @@ public abstract class AbstractTest {
 		entity.setSmallBlind(true);
 		entity.setBigBlind(false);
 		pokerActionService.save(entity);
+		return entity;
+	}
+	
+	protected IUserAccount saveNewUserAccount() {
+		IUserAccount entity = userAccountService.createEntity();
+		entity.setNickname(getRandomPrefix());
+		entity.setPassword(getRandomPrefix());
+		entity.setEmail(getRandomPrefix());
+		entity.setFoto(getRandomPrefix());
+		entity.setCountry(new Country());
+		entity.setUserRole(UserRole.member);
+		entity.setUserStatus(UserStatus.active);
+		entity.setTranzaction(new Tranzaction());
+		userAccountService.save(entity);
 		return entity;
 	}
 

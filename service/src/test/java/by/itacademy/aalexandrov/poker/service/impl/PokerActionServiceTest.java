@@ -79,6 +79,8 @@ public class PokerActionServiceTest extends AbstractTest {
 		entity.setFold(newFold);
 		entity.setCheck(newCheck);
 		entity.setVaBank(newVaBank);
+		entity.setSmallBlind(newSmallBlind);
+		entity.setBigBlind(newBigBlind);
 		Thread.sleep(2000);
 		pokerActionService.save(entity);
 

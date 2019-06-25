@@ -1,4 +1,16 @@
 Почему в таблице ticket создается только одна строка?
 Не проходит тест testCreateMultiple в statistic.
 Тесты по pokerAction не проходят вообще.
+Country создается так же как и tiket.
+UserAccount не могу понять как правильно заюзать обьекты и что с enum
 
+
+
+
+
+
+
+
+
+
+добавить user_id в tiket в классах
