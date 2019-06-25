@@ -15,12 +15,9 @@ import by.itacademy.aalexandrov.poker.dao.api.entity.enums.UserStatus;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.ICountry;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.ITranzaction;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IUserAccount;
-import by.itacademy.aalexandrov.poker.jdbc.impl.entity.Country;
-import by.itacademy.aalexandrov.poker.jdbc.impl.entity.Tranzaction;
-
 
 public class UserAccountServiceTest extends AbstractTest {
-	
+
 	@Test
 	public void testCreate() {
 		final IUserAccount entity = saveNewUserAccount();
@@ -51,10 +48,10 @@ public class UserAccountServiceTest extends AbstractTest {
 		entity1.setPassword(getRandomPrefix());
 		entity1.setEmail(getRandomPrefix());
 		entity1.setFoto(getRandomPrefix());
-		//entity1.setCountry(new Country());
+		entity1.setCountry(saveNewCountry());
 		entity1.setUserRole(UserRole.member);
 		entity1.setUserStatus(UserStatus.active);
-		//entity1.setTranzaction(new Tranzaction());
+		entity1.setTranzaction(saveNewTranzaction());
 
 		try {
 			final IUserAccount entity2 = userAccountService.createEntity();

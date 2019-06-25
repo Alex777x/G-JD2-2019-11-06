@@ -28,18 +28,17 @@ public class UserAccountDaoImpl extends AbstractDaoImpl<IUserAccount, Integer> i
 
 	@Override
 	public void insert(IUserAccount entity) {
-		executeStatement(new PreparedStatementAction<IUserAccount>(
-				String.format("insert into %s (nickname, password, email, foto, country_id, role_id, status_id, tranzaction_id, created, updated) values(?,?,?,?,?,?,?,?,?,?)",
-						getTableName()),
-				true) {
+		executeStatement(new PreparedStatementAction<IUserAccount>(String.format(
+				"insert into %s (nickname, password, email, foto, country_id, role_id, status_id, tranzaction_id, created, updated) values(?,?,?,?,?,?,?,?,?,?)",
+				getTableName()), true) {
 			@Override
 			public IUserAccount doWithPreparedStatement(final PreparedStatement pStmt) throws SQLException {
 				pStmt.setString(1, entity.getNickname());
 				pStmt.setString(2, entity.getPassword());
 				pStmt.setString(3, entity.getEmail());
 				pStmt.setString(4, entity.getFoto());
-				pStmt.setObject(5, entity.getCountry());
-				pStmt.setObject(6, entity.getUserRole());
+				pStmt.setString(5, entity.getCountry().getCountry());
+				pStmt.setString(6, entity.getUserRole().name());
 				pStmt.setObject(7, entity.getUserStatus());
 				pStmt.setObject(8, entity.getTranzaction());
 				pStmt.setObject(9, entity.getCreated(), Types.TIMESTAMP);
@@ -61,8 +60,9 @@ public class UserAccountDaoImpl extends AbstractDaoImpl<IUserAccount, Integer> i
 
 	@Override
 	public void update(IUserAccount entity) {
-		executeStatement(new PreparedStatementAction<IUserAccount>(String
-				.format("update %s set nickname=?, password=?, email=?, foto=?, country_id=?, role_id=?, status_id=?, tranzaction_id=?, updated=? where id=?", getTableName())) {
+		executeStatement(new PreparedStatementAction<IUserAccount>(String.format(
+				"update %s set nickname=?, password=?, email=?, foto=?, country_id=?, role_id=?, status_id=?, tranzaction_id=?, updated=? where id=?",
+				getTableName())) {
 			@Override
 			public IUserAccount doWithPreparedStatement(final PreparedStatement pStmt) throws SQLException {
 				pStmt.setString(1, entity.getNickname());
@@ -70,7 +70,7 @@ public class UserAccountDaoImpl extends AbstractDaoImpl<IUserAccount, Integer> i
 				pStmt.setString(3, entity.getEmail());
 				pStmt.setString(4, entity.getFoto());
 				pStmt.setObject(5, entity.getCountry());
-				pStmt.setObject(6, entity.getUserRole());
+				pStmt.setObject(6, entity.getUserRole().name());
 				pStmt.setObject(7, entity.getUserStatus());
 				pStmt.setObject(8, entity.getTranzaction());
 				pStmt.setObject(9, entity.getUpdated(), Types.TIMESTAMP);
@@ -97,7 +97,7 @@ public class UserAccountDaoImpl extends AbstractDaoImpl<IUserAccount, Integer> i
 		entity.setEmail(resultSet.getString("email"));
 		entity.setFoto(resultSet.getString("foto"));
 		entity.setCountry((ICountry) resultSet.getObject("country_id"));
-		entity.setUserRole((UserRole) resultSet.getObject("role_id"));
+		entity.setUserRole(UserRole.valueOf(resultSet.getString("role_id")));
 		entity.setUserStatus((UserStatus) resultSet.getObject("status_id"));
 		entity.setTranzaction((ITranzaction) resultSet.getObject("tranzaction_id"));
 		entity.setCreated(resultSet.getTimestamp("created"));
@@ -163,5 +163,5 @@ public class UserAccountDaoImpl extends AbstractDaoImpl<IUserAccount, Integer> i
 	public long getCount(UserAccountFilter filter) {
 		return executeCountQuery("");
 	}
-	
+
 }

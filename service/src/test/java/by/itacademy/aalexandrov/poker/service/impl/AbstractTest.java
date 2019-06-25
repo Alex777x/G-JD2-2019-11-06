@@ -1,5 +1,9 @@
 package by.itacademy.aalexandrov.poker.service.impl;
 
+import java.util.Random;
+
+import org.junit.jupiter.api.BeforeEach;
+
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.UserRole;
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.UserStatus;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.ICountry;
@@ -8,17 +12,12 @@ import by.itacademy.aalexandrov.poker.dao.api.entity.table.IStatistic;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.ITiket;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.ITranzaction;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IUserAccount;
-import by.itacademy.aalexandrov.poker.jdbc.impl.entity.Country;
-import by.itacademy.aalexandrov.poker.jdbc.impl.entity.Tranzaction;
 import by.itacademy.aalexandrov.poker.service.ICountryService;
 import by.itacademy.aalexandrov.poker.service.IPokerActionService;
 import by.itacademy.aalexandrov.poker.service.IStatisticService;
 import by.itacademy.aalexandrov.poker.service.ITiketService;
 import by.itacademy.aalexandrov.poker.service.ITranzactionService;
 import by.itacademy.aalexandrov.poker.service.IUserAccountService;
-
-import java.util.Random;
-import org.junit.jupiter.api.BeforeEach;
 
 public abstract class AbstractTest {
 	protected ITiketService tiketService = new TiketServiceImpl();
@@ -36,6 +35,9 @@ public abstract class AbstractTest {
 		tiketService.deleteAll();
 		countryService.deleteAll();
 		statisticService.deleteAll();
+		tranzactionService.deleteAll();
+		pokerActionService.deleteAll();
+		userAccountService.deleteAll();
 
 	}
 
@@ -82,7 +84,7 @@ public abstract class AbstractTest {
 		tranzactionService.save(entity);
 		return entity;
 	}
-	
+
 	protected IPokerAction saveNewPokerAction() {
 		IPokerAction entity = pokerActionService.createEntity();
 		entity.setBet(getRandomObjectsCount());
@@ -96,17 +98,17 @@ public abstract class AbstractTest {
 		pokerActionService.save(entity);
 		return entity;
 	}
-	
+
 	protected IUserAccount saveNewUserAccount() {
 		IUserAccount entity = userAccountService.createEntity();
-		entity.setNickname(getRandomPrefix());
-		entity.setPassword(getRandomPrefix());
-		entity.setEmail(getRandomPrefix());
-		entity.setFoto(getRandomPrefix());
-		entity.setCountry(new Country());
+		entity.setNickname("nickname" + getRandomPrefix());
+		entity.setPassword("password" + getRandomPrefix());
+		entity.setEmail("email" + getRandomPrefix());
+		entity.setFoto("foto" + getRandomPrefix());
+		entity.setCountry(saveNewCountry());
 		entity.setUserRole(UserRole.member);
 		entity.setUserStatus(UserStatus.active);
-		entity.setTranzaction(new Tranzaction());
+		entity.setTranzaction(saveNewTranzaction());
 		userAccountService.save(entity);
 		return entity;
 	}
