@@ -65,7 +65,7 @@ public class TransactionServiceImpl implements ITransactionService {
 
 	@Override
 	public void deleteAll() {
-		LOGGER.info("delete all Tranzactions");
+		LOGGER.info("delete all Transactions");
 		dao.deleteAll();
 	}
 

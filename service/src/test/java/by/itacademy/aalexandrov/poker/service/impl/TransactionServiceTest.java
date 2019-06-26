@@ -20,7 +20,7 @@ public class TransactionServiceTest extends AbstractTest {
 	public void testCreate() {
 		final ITransaction entity = saveNewTranzaction();
 
-		final ITransaction entityFromDb = tranzactionService.get(entity.getId());
+		final ITransaction entityFromDb = transactionService.get(entity.getId());
 
 		assertNotNull(entityFromDb);
 		assertEquals(entity.getAmount(), entityFromDb.getAmount());
@@ -33,18 +33,18 @@ public class TransactionServiceTest extends AbstractTest {
 	
 	@Test
     public void testCreateMultiple() {
-        int initialSize = tranzactionService.getAll().size();
+        int initialSize = transactionService.getAll().size();
 
-        final ITransaction entity1 = tranzactionService.createEntity();
+        final ITransaction entity1 = transactionService.createEntity();
         entity1.setAmount(getRandomObjectsCount());
         entity1.setComment("tiket_text" + getRandomPrefix());
 
         try {
-            final ITransaction entity2 = tranzactionService.createEntity();
-            tranzactionService.save(entity1, entity2);
+            final ITransaction entity2 = transactionService.createEntity();
+            transactionService.save(entity1, entity2);
             fail("Tranzaction save should fail if name not specified");
         } catch (Exception e) {
-            assertEquals(initialSize, tranzactionService.getAll().size());
+            assertEquals(initialSize, transactionService.getAll().size());
         }
 
     }
@@ -58,9 +58,9 @@ public class TransactionServiceTest extends AbstractTest {
         entity.setAmount(newAmount);
         entity.setComment(newComment);
         Thread.sleep(2000);
-        tranzactionService.save(entity);
+        transactionService.save(entity);
 
-        final ITransaction entityFromDb = tranzactionService.get(entity.getId());
+        final ITransaction entityFromDb = transactionService.get(entity.getId());
 
         assertNotNull(entityFromDb);
         assertEquals(newAmount, entityFromDb.getAmount());
@@ -74,14 +74,14 @@ public class TransactionServiceTest extends AbstractTest {
 	
 	@Test
     public void testGetAll() {
-        final int intialCount = tranzactionService.getAll().size();
+        final int intialCount = transactionService.getAll().size();
 
         final int randomObjectsCount = getRandomObjectsCount();
         for (int i = 0; i < randomObjectsCount; i++) {
         	saveNewTranzaction();
         }
 
-        final List<ITransaction> allEntities = tranzactionService.getAll();
+        final List<ITransaction> allEntities = transactionService.getAll();
 
         for (final ITransaction entityFromDb : allEntities) {
             assertNotNull(entityFromDb.getAmount());
@@ -97,14 +97,14 @@ public class TransactionServiceTest extends AbstractTest {
     @Test
     public void testDelete() {
         final ITransaction entity = saveNewTranzaction();
-        tranzactionService.delete(entity.getId());
-        assertNull(tranzactionService.get(entity.getId()));
+        transactionService.delete(entity.getId());
+        assertNull(transactionService.get(entity.getId()));
     }
 
     @Test
     public void testDeleteAll() {
     	saveNewTranzaction();
-    	tranzactionService.deleteAll();
-        assertEquals(0, tranzactionService.getAll().size());
+    	transactionService.deleteAll();
+        assertEquals(0, transactionService.getAll().size());
     }
 }

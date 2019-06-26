@@ -34,7 +34,7 @@ public class UserAccountDaoImpl extends AbstractDaoImpl<IUserAccount, Integer> i
 	@Override
 	public void insert(IUserAccount entity) {
 		executeStatement(new PreparedStatementAction<IUserAccount>(String.format(
-				"insert into %s (nickname, password, email, foto, statistic_id, country_id, role_id, status_id, tranzaction_id, created, updated) values(?,?,?,?,?,?,?,?,?,?,?)",
+				"insert into %s (nickname, password, email, foto, statistic_id, country_id, role_id, status_id, transaction_id, created, updated) values(?,?,?,?,?,?,?,?,?,?,?)",
 				getTableName()), true) {
 			@Override
 			public IUserAccount doWithPreparedStatement(final PreparedStatement pStmt) throws SQLException {
@@ -67,7 +67,7 @@ public class UserAccountDaoImpl extends AbstractDaoImpl<IUserAccount, Integer> i
 	@Override
 	public void update(IUserAccount entity) {
 		executeStatement(new PreparedStatementAction<IUserAccount>(String.format(
-				"update %s set nickname=?, password=?, email=?, foto=?, statistic_id=?, country_id=?, role_id=?, status_id=?, tranzaction_id=?, updated=? where id=?",
+				"update %s set nickname=?, password=?, email=?, foto=?, statistic_id=?, country_id=?, role_id=?, status_id=?, transaction_id=?, updated=? where id=?",
 				getTableName())) {
 			@Override
 			public IUserAccount doWithPreparedStatement(final PreparedStatement pStmt) throws SQLException {
@@ -130,13 +130,13 @@ public class UserAccountDaoImpl extends AbstractDaoImpl<IUserAccount, Integer> i
             entity.setStatisticId(statistic);
         }
 		
-		Integer tranzactionId = (Integer) resultSet.getObject("tranzaction_id");
+		Integer tranzactionId = (Integer) resultSet.getObject("transaction_id");
 		if (tranzactionId != null) {
             final Transaction tranzaction = new Transaction();
             tranzaction.setId(tranzactionId);
-            if (columns.contains("tranzaction_id")) {
-                tranzaction.setAmount(resultSet.getInt("tranzaction_id"));
-                tranzaction.setComment(resultSet.getString("tranzaction_id"));
+            if (columns.contains("transaction_id")) {
+                tranzaction.setAmount(resultSet.getInt("transaction_id"));
+                tranzaction.setComment(resultSet.getString("transaction_id"));
             }
             entity.setTranzaction(tranzaction);
         }
@@ -152,7 +152,7 @@ public class UserAccountDaoImpl extends AbstractDaoImpl<IUserAccount, Integer> i
 
 				for (IUserAccount entity : entities) {
 					PreparedStatement pStmt = c.prepareStatement(String.format(
-							"insert into %s (nickname, password, email, foto, statistic_id, country_id, role_id, status_id, tranzaction_id, created, updated) values(?,?,?,?,?,?,?,?,?,?)",
+							"insert into %s (nickname, password, email, foto, statistic_id, country_id, role_id, status_id, transaction_id, created, updated) values(?,?,?,?,?,?,?,?,?,?)",
 							getTableName()), Statement.RETURN_GENERATED_KEYS);
 
 					pStmt.setString(1, entity.getNickname());
