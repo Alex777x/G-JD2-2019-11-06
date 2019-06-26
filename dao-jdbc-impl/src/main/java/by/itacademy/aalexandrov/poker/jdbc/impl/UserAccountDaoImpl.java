@@ -46,7 +46,7 @@ public class UserAccountDaoImpl extends AbstractDaoImpl<IUserAccount, Integer> i
 				pStmt.setInt(6, entity.getCountryId().getId());
 				pStmt.setString(7, entity.getUserRole().name());
 				pStmt.setString(8, entity.getUserStatus().name());
-				pStmt.setInt(9, entity.getTranzaction().getId());
+				pStmt.setInt(9, entity.getTransactionId().getId());
 				pStmt.setObject(10, entity.getCreated(), Types.TIMESTAMP);
 				pStmt.setObject(11, entity.getUpdated(), Types.TIMESTAMP);
 
@@ -79,7 +79,7 @@ public class UserAccountDaoImpl extends AbstractDaoImpl<IUserAccount, Integer> i
 				pStmt.setInt(6, entity.getCountryId().getId());
 				pStmt.setString(7, entity.getUserRole().name());
 				pStmt.setString(8, entity.getUserStatus().name());
-				pStmt.setInt(9, entity.getTranzaction().getId());
+				pStmt.setInt(9, entity.getTransactionId().getId());
 				pStmt.setObject(10, entity.getUpdated(), Types.TIMESTAMP);
 				pStmt.setInt(11, entity.getId());
 
@@ -138,7 +138,7 @@ public class UserAccountDaoImpl extends AbstractDaoImpl<IUserAccount, Integer> i
                 tranzaction.setAmount(resultSet.getInt("transaction_id"));
                 tranzaction.setComment(resultSet.getString("transaction_id"));
             }
-            entity.setTranzaction(tranzaction);
+            entity.setTransactionId(tranzaction);
         }
 		
 		return entity;
@@ -163,7 +163,7 @@ public class UserAccountDaoImpl extends AbstractDaoImpl<IUserAccount, Integer> i
 					pStmt.setObject(6, entity.getCountryId());
 					pStmt.setObject(7, entity.getUserRole());
 					pStmt.setObject(8, entity.getUserStatus());
-					pStmt.setObject(9, entity.getTranzaction());
+					pStmt.setObject(9, entity.getTransactionId());
 					pStmt.setObject(10, entity.getCreated(), Types.TIMESTAMP);
 					pStmt.setObject(11, entity.getUpdated(), Types.TIMESTAMP);
 

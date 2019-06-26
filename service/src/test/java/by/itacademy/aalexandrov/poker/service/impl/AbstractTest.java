@@ -116,7 +116,7 @@ public abstract class AbstractTest {
 		return entity;
 	}
 
-	protected ITransaction saveNewTranzaction() {
+	protected ITransaction saveNewTransaction() {
 		ITransaction entity = transactionService.createEntity();
 		entity.setAmount(getRandomObjectsCount());
 		entity.setComment("comment" + getRandomPrefix());
@@ -148,7 +148,7 @@ public abstract class AbstractTest {
 		entity.setStatisticId(saveNewStatistic());
 		entity.setUserRole(UserRole.member);
 		entity.setUserStatus(UserStatus.active);
-		entity.setTranzaction(saveNewTranzaction());
+		entity.setTransactionId(saveNewTransaction());
 		userAccountService.save(entity);
 		return entity;
 	}

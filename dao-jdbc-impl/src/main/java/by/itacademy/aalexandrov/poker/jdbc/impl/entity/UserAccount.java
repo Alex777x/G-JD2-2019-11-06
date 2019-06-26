@@ -17,7 +17,7 @@ public class UserAccount extends BaseEntity implements IUserAccount {
 	private IStatistic statisticId;
 	private UserRole userRole;
 	private UserStatus userStatus;
-	private ITransaction tranzaction;
+	private ITransaction transactionId;
 
 	@Override
 	public IStatistic getStatisticId() {
@@ -100,20 +100,20 @@ public class UserAccount extends BaseEntity implements IUserAccount {
 	}
 
 	@Override
-	public ITransaction getTranzaction() {
-		return tranzaction;
+	public ITransaction getTransactionId() {
+		return transactionId;
 	}
 
 	@Override
-	public void setTranzaction(ITransaction tranzaction) {
-		this.tranzaction = tranzaction;
+	public void setTransactionId(ITransaction transactionId) {
+		this.transactionId = transactionId;
 	}
 
 	@Override
 	public String toString() {
 		return "UserAccount [nickname=" + nickname + ", password=" + password + ", email=" + email + ", foto=" + foto
-				+ ", country=" + countryId + ", userRole=" + userRole + ", userStatus=" + userStatus + ", tranzaction="
-				+ tranzaction + "]";
+				+ ", country=" + countryId + ", userRole=" + userRole + ", userStatus=" + userStatus + ", transaction="
+				+ transactionId + "]";
 	}
 
 }

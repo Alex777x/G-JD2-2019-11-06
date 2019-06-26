@@ -69,7 +69,7 @@ public class TransactionDaoImpl extends AbstractDaoImpl<ITransaction, Integer> i
 
 	@Override
 	protected String getTableName() {
-		return "tranzaction";
+		return "transaction";
 	}
 
 	@Override

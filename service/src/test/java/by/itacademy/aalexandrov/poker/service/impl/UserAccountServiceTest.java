@@ -34,7 +34,7 @@ public class UserAccountServiceTest extends AbstractTest {
 		assertEquals(entity.getStatisticId().getId(), entityFromDb.getStatisticId().getId());
 		assertEquals(entity.getUserRole(), entityFromDb.getUserRole());
 		assertEquals(entity.getUserStatus(), entityFromDb.getUserStatus());
-		assertEquals(entity.getTranzaction().getId(), entityFromDb.getTranzaction().getId());
+		assertEquals(entity.getTransactionId().getId(), entityFromDb.getTransactionId().getId());
 		assertNotNull(entityFromDb.getId());
 		assertNotNull(entityFromDb.getCreated());
 		assertNotNull(entityFromDb.getUpdated());
@@ -54,7 +54,7 @@ public class UserAccountServiceTest extends AbstractTest {
 		entity1.setStatisticId(saveNewStatistic());
 		entity1.setUserRole(UserRole.member);
 		entity1.setUserStatus(UserStatus.active);
-		entity1.setTranzaction(saveNewTranzaction());
+		entity1.setTransactionId(saveNewTransaction());
 
 		try {
 			final IUserAccount entity2 = userAccountService.createEntity();
@@ -121,7 +121,7 @@ public class UserAccountServiceTest extends AbstractTest {
 			assertNotNull(entityFromDb.getStatisticId());
 			assertNotNull(entityFromDb.getUserRole());
 			assertNotNull(entityFromDb.getUserStatus());
-			assertNotNull(entityFromDb.getTranzaction());
+			assertNotNull(entityFromDb.getTransactionId());
 			assertNotNull(entityFromDb.getId());
 			assertNotNull(entityFromDb.getCreated());
 			assertNotNull(entityFromDb.getUpdated());

@@ -18,7 +18,7 @@ public class TransactionServiceTest extends AbstractTest {
 	
 	@Test
 	public void testCreate() {
-		final ITransaction entity = saveNewTranzaction();
+		final ITransaction entity = saveNewTransaction();
 
 		final ITransaction entityFromDb = transactionService.get(entity.getId());
 
@@ -51,7 +51,7 @@ public class TransactionServiceTest extends AbstractTest {
 	
 	@Test
     public void testUpdate() throws InterruptedException {
-        final ITransaction entity = saveNewTranzaction();
+        final ITransaction entity = saveNewTransaction();
 
         double newAmount = entity.getAmount() + 1001;
         String newComment = entity.getComment() + "_updated";
@@ -78,7 +78,7 @@ public class TransactionServiceTest extends AbstractTest {
 
         final int randomObjectsCount = getRandomObjectsCount();
         for (int i = 0; i < randomObjectsCount; i++) {
-        	saveNewTranzaction();
+        	saveNewTransaction();
         }
 
         final List<ITransaction> allEntities = transactionService.getAll();
@@ -96,14 +96,14 @@ public class TransactionServiceTest extends AbstractTest {
 
     @Test
     public void testDelete() {
-        final ITransaction entity = saveNewTranzaction();
+        final ITransaction entity = saveNewTransaction();
         transactionService.delete(entity.getId());
         assertNull(transactionService.get(entity.getId()));
     }
 
     @Test
     public void testDeleteAll() {
-    	saveNewTranzaction();
+    	saveNewTransaction();
     	transactionService.deleteAll();
         assertEquals(0, transactionService.getAll().size());
     }

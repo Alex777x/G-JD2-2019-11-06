@@ -5,10 +5,6 @@ import by.itacademy.aalexandrov.poker.dao.api.entity.enums.UserStatus;
 
 public interface IUserAccount extends IBaseEntity {
 
-	void setTranzaction(ITransaction tranzaction);
-
-	ITransaction getTranzaction();
-
 	void setUserStatus(UserStatus userStatus);
 
 	UserStatus getUserStatus();
@@ -40,5 +36,9 @@ public interface IUserAccount extends IBaseEntity {
 	void setCountryId(ICountry countryId);
 
 	ICountry getCountryId();
+
+	void setTransactionId(ITransaction transactionId);
+
+	ITransaction getTransactionId();
 
 }
