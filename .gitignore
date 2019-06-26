@@ -38,3 +38,4 @@ dao-api/.classpath
 .settings/org.eclipse.m2e.core.prefs
 .settings/org.eclipse.core.resources.prefs
 .project
+service/logs/app.log
