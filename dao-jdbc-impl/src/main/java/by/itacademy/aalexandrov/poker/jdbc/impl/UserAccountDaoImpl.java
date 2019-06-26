@@ -39,8 +39,9 @@ public class UserAccountDaoImpl extends AbstractDaoImpl<IUserAccount, Integer> i
 				pStmt.setString(4, entity.getFoto());
 				pStmt.setString(5, entity.getCountry().getCountry());
 				pStmt.setString(6, entity.getUserRole().name());
-				pStmt.setObject(7, entity.getUserStatus());
-				pStmt.setObject(8, entity.getTranzaction());
+				pStmt.setString(7, entity.getUserStatus().name());
+				pStmt.setDouble(8, entity.getTranzaction().getAmount());
+				pStmt.setString(8, entity.getTranzaction().getComment());
 				pStmt.setObject(9, entity.getCreated(), Types.TIMESTAMP);
 				pStmt.setObject(10, entity.getUpdated(), Types.TIMESTAMP);
 
