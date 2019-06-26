@@ -12,6 +12,7 @@ import by.itacademy.aalexandrov.poker.dao.api.IUserAccountDao;
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.UserRole;
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.UserStatus;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.ICountry;
+import by.itacademy.aalexandrov.poker.dao.api.entity.table.IStatistic;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.ITranzaction;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IUserAccount;
 import by.itacademy.aalexandrov.poker.dao.api.filter.UserAccountFilter;
@@ -29,7 +30,7 @@ public class UserAccountDaoImpl extends AbstractDaoImpl<IUserAccount, Integer> i
 	@Override
 	public void insert(IUserAccount entity) {
 		executeStatement(new PreparedStatementAction<IUserAccount>(String.format(
-				"insert into %s (nickname, password, email, foto, country_id, role_id, status_id, tranzaction_id, created, updated) values(?,?,?,?,?,?,?,?,?,?)",
+				"insert into %s (nickname, password, email, foto, statistic_id, country_id, role_id, status_id, tranzaction_id, created, updated) values(?,?,?,?,?,?,?,?,?,?,?)",
 				getTableName()), true) {
 			@Override
 			public IUserAccount doWithPreparedStatement(final PreparedStatement pStmt) throws SQLException {
@@ -37,13 +38,13 @@ public class UserAccountDaoImpl extends AbstractDaoImpl<IUserAccount, Integer> i
 				pStmt.setString(2, entity.getPassword());
 				pStmt.setString(3, entity.getEmail());
 				pStmt.setString(4, entity.getFoto());
-				pStmt.setString(5, entity.getCountry().getCountry());
-				pStmt.setString(6, entity.getUserRole().name());
-				pStmt.setString(7, entity.getUserStatus().name());
-				pStmt.setDouble(8, entity.getTranzaction().getAmount());
-				pStmt.setString(8, entity.getTranzaction().getComment());
-				pStmt.setObject(9, entity.getCreated(), Types.TIMESTAMP);
-				pStmt.setObject(10, entity.getUpdated(), Types.TIMESTAMP);
+				pStmt.setInt(5, entity.getStatisticId().getId());
+				pStmt.setInt(6, entity.getCountry().getId());
+				pStmt.setString(7, entity.getUserRole().name());
+				pStmt.setString(8, entity.getUserStatus().name());
+				pStmt.setInt(9, entity.getTranzaction().getId());
+				pStmt.setObject(10, entity.getCreated(), Types.TIMESTAMP);
+				pStmt.setObject(11, entity.getUpdated(), Types.TIMESTAMP);
 
 				pStmt.executeUpdate();
 
@@ -62,7 +63,7 @@ public class UserAccountDaoImpl extends AbstractDaoImpl<IUserAccount, Integer> i
 	@Override
 	public void update(IUserAccount entity) {
 		executeStatement(new PreparedStatementAction<IUserAccount>(String.format(
-				"update %s set nickname=?, password=?, email=?, foto=?, country_id=?, role_id=?, status_id=?, tranzaction_id=?, updated=? where id=?",
+				"update %s set nickname=?, password=?, email=?, foto=?, statistic_id=?, country_id=?, role_id=?, status_id=?, tranzaction_id=?, updated=? where id=?",
 				getTableName())) {
 			@Override
 			public IUserAccount doWithPreparedStatement(final PreparedStatement pStmt) throws SQLException {
@@ -70,12 +71,13 @@ public class UserAccountDaoImpl extends AbstractDaoImpl<IUserAccount, Integer> i
 				pStmt.setString(2, entity.getPassword());
 				pStmt.setString(3, entity.getEmail());
 				pStmt.setString(4, entity.getFoto());
-				pStmt.setObject(5, entity.getCountry());
-				pStmt.setObject(6, entity.getUserRole().name());
-				pStmt.setObject(7, entity.getUserStatus());
-				pStmt.setObject(8, entity.getTranzaction());
-				pStmt.setObject(9, entity.getUpdated(), Types.TIMESTAMP);
-				pStmt.setInt(10, entity.getId());
+				pStmt.setInt(5, entity.getStatisticId().getId());
+				pStmt.setObject(6, entity.getCountry());
+				pStmt.setObject(7, entity.getUserRole().name());
+				pStmt.setObject(8, entity.getUserStatus());
+				pStmt.setObject(9, entity.getTranzaction());
+				pStmt.setObject(10, entity.getUpdated(), Types.TIMESTAMP);
+				pStmt.setInt(11, entity.getId());
 
 				pStmt.executeUpdate();
 				return entity;
@@ -98,8 +100,9 @@ public class UserAccountDaoImpl extends AbstractDaoImpl<IUserAccount, Integer> i
 		entity.setEmail(resultSet.getString("email"));
 		entity.setFoto(resultSet.getString("foto"));
 		entity.setCountry((ICountry) resultSet.getObject("country_id"));
+		entity.setStatisticId((IStatistic) resultSet.getObject("statistic_id"));
 		entity.setUserRole(UserRole.valueOf(resultSet.getString("role_id")));
-		entity.setUserStatus((UserStatus) resultSet.getObject("status_id"));
+		entity.setUserStatus(UserStatus.valueOf(resultSet.getString("status_id")));
 		entity.setTranzaction((ITranzaction) resultSet.getObject("tranzaction_id"));
 		entity.setCreated(resultSet.getTimestamp("created"));
 		entity.setUpdated(resultSet.getTimestamp("updated"));
@@ -114,19 +117,20 @@ public class UserAccountDaoImpl extends AbstractDaoImpl<IUserAccount, Integer> i
 
 				for (IUserAccount entity : entities) {
 					PreparedStatement pStmt = c.prepareStatement(String.format(
-							"insert into %s (nickname, password, email, foto, country_id, role_id, status_id, tranzaction_id, created, updated) values(?,?,?,?,?,?,?,?,?,?)",
+							"insert into %s (nickname, password, email, foto, statistic_id, country_id, role_id, status_id, tranzaction_id, created, updated) values(?,?,?,?,?,?,?,?,?,?)",
 							getTableName()), Statement.RETURN_GENERATED_KEYS);
 
 					pStmt.setString(1, entity.getNickname());
 					pStmt.setString(2, entity.getPassword());
 					pStmt.setString(3, entity.getEmail());
 					pStmt.setString(4, entity.getFoto());
-					pStmt.setObject(5, entity.getCountry());
-					pStmt.setObject(6, entity.getUserRole());
-					pStmt.setObject(7, entity.getUserStatus());
-					pStmt.setObject(8, entity.getTranzaction());
-					pStmt.setObject(9, entity.getCreated(), Types.TIMESTAMP);
-					pStmt.setObject(10, entity.getUpdated(), Types.TIMESTAMP);
+					pStmt.setInt(5, entity.getStatisticId().getId());
+					pStmt.setObject(6, entity.getCountry());
+					pStmt.setObject(7, entity.getUserRole());
+					pStmt.setObject(8, entity.getUserStatus());
+					pStmt.setObject(9, entity.getTranzaction());
+					pStmt.setObject(10, entity.getCreated(), Types.TIMESTAMP);
+					pStmt.setObject(11, entity.getUpdated(), Types.TIMESTAMP);
 
 					pStmt.executeUpdate();
 

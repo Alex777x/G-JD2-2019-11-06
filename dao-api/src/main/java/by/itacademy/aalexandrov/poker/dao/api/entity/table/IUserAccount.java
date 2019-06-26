@@ -37,4 +37,8 @@ public interface IUserAccount extends IBaseEntity {
 
 	String getNickname();
 
+	void setStatisticId(IStatistic statisticId);
+
+	IStatistic getStatisticId();
+
 }

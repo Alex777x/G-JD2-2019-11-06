@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.UserRole;
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.UserStatus;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.ICountry;
+import by.itacademy.aalexandrov.poker.dao.api.entity.table.IStatistic;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.ITranzaction;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IUserAccount;
 
@@ -30,6 +31,7 @@ public class UserAccountServiceTest extends AbstractTest {
 		assertEquals(entity.getEmail(), entityFromDb.getEmail());
 		assertEquals(entity.getFoto(), entityFromDb.getFoto());
 		assertEquals(entity.getCountry(), entityFromDb.getCountry());
+		assertEquals(entity.getStatisticId(), entityFromDb.getStatisticId());
 		assertEquals(entity.getUserRole(), entityFromDb.getUserRole());
 		assertEquals(entity.getUserStatus(), entityFromDb.getUserStatus());
 		assertEquals(entity.getTranzaction(), entityFromDb.getTranzaction());
@@ -49,6 +51,7 @@ public class UserAccountServiceTest extends AbstractTest {
 		entity1.setEmail(getRandomPrefix());
 		entity1.setFoto(getRandomPrefix());
 		entity1.setCountry(saveNewCountry());
+		entity1.setStatisticId(saveNewStatistic());
 		entity1.setUserRole(UserRole.member);
 		entity1.setUserStatus(UserStatus.active);
 		entity1.setTranzaction(saveNewTranzaction());
@@ -72,6 +75,7 @@ public class UserAccountServiceTest extends AbstractTest {
 		String newEmail = entity.getEmail();
 		String newFoto = entity.getFoto();
 		ICountry newCountry = entity.getCountry();
+		IStatistic newStatistic = entity.getStatisticId();
 		UserRole newUserRole = entity.getUserRole();
 		UserStatus newUserStatus = entity.getUserStatus();
 		ITranzaction newTranzaction = entity.getTranzaction();
@@ -80,6 +84,7 @@ public class UserAccountServiceTest extends AbstractTest {
 		entity.setEmail(newEmail);
 		entity.setFoto(newFoto);
 		entity.setCountry(newCountry);
+		entity.setStatisticId(newStatistic);
 		entity.setUserRole(newUserRole);
 		entity.setUserStatus(newUserStatus);
 		entity.setTranzaction(newTranzaction);
@@ -94,6 +99,7 @@ public class UserAccountServiceTest extends AbstractTest {
 		assertEquals(newEmail, entityFromDb.getEmail());
 		assertEquals(newFoto, entityFromDb.getFoto());
 		assertEquals(newCountry, entityFromDb.getCountry());
+		assertEquals(newStatistic, entityFromDb.getStatisticId());
 		assertEquals(newUserRole, entityFromDb.getUserRole());
 		assertEquals(newUserStatus, entityFromDb.getUserStatus());
 		assertEquals(newTranzaction, entityFromDb.getTranzaction());
@@ -121,6 +127,7 @@ public class UserAccountServiceTest extends AbstractTest {
 			assertNotNull(entityFromDb.getEmail());
 			assertNotNull(entityFromDb.getFoto());
 			assertNotNull(entityFromDb.getCountry());
+			assertNotNull(entityFromDb.getStatisticId());
 			assertNotNull(entityFromDb.getUserRole());
 			assertNotNull(entityFromDb.getUserStatus());
 			assertNotNull(entityFromDb.getTranzaction());

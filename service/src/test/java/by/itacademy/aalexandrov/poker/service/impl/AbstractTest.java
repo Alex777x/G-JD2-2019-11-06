@@ -32,12 +32,13 @@ public abstract class AbstractTest {
 	@BeforeEach
 	public void setUpMethod() {
 		// clean DB recursive
+		userAccountService.deleteAll();
 		tiketService.deleteAll();
 		countryService.deleteAll();
 		statisticService.deleteAll();
 		tranzactionService.deleteAll();
 		pokerActionService.deleteAll();
-		userAccountService.deleteAll();
+		
 
 	}
 
@@ -106,6 +107,7 @@ public abstract class AbstractTest {
 		entity.setEmail("email" + getRandomPrefix());
 		entity.setFoto("foto" + getRandomPrefix());
 		entity.setCountry(saveNewCountry());
+		entity.setStatisticId(saveNewStatistic());
 		entity.setUserRole(UserRole.member);
 		entity.setUserStatus(UserStatus.active);
 		entity.setTranzaction(saveNewTranzaction());
