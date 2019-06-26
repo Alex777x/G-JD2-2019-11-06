@@ -10,20 +10,20 @@ import by.itacademy.aalexandrov.poker.dao.api.entity.table.ICountry;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IPokerAction;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IStatistic;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.ITiket;
-import by.itacademy.aalexandrov.poker.dao.api.entity.table.ITranzaction;
+import by.itacademy.aalexandrov.poker.dao.api.entity.table.ITransaction;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IUserAccount;
 import by.itacademy.aalexandrov.poker.service.ICountryService;
 import by.itacademy.aalexandrov.poker.service.IPokerActionService;
 import by.itacademy.aalexandrov.poker.service.IStatisticService;
 import by.itacademy.aalexandrov.poker.service.ITiketService;
-import by.itacademy.aalexandrov.poker.service.ITranzactionService;
+import by.itacademy.aalexandrov.poker.service.ITransactionService;
 import by.itacademy.aalexandrov.poker.service.IUserAccountService;
 
 public abstract class AbstractTest {
 	protected ITiketService tiketService = new TiketServiceImpl();
 	protected ICountryService countryService = new CountryServiceImpl();
 	protected IStatisticService statisticService = new StatisticServiceImpl();
-	protected ITranzactionService tranzactionService = new TranzactionServiceImpl();
+	protected ITransactionService tranzactionService = new TransactionServiceImpl();
 	protected IPokerActionService pokerActionService = new PokerActionServiceImpl();
 	protected IUserAccountService userAccountService = new UserAccountServiceImpl();
 
@@ -77,8 +77,8 @@ public abstract class AbstractTest {
 		return entity;
 	}
 
-	protected ITranzaction saveNewTranzaction() {
-		ITranzaction entity = tranzactionService.createEntity();
+	protected ITransaction saveNewTranzaction() {
+		ITransaction entity = tranzactionService.createEntity();
 		entity.setAmount(getRandomObjectsCount());
 		entity.setComment("comment" + getRandomPrefix());
 		tranzactionService.save(entity);

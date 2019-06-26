@@ -3,6 +3,9 @@ package by.itacademy.aalexandrov.poker.service.impl;
 import java.util.Date;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import by.itacademy.aalexandrov.poker.dao.api.ICountryDao;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.ICountry;
 import by.itacademy.aalexandrov.poker.dao.api.filter.CountryFilter;
@@ -10,6 +13,8 @@ import by.itacademy.aalexandrov.poker.jdbc.impl.CountryDaoImpl;
 import by.itacademy.aalexandrov.poker.service.ICountryService;
 
 public class CountryServiceImpl implements ICountryService {
+
+	private static final Logger LOGGER = LoggerFactory.getLogger(CountryServiceImpl.class);
 
 	private ICountryDao dao = new CountryDaoImpl();
 
@@ -23,33 +28,13 @@ public class CountryServiceImpl implements ICountryService {
 		final Date modifedOn = new Date();
 		entity.setUpdated(modifedOn);
 		if (entity.getId() == null) {
+			LOGGER.info("new Country created: {}", entity);
 			entity.setCreated(modifedOn);
 			dao.insert(entity);
 		} else {
+			LOGGER.info("new Country updated: {}", entity);
 			dao.update(entity);
 		}
-	}
-
-	@Override
-	public ICountry get(final Integer id) {
-		final ICountry entity = dao.get(id);
-		return entity;
-	}
-
-	@Override
-	public void delete(final Integer id) {
-		dao.delete(id);
-	}
-
-	@Override
-	public void deleteAll() {
-		dao.deleteAll();
-	}
-
-	@Override
-	public List<ICountry> getAll() {
-		final List<ICountry> all = dao.selectAll();
-		return all;
 	}
 
 	@Override
@@ -63,6 +48,32 @@ public class CountryServiceImpl implements ICountryService {
 		}
 
 		dao.save(entities);
+	}
+
+	@Override
+	public ICountry get(final Integer id) {
+		final ICountry entity = dao.get(id);
+		LOGGER.debug("entityById: {}", entity);
+		return entity;
+	}
+
+	@Override
+	public void delete(final Integer id) {
+		LOGGER.info("delete entity: {}", id);
+		dao.delete(id);
+	}
+
+	@Override
+	public void deleteAll() {
+		LOGGER.info("delete all Countries");
+		dao.deleteAll();
+	}
+
+	@Override
+	public List<ICountry> getAll() {
+		final List<ICountry> all = dao.selectAll();
+		LOGGER.debug("total count in DB: {}", all.size());
+		return all;
 	}
 
 	@Override

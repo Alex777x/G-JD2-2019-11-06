@@ -26,7 +26,7 @@
 		</Root>
 
 		<Logger name="by.itacademy.aalexandrov.poker.service" level="debug" additivity="false">
-			<AppenderRef ref="Console" />
+			<AppenderRef ref="RollingFile" />
 		</Logger>
 
 	</Loggers>

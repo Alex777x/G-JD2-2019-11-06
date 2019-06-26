@@ -14,12 +14,12 @@ import by.itacademy.aalexandrov.poker.dao.api.entity.enums.UserRole;
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.UserStatus;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.ICountry;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IStatistic;
-import by.itacademy.aalexandrov.poker.dao.api.entity.table.ITranzaction;
+import by.itacademy.aalexandrov.poker.dao.api.entity.table.ITransaction;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IUserAccount;
 import by.itacademy.aalexandrov.poker.dao.api.filter.UserAccountFilter;
 import by.itacademy.aalexandrov.poker.jdbc.impl.entity.Country;
 import by.itacademy.aalexandrov.poker.jdbc.impl.entity.Statistic;
-import by.itacademy.aalexandrov.poker.jdbc.impl.entity.Tranzaction;
+import by.itacademy.aalexandrov.poker.jdbc.impl.entity.Transaction;
 import by.itacademy.aalexandrov.poker.jdbc.impl.entity.UserAccount;
 import by.itacademy.aalexandrov.poker.jdbc.impl.util.PreparedStatementAction;
 import by.itacademy.aalexandrov.poker.jdbc.impl.util.SQLExecutionException;
@@ -132,7 +132,7 @@ public class UserAccountDaoImpl extends AbstractDaoImpl<IUserAccount, Integer> i
 		
 		Integer tranzactionId = (Integer) resultSet.getObject("tranzaction_id");
 		if (tranzactionId != null) {
-            final Tranzaction tranzaction = new Tranzaction();
+            final Transaction tranzaction = new Transaction();
             tranzaction.setId(tranzactionId);
             if (columns.contains("tranzaction_id")) {
                 tranzaction.setAmount(resultSet.getInt("tranzaction_id"));

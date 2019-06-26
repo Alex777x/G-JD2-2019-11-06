@@ -4,7 +4,7 @@ import by.itacademy.aalexandrov.poker.dao.api.entity.enums.UserRole;
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.UserStatus;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.ICountry;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IStatistic;
-import by.itacademy.aalexandrov.poker.dao.api.entity.table.ITranzaction;
+import by.itacademy.aalexandrov.poker.dao.api.entity.table.ITransaction;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IUserAccount;
 
 public class UserAccount extends BaseEntity implements IUserAccount {
@@ -17,7 +17,7 @@ public class UserAccount extends BaseEntity implements IUserAccount {
 	private IStatistic statisticId;
 	private UserRole userRole;
 	private UserStatus userStatus;
-	private ITranzaction tranzaction;
+	private ITransaction tranzaction;
 
 	@Override
 	public IStatistic getStatisticId() {
@@ -100,12 +100,12 @@ public class UserAccount extends BaseEntity implements IUserAccount {
 	}
 
 	@Override
-	public ITranzaction getTranzaction() {
+	public ITransaction getTranzaction() {
 		return tranzaction;
 	}
 
 	@Override
-	public void setTranzaction(ITranzaction tranzaction) {
+	public void setTranzaction(ITransaction tranzaction) {
 		this.tranzaction = tranzaction;
 	}
 

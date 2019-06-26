@@ -13,6 +13,8 @@ public interface IBlackjackActionService {
 
 	void save(IBlackjackAction... entities);
 
+	void save(final IBlackjackAction entity);
+
 	List<IBlackjackAction> getAll();
 
 	void deleteAll();
@@ -20,8 +22,6 @@ public interface IBlackjackActionService {
 	void delete(final Integer id);
 
 	IBlackjackAction get(final Integer id);
-
-	void save(final IBlackjackAction entity);
 
 	IBlackjackAction createEntity();
 

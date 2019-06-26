@@ -1,0 +1,130 @@
+19:09:01.300 [main] INFO  mylogger - info message1
+19:09:01.302 [main] WARN  mylogger - warn message1
+19:09:01.309 [main] INFO  by.itacademy.aalexandrov.poker.logger.LoggerTest - info message2
+19:09:01.310 [main] WARN  by.itacademy.aalexandrov.poker.logger.LoggerTest - warn message2
+21:19:46.988 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.TiketServiceImpl - delete all Tikets
+21:19:47.270 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.PokerActionServiceImpl - delete all PokerActions
+21:19:47.356 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.UserAccountServiceImpl - delete all UserAccounts
+21:19:47.456 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.CountryServiceImpl - delete all Countries
+21:19:47.559 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.StatisticServiceImpl - delete all Statistics
+21:19:47.643 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.TranzactionServiceImpl - delete all Tranzactions
+21:19:47.729 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.CountryServiceImpl - new Country created: Country [country=country90239]
+21:19:47.818 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.StatisticServiceImpl - new Statistic created: Statistic [sum_games=5, won_games=8]
+21:19:47.908 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.TranzactionServiceImpl - new Tranzaction created: Tranzaction [amount=7.0, comment=comment91971]
+21:19:47.985 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.UserAccountServiceImpl - new UserAccount created: UserAccount [nickname=nickname55416, password=password13331, email=email91197, foto=foto90171, country=Country [country=country90239], userRole=member, userStatus=active, tranzaction=Tranzaction [amount=7.0, comment=comment91971]]
+21:19:48.076 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.UserAccountServiceImpl - delete all UserAccounts
+21:19:48.247 [main] DEBUG by.itacademy.aalexandrov.poker.service.impl.UserAccountServiceImpl - total count in DB: 0
+21:19:48.255 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.TiketServiceImpl - delete all Tikets
+21:19:48.708 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.PokerActionServiceImpl - delete all PokerActions
+21:19:48.784 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.UserAccountServiceImpl - delete all UserAccounts
+21:19:48.863 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.CountryServiceImpl - delete all Countries
+21:19:48.949 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.StatisticServiceImpl - delete all Statistics
+21:19:49.064 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.TranzactionServiceImpl - delete all Tranzactions
+21:19:49.231 [main] DEBUG by.itacademy.aalexandrov.poker.service.impl.UserAccountServiceImpl - total count in DB: 0
+21:19:49.231 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.CountryServiceImpl - new Country created: Country [country=country6248]
+21:19:49.321 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.StatisticServiceImpl - new Statistic created: Statistic [sum_games=3, won_games=3]
+21:19:49.403 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.TranzactionServiceImpl - new Tranzaction created: Tranzaction [amount=9.0, comment=comment57227]
+21:19:49.636 [main] DEBUG by.itacademy.aalexandrov.poker.service.impl.UserAccountServiceImpl - total count in DB: 0
+21:19:49.639 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.TiketServiceImpl - delete all Tikets
+21:19:49.727 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.PokerActionServiceImpl - delete all PokerActions
+21:19:49.799 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.UserAccountServiceImpl - delete all UserAccounts
+21:19:49.868 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.CountryServiceImpl - delete all Countries
+21:19:49.942 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.StatisticServiceImpl - delete all Statistics
+21:19:50.021 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.TranzactionServiceImpl - delete all Tranzactions
+21:19:50.207 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.CountryServiceImpl - new Country created: Country [country=country68975]
+21:19:50.347 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.StatisticServiceImpl - new Statistic created: Statistic [sum_games=9, won_games=4]
+21:19:50.441 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.TranzactionServiceImpl - new Tranzaction created: Tranzaction [amount=2.0, comment=comment80443]
+21:19:50.524 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.UserAccountServiceImpl - new UserAccount created: UserAccount [nickname=nickname90378, password=password11301, email=email15704, foto=foto26863, country=Country [country=country68975], userRole=member, userStatus=active, tranzaction=Tranzaction [amount=2.0, comment=comment80443]]
+21:19:50.698 [main] DEBUG by.itacademy.aalexandrov.poker.service.impl.UserAccountServiceImpl - entityById: UserAccount [nickname=nickname90378, password=password11301, email=email15704, foto=foto26863, country=Country [country=475], userRole=member, userStatus=active, tranzaction=Tranzaction [amount=433.0, comment=433]]
+21:19:50.703 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.TiketServiceImpl - delete all Tikets
+21:19:50.773 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.PokerActionServiceImpl - delete all PokerActions
+21:19:50.841 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.UserAccountServiceImpl - delete all UserAccounts
+21:19:50.924 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.CountryServiceImpl - delete all Countries
+21:19:50.999 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.StatisticServiceImpl - delete all Statistics
+21:19:51.075 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.TranzactionServiceImpl - delete all Tranzactions
+21:19:51.153 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.CountryServiceImpl - new Country created: Country [country=country64735]
+21:19:51.227 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.StatisticServiceImpl - new Statistic created: Statistic [sum_games=8, won_games=2]
+21:19:51.311 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.TranzactionServiceImpl - new Tranzaction created: Tranzaction [amount=7.0, comment=comment5035]
+21:19:51.399 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.UserAccountServiceImpl - new UserAccount created: UserAccount [nickname=nickname5371, password=password37436, email=email94708, foto=foto31218, country=Country [country=country64735], userRole=member, userStatus=active, tranzaction=Tranzaction [amount=7.0, comment=comment5035]]
+21:19:51.482 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.UserAccountServiceImpl - delete entity: 376
+21:19:51.640 [main] DEBUG by.itacademy.aalexandrov.poker.service.impl.UserAccountServiceImpl - entityById: null
+21:19:51.650 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.TiketServiceImpl - delete all Tikets
+21:19:51.718 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.PokerActionServiceImpl - delete all PokerActions
+21:19:51.797 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.UserAccountServiceImpl - delete all UserAccounts
+21:19:51.865 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.CountryServiceImpl - delete all Countries
+21:19:51.940 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.StatisticServiceImpl - delete all Statistics
+21:19:52.134 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.TranzactionServiceImpl - delete all Tranzactions
+21:19:52.292 [main] DEBUG by.itacademy.aalexandrov.poker.service.impl.UserAccountServiceImpl - total count in DB: 0
+21:19:52.292 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.CountryServiceImpl - new Country created: Country [country=country1014]
+21:19:52.364 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.StatisticServiceImpl - new Statistic created: Statistic [sum_games=1, won_games=2]
+21:19:52.436 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.TranzactionServiceImpl - new Tranzaction created: Tranzaction [amount=5.0, comment=comment77418]
+21:19:52.508 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.UserAccountServiceImpl - new UserAccount created: UserAccount [nickname=nickname82633, password=password6791, email=email72104, foto=foto86808, country=Country [country=country1014], userRole=member, userStatus=active, tranzaction=Tranzaction [amount=5.0, comment=comment77418]]
+21:19:52.661 [main] DEBUG by.itacademy.aalexandrov.poker.service.impl.UserAccountServiceImpl - total count in DB: 1
+21:19:52.662 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.TiketServiceImpl - delete all Tikets
+21:19:52.733 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.PokerActionServiceImpl - delete all PokerActions
+21:19:52.802 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.UserAccountServiceImpl - delete all UserAccounts
+21:19:52.883 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.CountryServiceImpl - delete all Countries
+21:19:52.958 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.StatisticServiceImpl - delete all Statistics
+21:19:53.038 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.TranzactionServiceImpl - delete all Tranzactions
+21:19:53.120 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.CountryServiceImpl - new Country created: Country [country=country99432]
+21:19:53.194 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.StatisticServiceImpl - new Statistic created: Statistic [sum_games=9, won_games=9]
+21:19:53.268 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.TranzactionServiceImpl - new Tranzaction created: Tranzaction [amount=3.0, comment=comment72924]
+21:19:53.341 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.UserAccountServiceImpl - new UserAccount created: UserAccount [nickname=nickname52182, password=password38128, email=email52440, foto=foto73577, country=Country [country=country99432], userRole=member, userStatus=active, tranzaction=Tranzaction [amount=3.0, comment=comment72924]]
+21:19:55.418 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.UserAccountServiceImpl - new UserAccount updated: UserAccount [nickname=nickname52182_updated, password=password38128_updated, email=email52440_updated, foto=foto73577_updated, country=Country [country=country99432], userRole=member, userStatus=active, tranzaction=Tranzaction [amount=3.0, comment=comment72924]]
+21:19:55.608 [main] DEBUG by.itacademy.aalexandrov.poker.service.impl.UserAccountServiceImpl - entityById: UserAccount [nickname=nickname52182_updated, password=password38128_updated, email=email52440_updated, foto=foto73577_updated, country=Country [country=478], userRole=member, userStatus=active, tranzaction=Tranzaction [amount=436.0, comment=436]]
+21:26:01.966 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.TiketServiceImpl - delete all Tikets
+21:26:02.106 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.PokerActionServiceImpl - delete all PokerActions
+21:26:02.185 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.UserAccountServiceImpl - delete all UserAccounts
+21:26:02.285 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.CountryServiceImpl - delete all Countries
+21:26:02.375 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.StatisticServiceImpl - delete all Statistics
+21:26:02.462 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.TransactionServiceImpl - delete all Tranzactions
+21:26:02.557 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.TransactionServiceImpl - new Tranzaction created: Tranzaction [amount=9.0, comment=comment1244]
+21:26:02.666 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.TransactionServiceImpl - delete all Tranzactions
+21:26:02.821 [main] DEBUG by.itacademy.aalexandrov.poker.service.impl.TransactionServiceImpl - total count in DB: 0
+21:26:02.830 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.TiketServiceImpl - delete all Tikets
+21:26:02.903 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.PokerActionServiceImpl - delete all PokerActions
+21:26:02.976 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.UserAccountServiceImpl - delete all UserAccounts
+21:26:03.162 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.CountryServiceImpl - delete all Countries
+21:26:03.235 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.StatisticServiceImpl - delete all Statistics
+21:26:03.317 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.TransactionServiceImpl - delete all Tranzactions
+21:26:03.461 [main] DEBUG by.itacademy.aalexandrov.poker.service.impl.TransactionServiceImpl - total count in DB: 0
+21:26:03.617 [main] DEBUG by.itacademy.aalexandrov.poker.service.impl.TransactionServiceImpl - total count in DB: 0
+21:26:03.619 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.TiketServiceImpl - delete all Tikets
+21:26:03.690 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.PokerActionServiceImpl - delete all PokerActions
+21:26:03.760 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.UserAccountServiceImpl - delete all UserAccounts
+21:26:03.834 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.CountryServiceImpl - delete all Countries
+21:26:03.903 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.StatisticServiceImpl - delete all Statistics
+21:26:03.977 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.TransactionServiceImpl - delete all Tranzactions
+21:26:04.047 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.TransactionServiceImpl - new Tranzaction created: Tranzaction [amount=3.0, comment=comment49593]
+21:26:04.212 [main] DEBUG by.itacademy.aalexandrov.poker.service.impl.TransactionServiceImpl - entityById: Tranzaction [amount=3.0, comment=comment49593]
+21:26:04.215 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.TiketServiceImpl - delete all Tikets
+21:26:04.288 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.PokerActionServiceImpl - delete all PokerActions
+21:26:04.357 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.UserAccountServiceImpl - delete all UserAccounts
+21:26:04.435 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.CountryServiceImpl - delete all Countries
+21:26:04.505 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.StatisticServiceImpl - delete all Statistics
+21:26:04.579 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.TransactionServiceImpl - delete all Tranzactions
+21:26:04.656 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.TransactionServiceImpl - new Tranzaction created: Tranzaction [amount=8.0, comment=comment3768]
+21:26:04.737 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.TransactionServiceImpl - delete entity: 441
+21:26:04.896 [main] DEBUG by.itacademy.aalexandrov.poker.service.impl.TransactionServiceImpl - entityById: null
+21:26:04.901 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.TiketServiceImpl - delete all Tikets
+21:26:04.969 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.PokerActionServiceImpl - delete all PokerActions
+21:26:05.050 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.UserAccountServiceImpl - delete all UserAccounts
+21:26:05.118 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.CountryServiceImpl - delete all Countries
+21:26:05.196 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.StatisticServiceImpl - delete all Statistics
+21:26:05.266 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.TransactionServiceImpl - delete all Tranzactions
+21:26:05.404 [main] DEBUG by.itacademy.aalexandrov.poker.service.impl.TransactionServiceImpl - total count in DB: 0
+21:26:05.404 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.TransactionServiceImpl - new Tranzaction created: Tranzaction [amount=5.0, comment=comment51245]
+21:26:05.479 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.TransactionServiceImpl - new Tranzaction created: Tranzaction [amount=9.0, comment=comment32327]
+21:26:05.565 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.TransactionServiceImpl - new Tranzaction created: Tranzaction [amount=5.0, comment=comment18709]
+21:26:05.648 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.TransactionServiceImpl - new Tranzaction created: Tranzaction [amount=8.0, comment=comment40082]
+21:26:05.725 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.TransactionServiceImpl - new Tranzaction created: Tranzaction [amount=5.0, comment=comment93522]
+21:26:05.963 [main] DEBUG by.itacademy.aalexandrov.poker.service.impl.TransactionServiceImpl - total count in DB: 5
+21:26:05.964 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.TiketServiceImpl - delete all Tikets
+21:26:06.031 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.PokerActionServiceImpl - delete all PokerActions
+21:26:06.098 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.UserAccountServiceImpl - delete all UserAccounts
+21:26:06.172 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.CountryServiceImpl - delete all Countries
+21:26:06.240 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.StatisticServiceImpl - delete all Statistics
+21:26:06.777 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.TransactionServiceImpl - delete all Tranzactions
+21:26:06.859 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.TransactionServiceImpl - new Tranzaction created: Tranzaction [amount=9.0, comment=comment10936]
+21:26:08.933 [main] INFO  by.itacademy.aalexandrov.poker.service.impl.TransactionServiceImpl - new Tranzaction updated: Tranzaction [amount=1010.0, comment=comment10936_updated]
+21:26:09.112 [main] DEBUG by.itacademy.aalexandrov.poker.service.impl.TransactionServiceImpl - entityById: Tranzaction [amount=1010.0, comment=comment10936_updated]

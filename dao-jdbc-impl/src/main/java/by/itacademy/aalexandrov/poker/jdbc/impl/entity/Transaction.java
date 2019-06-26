@@ -1,8 +1,8 @@
 package by.itacademy.aalexandrov.poker.jdbc.impl.entity;
 
-import by.itacademy.aalexandrov.poker.dao.api.entity.table.ITranzaction;
+import by.itacademy.aalexandrov.poker.dao.api.entity.table.ITransaction;
 
-public class Tranzaction extends BaseEntity implements ITranzaction {
+public class Transaction extends BaseEntity implements ITransaction {
 
 	private double amount;
 	private String comment;

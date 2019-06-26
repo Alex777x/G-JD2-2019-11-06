@@ -3,6 +3,9 @@ package by.itacademy.aalexandrov.poker.service.impl;
 import java.util.Date;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import by.itacademy.aalexandrov.poker.dao.api.IPlayerDao;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IPlayer;
 import by.itacademy.aalexandrov.poker.dao.api.filter.PlayerFilter;
@@ -10,9 +13,11 @@ import by.itacademy.aalexandrov.poker.jdbc.impl.PlayerDaoImpl;
 import by.itacademy.aalexandrov.poker.service.IPlayerService;
 
 public class PlayerServiceImpl implements IPlayerService {
-	
+
+	private static final Logger LOGGER = LoggerFactory.getLogger(PlayerServiceImpl.class);
+
 	private IPlayerDao dao = new PlayerDaoImpl();
-	
+
 	@Override
 	public IPlayer createEntity() {
 		return dao.createEntity();
@@ -23,47 +28,53 @@ public class PlayerServiceImpl implements IPlayerService {
 		final Date modifedOn = new Date();
 		entity.setUpdated(modifedOn);
 		if (entity.getId() == null) {
+			LOGGER.info("new Player created: {}", entity);
 			entity.setCreated(modifedOn);
 			dao.insert(entity);
 		} else {
+			LOGGER.info("new Player updated: {}", entity);
 			dao.update(entity);
 		}
 	}
 
 	@Override
+	public void save(IPlayer... entities) {
+		Date modified = new Date();
+		for (IPlayer iPlayer : entities) {
+
+			iPlayer.setUpdated(modified);
+			iPlayer.setCreated(modified);
+
+		}
+
+		dao.save(entities);
+	}
+
+	@Override
 	public IPlayer get(final Integer id) {
 		final IPlayer entity = dao.get(id);
+		LOGGER.debug("entityById: {}", entity);
 		return entity;
 	}
 
 	@Override
 	public void delete(final Integer id) {
+		LOGGER.info("delete entity: {}", id);
 		dao.delete(id);
 	}
 
 	@Override
 	public void deleteAll() {
+		LOGGER.info("delete all Players");
 		dao.deleteAll();
 	}
 
 	@Override
 	public List<IPlayer> getAll() {
 		final List<IPlayer> all = dao.selectAll();
+		LOGGER.debug("total count in DB: {}", all.size());
 		return all;
 	}
-	
-	@Override
-    public void save(IPlayer... entities) {
-        Date modified = new Date();
-        for (IPlayer iPokerAction : entities) {
-
-        	iPokerAction.setUpdated(modified);
-        	iPokerAction.setCreated(modified);
-
-        }
-
-        dao.save(entities);
-    }
 
 	@Override
 	public List<IPlayer> find(PlayerFilter filter) {

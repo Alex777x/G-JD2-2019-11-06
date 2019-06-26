@@ -10,17 +10,17 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import by.itacademy.aalexandrov.poker.dao.api.entity.table.ITranzaction;
+import by.itacademy.aalexandrov.poker.dao.api.entity.table.ITransaction;
 
 
-public class TranzactionServiceTest extends AbstractTest {
+public class TransactionServiceTest extends AbstractTest {
 
 	
 	@Test
 	public void testCreate() {
-		final ITranzaction entity = saveNewTranzaction();
+		final ITransaction entity = saveNewTranzaction();
 
-		final ITranzaction entityFromDb = tranzactionService.get(entity.getId());
+		final ITransaction entityFromDb = tranzactionService.get(entity.getId());
 
 		assertNotNull(entityFromDb);
 		assertEquals(entity.getAmount(), entityFromDb.getAmount());
@@ -35,12 +35,12 @@ public class TranzactionServiceTest extends AbstractTest {
     public void testCreateMultiple() {
         int initialSize = tranzactionService.getAll().size();
 
-        final ITranzaction entity1 = tranzactionService.createEntity();
+        final ITransaction entity1 = tranzactionService.createEntity();
         entity1.setAmount(getRandomObjectsCount());
         entity1.setComment("tiket_text" + getRandomPrefix());
 
         try {
-            final ITranzaction entity2 = tranzactionService.createEntity();
+            final ITransaction entity2 = tranzactionService.createEntity();
             tranzactionService.save(entity1, entity2);
             fail("Tranzaction save should fail if name not specified");
         } catch (Exception e) {
@@ -51,7 +51,7 @@ public class TranzactionServiceTest extends AbstractTest {
 	
 	@Test
     public void testUpdate() throws InterruptedException {
-        final ITranzaction entity = saveNewTranzaction();
+        final ITransaction entity = saveNewTranzaction();
 
         double newAmount = entity.getAmount() + 1001;
         String newComment = entity.getComment() + "_updated";
@@ -60,7 +60,7 @@ public class TranzactionServiceTest extends AbstractTest {
         Thread.sleep(2000);
         tranzactionService.save(entity);
 
-        final ITranzaction entityFromDb = tranzactionService.get(entity.getId());
+        final ITransaction entityFromDb = tranzactionService.get(entity.getId());
 
         assertNotNull(entityFromDb);
         assertEquals(newAmount, entityFromDb.getAmount());
@@ -81,9 +81,9 @@ public class TranzactionServiceTest extends AbstractTest {
         	saveNewTranzaction();
         }
 
-        final List<ITranzaction> allEntities = tranzactionService.getAll();
+        final List<ITransaction> allEntities = tranzactionService.getAll();
 
-        for (final ITranzaction entityFromDb : allEntities) {
+        for (final ITransaction entityFromDb : allEntities) {
             assertNotNull(entityFromDb.getAmount());
             assertNotNull(entityFromDb.getComment());
             assertNotNull(entityFromDb.getId());
@@ -96,7 +96,7 @@ public class TranzactionServiceTest extends AbstractTest {
 
     @Test
     public void testDelete() {
-        final ITranzaction entity = saveNewTranzaction();
+        final ITransaction entity = saveNewTranzaction();
         tranzactionService.delete(entity.getId());
         assertNull(tranzactionService.get(entity.getId()));
     }

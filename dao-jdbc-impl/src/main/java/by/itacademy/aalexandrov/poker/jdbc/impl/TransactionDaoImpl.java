@@ -8,28 +8,28 @@ import java.sql.Statement;
 import java.sql.Types;
 import java.util.List;
 
-import by.itacademy.aalexandrov.poker.dao.api.ITranzactionDao;
-import by.itacademy.aalexandrov.poker.dao.api.entity.table.ITranzaction;
-import by.itacademy.aalexandrov.poker.dao.api.filter.TranzactionFilter;
-import by.itacademy.aalexandrov.poker.jdbc.impl.entity.Tranzaction;
+import by.itacademy.aalexandrov.poker.dao.api.ITransactionDao;
+import by.itacademy.aalexandrov.poker.dao.api.entity.table.ITransaction;
+import by.itacademy.aalexandrov.poker.dao.api.filter.TransactionFilter;
+import by.itacademy.aalexandrov.poker.jdbc.impl.entity.Transaction;
 import by.itacademy.aalexandrov.poker.jdbc.impl.util.PreparedStatementAction;
 import by.itacademy.aalexandrov.poker.jdbc.impl.util.SQLExecutionException;
 
-public class TranzactionDaoImpl extends AbstractDaoImpl<ITranzaction, Integer> implements ITranzactionDao {
+public class TransactionDaoImpl extends AbstractDaoImpl<ITransaction, Integer> implements ITransactionDao {
 
 	@Override
-	public ITranzaction createEntity() {
-		return new Tranzaction();
+	public ITransaction createEntity() {
+		return new Transaction();
 	}
 
 	@Override
-	public void insert(ITranzaction entity) {
-		executeStatement(new PreparedStatementAction<ITranzaction>(
+	public void insert(ITransaction entity) {
+		executeStatement(new PreparedStatementAction<ITransaction>(
 				String.format("insert into %s (amount, comment, created, updated) values(?,?,?,?)",
 						getTableName()),
 				true) {
 			@Override
-			public ITranzaction doWithPreparedStatement(final PreparedStatement pStmt) throws SQLException {
+			public ITransaction doWithPreparedStatement(final PreparedStatement pStmt) throws SQLException {
 				pStmt.setDouble(1, entity.getAmount());
 				pStmt.setString(2, entity.getComment());
 				pStmt.setObject(3, entity.getCreated(), Types.TIMESTAMP);
@@ -50,11 +50,11 @@ public class TranzactionDaoImpl extends AbstractDaoImpl<ITranzaction, Integer> i
 	}
 
 	@Override
-	public void update(ITranzaction entity) {
-		executeStatement(new PreparedStatementAction<ITranzaction>(String
+	public void update(ITransaction entity) {
+		executeStatement(new PreparedStatementAction<ITransaction>(String
 				.format("update %s set amount=?, comment=?, updated=? where id=?", getTableName())) {
 			@Override
-			public ITranzaction doWithPreparedStatement(final PreparedStatement pStmt) throws SQLException {
+			public ITransaction doWithPreparedStatement(final PreparedStatement pStmt) throws SQLException {
 				pStmt.setDouble(1, entity.getAmount());
 				pStmt.setString(2, entity.getComment());
 				pStmt.setObject(3, entity.getUpdated(), Types.TIMESTAMP);
@@ -73,8 +73,8 @@ public class TranzactionDaoImpl extends AbstractDaoImpl<ITranzaction, Integer> i
 	}
 
 	@Override
-	protected ITranzaction parseRow(final ResultSet resultSet) throws SQLException {
-		final ITranzaction entity = createEntity();
+	protected ITransaction parseRow(final ResultSet resultSet) throws SQLException {
+		final ITransaction entity = createEntity();
 		entity.setId((Integer) resultSet.getObject("id"));
 		entity.setAmount(resultSet.getDouble("amount"));
 		entity.setComment(resultSet.getString("comment"));
@@ -84,12 +84,12 @@ public class TranzactionDaoImpl extends AbstractDaoImpl<ITranzaction, Integer> i
 	}
 
 	@Override
-	public void save(ITranzaction... entities) {
+	public void save(ITransaction... entities) {
 		try (Connection c = getConnection()) {
 			c.setAutoCommit(false);
 			try {
 
-				for (ITranzaction entity : entities) {
+				for (ITransaction entity : entities) {
 					PreparedStatement pStmt = c.prepareStatement(String.format(
 							"insert into %s (amount, comment, created, updated) values(?,?,?,?)",
 							getTableName()), Statement.RETURN_GENERATED_KEYS);
@@ -124,7 +124,7 @@ public class TranzactionDaoImpl extends AbstractDaoImpl<ITranzaction, Integer> i
 	}
 
 	@Override
-	public List<ITranzaction> find(TranzactionFilter filter) {
+	public List<ITransaction> find(TransactionFilter filter) {
 		final StringBuilder sqlTile = new StringBuilder("");
 		appendSort(filter, sqlTile);
 		appendPaging(filter, sqlTile);
@@ -132,7 +132,7 @@ public class TranzactionDaoImpl extends AbstractDaoImpl<ITranzaction, Integer> i
 	}
 
 	@Override
-	public long getCount(TranzactionFilter filter) {
+	public long getCount(TransactionFilter filter) {
 		return executeCountQuery("");
 	}
 
