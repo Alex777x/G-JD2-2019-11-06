@@ -21,7 +21,7 @@ public class UserAccountServiceTest extends AbstractTest {
 
 	@Test
 	public void testCreate() {
-		final IUserAccount entity = saveNewUserAccount();
+		IUserAccount entity = saveNewUserAccount();
 
 		final IUserAccount entityFromDb = userAccountService.get(entity.getId());
 
@@ -30,11 +30,11 @@ public class UserAccountServiceTest extends AbstractTest {
 		assertEquals(entity.getPassword(), entityFromDb.getPassword());
 		assertEquals(entity.getEmail(), entityFromDb.getEmail());
 		assertEquals(entity.getFoto(), entityFromDb.getFoto());
-		assertEquals(entity.getCountry(), entityFromDb.getCountry());
-		assertEquals(entity.getStatisticId(), entityFromDb.getStatisticId());
+		assertEquals(entity.getCountryId().getId(), entityFromDb.getCountryId().getId());
+		assertEquals(entity.getStatisticId().getId(), entityFromDb.getStatisticId().getId());
 		assertEquals(entity.getUserRole(), entityFromDb.getUserRole());
 		assertEquals(entity.getUserStatus(), entityFromDb.getUserStatus());
-		assertEquals(entity.getTranzaction(), entityFromDb.getTranzaction());
+		assertEquals(entity.getTranzaction().getId(), entityFromDb.getTranzaction().getId());
 		assertNotNull(entityFromDb.getId());
 		assertNotNull(entityFromDb.getCreated());
 		assertNotNull(entityFromDb.getUpdated());
@@ -50,7 +50,7 @@ public class UserAccountServiceTest extends AbstractTest {
 		entity1.setPassword(getRandomPrefix());
 		entity1.setEmail(getRandomPrefix());
 		entity1.setFoto(getRandomPrefix());
-		entity1.setCountry(saveNewCountry());
+		entity1.setCountryId(saveNewCountry());
 		entity1.setStatisticId(saveNewStatistic());
 		entity1.setUserRole(UserRole.member);
 		entity1.setUserStatus(UserStatus.active);
@@ -70,24 +70,18 @@ public class UserAccountServiceTest extends AbstractTest {
 	public void testUpdate() throws InterruptedException {
 		final IUserAccount entity = saveNewUserAccount();
 
-		String newNickname = entity.getNickname();
-		String newPassword = entity.getPassword();
-		String newEmail = entity.getEmail();
-		String newFoto = entity.getFoto();
-		ICountry newCountry = entity.getCountry();
-		IStatistic newStatistic = entity.getStatisticId();
+		String newNickname = entity.getNickname() + "_updated";
+		String newPassword = entity.getPassword() + "_updated";
+		String newEmail = entity.getEmail() + "_updated";
+		String newFoto = entity.getFoto() + "_updated";
 		UserRole newUserRole = entity.getUserRole();
 		UserStatus newUserStatus = entity.getUserStatus();
-		ITranzaction newTranzaction = entity.getTranzaction();
 		entity.setNickname(newNickname);
 		entity.setPassword(newPassword);
 		entity.setEmail(newEmail);
 		entity.setFoto(newFoto);
-		entity.setCountry(newCountry);
-		entity.setStatisticId(newStatistic);
 		entity.setUserRole(newUserRole);
 		entity.setUserStatus(newUserStatus);
-		entity.setTranzaction(newTranzaction);
 		Thread.sleep(2000);
 		userAccountService.save(entity);
 
@@ -98,11 +92,8 @@ public class UserAccountServiceTest extends AbstractTest {
 		assertEquals(newPassword, entityFromDb.getPassword());
 		assertEquals(newEmail, entityFromDb.getEmail());
 		assertEquals(newFoto, entityFromDb.getFoto());
-		assertEquals(newCountry, entityFromDb.getCountry());
-		assertEquals(newStatistic, entityFromDb.getStatisticId());
 		assertEquals(newUserRole, entityFromDb.getUserRole());
 		assertEquals(newUserStatus, entityFromDb.getUserStatus());
-		assertEquals(newTranzaction, entityFromDb.getTranzaction());
 		assertNotNull(entityFromDb.getId());
 		assertNotNull(entityFromDb.getCreated());
 		assertNotNull(entityFromDb.getUpdated());
@@ -126,7 +117,7 @@ public class UserAccountServiceTest extends AbstractTest {
 			assertNotNull(entityFromDb.getPassword());
 			assertNotNull(entityFromDb.getEmail());
 			assertNotNull(entityFromDb.getFoto());
-			assertNotNull(entityFromDb.getCountry());
+			assertNotNull(entityFromDb.getCountryId().getId());
 			assertNotNull(entityFromDb.getStatisticId());
 			assertNotNull(entityFromDb.getUserRole());
 			assertNotNull(entityFromDb.getUserStatus());

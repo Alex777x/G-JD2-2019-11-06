@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Types;
 import java.util.List;
+import java.util.Set;
 
 import by.itacademy.aalexandrov.poker.dao.api.IUserAccountDao;
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.UserRole;
@@ -16,6 +17,9 @@ import by.itacademy.aalexandrov.poker.dao.api.entity.table.IStatistic;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.ITranzaction;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IUserAccount;
 import by.itacademy.aalexandrov.poker.dao.api.filter.UserAccountFilter;
+import by.itacademy.aalexandrov.poker.jdbc.impl.entity.Country;
+import by.itacademy.aalexandrov.poker.jdbc.impl.entity.Statistic;
+import by.itacademy.aalexandrov.poker.jdbc.impl.entity.Tranzaction;
 import by.itacademy.aalexandrov.poker.jdbc.impl.entity.UserAccount;
 import by.itacademy.aalexandrov.poker.jdbc.impl.util.PreparedStatementAction;
 import by.itacademy.aalexandrov.poker.jdbc.impl.util.SQLExecutionException;
@@ -39,7 +43,7 @@ public class UserAccountDaoImpl extends AbstractDaoImpl<IUserAccount, Integer> i
 				pStmt.setString(3, entity.getEmail());
 				pStmt.setString(4, entity.getFoto());
 				pStmt.setInt(5, entity.getStatisticId().getId());
-				pStmt.setInt(6, entity.getCountry().getId());
+				pStmt.setInt(6, entity.getCountryId().getId());
 				pStmt.setString(7, entity.getUserRole().name());
 				pStmt.setString(8, entity.getUserStatus().name());
 				pStmt.setInt(9, entity.getTranzaction().getId());
@@ -72,10 +76,10 @@ public class UserAccountDaoImpl extends AbstractDaoImpl<IUserAccount, Integer> i
 				pStmt.setString(3, entity.getEmail());
 				pStmt.setString(4, entity.getFoto());
 				pStmt.setInt(5, entity.getStatisticId().getId());
-				pStmt.setObject(6, entity.getCountry());
-				pStmt.setObject(7, entity.getUserRole().name());
-				pStmt.setObject(8, entity.getUserStatus());
-				pStmt.setObject(9, entity.getTranzaction());
+				pStmt.setInt(6, entity.getCountryId().getId());
+				pStmt.setString(7, entity.getUserRole().name());
+				pStmt.setString(8, entity.getUserStatus().name());
+				pStmt.setInt(9, entity.getTranzaction().getId());
 				pStmt.setObject(10, entity.getUpdated(), Types.TIMESTAMP);
 				pStmt.setInt(11, entity.getId());
 
@@ -92,20 +96,51 @@ public class UserAccountDaoImpl extends AbstractDaoImpl<IUserAccount, Integer> i
 	}
 
 	@Override
-	protected IUserAccount parseRow(final ResultSet resultSet) throws SQLException {
+	protected IUserAccount parseRow(final ResultSet resultSet, Set<String> columns) throws SQLException {
 		final IUserAccount entity = createEntity();
 		entity.setId((Integer) resultSet.getObject("id"));
 		entity.setNickname(resultSet.getString("nickname"));
 		entity.setPassword(resultSet.getString("password"));
 		entity.setEmail(resultSet.getString("email"));
 		entity.setFoto(resultSet.getString("foto"));
-		entity.setCountry((ICountry) resultSet.getObject("country_id"));
-		entity.setStatisticId((IStatistic) resultSet.getObject("statistic_id"));
 		entity.setUserRole(UserRole.valueOf(resultSet.getString("role_id")));
 		entity.setUserStatus(UserStatus.valueOf(resultSet.getString("status_id")));
-		entity.setTranzaction((ITranzaction) resultSet.getObject("tranzaction_id"));
 		entity.setCreated(resultSet.getTimestamp("created"));
 		entity.setUpdated(resultSet.getTimestamp("updated"));
+		
+		
+		Integer countryId = (Integer) resultSet.getObject("country_id");
+		if (countryId != null) {
+            final Country country = new Country();
+            country.setId(countryId);
+            if (columns.contains("country_id")) {
+                country.setCountry(resultSet.getString("country_id"));
+            }
+            entity.setCountryId(country);
+        }
+		
+		Integer statisticId = (Integer) resultSet.getObject("statistic_id");
+		if (statisticId != null) {
+            final Statistic statistic = new Statistic();
+            statistic.setId(statisticId);
+            if (columns.contains("statistic_id")) {
+                statistic.setSumGames(resultSet.getInt("statistic_id"));
+                statistic.setWonGames(resultSet.getInt("statistic_id"));
+            }
+            entity.setStatisticId(statistic);
+        }
+		
+		Integer tranzactionId = (Integer) resultSet.getObject("tranzaction_id");
+		if (tranzactionId != null) {
+            final Tranzaction tranzaction = new Tranzaction();
+            tranzaction.setId(tranzactionId);
+            if (columns.contains("tranzaction_id")) {
+                tranzaction.setAmount(resultSet.getInt("tranzaction_id"));
+                tranzaction.setComment(resultSet.getString("tranzaction_id"));
+            }
+            entity.setTranzaction(tranzaction);
+        }
+		
 		return entity;
 	}
 
@@ -125,7 +160,7 @@ public class UserAccountDaoImpl extends AbstractDaoImpl<IUserAccount, Integer> i
 					pStmt.setString(3, entity.getEmail());
 					pStmt.setString(4, entity.getFoto());
 					pStmt.setInt(5, entity.getStatisticId().getId());
-					pStmt.setObject(6, entity.getCountry());
+					pStmt.setObject(6, entity.getCountryId());
 					pStmt.setObject(7, entity.getUserRole());
 					pStmt.setObject(8, entity.getUserStatus());
 					pStmt.setObject(9, entity.getTranzaction());

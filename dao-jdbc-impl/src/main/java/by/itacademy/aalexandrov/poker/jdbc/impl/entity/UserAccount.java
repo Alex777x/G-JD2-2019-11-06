@@ -13,7 +13,7 @@ public class UserAccount extends BaseEntity implements IUserAccount {
 	private String password;
 	private String email;
 	private String foto;
-	private ICountry country;
+	private ICountry countryId;
 	private IStatistic statisticId;
 	private UserRole userRole;
 	private UserStatus userStatus;
@@ -70,13 +70,13 @@ public class UserAccount extends BaseEntity implements IUserAccount {
 	}
 
 	@Override
-	public ICountry getCountry() {
-		return country;
+	public ICountry getCountryId() {
+		return countryId;
 	}
 
 	@Override
-	public void setCountry(ICountry country) {
-		this.country = country;
+	public void setCountryId(ICountry countryId) {
+		this.countryId = countryId;
 	}
 
 	@Override
@@ -112,7 +112,7 @@ public class UserAccount extends BaseEntity implements IUserAccount {
 	@Override
 	public String toString() {
 		return "UserAccount [nickname=" + nickname + ", password=" + password + ", email=" + email + ", foto=" + foto
-				+ ", country=" + country + ", userRole=" + userRole + ", userStatus=" + userStatus + ", tranzaction="
+				+ ", country=" + countryId + ", userRole=" + userRole + ", userStatus=" + userStatus + ", tranzaction="
 				+ tranzaction + "]";
 	}
 

@@ -17,10 +17,6 @@ public interface IUserAccount extends IBaseEntity {
 
 	UserRole getUserRole();
 
-	void setCountry(ICountry country);
-
-	ICountry getCountry();
-
 	void setFoto(String foto);
 
 	String getFoto();
@@ -40,5 +36,9 @@ public interface IUserAccount extends IBaseEntity {
 	void setStatisticId(IStatistic statisticId);
 
 	IStatistic getStatisticId();
+
+	void setCountryId(ICountry countryId);
+
+	ICountry getCountryId();
 
 }
