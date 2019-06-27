@@ -52,8 +52,8 @@ public class UserAccountServiceTest extends AbstractTest {
 		entity1.setFoto(getRandomPrefix());
 		entity1.setCountryId(saveNewCountry());
 		entity1.setStatisticId(saveNewStatistic());
-		entity1.setUserRole(UserRole.member);
-		entity1.setUserStatus(UserStatus.active);
+		entity1.setUserRole(UserRole.MEMBER);
+		entity1.setUserStatus(UserStatus.ACTIVE);
 		entity1.setTransactionId(saveNewTransaction());
 
 		try {

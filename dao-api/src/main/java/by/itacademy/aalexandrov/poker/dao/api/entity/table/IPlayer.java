@@ -1,25 +1,34 @@
 package by.itacademy.aalexandrov.poker.dao.api.entity.table;
 
+import by.itacademy.aalexandrov.poker.dao.api.entity.enums.PlayerPosition;
+import by.itacademy.aalexandrov.poker.dao.api.entity.enums.PlayerStatus;
+import by.itacademy.aalexandrov.poker.jdbc.impl.entity.PlayerCard;
+
 public interface IPlayer extends IBaseEntity {
-
-	void setPokerActionId(IPokerAction pokerActionId);
-
-	IPokerAction getPokerActionId();
 
 	void setStack(double stack);
 
 	double getStack();
 
-	void setDealer(boolean dealer);
+	void setState(PlayerStatus state);
 
-	boolean isDealer();
+	PlayerStatus getState();
 
-	void setGameId(IGame gameId);
+	void setInGame(boolean inGame);
 
-	IGame getGameId();
+	boolean isInGame();
 
-	void setUserAccountId(IUserAccount userAccountId);
+	void setPlayerActionId(PlayerAction playerActionId);
 
-	IUserAccount getUserAccountId();
+	PlayerAction getPlayerActionId();
+
+	void setPlayerCardId(PlayerCard playerCardId);
+
+	PlayerCard getPlayerCardId();
+
+	void setPositionId(PlayerPosition positionId);
+
+	PlayerPosition getPositionId();
+
 
 }

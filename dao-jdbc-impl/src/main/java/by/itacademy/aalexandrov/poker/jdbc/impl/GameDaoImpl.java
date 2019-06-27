@@ -12,7 +12,7 @@ import by.itacademy.aalexandrov.poker.dao.api.IGameDao;
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.GameStatus;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IChat;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IGame;
-import by.itacademy.aalexandrov.poker.dao.api.entity.table.IPokerBoard;
+import by.itacademy.aalexandrov.poker.dao.api.entity.table.IBoard;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IUserAccount;
 import by.itacademy.aalexandrov.poker.dao.api.filter.GameFilter;
 import by.itacademy.aalexandrov.poker.jdbc.impl.entity.Game;
@@ -91,7 +91,7 @@ public class GameDaoImpl extends AbstractDaoImpl<IGame, Integer> implements IGam
 		entity.setGameStatus((GameStatus) resultSet.getObject("state"));
 		entity.setWinnerId((IUserAccount) resultSet.getObject("winner_id"));
 		entity.setNexStepPerformerId((IUserAccount) resultSet.getObject("next_step_performer_id"));
-		entity.setPokerBoardId((IPokerBoard) resultSet.getObject("poker_board_id"));
+		entity.setPokerBoardId((IBoard) resultSet.getObject("poker_board_id"));
 		entity.setBank(resultSet.getDouble("bank"));
 		entity.setChatId((IChat) resultSet.getObject("chat_id"));
 		entity.setCreated(resultSet.getTimestamp("created"));

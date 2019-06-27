@@ -28,11 +28,11 @@ public class TransactionServiceImpl implements ITransactionService {
 		final Date modifedOn = new Date();
 		entity.setUpdated(modifedOn);
 		if (entity.getId() == null) {
-			LOGGER.info("new Tranzaction created: {}", entity);
+			LOGGER.info("new Transaction created: {}", entity);
 			entity.setCreated(modifedOn);
 			dao.insert(entity);
 		} else {
-			LOGGER.info("new Tranzaction updated: {}", entity);
+			LOGGER.info("new Transaction updated: {}", entity);
 			dao.update(entity);
 		}
 	}

@@ -3,7 +3,7 @@ package by.itacademy.aalexandrov.poker.jdbc.impl.entity;
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.GameStatus;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IChat;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IGame;
-import by.itacademy.aalexandrov.poker.dao.api.entity.table.IPokerBoard;
+import by.itacademy.aalexandrov.poker.dao.api.entity.table.IBoard;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IUserAccount;
 
 public class Game extends BaseEntity implements IGame {
@@ -11,7 +11,7 @@ public class Game extends BaseEntity implements IGame {
 	private GameStatus gameStatus;
 	private IUserAccount winnerId;
 	private IUserAccount nexStepPerformerId;
-	private IPokerBoard pokerBoardId;
+	private IBoard pokerBoardId;
 	private double bank;
 	private IChat chatId;
 
@@ -46,12 +46,12 @@ public class Game extends BaseEntity implements IGame {
 	}
 
 	@Override
-	public IPokerBoard getPokerBoardId() {
+	public IBoard getPokerBoardId() {
 		return pokerBoardId;
 	}
 
 	@Override
-	public void setPokerBoardId(IPokerBoard pokerBoardId) {
+	public void setPokerBoardId(IBoard pokerBoardId) {
 		this.pokerBoardId = pokerBoardId;
 	}
 

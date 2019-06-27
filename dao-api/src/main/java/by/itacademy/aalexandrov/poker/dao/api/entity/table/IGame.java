@@ -12,9 +12,9 @@ public interface IGame extends IBaseEntity {
 
 	double getBank();
 
-	void setPokerBoardId(IPokerBoard pokerBoardId);
+	void setPokerBoardId(IBoard pokerBoardId);
 
-	IPokerBoard getPokerBoardId();
+	IBoard getPokerBoardId();
 
 	void setNexStepPerformerId(IUserAccount nexStepPerformerId);
 

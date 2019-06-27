@@ -9,32 +9,26 @@ import by.itacademy.aalexandrov.poker.dao.api.entity.enums.Rank;
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.Suits;
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.UserRole;
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.UserStatus;
-import by.itacademy.aalexandrov.poker.dao.api.entity.table.IBlackjacBoard;
-import by.itacademy.aalexandrov.poker.dao.api.entity.table.IBlackjackAction;
-import by.itacademy.aalexandrov.poker.dao.api.entity.table.IBlackjackPlayerCard;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.ICard;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IChat;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.ICountry;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IGame;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IPlayer;
-import by.itacademy.aalexandrov.poker.dao.api.entity.table.IPokerAction;
-import by.itacademy.aalexandrov.poker.dao.api.entity.table.IPokerBoard;
-import by.itacademy.aalexandrov.poker.dao.api.entity.table.IPokerPlayerCard;
+import by.itacademy.aalexandrov.poker.dao.api.entity.table.IPlayerAction;
+import by.itacademy.aalexandrov.poker.dao.api.entity.table.IBoard;
+import by.itacademy.aalexandrov.poker.dao.api.entity.table.IPlayerCard;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IStatistic;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.ITiket;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.ITransaction;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IUserAccount;
-import by.itacademy.aalexandrov.poker.service.IBlackjackActionService;
-import by.itacademy.aalexandrov.poker.service.IBlackjackBoardService;
-import by.itacademy.aalexandrov.poker.service.IBlackjackPlayerCardService;
 import by.itacademy.aalexandrov.poker.service.ICardService;
 import by.itacademy.aalexandrov.poker.service.IChatService;
 import by.itacademy.aalexandrov.poker.service.ICountryService;
 import by.itacademy.aalexandrov.poker.service.IGameService;
 import by.itacademy.aalexandrov.poker.service.IPlayerService;
-import by.itacademy.aalexandrov.poker.service.IPokerActionService;
-import by.itacademy.aalexandrov.poker.service.IPokerBoardService;
-import by.itacademy.aalexandrov.poker.service.IPokerPlayerCardService;
+import by.itacademy.aalexandrov.poker.service.IPlayerActionService;
+import by.itacademy.aalexandrov.poker.service.IBoardService;
+import by.itacademy.aalexandrov.poker.service.IPlayerCardService;
 import by.itacademy.aalexandrov.poker.service.IStatisticService;
 import by.itacademy.aalexandrov.poker.service.ITiketService;
 import by.itacademy.aalexandrov.poker.service.ITransactionService;
@@ -45,17 +39,14 @@ public abstract class AbstractTest {
 	protected ICountryService countryService = new CountryServiceImpl();
 	protected IStatisticService statisticService = new StatisticServiceImpl();
 	protected ITransactionService transactionService = new TransactionServiceImpl();
-	protected IPokerActionService pokerActionService = new PokerActionServiceImpl();
+	protected IPlayerActionService playerActionService = new PlayerActionServiceImpl();
 	protected IUserAccountService userAccountService = new UserAccountServiceImpl();
-	protected IBlackjackActionService blackjackActionService = new BlackjackActionServiceImpl();
-	protected IBlackjackBoardService blackjackBoardService = new BlackjackBoardServiceImpl();
-	protected IBlackjackPlayerCardService blackjackPlayerCardService = new BlackjackPlayerCardServiceImpl();
 	protected ICardService cardService = new CardServiceImpl();
 	protected IChatService chatService = new ChatServiceImpl();
 	protected IGameService gameService = new GameServiceImpl();
 	protected IPlayerService playerService = new PlayerServiceImpl();
-	protected IPokerBoardService pokerBoardService = new PokerBoardServiceImpl();
-	protected IPokerPlayerCardService pokerPlayerCardService = new PokerPlayerCardServiceImpl();
+	protected IBoardService boardService = new BoardServiceImpl();
+	protected IPlayerCardService playerCardService = new PlayerCardServiceImpl();
 
 	private static final Random RANDOM = new Random();
 
@@ -63,20 +54,17 @@ public abstract class AbstractTest {
 	public void setUpMethod() {
 		// clean DB recursive
 		tiketService.deleteAll();
-		pokerActionService.deleteAll();
+		playerActionService.deleteAll();
 		userAccountService.deleteAll();
 		countryService.deleteAll();
 		statisticService.deleteAll();
 		transactionService.deleteAll();
-		blackjackActionService.deleteAll();
-		blackjackBoardService.deleteAll();
-		blackjackPlayerCardService.deleteAll();
-		cardService.deleteAll();
 		chatService.deleteAll();
-		gameService.deleteAll();
-		playerService.deleteAll();
-		pokerBoardService.deleteAll();
-		pokerPlayerCardService.deleteAll();
+		//gameService.deleteAll();
+		//playerService.deleteAll();
+		boardService.deleteAll();
+		playerCardService.deleteAll();
+		cardService.deleteAll();
 
 	}
 
@@ -124,17 +112,15 @@ public abstract class AbstractTest {
 		return entity;
 	}
 
-	protected IPokerAction saveNewPokerAction() {
-		IPokerAction entity = pokerActionService.createEntity();
+	protected IPlayerAction saveNewPlayerAction() {
+		IPlayerAction entity = playerActionService.createEntity();
 		entity.setBet(getRandomObjectsCount());
 		entity.setCall(getRandomObjectsCount());
 		entity.setRaise(getRandomObjectsCount());
 		entity.setFold(false);
 		entity.setCheck(true);
-		entity.setVaBank(getRandomObjectsCount());
-		entity.setSmallBlind(true);
-		entity.setBigBlind(false);
-		pokerActionService.save(entity);
+		entity.setAllIn(getRandomObjectsCount());
+		playerActionService.save(entity);
 		return entity;
 	}
 
@@ -146,8 +132,8 @@ public abstract class AbstractTest {
 		entity.setFoto("foto" + getRandomPrefix());
 		entity.setCountryId(saveNewCountry());
 		entity.setStatisticId(saveNewStatistic());
-		entity.setUserRole(UserRole.member);
-		entity.setUserStatus(UserStatus.active);
+		entity.setUserRole(UserRole.MEMBER);
+		entity.setUserStatus(UserStatus.ACTIVE);
 		entity.setTransactionId(saveNewTransaction());
 		userAccountService.save(entity);
 		return entity;
@@ -163,10 +149,10 @@ public abstract class AbstractTest {
 
 	protected IGame saveNewGame() {
 		IGame entity = gameService.createEntity();
-		entity.setGameStatus(GameStatus.active);
+		entity.setGameStatus(GameStatus.ACTIVE);
 		entity.setWinnerId(saveNewUserAccount());
 		entity.setNexStepPerformerId(saveNewUserAccount());
-		entity.setPokerBoardId(saveNewPokerBoard());
+		entity.setPokerBoardId(saveNewBoard());
 		entity.setBank(getRandomObjectsCount());
 		entity.setChatId(saveNewChat());
 		gameService.save(entity);
@@ -179,7 +165,7 @@ public abstract class AbstractTest {
 		entity.setGameId(saveNewGame());
 		entity.setDealer(false);
 		entity.setStack(getRandomObjectsCount());
-		entity.setPokerActionId(saveNewPokerAction());
+		entity.setPokerActionId(saveNewPlayerAction());
 		playerService.save(entity);
 		return entity;
 	}
@@ -193,52 +179,23 @@ public abstract class AbstractTest {
 		return entity;
 	}
 
-	protected IPokerBoard saveNewPokerBoard() {
-		IPokerBoard entity = pokerBoardService.createEntity();
+	protected IBoard saveNewBoard() {
+		IBoard entity = boardService.createEntity();
 		entity.setFlopCard1Id(saveNewCard());
 		entity.setFlopCard2Id(saveNewCard());
 		entity.setFlopCard3Id(saveNewCard());
 		entity.setTurnCardId(saveNewCard());
 		entity.setRiverCardId(saveNewCard());
-		entity.setGameId(saveNewGame());
-		pokerBoardService.save(entity);
+		boardService.save(entity);
 		return entity;
 	}
 
-	protected IPokerPlayerCard saveNewPokerPlayerCard() {
-		IPokerPlayerCard entity = pokerPlayerCardService.createEntity();
-		entity.setPokerPlayerId(saveNewUserAccount());
+	protected IPlayerCard saveNewPlayerCard() {
+		IPlayerCard entity = playerCardService.createEntity();
 		entity.setCard1Id(saveNewCard());
 		entity.setCard2Id(saveNewCard());
 		entity.setCardState(false);
-		pokerPlayerCardService.save(entity);
-		return entity;
-	}
-
-	protected IBlackjackPlayerCard saveNewBlackjackPlayerCard() {
-		IBlackjackPlayerCard entity = blackjackPlayerCardService.createEntity();
-		entity.setPlayerId(saveNewPlayer());
-		entity.setCardId(saveNewCard());
-		entity.setBlackjackActionId(saveNewBlackjackAction());
-		entity.setStack(getRandomObjectsCount());
-		blackjackPlayerCardService.save(entity);
-		return entity;
-	}
-
-	protected IBlackjacBoard saveNewIBlackjacBoard() {
-		IBlackjacBoard entity = blackjackBoardService.createEntity();
-		entity.setGameId(saveNewGame());
-		entity.setCardId(saveNewCard());
-		blackjackBoardService.save(entity);
-		return entity;
-	}
-
-	protected IBlackjackAction saveNewBlackjackAction() {
-		IBlackjackAction entity = blackjackActionService.createEntity();
-		entity.setBet(getRandomObjectsCount());
-		entity.setHitMe(false);
-		entity.setStop(false);
-		blackjackActionService.save(entity);
+		playerCardService.save(entity);
 		return entity;
 	}
 

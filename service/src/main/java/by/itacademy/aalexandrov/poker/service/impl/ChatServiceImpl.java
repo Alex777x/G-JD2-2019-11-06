@@ -40,10 +40,10 @@ public class ChatServiceImpl implements IChatService {
 	@Override
     public void save(IChat... entities) {
         Date modified = new Date();
-        for (IChat iPokerAction : entities) {
+        for (IChat iChat : entities) {
 
-        	iPokerAction.setUpdated(modified);
-        	iPokerAction.setCreated(modified);
+        	iChat.setUpdated(modified);
+        	iChat.setCreated(modified);
 
         }
 

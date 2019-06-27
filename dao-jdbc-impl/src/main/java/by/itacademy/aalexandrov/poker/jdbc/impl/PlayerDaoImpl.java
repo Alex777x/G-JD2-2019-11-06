@@ -11,7 +11,7 @@ import java.util.List;
 import by.itacademy.aalexandrov.poker.dao.api.IPlayerDao;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IGame;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IPlayer;
-import by.itacademy.aalexandrov.poker.dao.api.entity.table.IPokerAction;
+import by.itacademy.aalexandrov.poker.dao.api.entity.table.IPlayerAction;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IUserAccount;
 import by.itacademy.aalexandrov.poker.dao.api.filter.PlayerFilter;
 import by.itacademy.aalexandrov.poker.jdbc.impl.entity.Player;
@@ -89,7 +89,7 @@ public class PlayerDaoImpl extends AbstractDaoImpl<IPlayer, Integer> implements 
 		entity.setGameId((IGame) resultSet.getObject("game_id"));
 		entity.setDealer(resultSet.getBoolean("dealer"));
 		entity.setStack(resultSet.getDouble("stack"));
-		entity.setPokerActionId((IPokerAction) resultSet.getObject("poker_action_id"));
+		entity.setPokerActionId((IPlayerAction) resultSet.getObject("poker_action_id"));
 		entity.setCreated(resultSet.getTimestamp("created"));
 		entity.setUpdated(resultSet.getTimestamp("updated"));
 		return entity;

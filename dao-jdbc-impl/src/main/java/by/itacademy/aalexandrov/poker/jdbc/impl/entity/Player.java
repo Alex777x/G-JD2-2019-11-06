@@ -1,46 +1,66 @@
 package by.itacademy.aalexandrov.poker.jdbc.impl.entity;
 
-import by.itacademy.aalexandrov.poker.dao.api.entity.table.IGame;
+import by.itacademy.aalexandrov.poker.dao.api.entity.enums.PlayerPosition;
+import by.itacademy.aalexandrov.poker.dao.api.entity.enums.PlayerStatus;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IPlayer;
-import by.itacademy.aalexandrov.poker.dao.api.entity.table.IPokerAction;
-import by.itacademy.aalexandrov.poker.dao.api.entity.table.IUserAccount;
 
 public class Player extends BaseEntity implements IPlayer {
 
-	private IUserAccount userAccountId;
-	private IGame gameId;
-	private boolean dealer;
+	private PlayerPosition positionId;
+	private PlayerCard playerCardId;
+	private PlayerAction playerActionId;
+	private boolean inGame;
+	private PlayerStatus state;
 	private double stack;
-	private IPokerAction pokerActionId;
 
 	@Override
-	public IUserAccount getUserAccountId() {
-		return userAccountId;
+	public PlayerPosition getPositionId() {
+		return positionId;
 	}
 
 	@Override
-	public void setUserAccountId(IUserAccount userAccountId) {
-		this.userAccountId = userAccountId;
+	public void setPositionId(PlayerPosition positionId) {
+		this.positionId = positionId;
 	}
 
 	@Override
-	public IGame getGameId() {
-		return gameId;
+	public PlayerCard getPlayerCardId() {
+		return playerCardId;
 	}
 
 	@Override
-	public void setGameId(IGame gameId) {
-		this.gameId = gameId;
+	public void setPlayerCardId(PlayerCard playerCardId) {
+		this.playerCardId = playerCardId;
 	}
 
 	@Override
-	public boolean isDealer() {
-		return dealer;
+	public PlayerAction getPlayerActionId() {
+		return playerActionId;
 	}
 
 	@Override
-	public void setDealer(boolean dealer) {
-		this.dealer = dealer;
+	public void setPlayerActionId(PlayerAction playerActionId) {
+		this.playerActionId = playerActionId;
+	}
+
+	@Override
+	public boolean isInGame() {
+		return inGame;
+	}
+
+	@Override
+	public void setInGame(boolean inGame) {
+		this.inGame = inGame;
+	}
+
+	@Override
+	public PlayerStatus getState() {
+		return state;
+	}
+
+	@Override
+	public void setState(PlayerStatus state) {
+		this.state = state;
 	}
 
 	@Override
@@ -54,19 +74,9 @@ public class Player extends BaseEntity implements IPlayer {
 	}
 
 	@Override
-	public IPokerAction getPokerActionId() {
-		return pokerActionId;
-	}
-
-	@Override
-	public void setPokerActionId(IPokerAction pokerActionId) {
-		this.pokerActionId = pokerActionId;
-	}
-
-	@Override
 	public String toString() {
-		return "Player [userAccountId=" + userAccountId + ", gameId=" + gameId + ", dealer=" + dealer + ", stack="
-				+ stack + ", pokerActionId=" + pokerActionId + "]";
+		return "Player [positionId=" + positionId + ", playerCardId=" + playerCardId + ", playerActionId="
+				+ playerActionId + ", inGame=" + inGame + ", state=" + state + ", stack=" + stack + "]";
 	}
 
 }

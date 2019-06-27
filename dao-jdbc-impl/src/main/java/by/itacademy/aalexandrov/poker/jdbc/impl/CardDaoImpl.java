@@ -32,8 +32,8 @@ public class CardDaoImpl extends AbstractDaoImpl<ICard, Integer> implements ICar
 				true) {
 			@Override
 			public ICard doWithPreparedStatement(final PreparedStatement pStmt) throws SQLException {
-				pStmt.setObject(1, entity.getSuit());
-				pStmt.setObject(2, entity.getRank());
+				pStmt.setString(1, entity.getSuit().name());
+				pStmt.setString(2, entity.getRank().name());
 				pStmt.setString(3, entity.getFilename());
 				pStmt.setObject(4, entity.getCreated(), Types.TIMESTAMP);
 				pStmt.setObject(5, entity.getUpdated(), Types.TIMESTAMP);
@@ -58,8 +58,8 @@ public class CardDaoImpl extends AbstractDaoImpl<ICard, Integer> implements ICar
 				.format("update %s set suite=?, rank=?, filename=?, updated=? where id=?", getTableName())) {
 			@Override
 			public ICard doWithPreparedStatement(final PreparedStatement pStmt) throws SQLException {
-				pStmt.setObject(1, entity.getSuit());
-				pStmt.setObject(2, entity.getRank());
+				pStmt.setString(1, entity.getSuit().name());
+				pStmt.setString(2, entity.getRank().name());
 				pStmt.setString(3, entity.getFilename());
 				pStmt.setObject(4, entity.getUpdated(), Types.TIMESTAMP);
 				pStmt.setInt(5, entity.getId());
@@ -80,8 +80,8 @@ public class CardDaoImpl extends AbstractDaoImpl<ICard, Integer> implements ICar
 	protected ICard parseRow(final ResultSet resultSet) throws SQLException {
 		final ICard entity = createEntity();
 		entity.setId((Integer) resultSet.getObject("id"));
-		entity.setSuit((Suits) resultSet.getObject("suite"));
-		entity.setRank((Rank) resultSet.getObject("rank"));
+		entity.setSuit(Suits.valueOf(resultSet.getString("suite")));
+		entity.setRank(Rank.valueOf(resultSet.getString("rank")));
 		entity.setFilename(resultSet.getString("filename"));
 		entity.setCreated(resultSet.getTimestamp("created"));
 		entity.setUpdated(resultSet.getTimestamp("updated"));
