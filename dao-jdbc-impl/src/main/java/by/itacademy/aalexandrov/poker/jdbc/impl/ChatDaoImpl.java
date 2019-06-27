@@ -86,7 +86,7 @@ public class ChatDaoImpl extends AbstractDaoImpl<IChat, Integer> implements ICha
 		
 		Integer playerId = (Integer) resultSet.getObject("player_id");
 		if (playerId != null) {
-            final Player country = new Player();
+            final IPlayer country = new Player();
             country.setId(playerId);
             if (columns.contains("player_id")) {
                 country.setStack(resultSet.getInt("player_id"));

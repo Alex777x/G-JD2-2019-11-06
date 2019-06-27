@@ -29,4 +29,8 @@ public interface IPlayer extends IBaseEntity {
 
 	PlayerPosition getPositionId();
 
+	void setUserAccountId(IUserAccount userAccountId);
+
+	IUserAccount getUserAccountId();
+
 }

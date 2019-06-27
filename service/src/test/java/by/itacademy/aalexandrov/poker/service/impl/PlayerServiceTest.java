@@ -23,6 +23,7 @@ public class PlayerServiceTest extends AbstractTest {
 		final IPlayer entityFromDb = playerService.get(entity.getId());
 
 		assertNotNull(entityFromDb);
+		assertEquals(entity.getUserAccountId().getId(), entityFromDb.getUserAccountId().getId());
 		assertEquals(entity.getPositionId(), entityFromDb.getPositionId());
 		assertEquals(entity.getPlayerCardId().getId(), entityFromDb.getPlayerCardId().getId());
 		assertEquals(entity.getPlayerActionId().getId(), entityFromDb.getPlayerActionId().getId());
@@ -40,6 +41,7 @@ public class PlayerServiceTest extends AbstractTest {
 		int initialSize = playerService.getAll().size();
 
 		final IPlayer entity1 = playerService.createEntity();
+		entity1.setUserAccountId(saveNewUserAccount());
 		entity1.setPositionId(PlayerPosition.ONE);
 		entity1.setPlayerCardId(saveNewPlayerCard());
 		entity1.setPlayerActionId(saveNewPlayerAction());
@@ -95,6 +97,7 @@ public class PlayerServiceTest extends AbstractTest {
 		final List<IPlayer> allEntities = playerService.getAll();
 
 		for (final IPlayer entityFromDb : allEntities) {
+			assertNotNull(entityFromDb.getUserAccountId().getId());
 			assertNotNull(entityFromDb.getPositionId());
 			assertNotNull(entityFromDb.getPlayerCardId().getId());
 			assertNotNull(entityFromDb.getPlayerActionId().getId());

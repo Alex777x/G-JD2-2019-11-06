@@ -7,11 +7,13 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Types;
 import java.util.List;
+import java.util.Set;
 
 import by.itacademy.aalexandrov.poker.dao.api.ITiketDao;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.ITiket;
 import by.itacademy.aalexandrov.poker.dao.api.filter.TiketFilter;
 import by.itacademy.aalexandrov.poker.jdbc.impl.entity.Tiket;
+import by.itacademy.aalexandrov.poker.jdbc.impl.entity.UserAccount;
 import by.itacademy.aalexandrov.poker.jdbc.impl.util.PreparedStatementAction;
 import by.itacademy.aalexandrov.poker.jdbc.impl.util.SQLExecutionException;
 
@@ -25,16 +27,17 @@ public class TiketDaoImpl extends AbstractDaoImpl<ITiket, Integer> implements IT
 	@Override
 	public void insert(ITiket entity) {
 		executeStatement(new PreparedStatementAction<ITiket>(
-				String.format("insert into %s (tiket_title, tiket_text, status, created, updated) values(?,?,?,?,?)",
+				String.format("insert into %s (user_id, tiket_title, tiket_text, status, created, updated) values(?,?,?,?,?,?)",
 						getTableName()),
 				true) {
 			@Override
 			public ITiket doWithPreparedStatement(final PreparedStatement pStmt) throws SQLException {
-				pStmt.setString(1, entity.getTiketTitle());
-				pStmt.setString(2, entity.getTiketText());
-				pStmt.setString(3, entity.getStatus());
-				pStmt.setObject(4, entity.getCreated(), Types.TIMESTAMP);
-				pStmt.setObject(5, entity.getUpdated(), Types.TIMESTAMP);
+				pStmt.setInt(1, entity.getUserId().getId());
+				pStmt.setString(2, entity.getTiketTitle());
+				pStmt.setString(3, entity.getTiketText());
+				pStmt.setString(4, entity.getStatus());
+				pStmt.setObject(5, entity.getCreated(), Types.TIMESTAMP);
+				pStmt.setObject(6, entity.getUpdated(), Types.TIMESTAMP);
 
 				pStmt.executeUpdate();
 
@@ -53,14 +56,15 @@ public class TiketDaoImpl extends AbstractDaoImpl<ITiket, Integer> implements IT
 	@Override
 	public void update(ITiket entity) {
 		executeStatement(new PreparedStatementAction<ITiket>(String
-				.format("update %s set tiket_title=?, tiket_text=?, status=?, updated=? where id=?", getTableName())) {
+				.format("update %s set user_id=?, tiket_title=?, tiket_text=?, status=?, updated=? where id=?", getTableName())) {
 			@Override
 			public ITiket doWithPreparedStatement(final PreparedStatement pStmt) throws SQLException {
-				pStmt.setString(1, entity.getTiketTitle());
-				pStmt.setString(2, entity.getTiketText());
-				pStmt.setString(3, entity.getStatus());
-				pStmt.setObject(4, entity.getUpdated(), Types.TIMESTAMP);
-				pStmt.setInt(5, entity.getId());
+				pStmt.setInt(1, entity.getUserId().getId());
+				pStmt.setString(2, entity.getTiketTitle());
+				pStmt.setString(3, entity.getTiketText());
+				pStmt.setString(4, entity.getStatus());
+				pStmt.setObject(5, entity.getUpdated(), Types.TIMESTAMP);
+				pStmt.setInt(6, entity.getId());
 
 				pStmt.executeUpdate();
 				return entity;
@@ -75,7 +79,7 @@ public class TiketDaoImpl extends AbstractDaoImpl<ITiket, Integer> implements IT
 	}
 
 	@Override
-	protected ITiket parseRow(final ResultSet resultSet) throws SQLException {
+	protected ITiket parseRow(final ResultSet resultSet, Set<String> columns) throws SQLException {
 		final ITiket entity = createEntity();
 		entity.setId((Integer) resultSet.getObject("id"));
 		entity.setTiketTitle(resultSet.getString("tiket_title"));
@@ -83,6 +87,21 @@ public class TiketDaoImpl extends AbstractDaoImpl<ITiket, Integer> implements IT
 		entity.setStatus(resultSet.getString("status"));
 		entity.setCreated(resultSet.getTimestamp("created"));
 		entity.setUpdated(resultSet.getTimestamp("updated"));
+		
+		Integer userAccountId = (Integer) resultSet.getObject("user_account_id");
+		if (userAccountId != null) {
+            final UserAccount userAccount = new UserAccount();
+            userAccount.setId(userAccountId);
+            if (columns.contains("user_account_id")) {
+                userAccount.setNickname(resultSet.getString("user_account_id"));
+                userAccount.setPassword(resultSet.getString("user_account_id"));
+                userAccount.setEmail(resultSet.getString("user_account_id"));
+                userAccount.setFoto(resultSet.getString("user_account_id"));
+                userAccount.setFoto(resultSet.getString("user_account_id"));
+            }
+            entity.setUserId(userAccount);
+        }
+		
 		return entity;
 	}
 
@@ -94,14 +113,15 @@ public class TiketDaoImpl extends AbstractDaoImpl<ITiket, Integer> implements IT
 
 				for (ITiket entity : entities) {
 					PreparedStatement pStmt = c.prepareStatement(String.format(
-							"insert into %s (tiket_title, tiket_text, status, created, updated) values(?,?,?,?,?)",
+							"insert into %s (user_id, tiket_title, tiket_text, status, created, updated) values(?,?,?,?,?,?)",
 							getTableName()), Statement.RETURN_GENERATED_KEYS);
 
-					pStmt.setString(1, entity.getTiketTitle());
-					pStmt.setString(2, entity.getTiketText());
-					pStmt.setString(3, entity.getStatus());
-					pStmt.setObject(4, entity.getCreated(), Types.TIMESTAMP);
-					pStmt.setObject(5, entity.getUpdated(), Types.TIMESTAMP);
+					pStmt.setInt(1, entity.getUserId().getId());
+					pStmt.setString(2, entity.getTiketTitle());
+					pStmt.setString(3, entity.getTiketText());
+					pStmt.setString(4, entity.getStatus());
+					pStmt.setObject(5, entity.getCreated(), Types.TIMESTAMP);
+					pStmt.setObject(6, entity.getUpdated(), Types.TIMESTAMP);
 
 					pStmt.executeUpdate();
 

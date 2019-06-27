@@ -12,6 +12,7 @@ import java.util.Set;
 import by.itacademy.aalexandrov.poker.dao.api.IGameDao;
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.GameStatus;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IGame;
+import by.itacademy.aalexandrov.poker.dao.api.entity.table.IPlayer;
 import by.itacademy.aalexandrov.poker.dao.api.filter.GameFilter;
 import by.itacademy.aalexandrov.poker.jdbc.impl.entity.Board;
 import by.itacademy.aalexandrov.poker.jdbc.impl.entity.Chat;
@@ -104,7 +105,7 @@ public class GameDaoImpl extends AbstractDaoImpl<IGame, Integer> implements IGam
 
 		Integer playerId = (Integer) resultSet.getObject("player_id");
 		if (playerId != null) {
-			final Player player = new Player();
+			final IPlayer player = new Player();
 			player.setId(playerId);
 			if (columns.contains("player_id")) {
 				player.setInGame(resultSet.getBoolean("player_id"));

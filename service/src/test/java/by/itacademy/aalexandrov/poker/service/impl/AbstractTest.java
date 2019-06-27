@@ -56,17 +56,17 @@ public abstract class AbstractTest {
 	public void setUpMethod() {
 		// clean DB recursive
 		tiketService.deleteAll();
-		userAccountService.deleteAll();
-		countryService.deleteAll();
-		statisticService.deleteAll();
-		transactionService.deleteAll();
 		gameService.deleteAll();
 		chatService.deleteAll();
+		boardService.deleteAll();
 		playerService.deleteAll();
 		playerActionService.deleteAll();
-		boardService.deleteAll();
 		playerCardService.deleteAll();
 		cardService.deleteAll();
+		userAccountService.deleteAll();
+		countryService.deleteAll();
+		transactionService.deleteAll();
+		statisticService.deleteAll();
 
 	}
 
@@ -163,6 +163,7 @@ public abstract class AbstractTest {
 
 	protected IPlayer saveNewPlayer() {
 		IPlayer entity = playerService.createEntity();
+		entity.setUserAccountId(saveNewUserAccount());
 		entity.setPositionId(PlayerPosition.ONE);
 		entity.setPlayerCardId(saveNewPlayerCard());
 		entity.setPlayerActionId(saveNewPlayerAction());
