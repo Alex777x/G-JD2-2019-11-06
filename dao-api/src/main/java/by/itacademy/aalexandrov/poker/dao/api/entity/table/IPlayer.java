@@ -2,7 +2,6 @@ package by.itacademy.aalexandrov.poker.dao.api.entity.table;
 
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.PlayerPosition;
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.PlayerStatus;
-import by.itacademy.aalexandrov.poker.jdbc.impl.entity.PlayerCard;
 
 public interface IPlayer extends IBaseEntity {
 
@@ -18,17 +17,16 @@ public interface IPlayer extends IBaseEntity {
 
 	boolean isInGame();
 
-	void setPlayerActionId(PlayerAction playerActionId);
+	void setPlayerActionId(IPlayerAction playerActionId);
 
-	PlayerAction getPlayerActionId();
+	IPlayerAction getPlayerActionId();
 
-	void setPlayerCardId(PlayerCard playerCardId);
+	void setPlayerCardId(IPlayerCard playerCardId);
 
-	PlayerCard getPlayerCardId();
+	IPlayerCard getPlayerCardId();
 
 	void setPositionId(PlayerPosition positionId);
 
 	PlayerPosition getPositionId();
-
 
 }

@@ -10,6 +10,8 @@ public interface IUserAccountService {
 	long getCount(UserAccountFilter filter);
 
 	List<IUserAccount> find(UserAccountFilter filter);
+	
+	void save(final IUserAccount entity);
 
 	void save(IUserAccount... entities);
 
@@ -20,8 +22,6 @@ public interface IUserAccountService {
 	void delete(final Integer id);
 
 	IUserAccount get(final Integer id);
-
-	void save(final IUserAccount entity);
 
 	IUserAccount createEntity();
 

@@ -12,6 +12,8 @@ public interface IStatisticService {
 	List<IStatistic> find(StatisticFilter filter);
 
 	void save(final IStatistic entity);
+	
+	void save(IStatistic... entities);
 
 	List<IStatistic> getAll();
 
@@ -20,8 +22,6 @@ public interface IStatisticService {
 	void delete(final Integer id);
 
 	IStatistic get(final Integer id);
-
-	void save(IStatistic... entities);
 
 	IStatistic createEntity();
 

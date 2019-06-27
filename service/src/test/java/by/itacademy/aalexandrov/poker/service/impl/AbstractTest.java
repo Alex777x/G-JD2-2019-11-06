@@ -5,6 +5,8 @@ import java.util.Random;
 import org.junit.jupiter.api.BeforeEach;
 
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.GameStatus;
+import by.itacademy.aalexandrov.poker.dao.api.entity.enums.PlayerPosition;
+import by.itacademy.aalexandrov.poker.dao.api.entity.enums.PlayerStatus;
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.Rank;
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.Suits;
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.UserRole;
@@ -54,14 +56,14 @@ public abstract class AbstractTest {
 	public void setUpMethod() {
 		// clean DB recursive
 		tiketService.deleteAll();
-		playerActionService.deleteAll();
 		userAccountService.deleteAll();
 		countryService.deleteAll();
 		statisticService.deleteAll();
 		transactionService.deleteAll();
+		gameService.deleteAll();
 		chatService.deleteAll();
-		//gameService.deleteAll();
-		//playerService.deleteAll();
+		playerService.deleteAll();
+		playerActionService.deleteAll();
 		boardService.deleteAll();
 		playerCardService.deleteAll();
 		cardService.deleteAll();
@@ -82,6 +84,7 @@ public abstract class AbstractTest {
 
 	protected ITiket saveNewTiket() {
 		ITiket entity = tiketService.createEntity();
+		entity.setUserId(saveNewUserAccount());
 		entity.setTiketTitle("tiket-title" + getRandomPrefix());
 		entity.setTiketText("tiket-text" + getRandomPrefix());
 		entity.setStatus("tiket-status" + getRandomPrefix());
@@ -149,23 +152,23 @@ public abstract class AbstractTest {
 
 	protected IGame saveNewGame() {
 		IGame entity = gameService.createEntity();
-		entity.setGameStatus(GameStatus.ACTIVE);
-		entity.setWinnerId(saveNewUserAccount());
-		entity.setNexStepPerformerId(saveNewUserAccount());
-		entity.setPokerBoardId(saveNewBoard());
-		entity.setBank(getRandomObjectsCount());
 		entity.setChatId(saveNewChat());
+		entity.setPlayerId(saveNewPlayer());
+		entity.setBoardId(saveNewBoard());
+		entity.setState(GameStatus.ACTIVE);
+		entity.setBank(getRandomObjectsCount());
 		gameService.save(entity);
 		return entity;
 	}
 
 	protected IPlayer saveNewPlayer() {
 		IPlayer entity = playerService.createEntity();
-		entity.setUserAccountId(saveNewUserAccount());
-		entity.setGameId(saveNewGame());
-		entity.setDealer(false);
+		entity.setPositionId(PlayerPosition.ONE);
+		entity.setPlayerCardId(saveNewPlayerCard());
+		entity.setPlayerActionId(saveNewPlayerAction());
+		entity.setInGame(true);
+		entity.setState(PlayerStatus.DEALER);
 		entity.setStack(getRandomObjectsCount());
-		entity.setPokerActionId(saveNewPlayerAction());
 		playerService.save(entity);
 		return entity;
 	}

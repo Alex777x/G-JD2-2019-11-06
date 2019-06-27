@@ -10,6 +10,8 @@ public interface IChatService {
 	long getCount(ChatFilter filter);
 
 	List<IChat> find(ChatFilter filter);
+	
+	void save(final IChat entity);
 
 	void save(IChat... entities);
 
@@ -20,8 +22,6 @@ public interface IChatService {
 	void delete(final Integer id);
 
 	IChat get(final Integer id);
-
-	void save(final IChat entity);
 
 	IChat createEntity();
 

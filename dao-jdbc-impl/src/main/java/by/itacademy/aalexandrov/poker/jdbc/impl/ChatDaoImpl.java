@@ -7,12 +7,15 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Types;
 import java.util.List;
+import java.util.Set;
 
 import by.itacademy.aalexandrov.poker.dao.api.IChatDao;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IChat;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IPlayer;
 import by.itacademy.aalexandrov.poker.dao.api.filter.ChatFilter;
 import by.itacademy.aalexandrov.poker.jdbc.impl.entity.Chat;
+import by.itacademy.aalexandrov.poker.jdbc.impl.entity.Country;
+import by.itacademy.aalexandrov.poker.jdbc.impl.entity.Player;
 import by.itacademy.aalexandrov.poker.jdbc.impl.util.PreparedStatementAction;
 import by.itacademy.aalexandrov.poker.jdbc.impl.util.SQLExecutionException;
 
@@ -31,7 +34,7 @@ public class ChatDaoImpl extends AbstractDaoImpl<IChat, Integer> implements ICha
 				true) {
 			@Override
 			public IChat doWithPreparedStatement(final PreparedStatement pStmt) throws SQLException {
-				pStmt.setObject(1, entity.getPlayerId());
+				pStmt.setInt(1, entity.getPlayerId().getId());
 				pStmt.setString(2, entity.getMessage());
 				pStmt.setObject(3, entity.getCreated(), Types.TIMESTAMP);
 				pStmt.setObject(4, entity.getUpdated(), Types.TIMESTAMP);
@@ -56,7 +59,7 @@ public class ChatDaoImpl extends AbstractDaoImpl<IChat, Integer> implements ICha
 				.format("update %s set player_id=?, message=?, updated=? where id=?", getTableName())) {
 			@Override
 			public IChat doWithPreparedStatement(final PreparedStatement pStmt) throws SQLException {
-				pStmt.setObject(1, entity.getPlayerId());
+				pStmt.setInt(1, entity.getPlayerId().getId());
 				pStmt.setString(2, entity.getMessage());
 				pStmt.setObject(3, entity.getUpdated(), Types.TIMESTAMP);
 				pStmt.setInt(4, entity.getId());
@@ -74,13 +77,24 @@ public class ChatDaoImpl extends AbstractDaoImpl<IChat, Integer> implements ICha
 	}
 
 	@Override
-	protected IChat parseRow(final ResultSet resultSet) throws SQLException {
+	protected IChat parseRow(final ResultSet resultSet, Set<String> columns) throws SQLException {
 		final IChat entity = createEntity();
 		entity.setId((Integer) resultSet.getObject("id"));
-		entity.setPlayerId((IPlayer) resultSet.getObject("player_id"));
 		entity.setMessage(resultSet.getString("message"));
 		entity.setCreated(resultSet.getTimestamp("created"));
 		entity.setUpdated(resultSet.getTimestamp("updated"));
+		
+		Integer playerId = (Integer) resultSet.getObject("player_id");
+		if (playerId != null) {
+            final Player country = new Player();
+            country.setId(playerId);
+            if (columns.contains("player_id")) {
+                country.setStack(resultSet.getInt("player_id"));
+                country.setInGame(resultSet.getBoolean("player_id"));
+            }
+            entity.setPlayerId(country);
+        }
+		
 		return entity;
 	}
 

@@ -10,13 +10,10 @@ import java.util.List;
 import java.util.Set;
 
 import by.itacademy.aalexandrov.poker.dao.api.IBoardDao;
-import by.itacademy.aalexandrov.poker.dao.api.entity.table.ICard;
-import by.itacademy.aalexandrov.poker.dao.api.entity.table.IGame;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IBoard;
 import by.itacademy.aalexandrov.poker.dao.api.filter.BoardFilter;
 import by.itacademy.aalexandrov.poker.jdbc.impl.entity.Board;
 import by.itacademy.aalexandrov.poker.jdbc.impl.entity.Card;
-import by.itacademy.aalexandrov.poker.jdbc.impl.entity.Country;
 import by.itacademy.aalexandrov.poker.jdbc.impl.util.PreparedStatementAction;
 import by.itacademy.aalexandrov.poker.jdbc.impl.util.SQLExecutionException;
 

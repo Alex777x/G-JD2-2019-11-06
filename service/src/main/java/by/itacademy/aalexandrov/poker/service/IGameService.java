@@ -10,6 +10,8 @@ public interface IGameService {
 	long getCount(GameFilter filter);
 
 	List<IGame> find(GameFilter filter);
+	
+	void save(final IGame entity);
 
 	void save(IGame... entities);
 
@@ -20,8 +22,6 @@ public interface IGameService {
 	void delete(final Integer id);
 
 	IGame get(final Integer id);
-
-	void save(final IGame entity);
 
 	IGame createEntity();
 

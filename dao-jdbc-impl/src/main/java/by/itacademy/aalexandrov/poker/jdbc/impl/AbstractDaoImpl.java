@@ -31,6 +31,7 @@ public abstract class AbstractDaoImpl<ENTITY, ID> implements IDao<ENTITY, ID> {
 	static {
 		Properties props = new Properties();
 		try {
+			@SuppressWarnings("rawtypes")
 			Class<AbstractDaoImpl> clazz = AbstractDaoImpl.class;
 			props.load(clazz.getClassLoader().getResourceAsStream("jdbc-test.properties"));
 			url = props.getProperty("jdbc.url");

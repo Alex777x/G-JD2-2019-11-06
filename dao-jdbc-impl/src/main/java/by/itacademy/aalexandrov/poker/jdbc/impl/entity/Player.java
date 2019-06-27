@@ -3,12 +3,14 @@ package by.itacademy.aalexandrov.poker.jdbc.impl.entity;
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.PlayerPosition;
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.PlayerStatus;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IPlayer;
+import by.itacademy.aalexandrov.poker.dao.api.entity.table.IPlayerAction;
+import by.itacademy.aalexandrov.poker.dao.api.entity.table.IPlayerCard;
 
 public class Player extends BaseEntity implements IPlayer {
 
 	private PlayerPosition positionId;
-	private PlayerCard playerCardId;
-	private PlayerAction playerActionId;
+	private IPlayerCard playerCardId;
+	private IPlayerAction playerActionId;
 	private boolean inGame;
 	private PlayerStatus state;
 	private double stack;
@@ -24,22 +26,22 @@ public class Player extends BaseEntity implements IPlayer {
 	}
 
 	@Override
-	public PlayerCard getPlayerCardId() {
+	public IPlayerCard getPlayerCardId() {
 		return playerCardId;
 	}
 
 	@Override
-	public void setPlayerCardId(PlayerCard playerCardId) {
+	public void setPlayerCardId(IPlayerCard playerCardId) {
 		this.playerCardId = playerCardId;
 	}
 
 	@Override
-	public PlayerAction getPlayerActionId() {
+	public IPlayerAction getPlayerActionId() {
 		return playerActionId;
 	}
 
 	@Override
-	public void setPlayerActionId(PlayerAction playerActionId) {
+	public void setPlayerActionId(IPlayerAction playerActionId) {
 		this.playerActionId = playerActionId;
 	}
 

@@ -12,9 +12,6 @@ import org.junit.jupiter.api.Test;
 
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.UserRole;
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.UserStatus;
-import by.itacademy.aalexandrov.poker.dao.api.entity.table.ICountry;
-import by.itacademy.aalexandrov.poker.dao.api.entity.table.IStatistic;
-import by.itacademy.aalexandrov.poker.dao.api.entity.table.ITransaction;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IUserAccount;
 
 public class UserAccountServiceTest extends AbstractTest {

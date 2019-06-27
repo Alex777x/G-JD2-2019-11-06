@@ -10,6 +10,8 @@ public interface ITransactionService {
 	long getCount(TransactionFilter filter);
 
 	List<ITransaction> find(TransactionFilter filter);
+	
+	void save(final ITransaction entity);
 
 	void save(ITransaction... entities);
 
@@ -20,8 +22,6 @@ public interface ITransactionService {
 	void delete(final Integer id);
 
 	ITransaction get(final Integer id);
-
-	void save(final ITransaction entity);
 
 	ITransaction createEntity();
 

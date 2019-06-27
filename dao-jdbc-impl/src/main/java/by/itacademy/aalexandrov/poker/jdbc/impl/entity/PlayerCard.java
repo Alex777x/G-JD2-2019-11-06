@@ -2,7 +2,6 @@ package by.itacademy.aalexandrov.poker.jdbc.impl.entity;
 
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.ICard;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IPlayerCard;
-import by.itacademy.aalexandrov.poker.dao.api.entity.table.IUserAccount;
 
 public class PlayerCard extends BaseEntity implements IPlayerCard {
 

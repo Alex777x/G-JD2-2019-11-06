@@ -7,14 +7,16 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Types;
 import java.util.List;
+import java.util.Set;
 
 import by.itacademy.aalexandrov.poker.dao.api.IPlayerDao;
-import by.itacademy.aalexandrov.poker.dao.api.entity.table.IGame;
+import by.itacademy.aalexandrov.poker.dao.api.entity.enums.PlayerPosition;
+import by.itacademy.aalexandrov.poker.dao.api.entity.enums.PlayerStatus;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IPlayer;
-import by.itacademy.aalexandrov.poker.dao.api.entity.table.IPlayerAction;
-import by.itacademy.aalexandrov.poker.dao.api.entity.table.IUserAccount;
 import by.itacademy.aalexandrov.poker.dao.api.filter.PlayerFilter;
 import by.itacademy.aalexandrov.poker.jdbc.impl.entity.Player;
+import by.itacademy.aalexandrov.poker.jdbc.impl.entity.PlayerAction;
+import by.itacademy.aalexandrov.poker.jdbc.impl.entity.PlayerCard;
 import by.itacademy.aalexandrov.poker.jdbc.impl.util.PreparedStatementAction;
 import by.itacademy.aalexandrov.poker.jdbc.impl.util.SQLExecutionException;
 
@@ -28,18 +30,19 @@ public class PlayerDaoImpl extends AbstractDaoImpl<IPlayer, Integer> implements 
 	@Override
 	public void insert(IPlayer entity) {
 		executeStatement(new PreparedStatementAction<IPlayer>(
-				String.format("insert into %s (user_account_id, game_id, dealer, stack, poker_action_id, created, updated) values(?,?,?,?,?,?,?)",
+				String.format("insert into %s (position_id, player_card_id, action_id, in_game, state, stack, created, updated) values(?,?,?,?,?,?,?,?)",
 						getTableName()),
 				true) {
 			@Override
 			public IPlayer doWithPreparedStatement(final PreparedStatement pStmt) throws SQLException {
-				pStmt.setObject(1, entity.getUserAccountId());
-				pStmt.setObject(2, entity.getGameId());
-				pStmt.setBoolean(3, entity.isDealer());
-				pStmt.setDouble(4, entity.getStack());
-				pStmt.setObject(5, entity.getPokerActionId());
-				pStmt.setObject(6, entity.getCreated(), Types.TIMESTAMP);
-				pStmt.setObject(7, entity.getUpdated(), Types.TIMESTAMP);
+				pStmt.setString(1, entity.getPositionId().name());
+				pStmt.setInt(2, entity.getPlayerCardId().getId());
+				pStmt.setInt(3, entity.getPlayerActionId().getId());
+				pStmt.setBoolean(4, entity.isInGame());
+				pStmt.setString(5, entity.getState().name());
+				pStmt.setDouble(6, entity.getStack());
+				pStmt.setObject(7, entity.getCreated(), Types.TIMESTAMP);
+				pStmt.setObject(8, entity.getUpdated(), Types.TIMESTAMP);
 
 				pStmt.executeUpdate();
 
@@ -58,16 +61,17 @@ public class PlayerDaoImpl extends AbstractDaoImpl<IPlayer, Integer> implements 
 	@Override
 	public void update(IPlayer entity) {
 		executeStatement(new PreparedStatementAction<IPlayer>(String
-				.format("update %s set user_account_id=?, game_id=?, dealer=?, stack=?, poker_action_id=?, updated=? where id=?", getTableName())) {
+				.format("update %s set position_id=?, player_card_id=?, action_id=?, in_game=?, state=?, stack=?, updated=? where id=?", getTableName())) {
 			@Override
 			public IPlayer doWithPreparedStatement(final PreparedStatement pStmt) throws SQLException {
-				pStmt.setObject(1, entity.getUserAccountId());
-				pStmt.setObject(2, entity.getGameId());
-				pStmt.setBoolean(3, entity.isDealer());
-				pStmt.setDouble(4, entity.getStack());
-				pStmt.setObject(5, entity.getPokerActionId());
-				pStmt.setObject(6, entity.getUpdated(), Types.TIMESTAMP);
-				pStmt.setInt(7, entity.getId());
+				pStmt.setString(1, entity.getPositionId().name());
+				pStmt.setInt(2, entity.getPlayerCardId().getId());
+				pStmt.setInt(3, entity.getPlayerActionId().getId());
+				pStmt.setBoolean(4, entity.isInGame());
+				pStmt.setString(5, entity.getState().name());
+				pStmt.setDouble(6, entity.getStack());
+				pStmt.setObject(7, entity.getUpdated(), Types.TIMESTAMP);
+				pStmt.setInt(8, entity.getId());
 
 				pStmt.executeUpdate();
 				return entity;
@@ -82,16 +86,41 @@ public class PlayerDaoImpl extends AbstractDaoImpl<IPlayer, Integer> implements 
 	}
 
 	@Override
-	protected IPlayer parseRow(final ResultSet resultSet) throws SQLException {
+	protected IPlayer parseRow(final ResultSet resultSet, Set<String> columns) throws SQLException {
 		final IPlayer entity = createEntity();
 		entity.setId((Integer) resultSet.getObject("id"));
-		entity.setUserAccountId((IUserAccount) resultSet.getObject("user_account_id"));
-		entity.setGameId((IGame) resultSet.getObject("game_id"));
-		entity.setDealer(resultSet.getBoolean("dealer"));
+		entity.setPositionId(PlayerPosition.valueOf(resultSet.getString("position_id")));
+		entity.setInGame(resultSet.getBoolean("in_game"));
+		entity.setState(PlayerStatus.valueOf(resultSet.getString("state")));
 		entity.setStack(resultSet.getDouble("stack"));
-		entity.setPokerActionId((IPlayerAction) resultSet.getObject("poker_action_id"));
 		entity.setCreated(resultSet.getTimestamp("created"));
 		entity.setUpdated(resultSet.getTimestamp("updated"));
+		
+		Integer playerCardId = (Integer) resultSet.getObject("player_card_id");
+		if (playerCardId != null) {
+            final PlayerCard plaerCard = new PlayerCard();
+            plaerCard.setId(playerCardId);
+            if (columns.contains("player_card_id")) {
+                plaerCard.setCardState(resultSet.getBoolean("player_card_id"));
+            }
+            entity.setPlayerCardId(plaerCard);
+        }
+		
+		Integer actionId = (Integer) resultSet.getObject("action_id");
+		if (actionId != null) {
+            final PlayerAction playerAction = new PlayerAction();
+            playerAction.setId(actionId);
+            if (columns.contains("action_id")) {
+                playerAction.setAllIn(resultSet.getInt("action_id"));
+                playerAction.setBet(resultSet.getInt("action_id"));
+                playerAction.setCall(resultSet.getInt("action_id"));
+                playerAction.setCheck(resultSet.getBoolean("action_id"));
+                playerAction.setFold(resultSet.getBoolean("action_id"));
+                playerAction.setRaise(resultSet.getInt("action_id"));
+            }
+            entity.setPlayerActionId(playerAction);
+        }
+		
 		return entity;
 	}
 
@@ -103,16 +132,17 @@ public class PlayerDaoImpl extends AbstractDaoImpl<IPlayer, Integer> implements 
 
 				for (IPlayer entity : entities) {
 					PreparedStatement pStmt = c.prepareStatement(String.format(
-							"insert into %s (user_account_id, game_id, dealer, stack, poker_action_id, created, updated) values(?,?,?,?,?,?,?)",
+							"insert into %s (position_id, player_card_id, action_id, in_game, state, stack, created, updated) values(?,?,?,?,?,?,?,?)",
 							getTableName()), Statement.RETURN_GENERATED_KEYS);
 
-					pStmt.setObject(1, entity.getUserAccountId());
-					pStmt.setObject(2, entity.getGameId());
-					pStmt.setBoolean(3, entity.isDealer());
-					pStmt.setDouble(4, entity.getStack());
-					pStmt.setObject(5, entity.getPokerActionId());
-					pStmt.setObject(6, entity.getCreated(), Types.TIMESTAMP);
-					pStmt.setObject(7, entity.getUpdated(), Types.TIMESTAMP);
+					pStmt.setString(1, entity.getPositionId().name());
+					pStmt.setInt(2, entity.getPlayerCardId().getId());
+					pStmt.setInt(3, entity.getPlayerActionId().getId());
+					pStmt.setBoolean(4, entity.isInGame());
+					pStmt.setString(5, entity.getState().name());
+					pStmt.setDouble(6, entity.getStack());
+					pStmt.setObject(7, entity.getCreated(), Types.TIMESTAMP);
+					pStmt.setObject(8, entity.getUpdated(), Types.TIMESTAMP);
 
 					pStmt.executeUpdate();
 

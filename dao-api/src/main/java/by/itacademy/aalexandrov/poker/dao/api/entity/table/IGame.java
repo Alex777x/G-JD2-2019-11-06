@@ -4,28 +4,24 @@ import by.itacademy.aalexandrov.poker.dao.api.entity.enums.GameStatus;
 
 public interface IGame extends IBaseEntity {
 
-	void setChatId(IChat chatId);
-
-	IChat getChatId();
-
 	void setBank(double bank);
 
 	double getBank();
 
-	void setPokerBoardId(IBoard pokerBoardId);
+	void setState(GameStatus state);
 
-	IBoard getPokerBoardId();
+	GameStatus getState();
 
-	void setNexStepPerformerId(IUserAccount nexStepPerformerId);
+	void setBoardId(IBoard boardId);
 
-	IUserAccount getNexStepPerformerId();
+	IBoard getBoardId();
 
-	void setWinnerId(IUserAccount winnerId);
+	void setPlayerId(IPlayer playerId);
 
-	IUserAccount getWinnerId();
+	IPlayer getPlayerId();
 
-	void setGameStatus(GameStatus gameStatus);
+	void setChatId(IChat chatId);
 
-	GameStatus getGameStatus();
+	IChat getChatId();
 
 }

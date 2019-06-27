@@ -1,58 +1,57 @@
 package by.itacademy.aalexandrov.poker.jdbc.impl.entity;
 
-import by.itacademy.aalexandrov.poker.dao.api.entity.enums.GameStatus;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IChat;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IGame;
+import by.itacademy.aalexandrov.poker.dao.api.entity.table.IPlayer;
+import by.itacademy.aalexandrov.poker.dao.api.entity.enums.GameStatus;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IBoard;
-import by.itacademy.aalexandrov.poker.dao.api.entity.table.IUserAccount;
 
 public class Game extends BaseEntity implements IGame {
 
-	private GameStatus gameStatus;
-	private IUserAccount winnerId;
-	private IUserAccount nexStepPerformerId;
-	private IBoard pokerBoardId;
-	private double bank;
 	private IChat chatId;
+	private IPlayer playerId;
+	private IBoard boardId;
+	private GameStatus state;
+	private double bank;
 
 	@Override
-	public GameStatus getGameStatus() {
-		return gameStatus;
+	public IChat getChatId() {
+		return chatId;
 	}
 
 	@Override
-	public void setGameStatus(GameStatus gameStatus) {
-		this.gameStatus = gameStatus;
+	public void setChatId(IChat chatId) {
+		this.chatId = chatId;
 	}
 
 	@Override
-	public IUserAccount getWinnerId() {
-		return winnerId;
+	public IPlayer getPlayerId() {
+		return playerId;
 	}
 
 	@Override
-	public void setWinnerId(IUserAccount winnerId) {
-		this.winnerId = winnerId;
+	public void setPlayerId(IPlayer playerId) {
+		this.playerId = playerId;
 	}
 
 	@Override
-	public IUserAccount getNexStepPerformerId() {
-		return nexStepPerformerId;
+	public IBoard getBoardId() {
+		return boardId;
 	}
 
 	@Override
-	public void setNexStepPerformerId(IUserAccount nexStepPerformerId) {
-		this.nexStepPerformerId = nexStepPerformerId;
+	public void setBoardId(IBoard boardId) {
+		this.boardId = boardId;
 	}
 
 	@Override
-	public IBoard getPokerBoardId() {
-		return pokerBoardId;
+	public GameStatus getState() {
+		return state;
 	}
 
 	@Override
-	public void setPokerBoardId(IBoard pokerBoardId) {
-		this.pokerBoardId = pokerBoardId;
+	public void setState(GameStatus state) {
+		this.state = state;
 	}
 
 	@Override
@@ -66,19 +65,9 @@ public class Game extends BaseEntity implements IGame {
 	}
 
 	@Override
-	public IChat getChatId() {
-		return chatId;
-	}
-
-	@Override
-	public void setChatId(IChat chatId) {
-		this.chatId = chatId;
-	}
-
-	@Override
 	public String toString() {
-		return "Game [gameStatus=" + gameStatus + ", winnerId=" + winnerId + ", nexStepPerformerId="
-				+ nexStepPerformerId + ", pokerBoardId=" + pokerBoardId + ", bank=" + bank + ", chatId=" + chatId + "]";
+		return "Game [chatId=" + chatId + ", playerId=" + playerId + ", boardId=" + boardId + ", state=" + state
+				+ ", bank=" + bank + "]";
 	}
 
 }
