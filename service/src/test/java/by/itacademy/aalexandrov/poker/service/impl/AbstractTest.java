@@ -84,7 +84,7 @@ public abstract class AbstractTest {
 
 	protected ITiket saveNewTiket() {
 		ITiket entity = tiketService.createEntity();
-		entity.setUserId(saveNewUserAccount());
+		entity.setUserAccountId(saveNewUserAccount());
 		entity.setTiketTitle("tiket-title" + getRandomPrefix());
 		entity.setTiketText("tiket-text" + getRandomPrefix());
 		entity.setStatus("tiket-status" + getRandomPrefix());

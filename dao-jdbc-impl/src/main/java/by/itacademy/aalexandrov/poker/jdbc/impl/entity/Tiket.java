@@ -5,21 +5,19 @@ import by.itacademy.aalexandrov.poker.dao.api.entity.table.IUserAccount;
 
 public class Tiket extends BaseEntity implements ITiket {
 
-	private IUserAccount userId;
+	private IUserAccount userAccountId;
 	private String tiketTitle;
 	private String tiketText;
 	private String status;
 
-	
 	@Override
-	public IUserAccount getUserId() {
-		return userId;
+	public IUserAccount getUserAccountId() {
+		return userAccountId;
 	}
 
-	
 	@Override
-	public void setUserId(IUserAccount userId) {
-		this.userId = userId;
+	public void setUserAccountId(IUserAccount userAccountId) {
+		this.userAccountId = userAccountId;
 	}
 
 	@Override
@@ -54,8 +52,8 @@ public class Tiket extends BaseEntity implements ITiket {
 
 	@Override
 	public String toString() {
-		return "Tiket [userId=" + userId + ", tiketTitle=" + tiketTitle + ", tiketText=" + tiketText + ", status="
-				+ status + "]";
+		return "Tiket [userAccountId=" + userAccountId + ", tiketTitle=" + tiketTitle + ", tiketText=" + tiketText
+				+ ", status=" + status + "]";
 	}
 
 }

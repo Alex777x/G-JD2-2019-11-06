@@ -14,9 +14,9 @@ public interface ITiket extends IBaseEntity {
 
 	String getTiketTitle();
 
-	void setUserId(IUserAccount userId);
+	void setUserAccountId(IUserAccount userAccountId);
 
-	IUserAccount getUserId();
+	IUserAccount getUserAccountId();
 
-
+	
 }
