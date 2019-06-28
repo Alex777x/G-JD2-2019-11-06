@@ -15,7 +15,7 @@ import by.itacademy.aalexandrov.poker.dao.api.entity.enums.PlayerStatus;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IPlayer;
 
 public class PlayerServiceTest extends AbstractTest {
-	
+
 	@Test
 	public void testCreate() {
 		IPlayer entity = saveNewPlayer();
@@ -51,10 +51,11 @@ public class PlayerServiceTest extends AbstractTest {
 
 		try {
 			final IPlayer entity2 = playerService.createEntity();
+			entity2.setState(PlayerStatus.valueOf(getRandomPrefix()));
 			playerService.save(entity1, entity2);
 			fail("PokerAction save should fail if name not specified");
 		} catch (Exception e) {
-			assertEquals(initialSize, userAccountService.getAll().size());
+			assertEquals(initialSize, playerService.getAll().size());
 		}
 
 	}

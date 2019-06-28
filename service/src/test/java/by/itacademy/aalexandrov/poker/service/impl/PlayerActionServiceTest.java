@@ -8,7 +8,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
 
-
 import org.junit.jupiter.api.Test;
 
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IPlayerAction;
@@ -48,6 +47,7 @@ public class PlayerActionServiceTest extends AbstractTest {
 
 		try {
 			final IPlayerAction entity2 = playerActionService.createEntity();
+			entity2.setBet(getRandomObjectsCount() / 0);
 			playerActionService.save(entity1, entity2);
 			fail("Action save should fail if name not specified");
 		} catch (Exception e) {
@@ -130,5 +130,5 @@ public class PlayerActionServiceTest extends AbstractTest {
 		playerActionService.deleteAll();
 		assertEquals(0, playerActionService.getAll().size());
 	}
-	
+
 }

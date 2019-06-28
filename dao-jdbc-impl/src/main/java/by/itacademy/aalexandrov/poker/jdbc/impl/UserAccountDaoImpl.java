@@ -104,40 +104,39 @@ public class UserAccountDaoImpl extends AbstractDaoImpl<IUserAccount, Integer> i
 		entity.setUserStatus(UserStatus.valueOf(resultSet.getString("status_id")));
 		entity.setCreated(resultSet.getTimestamp("created"));
 		entity.setUpdated(resultSet.getTimestamp("updated"));
-		
-		
+
 		Integer countryId = (Integer) resultSet.getObject("country_id");
 		if (countryId != null) {
-            final Country country = new Country();
-            country.setId(countryId);
-            if (columns.contains("country_id")) {
-                country.setCountry(resultSet.getString("country_id"));
-            }
-            entity.setCountryId(country);
-        }
-		
+			final Country country = new Country();
+			country.setId(countryId);
+			if (columns.contains("country_id")) {
+				country.setCountry(resultSet.getString("country_id"));
+			}
+			entity.setCountryId(country);
+		}
+
 		Integer statisticId = (Integer) resultSet.getObject("statistic_id");
 		if (statisticId != null) {
-            final Statistic statistic = new Statistic();
-            statistic.setId(statisticId);
-            if (columns.contains("statistic_id")) {
-                statistic.setSumGames(resultSet.getInt("statistic_id"));
-                statistic.setWonGames(resultSet.getInt("statistic_id"));
-            }
-            entity.setStatisticId(statistic);
-        }
-		
+			final Statistic statistic = new Statistic();
+			statistic.setId(statisticId);
+			if (columns.contains("statistic_id")) {
+				statistic.setSumGames(resultSet.getInt("statistic_id"));
+				statistic.setWonGames(resultSet.getInt("statistic_id"));
+			}
+			entity.setStatisticId(statistic);
+		}
+
 		Integer tranzactionId = (Integer) resultSet.getObject("transaction_id");
 		if (tranzactionId != null) {
-            final Transaction tranzaction = new Transaction();
-            tranzaction.setId(tranzactionId);
-            if (columns.contains("transaction_id")) {
-                tranzaction.setAmount(resultSet.getInt("transaction_id"));
-                tranzaction.setComment(resultSet.getString("transaction_id"));
-            }
-            entity.setTransactionId(tranzaction);
-        }
-		
+			final Transaction tranzaction = new Transaction();
+			tranzaction.setId(tranzactionId);
+			if (columns.contains("transaction_id")) {
+				tranzaction.setAmount(resultSet.getInt("transaction_id"));
+				tranzaction.setComment(resultSet.getString("transaction_id"));
+			}
+			entity.setTransactionId(tranzaction);
+		}
+
 		return entity;
 	}
 
