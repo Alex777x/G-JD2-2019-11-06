@@ -2,6 +2,8 @@ package by.itacademy.aalexandrov.poker.dao.api.entity.table;
 
 public interface IPlayerAction extends IBaseEntity {
 
+	String toString();
+
 	void setAllIn(int allIn);
 
 	int getAllIn();
@@ -25,5 +27,9 @@ public interface IPlayerAction extends IBaseEntity {
 	void setBet(int bet);
 
 	int getBet();
+
+	void setPlayerId(IPlayer playerId);
+
+	IPlayer getPlayerId();
 
 }

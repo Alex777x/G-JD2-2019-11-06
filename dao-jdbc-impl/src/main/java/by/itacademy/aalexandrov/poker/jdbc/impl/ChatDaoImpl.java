@@ -11,11 +11,10 @@ import java.util.Set;
 
 import by.itacademy.aalexandrov.poker.dao.api.IChatDao;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IChat;
-import by.itacademy.aalexandrov.poker.dao.api.entity.table.IPlayer;
 import by.itacademy.aalexandrov.poker.dao.api.filter.ChatFilter;
 import by.itacademy.aalexandrov.poker.jdbc.impl.entity.Chat;
-import by.itacademy.aalexandrov.poker.jdbc.impl.entity.Country;
-import by.itacademy.aalexandrov.poker.jdbc.impl.entity.Player;
+import by.itacademy.aalexandrov.poker.jdbc.impl.entity.Game;
+import by.itacademy.aalexandrov.poker.jdbc.impl.entity.UserAccount;
 import by.itacademy.aalexandrov.poker.jdbc.impl.util.PreparedStatementAction;
 import by.itacademy.aalexandrov.poker.jdbc.impl.util.SQLExecutionException;
 
@@ -29,15 +28,16 @@ public class ChatDaoImpl extends AbstractDaoImpl<IChat, Integer> implements ICha
 	@Override
 	public void insert(IChat entity) {
 		executeStatement(new PreparedStatementAction<IChat>(
-				String.format("insert into %s (player_id, message, created, updated) values(?,?,?,?)",
+				String.format("insert into %s (game_id, user_account_id, message, created, updated) values(?,?,?,?,?)",
 						getTableName()),
 				true) {
 			@Override
 			public IChat doWithPreparedStatement(final PreparedStatement pStmt) throws SQLException {
-				pStmt.setInt(1, entity.getPlayerId().getId());
-				pStmt.setString(2, entity.getMessage());
-				pStmt.setObject(3, entity.getCreated(), Types.TIMESTAMP);
-				pStmt.setObject(4, entity.getUpdated(), Types.TIMESTAMP);
+				pStmt.setInt(1, entity.getGameId().getId());
+				pStmt.setInt(2, entity.getUserAccountId().getId());
+				pStmt.setString(3, entity.getMessage());
+				pStmt.setObject(4, entity.getCreated(), Types.TIMESTAMP);
+				pStmt.setObject(5, entity.getUpdated(), Types.TIMESTAMP);
 
 				pStmt.executeUpdate();
 
@@ -55,14 +55,15 @@ public class ChatDaoImpl extends AbstractDaoImpl<IChat, Integer> implements ICha
 
 	@Override
 	public void update(IChat entity) {
-		executeStatement(new PreparedStatementAction<IChat>(String
-				.format("update %s set player_id=?, message=?, updated=? where id=?", getTableName())) {
+		executeStatement(new PreparedStatementAction<IChat>(String.format(
+				"update %s set game_id=?, user_account_id=?, message=?, updated=? where id=?", getTableName())) {
 			@Override
 			public IChat doWithPreparedStatement(final PreparedStatement pStmt) throws SQLException {
-				pStmt.setInt(1, entity.getPlayerId().getId());
-				pStmt.setString(2, entity.getMessage());
-				pStmt.setObject(3, entity.getUpdated(), Types.TIMESTAMP);
-				pStmt.setInt(4, entity.getId());
+				pStmt.setInt(1, entity.getGameId().getId());
+				pStmt.setInt(2, entity.getUserAccountId().getId());
+				pStmt.setString(3, entity.getMessage());
+				pStmt.setObject(4, entity.getUpdated(), Types.TIMESTAMP);
+				pStmt.setInt(5, entity.getId());
 
 				pStmt.executeUpdate();
 				return entity;
@@ -83,18 +84,27 @@ public class ChatDaoImpl extends AbstractDaoImpl<IChat, Integer> implements ICha
 		entity.setMessage(resultSet.getString("message"));
 		entity.setCreated(resultSet.getTimestamp("created"));
 		entity.setUpdated(resultSet.getTimestamp("updated"));
-		
-		Integer playerId = (Integer) resultSet.getObject("player_id");
-		if (playerId != null) {
-            final IPlayer country = new Player();
-            country.setId(playerId);
-            if (columns.contains("player_id")) {
-                country.setStack(resultSet.getInt("player_id"));
-                country.setInGame(resultSet.getBoolean("player_id"));
-            }
-            entity.setPlayerId(country);
-        }
-		
+
+		Integer gameId = (Integer) resultSet.getObject("game_id");
+		if (gameId != null) {
+			final Game game = new Game();
+			game.setId(gameId);
+			if (columns.contains("game_id")) {
+				game.setBank(resultSet.getInt("game_id"));
+			}
+			entity.setGameId(game);
+		}
+
+		Integer userAccountId = (Integer) resultSet.getObject("user_account_id");
+		if (userAccountId != null) {
+			final UserAccount yserAccount = new UserAccount();
+			yserAccount.setId(userAccountId);
+			if (columns.contains("user_account_id")) {
+				yserAccount.setNickname(resultSet.getString("user_account_id"));
+			}
+			entity.setUserAccountId(yserAccount);
+		}
+
 		return entity;
 	}
 
@@ -106,13 +116,14 @@ public class ChatDaoImpl extends AbstractDaoImpl<IChat, Integer> implements ICha
 
 				for (IChat entity : entities) {
 					PreparedStatement pStmt = c.prepareStatement(String.format(
-							"insert into %s (player_id, message, created, updated) values(?,?,?,?)",
+							"insert into %s (game_id, user_account_id, message, created, updated) values(?,?,?,?,?)",
 							getTableName()), Statement.RETURN_GENERATED_KEYS);
 
-					pStmt.setObject(1, entity.getPlayerId());
-					pStmt.setString(2, entity.getMessage());
-					pStmt.setObject(3, entity.getCreated(), Types.TIMESTAMP);
-					pStmt.setObject(4, entity.getUpdated(), Types.TIMESTAMP);
+					pStmt.setInt(1, entity.getGameId().getId());
+					pStmt.setInt(2, entity.getUserAccountId().getId());
+					pStmt.setString(3, entity.getMessage());
+					pStmt.setObject(4, entity.getCreated(), Types.TIMESTAMP);
+					pStmt.setObject(5, entity.getUpdated(), Types.TIMESTAMP);
 
 					pStmt.executeUpdate();
 
@@ -150,5 +161,5 @@ public class ChatDaoImpl extends AbstractDaoImpl<IChat, Integer> implements ICha
 	public long getCount(ChatFilter filter) {
 		return executeCountQuery("");
 	}
-	
+
 }

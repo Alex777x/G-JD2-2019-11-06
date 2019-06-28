@@ -12,9 +12,8 @@ import org.junit.jupiter.api.Test;
 
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IChat;
 
-
 public class ChatServiceTest extends AbstractTest {
-	
+
 	@Test
 	public void testCreate() {
 		final IChat entity = saveNewChat();
@@ -22,6 +21,8 @@ public class ChatServiceTest extends AbstractTest {
 		final IChat entityFromDb = chatService.get(entity.getId());
 
 		assertNotNull(entityFromDb);
+		assertEquals(entity.getGameId().getId(), entityFromDb.getGameId().getId());
+		assertEquals(entity.getUserAccountId().getId(), entityFromDb.getUserAccountId().getId());
 		assertEquals(entity.getMessage(), entityFromDb.getMessage());
 		assertNotNull(entityFromDb.getId());
 		assertNotNull(entityFromDb.getCreated());
@@ -34,6 +35,8 @@ public class ChatServiceTest extends AbstractTest {
 		int initialSize = chatService.getAll().size();
 
 		final IChat entity1 = chatService.createEntity();
+		entity1.setGameId(saveNewGame());
+		entity1.setUserAccountId(saveNewUserAccount());
 		entity1.setMessage("message" + getRandomPrefix());
 
 		try {
@@ -78,6 +81,8 @@ public class ChatServiceTest extends AbstractTest {
 		final List<IChat> allEntities = chatService.getAll();
 
 		for (final IChat entityFromDb : allEntities) {
+			assertNotNull(entityFromDb.getGameId());
+			assertNotNull(entityFromDb.getUserAccountId());
 			assertNotNull(entityFromDb.getMessage());
 			assertNotNull(entityFromDb.getId());
 			assertNotNull(entityFromDb.getCreated());

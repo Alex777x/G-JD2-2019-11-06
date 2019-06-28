@@ -2,12 +2,18 @@ package by.itacademy.aalexandrov.poker.dao.api.entity.table;
 
 public interface IChat extends IBaseEntity {
 
+	String toString();
+
 	void setMessage(String message);
 
 	String getMessage();
 
-	void setPlayerId(IPlayer playerId);
+	void setUserAccountId(IUserAccount userAccountId);
 
-	IPlayer getPlayerId();
+	IUserAccount getUserAccountId();
+
+	void setGameId(IGame gameId);
+
+	IGame getGameId();
 
 }

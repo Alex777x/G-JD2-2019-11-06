@@ -7,10 +7,12 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Types;
 import java.util.List;
+import java.util.Set;
 
 import by.itacademy.aalexandrov.poker.dao.api.IPlayerActionDao;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IPlayerAction;
 import by.itacademy.aalexandrov.poker.dao.api.filter.PlayerActionFilter;
+import by.itacademy.aalexandrov.poker.jdbc.impl.entity.Player;
 import by.itacademy.aalexandrov.poker.jdbc.impl.entity.PlayerAction;
 import by.itacademy.aalexandrov.poker.jdbc.impl.util.PreparedStatementAction;
 import by.itacademy.aalexandrov.poker.jdbc.impl.util.SQLExecutionException;
@@ -24,20 +26,20 @@ public class PlayerActionDaoImpl extends AbstractDaoImpl<IPlayerAction, Integer>
 
 	@Override
 	public void insert(IPlayerAction entity) {
-		executeStatement(new PreparedStatementAction<IPlayerAction>(
-				String.format("insert into %s (bet, call, raise, fold, check_check, all_in, created, updated) values(?,?,?,?,?,?,?,?)",
-						getTableName()),
-				true) {
+		executeStatement(new PreparedStatementAction<IPlayerAction>(String.format(
+				"insert into %s (player_id, bet, call, raise, fold, check_check, all_in, created, updated) values(?,?,?,?,?,?,?,?,?)",
+				getTableName()), true) {
 			@Override
 			public IPlayerAction doWithPreparedStatement(final PreparedStatement pStmt) throws SQLException {
-				pStmt.setInt(1, entity.getBet());
-				pStmt.setInt(2, entity.getCall());
-				pStmt.setInt(3, entity.getRaise());
-				pStmt.setBoolean(4, entity.isFold());
-				pStmt.setBoolean(5, entity.isCheck());
-				pStmt.setInt(6, entity.getAllIn());
-				pStmt.setObject(7, entity.getCreated(), Types.TIMESTAMP);
-				pStmt.setObject(8, entity.getUpdated(), Types.TIMESTAMP);
+				pStmt.setInt(1, entity.getPlayerId().getId());
+				pStmt.setInt(2, entity.getBet());
+				pStmt.setInt(3, entity.getCall());
+				pStmt.setInt(4, entity.getRaise());
+				pStmt.setBoolean(5, entity.isFold());
+				pStmt.setBoolean(6, entity.isCheck());
+				pStmt.setInt(7, entity.getAllIn());
+				pStmt.setObject(8, entity.getCreated(), Types.TIMESTAMP);
+				pStmt.setObject(9, entity.getUpdated(), Types.TIMESTAMP);
 
 				pStmt.executeUpdate();
 
@@ -55,18 +57,20 @@ public class PlayerActionDaoImpl extends AbstractDaoImpl<IPlayerAction, Integer>
 
 	@Override
 	public void update(IPlayerAction entity) {
-		executeStatement(new PreparedStatementAction<IPlayerAction>(String
-				.format("update %s set bet=?, call=?, raise=?, fold=?, check_check=?, all_in=?, updated=? where id=?", getTableName())) {
+		executeStatement(new PreparedStatementAction<IPlayerAction>(String.format(
+				"update %s set player_id=?, bet=?, call=?, raise=?, fold=?, check_check=?, all_in=?, updated=? where id=?",
+				getTableName())) {
 			@Override
 			public IPlayerAction doWithPreparedStatement(final PreparedStatement pStmt) throws SQLException {
-				pStmt.setInt(1, entity.getBet());
-				pStmt.setInt(2, entity.getCall());
-				pStmt.setInt(3, entity.getRaise());
-				pStmt.setBoolean(4, entity.isFold());
-				pStmt.setBoolean(5, entity.isCheck());
-				pStmt.setInt(6, entity.getAllIn());
-				pStmt.setObject(7, entity.getUpdated(), Types.TIMESTAMP);
-				pStmt.setInt(8, entity.getId());
+				pStmt.setInt(1, entity.getPlayerId().getId());
+				pStmt.setInt(2, entity.getBet());
+				pStmt.setInt(3, entity.getCall());
+				pStmt.setInt(4, entity.getRaise());
+				pStmt.setBoolean(5, entity.isFold());
+				pStmt.setBoolean(6, entity.isCheck());
+				pStmt.setInt(7, entity.getAllIn());
+				pStmt.setObject(8, entity.getUpdated(), Types.TIMESTAMP);
+				pStmt.setInt(9, entity.getId());
 
 				pStmt.executeUpdate();
 				return entity;
@@ -81,7 +85,7 @@ public class PlayerActionDaoImpl extends AbstractDaoImpl<IPlayerAction, Integer>
 	}
 
 	@Override
-	protected IPlayerAction parseRow(final ResultSet resultSet) throws SQLException {
+	protected IPlayerAction parseRow(final ResultSet resultSet, Set<String> columns) throws SQLException {
 		final IPlayerAction entity = createEntity();
 		entity.setId((Integer) resultSet.getObject("id"));
 		entity.setBet(resultSet.getInt("bet"));
@@ -92,6 +96,16 @@ public class PlayerActionDaoImpl extends AbstractDaoImpl<IPlayerAction, Integer>
 		entity.setAllIn(resultSet.getInt("all_in"));
 		entity.setCreated(resultSet.getTimestamp("created"));
 		entity.setUpdated(resultSet.getTimestamp("updated"));
+
+		Integer playerId = (Integer) resultSet.getObject("player_id");
+		if (playerId != null) {
+			final Player player = new Player();
+			player.setId(playerId);
+			if (columns.contains("player_id")) {
+				player.setInGame(resultSet.getBoolean("player_id"));
+			}
+			entity.setPlayerId(player);
+		}
 		return entity;
 	}
 
@@ -103,17 +117,18 @@ public class PlayerActionDaoImpl extends AbstractDaoImpl<IPlayerAction, Integer>
 
 				for (IPlayerAction entity : entities) {
 					PreparedStatement pStmt = c.prepareStatement(String.format(
-							"insert into %s (bet, call, raise, fold, check_check, all_in, created, updated) values(?,?,?,?,?,?,?,?)",
+							"insert into %s (player_id, bet, call, raise, fold, check_check, all_in, created, updated) values(?,?,?,?,?,?,?,?)",
 							getTableName()), Statement.RETURN_GENERATED_KEYS);
 
-					pStmt.setInt(1, entity.getBet());
-					pStmt.setInt(2, entity.getCall());
-					pStmt.setInt(3, entity.getRaise());
-					pStmt.setBoolean(4, entity.isFold());
-					pStmt.setBoolean(5, entity.isCheck());
-					pStmt.setInt(6, entity.getAllIn());
-					pStmt.setObject(7, entity.getCreated(), Types.TIMESTAMP);
-					pStmt.setObject(8, entity.getUpdated(), Types.TIMESTAMP);
+					pStmt.setInt(1, entity.getPlayerId().getId());
+					pStmt.setInt(2, entity.getBet());
+					pStmt.setInt(3, entity.getCall());
+					pStmt.setInt(4, entity.getRaise());
+					pStmt.setBoolean(5, entity.isFold());
+					pStmt.setBoolean(6, entity.isCheck());
+					pStmt.setInt(7, entity.getAllIn());
+					pStmt.setObject(8, entity.getCreated(), Types.TIMESTAMP);
+					pStmt.setObject(9, entity.getUpdated(), Types.TIMESTAMP);
 
 					pStmt.executeUpdate();
 
@@ -151,5 +166,5 @@ public class PlayerActionDaoImpl extends AbstractDaoImpl<IPlayerAction, Integer>
 	public long getCount(PlayerActionFilter filter) {
 		return executeCountQuery("");
 	}
-	
+
 }

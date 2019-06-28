@@ -1,15 +1,27 @@
 package by.itacademy.aalexandrov.poker.jdbc.impl.entity;
 
+import by.itacademy.aalexandrov.poker.dao.api.entity.table.IPlayer;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IPlayerAction;
 
 public class PlayerAction extends BaseEntity implements IPlayerAction {
 
+	private IPlayer playerId;
 	private int bet;
 	private int call;
 	private int raise;
 	private boolean fold;
 	private boolean check;
 	private int allIn;
+
+	@Override
+	public IPlayer getPlayerId() {
+		return playerId;
+	}
+
+	@Override
+	public void setPlayerId(IPlayer playerId) {
+		this.playerId = playerId;
+	}
 
 	@Override
 	public int getBet() {
@@ -73,8 +85,8 @@ public class PlayerAction extends BaseEntity implements IPlayerAction {
 
 	@Override
 	public String toString() {
-		return "Action [bet=" + bet + ", call=" + call + ", raise=" + raise + ", fold=" + fold + ", check=" + check
-				+ ", allIn=" + allIn + "]";
+		return "PlayerAction [playerId=" + playerId + ", bet=" + bet + ", call=" + call + ", raise=" + raise + ", fold="
+				+ fold + ", check=" + check + ", allIn=" + allIn + "]";
 	}
 
 }
