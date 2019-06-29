@@ -63,27 +63,31 @@ public class UserAccountDaoImpl extends AbstractDaoImpl<IUserAccount, Integer> i
 
 	@Override
 	public void update(IUserAccount entity) {
-		executeStatement(new PreparedStatementAction<IUserAccount>(String.format(
-				"update %s set nickname=?, password=?, email=?, foto=?, statistic_id=?, country_id=?, role_id=?, status_id=?, transaction_id=?, updated=? where id=?",
-				getTableName())) {
-			@Override
-			public IUserAccount doWithPreparedStatement(final PreparedStatement pStmt) throws SQLException {
-				pStmt.setString(1, entity.getNickname());
-				pStmt.setString(2, entity.getPassword());
-				pStmt.setString(3, entity.getEmail());
-				pStmt.setString(4, entity.getFoto());
-				pStmt.setInt(5, entity.getStatisticId().getId());
-				pStmt.setInt(6, entity.getCountryId().getId());
-				pStmt.setString(7, entity.getUserRole().name());
-				pStmt.setString(8, entity.getUserStatus().name());
-				pStmt.setInt(9, entity.getTransactionId().getId());
-				pStmt.setObject(10, entity.getUpdated(), Types.TIMESTAMP);
-				pStmt.setInt(11, entity.getId());
+		try {
+			executeStatement(new PreparedStatementAction<IUserAccount>(String.format(
+					"update %s set nickname=?, password=?, email=?, foto=?, statistic_id=?, country_id=?, role_id=?, status_id=?, transaction_id=?, updated=? where id=?",
+					getTableName())) {
+				@Override
+				public IUserAccount doWithPreparedStatement(final PreparedStatement pStmt) throws SQLException {
+					pStmt.setString(1, entity.getNickname());
+					pStmt.setString(2, entity.getPassword());
+					pStmt.setString(3, entity.getEmail());
+					pStmt.setString(4, entity.getFoto());
+					pStmt.setInt(5, entity.getStatisticId().getId());
+					pStmt.setInt(6, entity.getCountryId().getId());
+					pStmt.setString(7, entity.getUserRole().name());
+					pStmt.setString(8, entity.getUserStatus().name());
+					pStmt.setInt(9, entity.getTransactionId().getId());
+					pStmt.setObject(10, entity.getUpdated(), Types.TIMESTAMP);
+					pStmt.setInt(11, entity.getId());
 
-				pStmt.executeUpdate();
-				return entity;
-			}
-		});
+					pStmt.executeUpdate();
+					return entity;
+				}
+			});
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
 
 	}
 

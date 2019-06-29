@@ -1,5 +1,5 @@
 CREATE TABLE "user_account" (
-	"id" serial NOT NULL UNIQUE,
+	"id" serial NOT NULL,
 	"nickname" character varying(50) NOT NULL UNIQUE,
 	"password" character varying(250) NOT NULL,
 	"email" character varying(250) NOT NULL UNIQUE,
@@ -31,12 +31,12 @@ CREATE TABLE "statistic" (
 
 CREATE TABLE "tiket" (
 	"id" serial NOT NULL,
+	"user_account_id" integer NOT NULL,
 	"tiket_title" character varying(50) NOT NULL,
 	"tiket_text" TEXT NOT NULL,
 	"status" character varying(50) NOT NULL,
 	"created" TIMESTAMP NOT NULL,
 	"updated" TIMESTAMP,
-	"user_id" integer,
 	CONSTRAINT "tiket_pk" PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
@@ -67,28 +67,14 @@ CREATE TABLE "transaction" (
 
 
 
-CREATE TABLE "poker_player_card" (
-	"id" serial NOT NULL,
-	"player_id" integer NOT NULL UNIQUE,
-	"card1_id" integer,
-	"card2_id" integer NOT NULL UNIQUE,
-	"card_state" BOOLEAN NOT NULL,
-	"created" TIMESTAMP NOT NULL,
-	"updated" TIMESTAMP NOT NULL,
-	CONSTRAINT "poker_player_card_pk" PRIMARY KEY ("id")
-) WITH (
-  OIDS=FALSE
-);
-
-
-
 CREATE TABLE "player" (
 	"id" serial NOT NULL,
+	"game_id" integer NOT NULL,
 	"user_account_id" integer NOT NULL,
-	"game_id" integer NOT NULL UNIQUE,
-	"dealer" BOOLEAN NOT NULL,
+	"position_id" character varying,
+	"in_game" BOOLEAN NOT NULL,
+	"state" character varying(50) NOT NULL,
 	"stack" DECIMAL NOT NULL,
-	"poker_action_id" integer NOT NULL,
 	"created" TIMESTAMP NOT NULL,
 	"updated" TIMESTAMP NOT NULL,
 	CONSTRAINT "player_pk" PRIMARY KEY ("id")
@@ -100,12 +86,8 @@ CREATE TABLE "player" (
 
 CREATE TABLE "game" (
 	"id" serial NOT NULL,
-	"state" integer NOT NULL,
-	"winner_id" integer UNIQUE,
-	"next_step_performer_id" integer NOT NULL UNIQUE,
-	"poker_bord_id" integer NOT NULL UNIQUE,
-	"bank" DECIMAL NOT NULL UNIQUE DEFAULT '0',
-	"chat_id" serial NOT NULL UNIQUE,
+	"state" character varying NOT NULL,
+	"bank" DECIMAL NOT NULL DEFAULT '0',
 	"created" TIMESTAMP NOT NULL,
 	"updated" TIMESTAMP NOT NULL,
 	CONSTRAINT "game_pk" PRIMARY KEY ("id")
@@ -115,27 +97,10 @@ CREATE TABLE "game" (
 
 
 
-CREATE TABLE "poker_board" (
-	"id" serial NOT NULL,
-	"flop_card1_id" integer NOT NULL UNIQUE,
-	"flop_card2_id" integer NOT NULL UNIQUE,
-	"flop_card3_id" integer NOT NULL UNIQUE,
-	"turn_card_id" integer UNIQUE,
-	"river_card_id" integer UNIQUE,
-	"game_id" integer NOT NULL UNIQUE,
-	"created" TIMESTAMP NOT NULL,
-	"updated" TIMESTAMP NOT NULL,
-	CONSTRAINT "poker_board_pk" PRIMARY KEY ("id")
-) WITH (
-  OIDS=FALSE
-);
-
-
-
 CREATE TABLE "card" (
 	"id" serial NOT NULL,
 	"suite" character varying(50) NOT NULL,
-	"rank" integer NOT NULL,
+	"rank" character varying NOT NULL,
 	"filename" character varying NOT NULL UNIQUE,
 	"created" TIMESTAMP NOT NULL,
 	"updated" TIMESTAMP NOT NULL,
@@ -146,19 +111,18 @@ CREATE TABLE "card" (
 
 
 
-CREATE TABLE "poker_action" (
+CREATE TABLE "action" (
 	"id" serial NOT NULL,
+	"player_id" integer NOT NULL,
 	"bet" DECIMAL NOT NULL,
 	"call" DECIMAL NOT NULL,
 	"raise" DECIMAL NOT NULL,
 	"fold" BOOLEAN NOT NULL,
 	"check_check" BOOLEAN NOT NULL,
-	"va_bank" DECIMAL NOT NULL,
-	"small_blind" BOOLEAN NOT NULL,
-	"big_blind" BOOLEAN NOT NULL,
+	"all_in" DECIMAL NOT NULL,
 	"created" TIMESTAMP NOT NULL,
 	"updated" TIMESTAMP NOT NULL,
-	CONSTRAINT "poker_action_pk" PRIMARY KEY ("id")
+	CONSTRAINT "action_pk" PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
 );
@@ -167,7 +131,8 @@ CREATE TABLE "poker_action" (
 
 CREATE TABLE "chat" (
 	"id" serial NOT NULL,
-	"player_id" integer NOT NULL,
+	"game_id" integer NOT NULL,
+	"user_account_id" integer NOT NULL,
 	"message" character varying(50) NOT NULL,
 	"created" TIMESTAMP NOT NULL,
 	"updated" TIMESTAMP NOT NULL,
@@ -178,42 +143,15 @@ CREATE TABLE "chat" (
 
 
 
-CREATE TABLE "blackjack_player_card" (
+CREATE TABLE "card_in_game" (
 	"id" serial NOT NULL,
-	"player_id" integer NOT NULL UNIQUE,
 	"card_id" integer NOT NULL,
-	"blackjack_action_id" integer NOT NULL,
-	"stack" DECIMAL NOT NULL,
-	"created" TIMESTAMP NOT NULL,
-	"updated" TIMESTAMP NOT NULL,
-	CONSTRAINT "blackjack_player_card_pk" PRIMARY KEY ("id")
-) WITH (
-  OIDS=FALSE
-);
-
-
-
-CREATE TABLE "blackjack_board" (
-	"id" serial NOT NULL,
 	"game_id" integer NOT NULL,
-	"card_id" integer NOT NULL,
+	"player_id" integer,
+	"card_state" character varying NOT NULL,
 	"created" TIMESTAMP NOT NULL,
 	"updated" TIMESTAMP NOT NULL,
-	CONSTRAINT "blackjack_board_pk" PRIMARY KEY ("id")
-) WITH (
-  OIDS=FALSE
-);
-
-
-
-CREATE TABLE "blackjack_action" (
-	"id" serial NOT NULL,
-	"bet" DECIMAL NOT NULL,
-	"hit_me" BOOLEAN NOT NULL,
-	"stop" BOOLEAN NOT NULL,
-	"created" TIMESTAMP NOT NULL,
-	"updated" TIMESTAMP NOT NULL,
-	CONSTRAINT "blackjack_action_pk" PRIMARY KEY ("id")
+	CONSTRAINT "card_in_game_pk" PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
 );
@@ -225,34 +163,20 @@ ALTER TABLE "user_account" ADD CONSTRAINT "user_account_fk1" FOREIGN KEY ("count
 ALTER TABLE "user_account" ADD CONSTRAINT "user_account_fk2" FOREIGN KEY ("transaction_id") REFERENCES "transaction"("id");
 
 
-ALTER TABLE "tiket" ADD CONSTRAINT "tiket_fk0" FOREIGN KEY ("user_id") REFERENCES "user_account"("id");
+ALTER TABLE "tiket" ADD CONSTRAINT "tiket_fk0" FOREIGN KEY ("user_account_id") REFERENCES "user_account"("id");
 
 
 
-ALTER TABLE "poker_player_card" ADD CONSTRAINT "poker_player_card_fk0" FOREIGN KEY ("player_id") REFERENCES "player"("id");
-ALTER TABLE "poker_player_card" ADD CONSTRAINT "poker_player_card_fk1" FOREIGN KEY ("card1_id") REFERENCES "card"("id");
-ALTER TABLE "poker_player_card" ADD CONSTRAINT "poker_player_card_fk2" FOREIGN KEY ("card2_id") REFERENCES "card"("id");
-
-ALTER TABLE "player" ADD CONSTRAINT "player_fk0" FOREIGN KEY ("user_account_id") REFERENCES "user_account"("id");
-ALTER TABLE "player" ADD CONSTRAINT "player_fk1" FOREIGN KEY ("game_id") REFERENCES "game"("id");
-ALTER TABLE "player" ADD CONSTRAINT "player_fk2" FOREIGN KEY ("poker_action_id") REFERENCES "poker_action"("id");
-
-ALTER TABLE "game" ADD CONSTRAINT "game_fk0" FOREIGN KEY ("id") REFERENCES "poker_board"("game_id");
-ALTER TABLE "game" ADD CONSTRAINT "game_fk1" FOREIGN KEY ("winner_id") REFERENCES "user_account"("id");
-ALTER TABLE "game" ADD CONSTRAINT "game_fk2" FOREIGN KEY ("next_step_performer_id") REFERENCES "user_account"("id");
-ALTER TABLE "game" ADD CONSTRAINT "game_fk3" FOREIGN KEY ("poker_bord_id") REFERENCES "poker_board"("id");
-ALTER TABLE "game" ADD CONSTRAINT "game_fk4" FOREIGN KEY ("chat_id") REFERENCES "chat"("id");
-
-ALTER TABLE "poker_board" ADD CONSTRAINT "poker_board_fk0" FOREIGN KEY ("id") REFERENCES "card"("id");
+ALTER TABLE "player" ADD CONSTRAINT "player_fk0" FOREIGN KEY ("game_id") REFERENCES "game"("id");
+ALTER TABLE "player" ADD CONSTRAINT "player_fk1" FOREIGN KEY ("user_account_id") REFERENCES "user_account"("id");
 
 
 
-ALTER TABLE "chat" ADD CONSTRAINT "chat_fk0" FOREIGN KEY ("player_id") REFERENCES "player"("id");
+ALTER TABLE "action" ADD CONSTRAINT "action_fk0" FOREIGN KEY ("player_id") REFERENCES "player"("id");
 
-ALTER TABLE "blackjack_player_card" ADD CONSTRAINT "blackjack_player_card_fk0" FOREIGN KEY ("player_id") REFERENCES "player"("id");
-ALTER TABLE "blackjack_player_card" ADD CONSTRAINT "blackjack_player_card_fk1" FOREIGN KEY ("card_id") REFERENCES "card"("id");
-ALTER TABLE "blackjack_player_card" ADD CONSTRAINT "blackjack_player_card_fk2" FOREIGN KEY ("blackjack_action_id") REFERENCES "blackjack_action"("id");
+ALTER TABLE "chat" ADD CONSTRAINT "chat_fk0" FOREIGN KEY ("game_id") REFERENCES "game"("id");
+ALTER TABLE "chat" ADD CONSTRAINT "chat_fk1" FOREIGN KEY ("user_account_id") REFERENCES "user_account"("id");
 
-ALTER TABLE "blackjack_board" ADD CONSTRAINT "blackjack_board_fk0" FOREIGN KEY ("game_id") REFERENCES "game"("id");
-ALTER TABLE "blackjack_board" ADD CONSTRAINT "blackjack_board_fk1" FOREIGN KEY ("card_id") REFERENCES "card"("id");
-
+ALTER TABLE "card_in_game" ADD CONSTRAINT "card_in_game_fk0" FOREIGN KEY ("card_id") REFERENCES "card"("id");
+ALTER TABLE "card_in_game" ADD CONSTRAINT "card_in_game_fk1" FOREIGN KEY ("game_id") REFERENCES "game"("id");
+ALTER TABLE "card_in_game" ADD CONSTRAINT "card_in_game_fk2" FOREIGN KEY ("player_id") REFERENCES "player"("id");
