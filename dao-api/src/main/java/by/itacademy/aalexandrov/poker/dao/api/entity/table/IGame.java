@@ -4,6 +4,8 @@ import by.itacademy.aalexandrov.poker.dao.api.entity.enums.GameStatus;
 
 public interface IGame extends IBaseEntity {
 
+	String toString();
+
 	void setBank(double bank);
 
 	double getBank();
@@ -11,17 +13,5 @@ public interface IGame extends IBaseEntity {
 	void setState(GameStatus state);
 
 	GameStatus getState();
-
-	void setBoardId(IBoard boardId);
-
-	IBoard getBoardId();
-
-	void setPlayerId(IPlayer playerId);
-
-	IPlayer getPlayerId();
-
-	void setChatId(IChat chatId);
-
-	IChat getChatId();
 
 }

@@ -17,14 +17,6 @@ public interface IPlayer extends IBaseEntity {
 
 	boolean isInGame();
 
-	void setPlayerActionId(IPlayerAction playerActionId);
-
-	IPlayerAction getPlayerActionId();
-
-	void setPlayerCardId(IPlayerCard playerCardId);
-
-	IPlayerCard getPlayerCardId();
-
 	void setPositionId(PlayerPosition positionId);
 
 	PlayerPosition getPositionId();
@@ -32,5 +24,9 @@ public interface IPlayer extends IBaseEntity {
 	void setUserAccountId(IUserAccount userAccountId);
 
 	IUserAccount getUserAccountId();
+
+	void setGameId(IGame gameId);
+
+	IGame getGameId();
 
 }

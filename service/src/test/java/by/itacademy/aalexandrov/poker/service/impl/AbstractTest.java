@@ -4,6 +4,7 @@ import java.util.Random;
 
 import org.junit.jupiter.api.BeforeEach;
 
+import by.itacademy.aalexandrov.poker.dao.api.entity.enums.CardStatus;
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.GameStatus;
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.PlayerPosition;
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.PlayerStatus;
@@ -11,25 +12,23 @@ import by.itacademy.aalexandrov.poker.dao.api.entity.enums.Rank;
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.Suits;
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.UserRole;
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.UserStatus;
-import by.itacademy.aalexandrov.poker.dao.api.entity.table.IBoard;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.ICard;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IChat;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.ICountry;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IGame;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IPlayer;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IPlayerAction;
-import by.itacademy.aalexandrov.poker.dao.api.entity.table.IPlayerCard;
+import by.itacademy.aalexandrov.poker.dao.api.entity.table.ICardInGame;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IStatistic;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.ITiket;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.ITransaction;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IUserAccount;
-import by.itacademy.aalexandrov.poker.service.IBoardService;
 import by.itacademy.aalexandrov.poker.service.ICardService;
 import by.itacademy.aalexandrov.poker.service.IChatService;
 import by.itacademy.aalexandrov.poker.service.ICountryService;
 import by.itacademy.aalexandrov.poker.service.IGameService;
 import by.itacademy.aalexandrov.poker.service.IPlayerActionService;
-import by.itacademy.aalexandrov.poker.service.IPlayerCardService;
+import by.itacademy.aalexandrov.poker.service.ICardInGameService;
 import by.itacademy.aalexandrov.poker.service.IPlayerService;
 import by.itacademy.aalexandrov.poker.service.IStatisticService;
 import by.itacademy.aalexandrov.poker.service.ITiketService;
@@ -47,8 +46,7 @@ public abstract class AbstractTest {
 	protected IChatService chatService = new ChatServiceImpl();
 	protected IGameService gameService = new GameServiceImpl();
 	protected IPlayerService playerService = new PlayerServiceImpl();
-	protected IBoardService boardService = new BoardServiceImpl();
-	protected IPlayerCardService playerCardService = new PlayerCardServiceImpl();
+	protected ICardInGameService cardInGameService = new PlayerCardServiceImpl();
 
 	private static final Random RANDOM = new Random();
 
@@ -56,13 +54,12 @@ public abstract class AbstractTest {
 	public void setUpMethod() {
 		// clean DB recursive
 		tiketService.deleteAll();
-		gameService.deleteAll();
 		chatService.deleteAll();
-		boardService.deleteAll();
-		playerService.deleteAll();
-		playerActionService.deleteAll();
-		playerCardService.deleteAll();
+		cardInGameService.deleteAll();
 		cardService.deleteAll();
+		playerActionService.deleteAll();
+		playerService.deleteAll();
+		gameService.deleteAll();
 		userAccountService.deleteAll();
 		countryService.deleteAll();
 		transactionService.deleteAll();
@@ -117,6 +114,7 @@ public abstract class AbstractTest {
 
 	protected IPlayerAction saveNewPlayerAction() {
 		IPlayerAction entity = playerActionService.createEntity();
+		entity.setPlayerId(saveNewPlayer());
 		entity.setBet(getRandomObjectsCount());
 		entity.setCall(getRandomObjectsCount());
 		entity.setRaise(getRandomObjectsCount());
@@ -153,9 +151,6 @@ public abstract class AbstractTest {
 
 	protected IGame saveNewGame() {
 		IGame entity = gameService.createEntity();
-		entity.setChatId(saveNewChat());
-		entity.setPlayerId(saveNewPlayer());
-		entity.setBoardId(saveNewBoard());
 		entity.setState(GameStatus.ACTIVE);
 		entity.setBank(getRandomObjectsCount());
 		gameService.save(entity);
@@ -164,10 +159,9 @@ public abstract class AbstractTest {
 
 	protected IPlayer saveNewPlayer() {
 		IPlayer entity = playerService.createEntity();
+		entity.setGameId(saveNewGame());
 		entity.setUserAccountId(saveNewUserAccount());
 		entity.setPositionId(PlayerPosition.ONE);
-		entity.setPlayerCardId(saveNewPlayerCard());
-		entity.setPlayerActionId(saveNewPlayerAction());
 		entity.setInGame(true);
 		entity.setState(PlayerStatus.DEALER);
 		entity.setStack(getRandomObjectsCount());
@@ -184,23 +178,13 @@ public abstract class AbstractTest {
 		return entity;
 	}
 
-	protected IBoard saveNewBoard() {
-		IBoard entity = boardService.createEntity();
-		entity.setFlopCard1Id(saveNewCard());
-		entity.setFlopCard2Id(saveNewCard());
-		entity.setFlopCard3Id(saveNewCard());
-		entity.setTurnCardId(saveNewCard());
-		entity.setRiverCardId(saveNewCard());
-		boardService.save(entity);
-		return entity;
-	}
-
-	protected IPlayerCard saveNewPlayerCard() {
-		IPlayerCard entity = playerCardService.createEntity();
-		entity.setCard1Id(saveNewCard());
-		entity.setCard2Id(saveNewCard());
-		entity.setCardState(false);
-		playerCardService.save(entity);
+	protected ICardInGame saveNewPlayerCard() {
+		ICardInGame entity = cardInGameService.createEntity();
+		entity.setCardId(saveNewCard());
+		entity.setGameId(saveNewGame());
+		entity.setPlayerId(saveNewPlayer());
+		entity.setCardStatus(CardStatus.PLAYERCARDOPEN);
+		cardInGameService.save(entity);
 		return entity;
 	}
 

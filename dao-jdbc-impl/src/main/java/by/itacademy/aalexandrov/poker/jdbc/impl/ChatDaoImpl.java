@@ -11,6 +11,7 @@ import java.util.Set;
 
 import by.itacademy.aalexandrov.poker.dao.api.IChatDao;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IChat;
+import by.itacademy.aalexandrov.poker.dao.api.entity.table.IGame;
 import by.itacademy.aalexandrov.poker.dao.api.filter.ChatFilter;
 import by.itacademy.aalexandrov.poker.jdbc.impl.entity.Chat;
 import by.itacademy.aalexandrov.poker.jdbc.impl.entity.Game;
@@ -87,7 +88,7 @@ public class ChatDaoImpl extends AbstractDaoImpl<IChat, Integer> implements ICha
 
 		Integer gameId = (Integer) resultSet.getObject("game_id");
 		if (gameId != null) {
-			final Game game = new Game();
+			final IGame game = new Game();
 			game.setId(gameId);
 			if (columns.contains("game_id")) {
 				game.setBank(resultSet.getInt("game_id"));
@@ -97,12 +98,12 @@ public class ChatDaoImpl extends AbstractDaoImpl<IChat, Integer> implements ICha
 
 		Integer userAccountId = (Integer) resultSet.getObject("user_account_id");
 		if (userAccountId != null) {
-			final UserAccount yserAccount = new UserAccount();
-			yserAccount.setId(userAccountId);
+			final UserAccount userAccount = new UserAccount();
+			userAccount.setId(userAccountId);
 			if (columns.contains("user_account_id")) {
-				yserAccount.setNickname(resultSet.getString("user_account_id"));
+				userAccount.setNickname(resultSet.getString("user_account_id"));
 			}
-			entity.setUserAccountId(yserAccount);
+			entity.setUserAccountId(userAccount);
 		}
 
 		return entity;

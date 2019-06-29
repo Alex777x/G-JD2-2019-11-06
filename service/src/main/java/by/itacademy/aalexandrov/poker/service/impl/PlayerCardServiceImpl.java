@@ -6,25 +6,25 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import by.itacademy.aalexandrov.poker.dao.api.IPlayerCardDao;
-import by.itacademy.aalexandrov.poker.dao.api.entity.table.IPlayerCard;
-import by.itacademy.aalexandrov.poker.dao.api.filter.PlayerCardFilter;
-import by.itacademy.aalexandrov.poker.jdbc.impl.PlayerCardDaoImpl;
-import by.itacademy.aalexandrov.poker.service.IPlayerCardService;
+import by.itacademy.aalexandrov.poker.dao.api.ICardInGameDao;
+import by.itacademy.aalexandrov.poker.dao.api.entity.table.ICardInGame;
+import by.itacademy.aalexandrov.poker.dao.api.filter.CardInGameFilter;
+import by.itacademy.aalexandrov.poker.jdbc.impl.CardInGameDaoImpl;
+import by.itacademy.aalexandrov.poker.service.ICardInGameService;
 
-public class PlayerCardServiceImpl implements IPlayerCardService {
+public class PlayerCardServiceImpl implements ICardInGameService {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(PlayerCardServiceImpl.class);
 
-	private IPlayerCardDao dao = new PlayerCardDaoImpl();
+	private ICardInGameDao dao = new CardInGameDaoImpl();
 
 	@Override
-	public IPlayerCard createEntity() {
+	public ICardInGame createEntity() {
 		return dao.createEntity();
 	}
 
 	@Override
-	public void save(final IPlayerCard entity) {
+	public void save(final ICardInGame entity) {
 		final Date modifedOn = new Date();
 		entity.setUpdated(modifedOn);
 		if (entity.getId() == null) {
@@ -38,9 +38,9 @@ public class PlayerCardServiceImpl implements IPlayerCardService {
 	}
 
 	@Override
-	public void save(IPlayerCard... entities) {
+	public void save(ICardInGame... entities) {
 		Date modified = new Date();
-		for (IPlayerCard iPlayerCard : entities) {
+		for (ICardInGame iPlayerCard : entities) {
 
 			iPlayerCard.setUpdated(modified);
 			iPlayerCard.setCreated(modified);
@@ -51,8 +51,8 @@ public class PlayerCardServiceImpl implements IPlayerCardService {
 	}
 
 	@Override
-	public IPlayerCard get(final Integer id) {
-		final IPlayerCard entity = dao.get(id);
+	public ICardInGame get(final Integer id) {
+		final ICardInGame entity = dao.get(id);
 		LOGGER.debug("entityById: {}", entity);
 		return entity;
 	}
@@ -70,19 +70,19 @@ public class PlayerCardServiceImpl implements IPlayerCardService {
 	}
 
 	@Override
-	public List<IPlayerCard> getAll() {
-		final List<IPlayerCard> all = dao.selectAll();
+	public List<ICardInGame> getAll() {
+		final List<ICardInGame> all = dao.selectAll();
 		LOGGER.debug("total count in DB: {}", all.size());
 		return all;
 	}
 
 	@Override
-	public List<IPlayerCard> find(PlayerCardFilter filter) {
+	public List<ICardInGame> find(CardInGameFilter filter) {
 		return dao.find(filter);
 	}
 
 	@Override
-	public long getCount(PlayerCardFilter filter) {
+	public long getCount(CardInGameFilter filter) {
 		return dao.getCount(filter);
 	}
 

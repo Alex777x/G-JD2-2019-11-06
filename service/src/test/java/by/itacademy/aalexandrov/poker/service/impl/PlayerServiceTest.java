@@ -23,10 +23,9 @@ public class PlayerServiceTest extends AbstractTest {
 		final IPlayer entityFromDb = playerService.get(entity.getId());
 
 		assertNotNull(entityFromDb);
+		assertEquals(entity.getGameId().getId(), entityFromDb.getGameId().getId());
 		assertEquals(entity.getUserAccountId().getId(), entityFromDb.getUserAccountId().getId());
 		assertEquals(entity.getPositionId(), entityFromDb.getPositionId());
-		assertEquals(entity.getPlayerCardId().getId(), entityFromDb.getPlayerCardId().getId());
-		assertEquals(entity.getPlayerActionId().getId(), entityFromDb.getPlayerActionId().getId());
 		assertEquals(entity.isInGame(), entityFromDb.isInGame());
 		assertEquals(entity.getState(), entityFromDb.getState());
 		assertEquals(entity.getStack(), entityFromDb.getStack());
@@ -41,10 +40,9 @@ public class PlayerServiceTest extends AbstractTest {
 		int initialSize = playerService.getAll().size();
 
 		final IPlayer entity1 = playerService.createEntity();
+		entity1.setGameId(saveNewGame());
 		entity1.setUserAccountId(saveNewUserAccount());
 		entity1.setPositionId(PlayerPosition.ONE);
-		entity1.setPlayerCardId(saveNewPlayerCard());
-		entity1.setPlayerActionId(saveNewPlayerAction());
 		entity1.setInGame(true);
 		entity1.setState(PlayerStatus.DEALER);
 		entity1.setStack(getRandomObjectsCount());
@@ -53,7 +51,7 @@ public class PlayerServiceTest extends AbstractTest {
 			final IPlayer entity2 = playerService.createEntity();
 			entity2.setState(PlayerStatus.valueOf(getRandomPrefix()));
 			playerService.save(entity1, entity2);
-			fail("PokerAction save should fail if name not specified");
+			fail("Player save should fail if name not specified");
 		} catch (Exception e) {
 			assertEquals(initialSize, playerService.getAll().size());
 		}
@@ -98,10 +96,9 @@ public class PlayerServiceTest extends AbstractTest {
 		final List<IPlayer> allEntities = playerService.getAll();
 
 		for (final IPlayer entityFromDb : allEntities) {
+			assertNotNull(entityFromDb.getGameId().getId());
 			assertNotNull(entityFromDb.getUserAccountId().getId());
 			assertNotNull(entityFromDb.getPositionId());
-			assertNotNull(entityFromDb.getPlayerCardId().getId());
-			assertNotNull(entityFromDb.getPlayerActionId().getId());
 			assertNotNull(entityFromDb.isInGame());
 			assertNotNull(entityFromDb.getState());
 			assertNotNull(entityFromDb.getStack());

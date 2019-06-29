@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Set;
 
 import by.itacademy.aalexandrov.poker.dao.api.IPlayerActionDao;
+import by.itacademy.aalexandrov.poker.dao.api.entity.table.IPlayer;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IPlayerAction;
 import by.itacademy.aalexandrov.poker.dao.api.filter.PlayerActionFilter;
 import by.itacademy.aalexandrov.poker.jdbc.impl.entity.Player;
@@ -99,10 +100,11 @@ public class PlayerActionDaoImpl extends AbstractDaoImpl<IPlayerAction, Integer>
 
 		Integer playerId = (Integer) resultSet.getObject("player_id");
 		if (playerId != null) {
-			final Player player = new Player();
+			final IPlayer player = new Player();
 			player.setId(playerId);
 			if (columns.contains("player_id")) {
 				player.setInGame(resultSet.getBoolean("player_id"));
+				player.setStack(resultSet.getDouble("player_id"));
 			}
 			entity.setPlayerId(player);
 		}

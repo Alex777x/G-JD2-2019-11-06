@@ -22,9 +22,6 @@ public class GameServiceTest extends AbstractTest {
 		final IGame entityFromDb = gameService.get(entity.getId());
 
 		assertNotNull(entityFromDb);
-		assertEquals(entity.getChatId().getId(), entityFromDb.getChatId().getId());
-		assertEquals(entity.getPlayerId().getId(), entityFromDb.getPlayerId().getId());
-		assertEquals(entity.getBoardId().getId(), entityFromDb.getBoardId().getId());
 		assertEquals(entity.getState(), entityFromDb.getState());
 		assertEquals(entity.getBank(), entityFromDb.getBank());
 		assertNotNull(entityFromDb.getId());
@@ -38,9 +35,6 @@ public class GameServiceTest extends AbstractTest {
 		int initialSize = gameService.getAll().size();
 
 		final IGame entity1 = gameService.createEntity();
-		entity1.setChatId(saveNewChat());
-		entity1.setPlayerId(saveNewPlayer());
-		entity1.setBoardId(saveNewBoard());
 		entity1.setState(GameStatus.ACTIVE);
 		entity1.setBank(getRandomObjectsCount());
 
@@ -59,6 +53,8 @@ public class GameServiceTest extends AbstractTest {
 		final IGame entity = saveNewGame();
 
 		double newBank = entity.getBank();
+		GameStatus newGameStatus = entity.getState();
+		entity.setState(newGameStatus);
 		entity.setBank(newBank);
 		Thread.sleep(2000);
 		gameService.save(entity);
@@ -86,9 +82,6 @@ public class GameServiceTest extends AbstractTest {
 		final List<IGame> allEntities = gameService.getAll();
 
 		for (final IGame entityFromDb : allEntities) {
-			assertNotNull(entityFromDb.getChatId().getId());
-			assertNotNull(entityFromDb.getPlayerId().getId());
-			assertNotNull(entityFromDb.getBoardId().getId());
 			assertNotNull(entityFromDb.getState());
 			assertNotNull(entityFromDb.getBank());
 			assertNotNull(entityFromDb.getId());
