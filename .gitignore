@@ -39,3 +39,4 @@ dao-api/.classpath
 .settings/org.eclipse.core.resources.prefs
 .project
 service/logs/app.log
+service/logs/2019-06/app-06-29-2019-1.log.gz
