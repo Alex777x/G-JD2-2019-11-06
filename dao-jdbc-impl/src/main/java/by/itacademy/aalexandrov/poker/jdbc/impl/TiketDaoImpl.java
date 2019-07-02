@@ -9,6 +9,8 @@ import java.sql.Types;
 import java.util.List;
 import java.util.Set;
 
+import org.springframework.stereotype.Repository;
+
 import by.itacademy.aalexandrov.poker.dao.api.ITiketDao;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.ITiket;
 import by.itacademy.aalexandrov.poker.dao.api.filter.TiketFilter;
@@ -17,6 +19,7 @@ import by.itacademy.aalexandrov.poker.jdbc.impl.entity.UserAccount;
 import by.itacademy.aalexandrov.poker.jdbc.impl.util.PreparedStatementAction;
 import by.itacademy.aalexandrov.poker.jdbc.impl.util.SQLExecutionException;
 
+@Repository
 public class TiketDaoImpl extends AbstractDaoImpl<ITiket, Integer> implements ITiketDao {
 
 	@Override
@@ -26,10 +29,9 @@ public class TiketDaoImpl extends AbstractDaoImpl<ITiket, Integer> implements IT
 
 	@Override
 	public void insert(ITiket entity) {
-		executeStatement(new PreparedStatementAction<ITiket>(
-				String.format("insert into %s (user_account_id, tiket_title, tiket_text, status, created, updated) values(?,?,?,?,?,?)",
-						getTableName()),
-				true) {
+		executeStatement(new PreparedStatementAction<ITiket>(String.format(
+				"insert into %s (user_account_id, tiket_title, tiket_text, status, created, updated) values(?,?,?,?,?,?)",
+				getTableName()), true) {
 			@Override
 			public ITiket doWithPreparedStatement(final PreparedStatement pStmt) throws SQLException {
 				pStmt.setInt(1, entity.getUserAccountId().getId());
@@ -55,8 +57,9 @@ public class TiketDaoImpl extends AbstractDaoImpl<ITiket, Integer> implements IT
 
 	@Override
 	public void update(ITiket entity) {
-		executeStatement(new PreparedStatementAction<ITiket>(String
-				.format("update %s set user_account_id=?, tiket_title=?, tiket_text=?, status=?, updated=? where id=?", getTableName())) {
+		executeStatement(new PreparedStatementAction<ITiket>(String.format(
+				"update %s set user_account_id=?, tiket_title=?, tiket_text=?, status=?, updated=? where id=?",
+				getTableName())) {
 			@Override
 			public ITiket doWithPreparedStatement(final PreparedStatement pStmt) throws SQLException {
 				pStmt.setInt(1, entity.getUserAccountId().getId());
@@ -87,21 +90,21 @@ public class TiketDaoImpl extends AbstractDaoImpl<ITiket, Integer> implements IT
 		entity.setStatus(resultSet.getString("status"));
 		entity.setCreated(resultSet.getTimestamp("created"));
 		entity.setUpdated(resultSet.getTimestamp("updated"));
-		
+
 		Integer userAccountId = (Integer) resultSet.getObject("user_account_id");
 		if (userAccountId != null) {
-            final UserAccount userAccount = new UserAccount();
-            userAccount.setId(userAccountId);
-            if (columns.contains("user_account_id")) {
-                userAccount.setNickname(resultSet.getString("user_account_id"));
-                userAccount.setPassword(resultSet.getString("user_account_id"));
-                userAccount.setEmail(resultSet.getString("user_account_id"));
-                userAccount.setFoto(resultSet.getString("user_account_id"));
-                userAccount.setFoto(resultSet.getString("user_account_id"));
-            }
-            entity.setUserAccountId(userAccount);
-        }
-		
+			final UserAccount userAccount = new UserAccount();
+			userAccount.setId(userAccountId);
+			if (columns.contains("user_account_id")) {
+				userAccount.setNickname(resultSet.getString("user_account_id"));
+				userAccount.setPassword(resultSet.getString("user_account_id"));
+				userAccount.setEmail(resultSet.getString("user_account_id"));
+				userAccount.setFoto(resultSet.getString("user_account_id"));
+				userAccount.setFoto(resultSet.getString("user_account_id"));
+			}
+			entity.setUserAccountId(userAccount);
+		}
+
 		return entity;
 	}
 

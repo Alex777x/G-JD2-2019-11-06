@@ -9,6 +9,8 @@ import java.sql.Types;
 import java.util.List;
 import java.util.Set;
 
+import org.springframework.stereotype.Repository;
+
 import by.itacademy.aalexandrov.poker.dao.api.IGameDao;
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.GameStatus;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IGame;
@@ -17,6 +19,7 @@ import by.itacademy.aalexandrov.poker.jdbc.impl.entity.Game;
 import by.itacademy.aalexandrov.poker.jdbc.impl.util.PreparedStatementAction;
 import by.itacademy.aalexandrov.poker.jdbc.impl.util.SQLExecutionException;
 
+@Repository
 public class GameDaoImpl extends AbstractDaoImpl<IGame, Integer> implements IGameDao {
 
 	@Override
@@ -91,9 +94,9 @@ public class GameDaoImpl extends AbstractDaoImpl<IGame, Integer> implements IGam
 			try {
 
 				for (IGame entity : entities) {
-					PreparedStatement pStmt = c.prepareStatement(String.format(
-							"insert into %s (state, bank, created, updated) values(?,?,?,?)",
-							getTableName()), Statement.RETURN_GENERATED_KEYS);
+					PreparedStatement pStmt = c.prepareStatement(String
+							.format("insert into %s (state, bank, created, updated) values(?,?,?,?)", getTableName()),
+							Statement.RETURN_GENERATED_KEYS);
 
 					pStmt.setString(1, entity.getState().name());
 					pStmt.setDouble(2, entity.getBank());

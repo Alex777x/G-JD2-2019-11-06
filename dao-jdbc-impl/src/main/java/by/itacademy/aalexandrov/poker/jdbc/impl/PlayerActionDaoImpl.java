@@ -9,6 +9,8 @@ import java.sql.Types;
 import java.util.List;
 import java.util.Set;
 
+import org.springframework.stereotype.Repository;
+
 import by.itacademy.aalexandrov.poker.dao.api.IPlayerActionDao;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IPlayer;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IPlayerAction;
@@ -18,6 +20,7 @@ import by.itacademy.aalexandrov.poker.jdbc.impl.entity.PlayerAction;
 import by.itacademy.aalexandrov.poker.jdbc.impl.util.PreparedStatementAction;
 import by.itacademy.aalexandrov.poker.jdbc.impl.util.SQLExecutionException;
 
+@Repository
 public class PlayerActionDaoImpl extends AbstractDaoImpl<IPlayerAction, Integer> implements IPlayerActionDao {
 
 	@Override

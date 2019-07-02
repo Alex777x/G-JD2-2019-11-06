@@ -5,19 +5,27 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import by.itacademy.aalexandrov.poker.dao.api.ITransactionDao;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.ITransaction;
 import by.itacademy.aalexandrov.poker.dao.api.filter.TransactionFilter;
-import by.itacademy.aalexandrov.poker.jdbc.impl.TransactionDaoImpl;
 import by.itacademy.aalexandrov.poker.service.ITransactionService;
 
+@Service
 public class TransactionServiceImpl implements ITransactionService {
-	
+
 	private static final Logger LOGGER = LoggerFactory.getLogger(TransactionServiceImpl.class);
-	
-	private ITransactionDao dao = new TransactionDaoImpl();
-	
+
+	private ITransactionDao dao;
+
+	@Autowired
+	public TransactionServiceImpl(ITransactionDao dao) {
+		super();
+		this.dao = dao;
+	}
+
 	@Override
 	public ITransaction createEntity() {
 		return dao.createEntity();
@@ -36,19 +44,19 @@ public class TransactionServiceImpl implements ITransactionService {
 			dao.update(entity);
 		}
 	}
-	
+
 	@Override
-    public void save(ITransaction... entities) {
-        Date modified = new Date();
-        for (ITransaction iTransaction : entities) {
+	public void save(ITransaction... entities) {
+		Date modified = new Date();
+		for (ITransaction iTransaction : entities) {
 
-        	iTransaction.setUpdated(modified);
-        	iTransaction.setCreated(modified);
+			iTransaction.setUpdated(modified);
+			iTransaction.setCreated(modified);
 
-        }
+		}
 
-        dao.save(entities);
-    }
+		dao.save(entities);
+	}
 
 	@Override
 	public ITransaction get(final Integer id) {
@@ -75,7 +83,6 @@ public class TransactionServiceImpl implements ITransactionService {
 		LOGGER.debug("total count in DB: {}", all.size());
 		return all;
 	}
-	
 
 	@Override
 	public List<ITransaction> find(TransactionFilter filter) {

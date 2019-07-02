@@ -5,18 +5,26 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import by.itacademy.aalexandrov.poker.dao.api.IStatisticDao;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IStatistic;
 import by.itacademy.aalexandrov.poker.dao.api.filter.StatisticFilter;
-import by.itacademy.aalexandrov.poker.jdbc.impl.StatisticDaoImpl;
 import by.itacademy.aalexandrov.poker.service.IStatisticService;
 
+@Service
 public class StatisticServiceImpl implements IStatisticService {
-	
+
 	private static final Logger LOGGER = LoggerFactory.getLogger(StatisticServiceImpl.class);
 
-	private IStatisticDao dao = new StatisticDaoImpl();
+	private IStatisticDao dao;
+
+	@Autowired
+	public StatisticServiceImpl(IStatisticDao dao) {
+		super();
+		this.dao = dao;
+	}
 
 	@Override
 	public IStatistic createEntity() {
@@ -36,7 +44,7 @@ public class StatisticServiceImpl implements IStatisticService {
 			dao.update(entity);
 		}
 	}
-	
+
 	@Override
 	public void save(IStatistic... entities) {
 		Date modified = new Date();
@@ -75,7 +83,6 @@ public class StatisticServiceImpl implements IStatisticService {
 		LOGGER.debug("total count in DB: {}", all.size());
 		return all;
 	}
-
 
 	@Override
 	public List<IStatistic> find(StatisticFilter filter) {

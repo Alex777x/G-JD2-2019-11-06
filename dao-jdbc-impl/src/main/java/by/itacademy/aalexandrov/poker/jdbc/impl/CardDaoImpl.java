@@ -8,6 +8,8 @@ import java.sql.Statement;
 import java.sql.Types;
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import by.itacademy.aalexandrov.poker.dao.api.ICardDao;
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.Rank;
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.Suits;
@@ -17,8 +19,9 @@ import by.itacademy.aalexandrov.poker.jdbc.impl.entity.Card;
 import by.itacademy.aalexandrov.poker.jdbc.impl.util.PreparedStatementAction;
 import by.itacademy.aalexandrov.poker.jdbc.impl.util.SQLExecutionException;
 
+@Repository
 public class CardDaoImpl extends AbstractDaoImpl<ICard, Integer> implements ICardDao {
-	
+
 	@Override
 	public ICard createEntity() {
 		return new Card();
@@ -26,10 +29,8 @@ public class CardDaoImpl extends AbstractDaoImpl<ICard, Integer> implements ICar
 
 	@Override
 	public void insert(ICard entity) {
-		executeStatement(new PreparedStatementAction<ICard>(
-				String.format("insert into %s (suite, rank, filename, created, updated) values(?,?,?,?,?)",
-						getTableName()),
-				true) {
+		executeStatement(new PreparedStatementAction<ICard>(String.format(
+				"insert into %s (suite, rank, filename, created, updated) values(?,?,?,?,?)", getTableName()), true) {
 			@Override
 			public ICard doWithPreparedStatement(final PreparedStatement pStmt) throws SQLException {
 				pStmt.setString(1, entity.getSuit().name());
@@ -54,8 +55,8 @@ public class CardDaoImpl extends AbstractDaoImpl<ICard, Integer> implements ICar
 
 	@Override
 	public void update(ICard entity) {
-		executeStatement(new PreparedStatementAction<ICard>(String
-				.format("update %s set suite=?, rank=?, filename=?, updated=? where id=?", getTableName())) {
+		executeStatement(new PreparedStatementAction<ICard>(
+				String.format("update %s set suite=?, rank=?, filename=?, updated=? where id=?", getTableName())) {
 			@Override
 			public ICard doWithPreparedStatement(final PreparedStatement pStmt) throws SQLException {
 				pStmt.setString(1, entity.getSuit().name());

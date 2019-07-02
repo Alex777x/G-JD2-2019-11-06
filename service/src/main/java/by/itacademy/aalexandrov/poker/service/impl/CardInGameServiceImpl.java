@@ -5,18 +5,26 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import by.itacademy.aalexandrov.poker.dao.api.ICardInGameDao;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.ICardInGame;
 import by.itacademy.aalexandrov.poker.dao.api.filter.CardInGameFilter;
-import by.itacademy.aalexandrov.poker.jdbc.impl.CardInGameDaoImpl;
 import by.itacademy.aalexandrov.poker.service.ICardInGameService;
 
-public class PlayerCardServiceImpl implements ICardInGameService {
+@Service
+public class CardInGameServiceImpl implements ICardInGameService {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(PlayerCardServiceImpl.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(CardInGameServiceImpl.class);
 
-	private ICardInGameDao dao = new CardInGameDaoImpl();
+	private ICardInGameDao dao;
+
+	@Autowired
+	public CardInGameServiceImpl(ICardInGameDao dao) {
+		super();
+		this.dao = dao;
+	}
 
 	@Override
 	public ICardInGame createEntity() {
@@ -28,11 +36,11 @@ public class PlayerCardServiceImpl implements ICardInGameService {
 		final Date modifedOn = new Date();
 		entity.setUpdated(modifedOn);
 		if (entity.getId() == null) {
-			LOGGER.info("new PlayerCard created: {}", entity);
+			LOGGER.info("new CardInGame created: {}", entity);
 			entity.setCreated(modifedOn);
 			dao.insert(entity);
 		} else {
-			LOGGER.info("new PlayerCard updated: {}", entity);
+			LOGGER.info("new CardInGame updated: {}", entity);
 			dao.update(entity);
 		}
 	}
@@ -40,10 +48,10 @@ public class PlayerCardServiceImpl implements ICardInGameService {
 	@Override
 	public void save(ICardInGame... entities) {
 		Date modified = new Date();
-		for (ICardInGame iPlayerCard : entities) {
+		for (ICardInGame iCardInGame : entities) {
 
-			iPlayerCard.setUpdated(modified);
-			iPlayerCard.setCreated(modified);
+			iCardInGame.setUpdated(modified);
+			iCardInGame.setCreated(modified);
 
 		}
 
@@ -65,7 +73,7 @@ public class PlayerCardServiceImpl implements ICardInGameService {
 
 	@Override
 	public void deleteAll() {
-		LOGGER.info("delete all PlayerCards");
+		LOGGER.info("delete all CardInGames");
 		dao.deleteAll();
 	}
 

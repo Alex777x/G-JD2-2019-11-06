@@ -5,18 +5,26 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import by.itacademy.aalexandrov.poker.dao.api.ICountryDao;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.ICountry;
 import by.itacademy.aalexandrov.poker.dao.api.filter.CountryFilter;
-import by.itacademy.aalexandrov.poker.jdbc.impl.CountryDaoImpl;
 import by.itacademy.aalexandrov.poker.service.ICountryService;
 
+@Service
 public class CountryServiceImpl implements ICountryService {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(CountryServiceImpl.class);
 
-	private ICountryDao dao = new CountryDaoImpl();
+	private ICountryDao dao;
+
+	@Autowired
+	public CountryServiceImpl(ICountryDao dao) {
+		super();
+		this.dao = dao;
+	}
 
 	@Override
 	public ICountry createEntity() {

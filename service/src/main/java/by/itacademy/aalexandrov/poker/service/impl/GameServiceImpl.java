@@ -5,18 +5,26 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import by.itacademy.aalexandrov.poker.dao.api.IGameDao;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IGame;
 import by.itacademy.aalexandrov.poker.dao.api.filter.GameFilter;
-import by.itacademy.aalexandrov.poker.jdbc.impl.GameDaoImpl;
 import by.itacademy.aalexandrov.poker.service.IGameService;
 
+@Service
 public class GameServiceImpl implements IGameService {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(GameServiceImpl.class);
 
-	private IGameDao dao = new GameDaoImpl();
+	private IGameDao dao;
+
+	@Autowired
+	public GameServiceImpl(IGameDao dao) {
+		super();
+		this.dao = dao;
+	}
 
 	@Override
 	public IGame createEntity() {

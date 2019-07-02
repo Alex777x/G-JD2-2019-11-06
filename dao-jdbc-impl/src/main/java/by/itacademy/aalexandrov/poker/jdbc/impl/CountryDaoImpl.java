@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import by.itacademy.aalexandrov.poker.dao.api.ICountryDao;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.ICountry;
 import by.itacademy.aalexandrov.poker.dao.api.filter.CountryFilter;
@@ -14,6 +16,7 @@ import by.itacademy.aalexandrov.poker.jdbc.impl.entity.Country;
 import by.itacademy.aalexandrov.poker.jdbc.impl.util.PreparedStatementAction;
 import by.itacademy.aalexandrov.poker.jdbc.impl.util.SQLExecutionException;
 
+@Repository
 public class CountryDaoImpl extends AbstractDaoImpl<ICountry, Integer> implements ICountryDao {
 
 	@Override

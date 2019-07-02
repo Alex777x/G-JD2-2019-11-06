@@ -1,10 +1,10 @@
 package by.itacademy.aalexandrov.poker.service.impl;
 
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.fail;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.List;
 
@@ -27,7 +27,8 @@ public class UserAccountServiceTest extends AbstractTest {
 		assertEquals(entity.getPassword(), entityFromDb.getPassword());
 		assertEquals(entity.getEmail(), entityFromDb.getEmail());
 		assertEquals(entity.getFoto(), entityFromDb.getFoto());
-		assertEquals(entity.getCountryId().getId(), entityFromDb.getCountryId().getId());
+		assertEquals(entity.getCountryId().getId().intValue(), entityFromDb.getCountryId().getId().intValue()); // это
+																												// убрать
 		assertEquals(entity.getStatisticId().getId(), entityFromDb.getStatisticId().getId());
 		assertEquals(entity.getUserRole(), entityFromDb.getUserRole());
 		assertEquals(entity.getUserStatus(), entityFromDb.getUserStatus());

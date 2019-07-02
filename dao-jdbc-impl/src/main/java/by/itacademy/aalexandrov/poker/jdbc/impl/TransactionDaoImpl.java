@@ -8,6 +8,8 @@ import java.sql.Statement;
 import java.sql.Types;
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import by.itacademy.aalexandrov.poker.dao.api.ITransactionDao;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.ITransaction;
 import by.itacademy.aalexandrov.poker.dao.api.filter.TransactionFilter;
@@ -15,6 +17,7 @@ import by.itacademy.aalexandrov.poker.jdbc.impl.entity.Transaction;
 import by.itacademy.aalexandrov.poker.jdbc.impl.util.PreparedStatementAction;
 import by.itacademy.aalexandrov.poker.jdbc.impl.util.SQLExecutionException;
 
+@Repository
 public class TransactionDaoImpl extends AbstractDaoImpl<ITransaction, Integer> implements ITransactionDao {
 
 	@Override
@@ -25,8 +28,7 @@ public class TransactionDaoImpl extends AbstractDaoImpl<ITransaction, Integer> i
 	@Override
 	public void insert(ITransaction entity) {
 		executeStatement(new PreparedStatementAction<ITransaction>(
-				String.format("insert into %s (amount, comment, created, updated) values(?,?,?,?)",
-						getTableName()),
+				String.format("insert into %s (amount, comment, created, updated) values(?,?,?,?)", getTableName()),
 				true) {
 			@Override
 			public ITransaction doWithPreparedStatement(final PreparedStatement pStmt) throws SQLException {
@@ -51,8 +53,8 @@ public class TransactionDaoImpl extends AbstractDaoImpl<ITransaction, Integer> i
 
 	@Override
 	public void update(ITransaction entity) {
-		executeStatement(new PreparedStatementAction<ITransaction>(String
-				.format("update %s set amount=?, comment=?, updated=? where id=?", getTableName())) {
+		executeStatement(new PreparedStatementAction<ITransaction>(
+				String.format("update %s set amount=?, comment=?, updated=? where id=?", getTableName())) {
 			@Override
 			public ITransaction doWithPreparedStatement(final PreparedStatement pStmt) throws SQLException {
 				pStmt.setDouble(1, entity.getAmount());
@@ -90,9 +92,10 @@ public class TransactionDaoImpl extends AbstractDaoImpl<ITransaction, Integer> i
 			try {
 
 				for (ITransaction entity : entities) {
-					PreparedStatement pStmt = c.prepareStatement(String.format(
-							"insert into %s (amount, comment, created, updated) values(?,?,?,?)",
-							getTableName()), Statement.RETURN_GENERATED_KEYS);
+					PreparedStatement pStmt = c.prepareStatement(
+							String.format("insert into %s (amount, comment, created, updated) values(?,?,?,?)",
+									getTableName()),
+							Statement.RETURN_GENERATED_KEYS);
 
 					pStmt.setDouble(1, entity.getAmount());
 					pStmt.setString(2, entity.getComment());

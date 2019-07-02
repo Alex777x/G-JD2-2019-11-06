@@ -1,10 +1,10 @@
 package by.itacademy.aalexandrov.poker.service.impl;
 
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.fail;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.List;
 
@@ -13,12 +13,11 @@ import org.junit.jupiter.api.Test;
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.CardStatus;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.ICardInGame;
 
-
 public class CardInGameServiceTest extends AbstractTest {
-	
+
 	@Test
 	public void testCreate() {
-		final ICardInGame entity = saveNewPlayerCard();
+		final ICardInGame entity = saveNewCardInGame();
 
 		final ICardInGame entityFromDb = cardInGameService.get(entity.getId());
 
@@ -55,7 +54,7 @@ public class CardInGameServiceTest extends AbstractTest {
 
 	@Test
 	public void testUpdate() throws InterruptedException {
-		final ICardInGame entity = saveNewPlayerCard();
+		final ICardInGame entity = saveNewCardInGame();
 
 		CardStatus newCardStatus = entity.getCardStatus();
 		entity.setCardStatus(newCardStatus);
@@ -79,7 +78,7 @@ public class CardInGameServiceTest extends AbstractTest {
 
 		final int randomObjectsCount = getRandomObjectsCount();
 		for (int i = 0; i < randomObjectsCount; i++) {
-			saveNewPlayerCard();
+			saveNewCardInGame();
 		}
 
 		final List<ICardInGame> allEntities = cardInGameService.getAll();
@@ -99,14 +98,14 @@ public class CardInGameServiceTest extends AbstractTest {
 
 	@Test
 	public void testDelete() {
-		final ICardInGame entity = saveNewPlayerCard();
+		final ICardInGame entity = saveNewCardInGame();
 		cardInGameService.delete(entity.getId());
 		assertNull(cardInGameService.get(entity.getId()));
 	}
 
 	@Test
 	public void testDeleteAll() {
-		saveNewPlayerCard();
+		saveNewCardInGame();
 		cardInGameService.deleteAll();
 		assertEquals(0, cardInGameService.getAll().size());
 	}

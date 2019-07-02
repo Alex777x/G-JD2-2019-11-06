@@ -5,18 +5,26 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import by.itacademy.aalexandrov.poker.dao.api.IPlayerActionDao;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IPlayerAction;
 import by.itacademy.aalexandrov.poker.dao.api.filter.PlayerActionFilter;
-import by.itacademy.aalexandrov.poker.jdbc.impl.PlayerActionDaoImpl;
 import by.itacademy.aalexandrov.poker.service.IPlayerActionService;
 
+@Service
 public class PlayerActionServiceImpl implements IPlayerActionService {
-	
+
 	private static final Logger LOGGER = LoggerFactory.getLogger(PlayerActionServiceImpl.class);
 
-	private IPlayerActionDao dao = new PlayerActionDaoImpl();
+	private IPlayerActionDao dao;
+
+	@Autowired
+	public PlayerActionServiceImpl(IPlayerActionDao dao) {
+		super();
+		this.dao = dao;
+	}
 
 	@Override
 	public IPlayerAction createEntity() {

@@ -5,19 +5,27 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import by.itacademy.aalexandrov.poker.dao.api.ICardDao;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.ICard;
 import by.itacademy.aalexandrov.poker.dao.api.filter.CardFilter;
-import by.itacademy.aalexandrov.poker.jdbc.impl.CardDaoImpl;
 import by.itacademy.aalexandrov.poker.service.ICardService;
 
+@Service
 public class CardServiceImpl implements ICardService {
-	
+
 	private static final Logger LOGGER = LoggerFactory.getLogger(CardServiceImpl.class);
-	
-	private ICardDao dao = new CardDaoImpl();
-	
+
+	private ICardDao dao;
+
+	@Autowired
+	public CardServiceImpl(ICardDao dao) {
+		super();
+		this.dao = dao;
+	}
+
 	@Override
 	public ICard createEntity() {
 		return dao.createEntity();
@@ -36,19 +44,19 @@ public class CardServiceImpl implements ICardService {
 			dao.update(entity);
 		}
 	}
-	
+
 	@Override
-    public void save(ICard... entities) {
-        Date modified = new Date();
-        for (ICard iCard : entities) {
+	public void save(ICard... entities) {
+		Date modified = new Date();
+		for (ICard iCard : entities) {
 
-        	iCard.setUpdated(modified);
-        	iCard.setCreated(modified);
+			iCard.setUpdated(modified);
+			iCard.setCreated(modified);
 
-        }
+		}
 
-        dao.save(entities);
-    }
+		dao.save(entities);
+	}
 
 	@Override
 	public ICard get(final Integer id) {
@@ -75,7 +83,6 @@ public class CardServiceImpl implements ICardService {
 		LOGGER.debug("total count in DB: {}", all.size());
 		return all;
 	}
-	
 
 	@Override
 	public List<ICard> find(CardFilter filter) {

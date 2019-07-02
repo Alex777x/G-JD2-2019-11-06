@@ -5,19 +5,27 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import by.itacademy.aalexandrov.poker.dao.api.IChatDao;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IChat;
 import by.itacademy.aalexandrov.poker.dao.api.filter.ChatFilter;
-import by.itacademy.aalexandrov.poker.jdbc.impl.ChatDaoImpl;
 import by.itacademy.aalexandrov.poker.service.IChatService;
 
+@Service
 public class ChatServiceImpl implements IChatService {
-	
+
 	private static final Logger LOGGER = LoggerFactory.getLogger(ChatServiceImpl.class);
-	
-	private IChatDao dao = new ChatDaoImpl();
-	
+
+	private IChatDao dao;
+
+	@Autowired
+	public ChatServiceImpl(IChatDao dao) {
+		super();
+		this.dao = dao;
+	}
+
 	@Override
 	public IChat createEntity() {
 		return dao.createEntity();
@@ -36,19 +44,19 @@ public class ChatServiceImpl implements IChatService {
 			dao.update(entity);
 		}
 	}
-	
+
 	@Override
-    public void save(IChat... entities) {
-        Date modified = new Date();
-        for (IChat iChat : entities) {
+	public void save(IChat... entities) {
+		Date modified = new Date();
+		for (IChat iChat : entities) {
 
-        	iChat.setUpdated(modified);
-        	iChat.setCreated(modified);
+			iChat.setUpdated(modified);
+			iChat.setCreated(modified);
 
-        }
+		}
 
-        dao.save(entities);
-    }
+		dao.save(entities);
+	}
 
 	@Override
 	public IChat get(final Integer id) {
@@ -75,7 +83,6 @@ public class ChatServiceImpl implements IChatService {
 		LOGGER.debug("total count in DB: {}", all.size());
 		return all;
 	}
-	
 
 	@Override
 	public List<IChat> find(ChatFilter filter) {

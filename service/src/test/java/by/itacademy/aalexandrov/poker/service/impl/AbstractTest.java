@@ -3,6 +3,8 @@ package by.itacademy.aalexandrov.poker.service.impl;
 import java.util.Random;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.CardStatus;
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.GameStatus;
@@ -13,40 +15,52 @@ import by.itacademy.aalexandrov.poker.dao.api.entity.enums.Suits;
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.UserRole;
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.UserStatus;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.ICard;
+import by.itacademy.aalexandrov.poker.dao.api.entity.table.ICardInGame;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IChat;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.ICountry;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IGame;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IPlayer;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IPlayerAction;
-import by.itacademy.aalexandrov.poker.dao.api.entity.table.ICardInGame;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IStatistic;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.ITiket;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.ITransaction;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IUserAccount;
+import by.itacademy.aalexandrov.poker.service.ICardInGameService;
 import by.itacademy.aalexandrov.poker.service.ICardService;
 import by.itacademy.aalexandrov.poker.service.IChatService;
 import by.itacademy.aalexandrov.poker.service.ICountryService;
 import by.itacademy.aalexandrov.poker.service.IGameService;
 import by.itacademy.aalexandrov.poker.service.IPlayerActionService;
-import by.itacademy.aalexandrov.poker.service.ICardInGameService;
 import by.itacademy.aalexandrov.poker.service.IPlayerService;
 import by.itacademy.aalexandrov.poker.service.IStatisticService;
 import by.itacademy.aalexandrov.poker.service.ITiketService;
 import by.itacademy.aalexandrov.poker.service.ITransactionService;
 import by.itacademy.aalexandrov.poker.service.IUserAccountService;
 
+@SpringJUnitConfig(locations = "classpath:service-context.xml")
 public abstract class AbstractTest {
-	protected ITiketService tiketService = new TiketServiceImpl();
-	protected ICountryService countryService = new CountryServiceImpl();
-	protected IStatisticService statisticService = new StatisticServiceImpl();
-	protected ITransactionService transactionService = new TransactionServiceImpl();
-	protected IPlayerActionService playerActionService = new PlayerActionServiceImpl();
-	protected IUserAccountService userAccountService = new UserAccountServiceImpl();
-	protected ICardService cardService = new CardServiceImpl();
-	protected IChatService chatService = new ChatServiceImpl();
-	protected IGameService gameService = new GameServiceImpl();
-	protected IPlayerService playerService = new PlayerServiceImpl();
-	protected ICardInGameService cardInGameService = new PlayerCardServiceImpl();
+	@Autowired
+	protected ITiketService tiketService;
+	@Autowired
+	protected ICountryService countryService;
+	@Autowired
+	protected IStatisticService statisticService;
+	@Autowired
+	protected ITransactionService transactionService;
+	@Autowired
+	protected IPlayerActionService playerActionService;
+	@Autowired
+	protected IUserAccountService userAccountService;
+	@Autowired
+	protected ICardService cardService;
+	@Autowired
+	protected IChatService chatService;
+	@Autowired
+	protected IGameService gameService;
+	@Autowired
+	protected IPlayerService playerService;
+	@Autowired
+	protected ICardInGameService cardInGameService;
 
 	private static final Random RANDOM = new Random();
 
@@ -178,7 +192,7 @@ public abstract class AbstractTest {
 		return entity;
 	}
 
-	protected ICardInGame saveNewPlayerCard() {
+	protected ICardInGame saveNewCardInGame() {
 		ICardInGame entity = cardInGameService.createEntity();
 		entity.setCardId(saveNewCard());
 		entity.setGameId(saveNewGame());

@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import by.itacademy.aalexandrov.poker.dao.api.IStatisticDao;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IStatistic;
 import by.itacademy.aalexandrov.poker.dao.api.filter.StatisticFilter;
@@ -14,6 +16,7 @@ import by.itacademy.aalexandrov.poker.jdbc.impl.entity.Statistic;
 import by.itacademy.aalexandrov.poker.jdbc.impl.util.PreparedStatementAction;
 import by.itacademy.aalexandrov.poker.jdbc.impl.util.SQLExecutionException;
 
+@Repository
 public class StatisticDaoImpl extends AbstractDaoImpl<IStatistic, Integer> implements IStatisticDao {
 
 	@Override

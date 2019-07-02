@@ -9,6 +9,8 @@ import java.sql.Types;
 import java.util.List;
 import java.util.Set;
 
+import org.springframework.stereotype.Repository;
+
 import by.itacademy.aalexandrov.poker.dao.api.IPlayerDao;
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.PlayerPosition;
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.PlayerStatus;
@@ -21,8 +23,9 @@ import by.itacademy.aalexandrov.poker.jdbc.impl.entity.UserAccount;
 import by.itacademy.aalexandrov.poker.jdbc.impl.util.PreparedStatementAction;
 import by.itacademy.aalexandrov.poker.jdbc.impl.util.SQLExecutionException;
 
+@Repository
 public class PlayerDaoImpl extends AbstractDaoImpl<IPlayer, Integer> implements IPlayerDao {
-	
+
 	@Override
 	public IPlayer createEntity() {
 		return new Player();
@@ -30,10 +33,9 @@ public class PlayerDaoImpl extends AbstractDaoImpl<IPlayer, Integer> implements 
 
 	@Override
 	public void insert(IPlayer entity) {
-		executeStatement(new PreparedStatementAction<IPlayer>(
-				String.format("insert into %s ( game_id, user_account_id, position_id, in_game, state, stack, created, updated) values(?,?,?,?,?,?,?,?)",
-						getTableName()),
-				true) {
+		executeStatement(new PreparedStatementAction<IPlayer>(String.format(
+				"insert into %s ( game_id, user_account_id, position_id, in_game, state, stack, created, updated) values(?,?,?,?,?,?,?,?)",
+				getTableName()), true) {
 			@Override
 			public IPlayer doWithPreparedStatement(final PreparedStatement pStmt) throws SQLException {
 				pStmt.setInt(1, entity.getGameId().getId());
@@ -61,8 +63,9 @@ public class PlayerDaoImpl extends AbstractDaoImpl<IPlayer, Integer> implements 
 
 	@Override
 	public void update(IPlayer entity) {
-		executeStatement(new PreparedStatementAction<IPlayer>(String
-				.format("update %s set game_id=?, user_account_id=?, position_id=?, in_game=?, state=?, stack=?, updated=? where id=?", getTableName())) {
+		executeStatement(new PreparedStatementAction<IPlayer>(String.format(
+				"update %s set game_id=?, user_account_id=?, position_id=?, in_game=?, state=?, stack=?, updated=? where id=?",
+				getTableName())) {
 			@Override
 			public IPlayer doWithPreparedStatement(final PreparedStatement pStmt) throws SQLException {
 				pStmt.setInt(1, entity.getGameId().getId());
@@ -96,30 +99,30 @@ public class PlayerDaoImpl extends AbstractDaoImpl<IPlayer, Integer> implements 
 		entity.setStack(resultSet.getDouble("stack"));
 		entity.setCreated(resultSet.getTimestamp("created"));
 		entity.setUpdated(resultSet.getTimestamp("updated"));
-		
+
 		Integer userAccountId = (Integer) resultSet.getObject("user_account_id");
 		if (userAccountId != null) {
-            final UserAccount userAccount = new UserAccount();
-            userAccount.setId(userAccountId);
-            if (columns.contains("user_account_id")) {
-                userAccount.setNickname(resultSet.getString("user_account_id"));
-                userAccount.setPassword(resultSet.getString("user_account_id"));
-                userAccount.setEmail(resultSet.getString("user_account_id"));
-                userAccount.setFoto(resultSet.getString("user_account_id"));
-            }
-            entity.setUserAccountId(userAccount);
-        }
-		
+			final UserAccount userAccount = new UserAccount();
+			userAccount.setId(userAccountId);
+			if (columns.contains("user_account_id")) {
+				userAccount.setNickname(resultSet.getString("user_account_id"));
+				userAccount.setPassword(resultSet.getString("user_account_id"));
+				userAccount.setEmail(resultSet.getString("user_account_id"));
+				userAccount.setFoto(resultSet.getString("user_account_id"));
+			}
+			entity.setUserAccountId(userAccount);
+		}
+
 		Integer gameId = (Integer) resultSet.getObject("game_id");
 		if (gameId != null) {
-            final IGame game = new Game();
-            game.setId(gameId);
-            if (columns.contains("game_id")) {
-                game.setBank(resultSet.getDouble("game_id"));
-            }
-            entity.setGameId(game);
-        }
-		
+			final IGame game = new Game();
+			game.setId(gameId);
+			if (columns.contains("game_id")) {
+				game.setBank(resultSet.getDouble("game_id"));
+			}
+			entity.setGameId(game);
+		}
+
 		return entity;
 	}
 
@@ -134,7 +137,6 @@ public class PlayerDaoImpl extends AbstractDaoImpl<IPlayer, Integer> implements 
 							"insert into %s (game_id, user_account_id, position_id, in_game, state, stack, created, updated) values(?,?,?,?,?,?,?,?)",
 							getTableName()), Statement.RETURN_GENERATED_KEYS);
 
-					
 					pStmt.setInt(1, entity.getGameId().getId());
 					pStmt.setInt(2, entity.getUserAccountId().getId());
 					pStmt.setString(3, entity.getPositionId().name());

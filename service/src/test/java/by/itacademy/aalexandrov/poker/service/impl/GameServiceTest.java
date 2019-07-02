@@ -1,10 +1,10 @@
 package by.itacademy.aalexandrov.poker.service.impl;
 
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.fail;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ import by.itacademy.aalexandrov.poker.dao.api.entity.enums.GameStatus;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IGame;
 
 public class GameServiceTest extends AbstractTest {
-	
+
 	@Test
 	public void testCreate() {
 		IGame entity = saveNewGame();
