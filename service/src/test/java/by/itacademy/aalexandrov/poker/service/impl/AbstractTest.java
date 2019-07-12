@@ -37,7 +37,7 @@ import by.itacademy.aalexandrov.poker.service.ITiketService;
 import by.itacademy.aalexandrov.poker.service.ITransactionService;
 import by.itacademy.aalexandrov.poker.service.IUserAccountService;
 
-@SpringJUnitConfig(locations = "classpath:service-context.xml")
+@SpringJUnitConfig(locations = "classpath:service-context-test.xml")
 public abstract class AbstractTest {
 	@Autowired
 	protected ITiketService tiketService;
@@ -95,7 +95,7 @@ public abstract class AbstractTest {
 
 	protected ITiket saveNewTiket() {
 		ITiket entity = tiketService.createEntity();
-		// entity.setUserAccountId(saveNewUserAccount());
+		entity.setUserAccountId(saveNewUserAccount());
 		entity.setTiketTitle("tiket-title" + getRandomPrefix());
 		entity.setTiketText("tiket-text" + getRandomPrefix());
 		entity.setStatus("tiket-status" + getRandomPrefix());
