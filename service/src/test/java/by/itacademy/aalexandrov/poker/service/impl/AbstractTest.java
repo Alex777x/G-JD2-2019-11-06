@@ -67,17 +67,17 @@ public abstract class AbstractTest {
 	@BeforeEach
 	public void setUpMethod() {
 		// clean DB recursive
-		//tiketService.deleteAll();
-		//chatService.deleteAll();
-		//cardInGameService.deleteAll();
-		//cardService.deleteAll();
-		//playerActionService.deleteAll();
-		//playerService.deleteAll();
-		//gameService.deleteAll();
-		//userAccountService.deleteAll();
-		//countryService.deleteAll();
-		//transactionService.deleteAll();
-		//statisticService.deleteAll();
+		tiketService.deleteAll();
+		chatService.deleteAll();
+		cardInGameService.deleteAll();
+		cardService.deleteAll();
+		playerActionService.deleteAll();
+		playerService.deleteAll();
+		gameService.deleteAll();
+		userAccountService.deleteAll();
+		countryService.deleteAll();
+		transactionService.deleteAll();
+		statisticService.deleteAll();
 
 	}
 
