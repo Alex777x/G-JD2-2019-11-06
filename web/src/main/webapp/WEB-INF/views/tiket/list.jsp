@@ -6,19 +6,25 @@
 	<tbody>
 		<tr>
 			<th>id</th>
-			<th>userAccountId</th>
+			<th>userAccount</th>
 			<th>tiketTitle</th>
 			<th>tiketText</th>
 			<th>status</th>
+			<th>created</th>
+			<th>updated</th>
 			<th></th>
 		</tr>
 		<c:forEach var="tiket" items="${gridItems}" varStatus="loopCounter">
 			<tr>
 				<td><c:out value="${tiket.id}" /></td>
-				<td><c:out value="${tiket.userAccountId.id}" /></td>
+				<td><c:out value="${tiket.userAccount.id}" /></td>
 				<td><c:out value="${tiket.tiketTitle}" /></td>
 				<td><c:out value="${tiket.tiketText}" /></td>
 				<td><c:out value="${tiket.status}" /></td>
+				<td><fmt:formatDate pattern="yyyy-MM-dd"
+						value="${tiket.created}" /></td>
+				<td><fmt:formatDate pattern="yyyy-MM-dd"
+						value="${tiket.updated}" /></td>
 				<td class="right"><a class="btn-floating"
 					href="${pagesTiket}/${tiket.id}"><i class="material-icons">info</i></a>
 					<a class="btn-floating" href="${pagesTiket}/${tiket.id}/edit"><i

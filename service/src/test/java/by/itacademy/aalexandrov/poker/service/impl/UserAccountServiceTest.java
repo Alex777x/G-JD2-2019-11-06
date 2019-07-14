@@ -27,11 +27,11 @@ public class UserAccountServiceTest extends AbstractTest {
 		assertEquals(entity.getPassword(), entityFromDb.getPassword());
 		assertEquals(entity.getEmail(), entityFromDb.getEmail());
 		assertEquals(entity.getFoto(), entityFromDb.getFoto());
-		assertEquals(entity.getCountryId().getId(), entityFromDb.getCountryId().getId());
-		assertEquals(entity.getStatisticId().getId(), entityFromDb.getStatisticId().getId());
+		assertEquals(entity.getCountry().getId(), entityFromDb.getCountry().getId());
+		assertEquals(entity.getStatistic().getId(), entityFromDb.getStatistic().getId());
 		assertEquals(entity.getUserRole(), entityFromDb.getUserRole());
 		assertEquals(entity.getUserStatus(), entityFromDb.getUserStatus());
-		assertEquals(entity.getTransactionId().getId(), entityFromDb.getTransactionId().getId());
+		assertEquals(entity.getTransaction().getId(), entityFromDb.getTransaction().getId());
 		assertNotNull(entityFromDb.getId());
 		assertNotNull(entityFromDb.getCreated());
 		assertNotNull(entityFromDb.getUpdated());
@@ -47,11 +47,11 @@ public class UserAccountServiceTest extends AbstractTest {
 		entity1.setPassword(getRandomPrefix());
 		entity1.setEmail(getRandomPrefix());
 		entity1.setFoto(getRandomPrefix());
-		entity1.setCountryId(saveNewCountry());
-		entity1.setStatisticId(saveNewStatistic());
+		entity1.setCountry(saveNewCountry());
+		entity1.setStatistic(saveNewStatistic());
 		entity1.setUserRole(UserRole.MEMBER);
 		entity1.setUserStatus(UserStatus.ACTIVE);
-		entity1.setTransactionId(saveNewTransaction());
+		entity1.setTransaction(saveNewTransaction());
 
 		try {
 			final IUserAccount entity2 = userAccountService.createEntity();
@@ -114,11 +114,11 @@ public class UserAccountServiceTest extends AbstractTest {
 			assertNotNull(entityFromDb.getPassword());
 			assertNotNull(entityFromDb.getEmail());
 			assertNotNull(entityFromDb.getFoto());
-			assertNotNull(entityFromDb.getCountryId().getId());
-			assertNotNull(entityFromDb.getStatisticId());
+			assertNotNull(entityFromDb.getCountry().getId());
+			assertNotNull(entityFromDb.getStatistic());
 			assertNotNull(entityFromDb.getUserRole());
 			assertNotNull(entityFromDb.getUserStatus());
-			assertNotNull(entityFromDb.getTransactionId());
+			assertNotNull(entityFromDb.getTransaction());
 			assertNotNull(entityFromDb.getId());
 			assertNotNull(entityFromDb.getCreated());
 			assertNotNull(entityFromDb.getUpdated());

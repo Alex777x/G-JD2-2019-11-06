@@ -35,7 +35,7 @@ public class PlayerActionDaoImpl extends AbstractDaoImpl<IPlayerAction, Integer>
 				getTableName()), true) {
 			@Override
 			public IPlayerAction doWithPreparedStatement(final PreparedStatement pStmt) throws SQLException {
-				pStmt.setInt(1, entity.getPlayerId().getId());
+				pStmt.setInt(1, entity.getPlayer().getId());
 				pStmt.setInt(2, entity.getBet());
 				pStmt.setInt(3, entity.getCall());
 				pStmt.setInt(4, entity.getRaise());
@@ -66,7 +66,7 @@ public class PlayerActionDaoImpl extends AbstractDaoImpl<IPlayerAction, Integer>
 				getTableName())) {
 			@Override
 			public IPlayerAction doWithPreparedStatement(final PreparedStatement pStmt) throws SQLException {
-				pStmt.setInt(1, entity.getPlayerId().getId());
+				pStmt.setInt(1, entity.getPlayer().getId());
 				pStmt.setInt(2, entity.getBet());
 				pStmt.setInt(3, entity.getCall());
 				pStmt.setInt(4, entity.getRaise());
@@ -109,7 +109,7 @@ public class PlayerActionDaoImpl extends AbstractDaoImpl<IPlayerAction, Integer>
 				player.setInGame(resultSet.getBoolean("player_id"));
 				player.setStack(resultSet.getDouble("player_id"));
 			}
-			entity.setPlayerId(player);
+			entity.setPlayer(player);
 		}
 		return entity;
 	}
@@ -125,7 +125,7 @@ public class PlayerActionDaoImpl extends AbstractDaoImpl<IPlayerAction, Integer>
 							"insert into %s (player_id, bet, call, raise, fold, check_check, all_in, created, updated) values(?,?,?,?,?,?,?,?)",
 							getTableName()), Statement.RETURN_GENERATED_KEYS);
 
-					pStmt.setInt(1, entity.getPlayerId().getId());
+					pStmt.setInt(1, entity.getPlayer().getId());
 					pStmt.setInt(2, entity.getBet());
 					pStmt.setInt(3, entity.getCall());
 					pStmt.setInt(4, entity.getRaise());

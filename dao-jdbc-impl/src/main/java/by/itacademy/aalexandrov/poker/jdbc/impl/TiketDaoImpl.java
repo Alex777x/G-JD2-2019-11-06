@@ -34,7 +34,7 @@ public class TiketDaoImpl extends AbstractDaoImpl<ITiket, Integer> implements IT
 				getTableName()), true) {
 			@Override
 			public ITiket doWithPreparedStatement(final PreparedStatement pStmt) throws SQLException {
-				pStmt.setInt(1, entity.getUserAccountId().getId());
+				pStmt.setInt(1, entity.getUserAccount().getId());
 				pStmt.setString(2, entity.getTiketTitle());
 				pStmt.setString(3, entity.getTiketText());
 				pStmt.setString(4, entity.getStatus());
@@ -62,7 +62,7 @@ public class TiketDaoImpl extends AbstractDaoImpl<ITiket, Integer> implements IT
 				getTableName())) {
 			@Override
 			public ITiket doWithPreparedStatement(final PreparedStatement pStmt) throws SQLException {
-				pStmt.setInt(1, entity.getUserAccountId().getId());
+				pStmt.setInt(1, entity.getUserAccount().getId());
 				pStmt.setString(2, entity.getTiketTitle());
 				pStmt.setString(3, entity.getTiketText());
 				pStmt.setString(4, entity.getStatus());
@@ -102,7 +102,7 @@ public class TiketDaoImpl extends AbstractDaoImpl<ITiket, Integer> implements IT
 				userAccount.setFoto(resultSet.getString("user_account_id"));
 				userAccount.setFoto(resultSet.getString("user_account_id"));
 			}
-			entity.setUserAccountId(userAccount);
+			entity.setUserAccount(userAccount);
 		}
 
 		return entity;
@@ -119,7 +119,7 @@ public class TiketDaoImpl extends AbstractDaoImpl<ITiket, Integer> implements IT
 							"insert into %s (user_account_id, tiket_title, tiket_text, status, created, updated) values(?,?,?,?,?,?)",
 							getTableName()), Statement.RETURN_GENERATED_KEYS);
 
-					pStmt.setInt(1, entity.getUserAccountId().getId());
+					pStmt.setInt(1, entity.getUserAccount().getId());
 					pStmt.setString(2, entity.getTiketTitle());
 					pStmt.setString(3, entity.getTiketText());
 					pStmt.setString(4, entity.getStatus());

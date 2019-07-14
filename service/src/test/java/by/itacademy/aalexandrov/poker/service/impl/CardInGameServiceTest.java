@@ -22,9 +22,9 @@ public class CardInGameServiceTest extends AbstractTest {
 		final ICardInGame entityFromDb = cardInGameService.get(entity.getId());
 
 		assertNotNull(entityFromDb);
-		assertEquals(entity.getCardId().getId(), entityFromDb.getCardId().getId());
-		assertEquals(entity.getGameId().getId(), entityFromDb.getGameId().getId());
-		assertEquals(entity.getPlayerId().getId(), entityFromDb.getPlayerId().getId());
+		assertEquals(entity.getCard().getId(), entityFromDb.getCard().getId());
+		assertEquals(entity.getGame().getId(), entityFromDb.getGame().getId());
+		assertEquals(entity.getPlayer().getId(), entityFromDb.getPlayer().getId());
 		assertEquals(entity.getCardStatus(), entityFromDb.getCardStatus());
 		assertNotNull(entityFromDb.getId());
 		assertNotNull(entityFromDb.getCreated());
@@ -37,9 +37,9 @@ public class CardInGameServiceTest extends AbstractTest {
 		int initialSize = cardInGameService.getAll().size();
 
 		final ICardInGame entity1 = cardInGameService.createEntity();
-		entity1.setCardId(saveNewCard());
-		entity1.setGameId(saveNewGame());
-		entity1.setPlayerId(saveNewPlayer());
+		entity1.setCard(saveNewCard());
+		entity1.setGame(saveNewGame());
+		entity1.setPlayer(saveNewPlayer());
 		entity1.setCardStatus(CardStatus.PLAYERCARDCLOSED);
 
 		try {
@@ -84,9 +84,9 @@ public class CardInGameServiceTest extends AbstractTest {
 		final List<ICardInGame> allEntities = cardInGameService.getAll();
 
 		for (final ICardInGame entityFromDb : allEntities) {
-			assertNotNull(entityFromDb.getCardId().getId());
-			assertNotNull(entityFromDb.getGameId().getId());
-			assertNotNull(entityFromDb.getPlayerId().getId());
+			assertNotNull(entityFromDb.getCard().getId());
+			assertNotNull(entityFromDb.getGame().getId());
+			assertNotNull(entityFromDb.getPlayer().getId());
 			assertNotNull(entityFromDb.getCardStatus());
 			assertNotNull(entityFromDb.getId());
 			assertNotNull(entityFromDb.getCreated());

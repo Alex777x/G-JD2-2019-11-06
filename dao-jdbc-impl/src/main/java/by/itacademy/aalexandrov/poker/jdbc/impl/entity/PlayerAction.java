@@ -5,7 +5,7 @@ import by.itacademy.aalexandrov.poker.dao.api.entity.table.IPlayerAction;
 
 public class PlayerAction extends BaseEntity implements IPlayerAction {
 
-	private IPlayer playerId;
+	private IPlayer player;
 	private int bet;
 	private int call;
 	private int raise;
@@ -14,13 +14,13 @@ public class PlayerAction extends BaseEntity implements IPlayerAction {
 	private int allIn;
 
 	@Override
-	public IPlayer getPlayerId() {
-		return playerId;
+	public IPlayer getPlayer() {
+		return player;
 	}
 
 	@Override
-	public void setPlayerId(IPlayer playerId) {
-		this.playerId = playerId;
+	public void setPlayer(IPlayer player) {
+		this.player = player;
 	}
 
 	@Override
@@ -85,7 +85,7 @@ public class PlayerAction extends BaseEntity implements IPlayerAction {
 
 	@Override
 	public String toString() {
-		return "PlayerAction [playerId=" + playerId + ", bet=" + bet + ", call=" + call + ", raise=" + raise + ", fold="
+		return "PlayerAction [player=" + player + ", bet=" + bet + ", call=" + call + ", raise=" + raise + ", fold="
 				+ fold + ", check=" + check + ", allIn=" + allIn + "]";
 	}
 

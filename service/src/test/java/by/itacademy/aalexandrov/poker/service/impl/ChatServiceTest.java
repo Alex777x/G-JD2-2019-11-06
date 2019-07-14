@@ -21,8 +21,8 @@ public class ChatServiceTest extends AbstractTest {
 		final IChat entityFromDb = chatService.get(entity.getId());
 
 		assertNotNull(entityFromDb);
-		assertEquals(entity.getGameId().getId(), entityFromDb.getGameId().getId());
-		assertEquals(entity.getUserAccountId().getId(), entityFromDb.getUserAccountId().getId());
+		assertEquals(entity.getGame().getId(), entityFromDb.getGame().getId());
+		assertEquals(entity.getUserAccount().getId(), entityFromDb.getUserAccount().getId());
 		assertEquals(entity.getMessage(), entityFromDb.getMessage());
 		assertNotNull(entityFromDb.getId());
 		assertNotNull(entityFromDb.getCreated());
@@ -35,8 +35,8 @@ public class ChatServiceTest extends AbstractTest {
 		int initialSize = chatService.getAll().size();
 
 		final IChat entity1 = chatService.createEntity();
-		entity1.setGameId(saveNewGame());
-		entity1.setUserAccountId(saveNewUserAccount());
+		entity1.setGame(saveNewGame());
+		entity1.setUserAccount(saveNewUserAccount());
 		entity1.setMessage("message" + getRandomPrefix());
 
 		try {
@@ -81,8 +81,8 @@ public class ChatServiceTest extends AbstractTest {
 		final List<IChat> allEntities = chatService.getAll();
 
 		for (final IChat entityFromDb : allEntities) {
-			assertNotNull(entityFromDb.getGameId());
-			assertNotNull(entityFromDb.getUserAccountId());
+			assertNotNull(entityFromDb.getGame());
+			assertNotNull(entityFromDb.getUserAccount());
 			assertNotNull(entityFromDb.getMessage());
 			assertNotNull(entityFromDb.getId());
 			assertNotNull(entityFromDb.getCreated());

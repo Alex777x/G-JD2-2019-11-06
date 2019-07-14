@@ -8,41 +8,41 @@ import by.itacademy.aalexandrov.poker.dao.api.entity.table.IUserAccount;
 
 public class Player extends BaseEntity implements IPlayer {
 
-	private IGame gameId;
-	private IUserAccount userAccountId;
-	private PlayerPosition positionId;
+	private IGame game;
+	private IUserAccount userAccount;
+	private PlayerPosition position;
 	private boolean inGame;
 	private PlayerStatus state;
 	private double stack;
 
 	@Override
-	public IGame getGameId() {
-		return gameId;
+	public IGame getGame() {
+		return game;
 	}
 
 	@Override
-	public void setGameId(IGame gameId) {
-		this.gameId = gameId;
+	public void setGame(IGame game) {
+		this.game = game;
 	}
 
 	@Override
-	public IUserAccount getUserAccountId() {
-		return userAccountId;
+	public IUserAccount getUserAccount() {
+		return userAccount;
 	}
 
 	@Override
-	public void setUserAccountId(IUserAccount userAccountId) {
-		this.userAccountId = userAccountId;
+	public void setUserAccount(IUserAccount userAccount) {
+		this.userAccount = userAccount;
 	}
 
 	@Override
-	public PlayerPosition getPositionId() {
-		return positionId;
+	public PlayerPosition getPosition() {
+		return position;
 	}
 
 	@Override
-	public void setPositionId(PlayerPosition positionId) {
-		this.positionId = positionId;
+	public void setPosition(PlayerPosition position) {
+		this.position = position;
 	}
 
 	@Override
@@ -77,8 +77,8 @@ public class Player extends BaseEntity implements IPlayer {
 
 	@Override
 	public String toString() {
-		return "Player [gameId=" + gameId + ", userAccountId=" + userAccountId + ", positionId=" + positionId
-				+ ", inGame=" + inGame + ", state=" + state + ", stack=" + stack + "]";
+		return "Player [game=" + game + ", userAccount=" + userAccount + ", position=" + position + ", inGame=" + inGame
+				+ ", state=" + state + ", stack=" + stack + "]";
 	}
 
 }

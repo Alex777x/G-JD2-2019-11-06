@@ -67,17 +67,17 @@ public abstract class AbstractTest {
 	@BeforeEach
 	public void setUpMethod() {
 		// clean DB recursive
-		tiketService.deleteAll();
-		chatService.deleteAll();
-		cardInGameService.deleteAll();
-		cardService.deleteAll();
-		playerActionService.deleteAll();
-		playerService.deleteAll();
-		gameService.deleteAll();
-		userAccountService.deleteAll();
-		countryService.deleteAll();
-		transactionService.deleteAll();
-		statisticService.deleteAll();
+		//tiketService.deleteAll();
+		//chatService.deleteAll();
+		//cardInGameService.deleteAll();
+		//cardService.deleteAll();
+		//playerActionService.deleteAll();
+		//playerService.deleteAll();
+		//gameService.deleteAll();
+		//userAccountService.deleteAll();
+		//countryService.deleteAll();
+		//transactionService.deleteAll();
+		//statisticService.deleteAll();
 
 	}
 
@@ -95,7 +95,7 @@ public abstract class AbstractTest {
 
 	protected ITiket saveNewTiket() {
 		ITiket entity = tiketService.createEntity();
-		entity.setUserAccountId(saveNewUserAccount());
+		entity.setUserAccount(saveNewUserAccount());
 		entity.setTiketTitle("tiket-title" + getRandomPrefix());
 		entity.setTiketText("tiket-text" + getRandomPrefix());
 		entity.setStatus("tiket-status" + getRandomPrefix());
@@ -128,7 +128,7 @@ public abstract class AbstractTest {
 
 	protected IPlayerAction saveNewPlayerAction() {
 		IPlayerAction entity = playerActionService.createEntity();
-		entity.setPlayerId(saveNewPlayer());
+		entity.setPlayer(saveNewPlayer());
 		entity.setBet(getRandomObjectsCount());
 		entity.setCall(getRandomObjectsCount());
 		entity.setRaise(getRandomObjectsCount());
@@ -145,19 +145,19 @@ public abstract class AbstractTest {
 		entity.setPassword("password" + getRandomPrefix());
 		entity.setEmail("email" + getRandomPrefix());
 		entity.setFoto("foto" + getRandomPrefix());
-		entity.setCountryId(saveNewCountry());
-		entity.setStatisticId(saveNewStatistic());
+		entity.setCountry(saveNewCountry());
+		entity.setStatistic(saveNewStatistic());
 		entity.setUserRole(UserRole.MEMBER);
 		entity.setUserStatus(UserStatus.ACTIVE);
-		entity.setTransactionId(saveNewTransaction());
+		entity.setTransaction(saveNewTransaction());
 		userAccountService.save(entity);
 		return entity;
 	}
 
 	protected IChat saveNewChat() {
 		IChat entity = chatService.createEntity();
-		entity.setGameId(saveNewGame());
-		entity.setUserAccountId(saveNewUserAccount());
+		entity.setGame(saveNewGame());
+		entity.setUserAccount(saveNewUserAccount());
 		entity.setMessage(getRandomPrefix());
 		chatService.save(entity);
 		return entity;
@@ -173,9 +173,9 @@ public abstract class AbstractTest {
 
 	protected IPlayer saveNewPlayer() {
 		IPlayer entity = playerService.createEntity();
-		entity.setGameId(saveNewGame());
-		entity.setUserAccountId(saveNewUserAccount());
-		entity.setPositionId(PlayerPosition.ONE);
+		entity.setGame(saveNewGame());
+		entity.setUserAccount(saveNewUserAccount());
+		entity.setPosition(PlayerPosition.ONE);
 		entity.setInGame(true);
 		entity.setState(PlayerStatus.DEALER);
 		entity.setStack(getRandomObjectsCount());
@@ -194,9 +194,9 @@ public abstract class AbstractTest {
 
 	protected ICardInGame saveNewCardInGame() {
 		ICardInGame entity = cardInGameService.createEntity();
-		entity.setCardId(saveNewCard());
-		entity.setGameId(saveNewGame());
-		entity.setPlayerId(saveNewPlayer());
+		entity.setCard(saveNewCard());
+		entity.setGame(saveNewGame());
+		entity.setPlayer(saveNewPlayer());
 		entity.setCardStatus(CardStatus.PLAYERCARDOPEN);
 		cardInGameService.save(entity);
 		return entity;

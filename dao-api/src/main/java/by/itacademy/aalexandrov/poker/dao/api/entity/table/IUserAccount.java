@@ -29,16 +29,16 @@ public interface IUserAccount extends IBaseEntity {
 
 	String getNickname();
 
-	void setStatisticId(IStatistic statisticId);
+	void setStatistic(IStatistic statistic);
 
-	IStatistic getStatisticId();
+	IStatistic getStatistic();
 
-	void setCountryId(ICountry countryId);
+	void setCountry(ICountry country);
 
-	ICountry getCountryId();
+	ICountry getCountry();
 
-	void setTransactionId(ITransaction transactionId);
+	void setTransaction(ITransaction transaction);
 
-	ITransaction getTransactionId();
+	ITransaction getTransaction();
 
 }

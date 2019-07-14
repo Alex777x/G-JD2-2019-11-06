@@ -37,8 +37,8 @@ public class ChatDaoImpl extends AbstractDaoImpl<IChat, Integer> implements ICha
 				true) {
 			@Override
 			public IChat doWithPreparedStatement(final PreparedStatement pStmt) throws SQLException {
-				pStmt.setInt(1, entity.getGameId().getId());
-				pStmt.setInt(2, entity.getUserAccountId().getId());
+				pStmt.setInt(1, entity.getGame().getId());
+				pStmt.setInt(2, entity.getUserAccount().getId());
 				pStmt.setString(3, entity.getMessage());
 				pStmt.setObject(4, entity.getCreated(), Types.TIMESTAMP);
 				pStmt.setObject(5, entity.getUpdated(), Types.TIMESTAMP);
@@ -63,8 +63,8 @@ public class ChatDaoImpl extends AbstractDaoImpl<IChat, Integer> implements ICha
 				"update %s set game_id=?, user_account_id=?, message=?, updated=? where id=?", getTableName())) {
 			@Override
 			public IChat doWithPreparedStatement(final PreparedStatement pStmt) throws SQLException {
-				pStmt.setInt(1, entity.getGameId().getId());
-				pStmt.setInt(2, entity.getUserAccountId().getId());
+				pStmt.setInt(1, entity.getGame().getId());
+				pStmt.setInt(2, entity.getUserAccount().getId());
 				pStmt.setString(3, entity.getMessage());
 				pStmt.setObject(4, entity.getUpdated(), Types.TIMESTAMP);
 				pStmt.setInt(5, entity.getId());
@@ -96,7 +96,7 @@ public class ChatDaoImpl extends AbstractDaoImpl<IChat, Integer> implements ICha
 			if (columns.contains("game_id")) {
 				game.setBank(resultSet.getInt("game_id"));
 			}
-			entity.setGameId(game);
+			entity.setGame(game);
 		}
 
 		Integer userAccountId = (Integer) resultSet.getObject("user_account_id");
@@ -106,7 +106,7 @@ public class ChatDaoImpl extends AbstractDaoImpl<IChat, Integer> implements ICha
 			if (columns.contains("user_account_id")) {
 				userAccount.setNickname(resultSet.getString("user_account_id"));
 			}
-			entity.setUserAccountId(userAccount);
+			entity.setUserAccount(userAccount);
 		}
 
 		return entity;
@@ -123,8 +123,8 @@ public class ChatDaoImpl extends AbstractDaoImpl<IChat, Integer> implements ICha
 							"insert into %s (game_id, user_account_id, message, created, updated) values(?,?,?,?,?)",
 							getTableName()), Statement.RETURN_GENERATED_KEYS);
 
-					pStmt.setInt(1, entity.getGameId().getId());
-					pStmt.setInt(2, entity.getUserAccountId().getId());
+					pStmt.setInt(1, entity.getGame().getId());
+					pStmt.setInt(2, entity.getUserAccount().getId());
 					pStmt.setString(3, entity.getMessage());
 					pStmt.setObject(4, entity.getCreated(), Types.TIMESTAMP);
 					pStmt.setObject(5, entity.getUpdated(), Types.TIMESTAMP);

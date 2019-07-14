@@ -8,12 +8,12 @@ public interface IChat extends IBaseEntity {
 
 	String getMessage();
 
-	void setUserAccountId(IUserAccount userAccountId);
+	void setUserAccount(IUserAccount userAccount);
 
-	IUserAccount getUserAccountId();
+	IUserAccount getUserAccount();
 
-	void setGameId(IGame gameId);
+	void setGame(IGame game);
 
-	IGame getGameId();
+	IGame getGame();
 
 }

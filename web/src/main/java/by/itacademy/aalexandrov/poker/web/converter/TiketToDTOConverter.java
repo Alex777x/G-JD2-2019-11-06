@@ -14,10 +14,12 @@ public class TiketToDTOConverter implements Function<ITiket, TiketDTO> {
 	public TiketDTO apply(ITiket entity) {
 		TiketDTO dto = new TiketDTO();
 		dto.setId(entity.getId());
-		dto.setUserAccountId(entity.getUserAccountId());
+		dto.setUserAccount(entity.getUserAccount());
 		dto.setTiketTitle(entity.getTiketTitle());
 		dto.setTiketText(entity.getTiketText());
 		dto.setStatus(entity.getStatus());
+		dto.setCreated(entity.getCreated());
+		dto.setUpdated(entity.getUpdated());
 		return dto;
 	}
 

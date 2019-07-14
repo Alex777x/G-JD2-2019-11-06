@@ -21,7 +21,7 @@ public class PlayerActionServiceTest extends AbstractTest {
 		final IPlayerAction entityFromDb = playerActionService.get(entity.getId());
 
 		assertNotNull(entityFromDb);
-		assertEquals(entity.getPlayerId().getId(), entityFromDb.getPlayerId().getId());
+		assertEquals(entity.getPlayer().getId(), entityFromDb.getPlayer().getId());
 		assertEquals(entity.getBet(), entityFromDb.getBet());
 		assertEquals(entity.getCall(), entityFromDb.getCall());
 		assertEquals(entity.getRaise(), entityFromDb.getRaise());
@@ -39,7 +39,7 @@ public class PlayerActionServiceTest extends AbstractTest {
 		int initialSize = playerActionService.getAll().size();
 
 		final IPlayerAction entity1 = playerActionService.createEntity();
-		entity1.setPlayerId(saveNewPlayer());
+		entity1.setPlayer(saveNewPlayer());
 		entity1.setBet(getRandomObjectsCount());
 		entity1.setCall(getRandomObjectsCount());
 		entity1.setRaise(getRandomObjectsCount());
@@ -105,7 +105,7 @@ public class PlayerActionServiceTest extends AbstractTest {
 		final List<IPlayerAction> allEntities = playerActionService.getAll();
 
 		for (final IPlayerAction entityFromDb : allEntities) {
-			assertNotNull(entityFromDb.getPlayerId().getId());
+			assertNotNull(entityFromDb.getPlayer().getId());
 			assertNotNull(entityFromDb.getBet());
 			assertNotNull(entityFromDb.getCall());
 			assertNotNull(entityFromDb.getRaise());

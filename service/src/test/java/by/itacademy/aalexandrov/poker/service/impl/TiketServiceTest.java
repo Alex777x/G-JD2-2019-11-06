@@ -21,7 +21,7 @@ public class TiketServiceTest extends AbstractTest {
 		final ITiket entityFromDb = tiketService.get(entity.getId());
 
 		assertNotNull(entityFromDb);
-		assertEquals(entity.getUserAccountId().getId().intValue(), entityFromDb.getUserAccountId().getId().intValue()); // это убрать 
+		assertEquals(entity.getUserAccount().getId(), entityFromDb.getUserAccount().getId()); // это убрать 
 		assertEquals(entity.getTiketTitle(), entityFromDb.getTiketTitle());
 		assertEquals(entity.getTiketText(), entityFromDb.getTiketText());
 		assertEquals(entity.getStatus(), entityFromDb.getStatus());

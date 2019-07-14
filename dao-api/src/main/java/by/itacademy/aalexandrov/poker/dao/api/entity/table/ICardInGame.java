@@ -10,16 +10,16 @@ public interface ICardInGame extends IBaseEntity {
 
 	CardStatus getCardStatus();
 
-	void setPlayerId(IPlayer playerId);
+	void setPlayer(IPlayer player);
 
-	IPlayer getPlayerId();
+	IPlayer getPlayer();
 
-	void setGameId(IGame gameId);
+	void setGame(IGame game);
 
-	IGame getGameId();
+	IGame getGame();
 
-	void setCardId(ICard cardId);
+	void setCard(ICard card);
 
-	ICard getCardId();
+	ICard getCard();
 
 }

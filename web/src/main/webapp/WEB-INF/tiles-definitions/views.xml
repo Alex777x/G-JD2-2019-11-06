@@ -24,5 +24,58 @@
 			value="/WEB-INF/views/tiket/list.jsp" />
 	</definition>
 
+	<definition name="card.list" extends="DefaultTemplate">
+		<put-attribute name="body"
+			value="/WEB-INF/views/card/list.jsp" />
+	</definition>
+
+	<definition name="cardInGame.list" extends="DefaultTemplate">
+		<put-attribute name="body"
+			value="/WEB-INF/views/cardInGame/list.jsp" />
+	</definition>
+
+	<definition name="chat.list" extends="DefaultTemplate">
+		<put-attribute name="body"
+			value="/WEB-INF/views/chat/list.jsp" />
+	</definition>
+
+	<definition name="country.list" extends="DefaultTemplate">
+		<put-attribute name="body"
+			value="/WEB-INF/views/country/list.jsp" />
+	</definition>
+
+	<definition name="game.list" extends="DefaultTemplate">
+		<put-attribute name="body"
+			value="/WEB-INF/views/game/list.jsp" />
+	</definition>
+
+	<definition name="player.list" extends="DefaultTemplate">
+		<put-attribute name="body"
+			value="/WEB-INF/views/player/list.jsp" />
+	</definition>
+
+	<definition name="playerAction.list"
+		extends="DefaultTemplate">
+		<put-attribute name="body"
+			value="/WEB-INF/views/playerAction/list.jsp" />
+	</definition>
+
+	<definition name="statistic.list" extends="DefaultTemplate">
+		<put-attribute name="body"
+			value="/WEB-INF/views/statistic/list.jsp" />
+	</definition>
+
+	<definition name="transaction.list"
+		extends="DefaultTemplate">
+		<put-attribute name="body"
+			value="/WEB-INF/views/transaction/list.jsp" />
+	</definition>
+
+	<definition name="userAccount.list"
+		extends="DefaultTemplate">
+		<put-attribute name="body"
+			value="/WEB-INF/views/userAccount/list.jsp" />
+	</definition>
+
 
 </tiles-definitions>

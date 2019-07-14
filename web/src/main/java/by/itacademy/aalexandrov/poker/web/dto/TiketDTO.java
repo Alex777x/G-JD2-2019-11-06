@@ -1,21 +1,41 @@
 package by.itacademy.aalexandrov.poker.web.dto;
 
+import java.util.Date;
+
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IUserAccount;
 
 public class TiketDTO {
 
 	private Integer id;
-	private IUserAccount userAccountId;
+	private IUserAccount userAccount;
 	private String tiketTitle;
 	private String tiketText;
 	private String status;
+	private Date created;
+	private Date updated;
 
-	public IUserAccount getUserAccountId() {
-		return userAccountId;
+	public Date getCreated() {
+		return created;
 	}
 
-	public void setUserAccountId(IUserAccount userAccountId) {
-		this.userAccountId = userAccountId;
+	public void setCreated(Date created) {
+		this.created = created;
+	}
+
+	public Date getUpdated() {
+		return updated;
+	}
+
+	public void setUpdated(Date updated) {
+		this.updated = updated;
+	}
+
+	public IUserAccount getUserAccount() {
+		return userAccount;
+	}
+
+	public void setUserAccount(IUserAccount userAccount) {
+		this.userAccount = userAccount;
 	}
 
 	public String getTiketTitle() {

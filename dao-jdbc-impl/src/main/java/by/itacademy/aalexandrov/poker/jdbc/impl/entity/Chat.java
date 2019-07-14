@@ -6,28 +6,28 @@ import by.itacademy.aalexandrov.poker.dao.api.entity.table.IUserAccount;
 
 public class Chat extends BaseEntity implements IChat {
 
-	private IGame gameId;
-	private IUserAccount userAccountId;
+	private IGame game;
+	private IUserAccount userAccount;
 	private String message;
 
 	@Override
-	public IGame getGameId() {
-		return gameId;
+	public IGame getGame() {
+		return game;
 	}
 
 	@Override
-	public void setGameId(IGame gameId) {
-		this.gameId = gameId;
+	public void setGame(IGame game) {
+		this.game = game;
 	}
 
 	@Override
-	public IUserAccount getUserAccountId() {
-		return userAccountId;
+	public IUserAccount getUserAccount() {
+		return userAccount;
 	}
 
 	@Override
-	public void setUserAccountId(IUserAccount userAccountId) {
-		this.userAccountId = userAccountId;
+	public void setUserAccount(IUserAccount userAccount) {
+		this.userAccount = userAccount;
 	}
 
 	@Override
@@ -42,7 +42,7 @@ public class Chat extends BaseEntity implements IChat {
 
 	@Override
 	public String toString() {
-		return "Chat [gameId=" + gameId + ", userAccountId=" + userAccountId + ", message=" + message + "]";
+		return "Chat [game=" + game + ", userAccount=" + userAccount + ", message=" + message + "]";
 	}
 
 }

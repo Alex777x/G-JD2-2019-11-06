@@ -13,20 +13,40 @@ public class UserAccount extends BaseEntity implements IUserAccount {
 	private String password;
 	private String email;
 	private String foto;
-	private ICountry countryId;
-	private IStatistic statisticId;
+	private ICountry country;
+	private IStatistic statistic;
 	private UserRole userRole;
 	private UserStatus userStatus;
-	private ITransaction transactionId;
+	private ITransaction transaction;
 
 	@Override
-	public IStatistic getStatisticId() {
-		return statisticId;
+	public ICountry getCountry() {
+		return country;
 	}
 
 	@Override
-	public void setStatisticId(IStatistic statisticId) {
-		this.statisticId = statisticId;
+	public void setCountry(ICountry country) {
+		this.country = country;
+	}
+
+	@Override
+	public IStatistic getStatistic() {
+		return statistic;
+	}
+
+	@Override
+	public void setStatistic(IStatistic statistic) {
+		this.statistic = statistic;
+	}
+
+	@Override
+	public ITransaction getTransaction() {
+		return transaction;
+	}
+
+	@Override
+	public void setTransaction(ITransaction transaction) {
+		this.transaction = transaction;
 	}
 
 	@Override
@@ -70,16 +90,6 @@ public class UserAccount extends BaseEntity implements IUserAccount {
 	}
 
 	@Override
-	public ICountry getCountryId() {
-		return countryId;
-	}
-
-	@Override
-	public void setCountryId(ICountry countryId) {
-		this.countryId = countryId;
-	}
-
-	@Override
 	public UserRole getUserRole() {
 		return userRole;
 	}
@@ -100,20 +110,10 @@ public class UserAccount extends BaseEntity implements IUserAccount {
 	}
 
 	@Override
-	public ITransaction getTransactionId() {
-		return transactionId;
-	}
-
-	@Override
-	public void setTransactionId(ITransaction transactionId) {
-		this.transactionId = transactionId;
-	}
-
-	@Override
 	public String toString() {
 		return "UserAccount [nickname=" + nickname + ", password=" + password + ", email=" + email + ", foto=" + foto
-				+ ", country=" + countryId + ", userRole=" + userRole + ", userStatus=" + userStatus + ", transaction="
-				+ transactionId + "]";
+				+ ", country=" + country + ", statistic=" + statistic + ", userRole=" + userRole + ", userStatus="
+				+ userStatus + ", transaction=" + transaction + "]";
 	}
 
 }

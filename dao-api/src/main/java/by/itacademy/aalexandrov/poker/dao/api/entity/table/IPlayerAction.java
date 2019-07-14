@@ -28,8 +28,8 @@ public interface IPlayerAction extends IBaseEntity {
 
 	int getBet();
 
-	void setPlayerId(IPlayer playerId);
+	void setPlayer(IPlayer player);
 
-	IPlayer getPlayerId();
+	IPlayer getPlayer();
 
 }

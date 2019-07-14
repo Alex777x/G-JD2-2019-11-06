@@ -38,9 +38,9 @@ public class CardInGameDaoImpl extends AbstractDaoImpl<ICardInGame, Integer> imp
 				getTableName()), true) {
 			@Override
 			public ICardInGame doWithPreparedStatement(final PreparedStatement pStmt) throws SQLException {
-				pStmt.setInt(1, entity.getCardId().getId());
-				pStmt.setInt(2, entity.getGameId().getId());
-				pStmt.setInt(3, entity.getPlayerId().getId());
+				pStmt.setInt(1, entity.getCard().getId());
+				pStmt.setInt(2, entity.getGame().getId());
+				pStmt.setInt(3, entity.getPlayer().getId());
 				pStmt.setString(4, entity.getCardStatus().name());
 				pStmt.setObject(5, entity.getCreated(), Types.TIMESTAMP);
 				pStmt.setObject(6, entity.getUpdated(), Types.TIMESTAMP);
@@ -66,9 +66,9 @@ public class CardInGameDaoImpl extends AbstractDaoImpl<ICardInGame, Integer> imp
 						getTableName())) {
 			@Override
 			public ICardInGame doWithPreparedStatement(final PreparedStatement pStmt) throws SQLException {
-				pStmt.setInt(1, entity.getCardId().getId());
-				pStmt.setInt(2, entity.getGameId().getId());
-				pStmt.setInt(3, entity.getPlayerId().getId());
+				pStmt.setInt(1, entity.getCard().getId());
+				pStmt.setInt(2, entity.getGame().getId());
+				pStmt.setInt(3, entity.getPlayer().getId());
 				pStmt.setString(4, entity.getCardStatus().name());
 				pStmt.setObject(5, entity.getUpdated(), Types.TIMESTAMP);
 				pStmt.setInt(6, entity.getId());
@@ -100,7 +100,7 @@ public class CardInGameDaoImpl extends AbstractDaoImpl<ICardInGame, Integer> imp
 			if (columns.contains("card_id")) {
 				card.setFilename(resultSet.getString("card_id"));
 			}
-			entity.setCardId(card);
+			entity.setCard(card);
 		}
 
 		Integer gameId = (Integer) resultSet.getObject("game_id");
@@ -110,7 +110,7 @@ public class CardInGameDaoImpl extends AbstractDaoImpl<ICardInGame, Integer> imp
 			if (columns.contains("game_id")) {
 				game.setBank(resultSet.getDouble("game_id"));
 			}
-			entity.setGameId(game);
+			entity.setGame(game);
 		}
 
 		Integer playerId = (Integer) resultSet.getObject("player_id");
@@ -121,7 +121,7 @@ public class CardInGameDaoImpl extends AbstractDaoImpl<ICardInGame, Integer> imp
 				player.setInGame(resultSet.getBoolean("player_id"));
 				player.setStack(resultSet.getDouble("player_id"));
 			}
-			entity.setPlayerId(player);
+			entity.setPlayer(player);
 		}
 
 		return entity;
@@ -138,9 +138,9 @@ public class CardInGameDaoImpl extends AbstractDaoImpl<ICardInGame, Integer> imp
 							"insert into %s (card_id, game_id, player_id, card_state, created, updated) values(?,?,?,?,?,?)",
 							getTableName()), Statement.RETURN_GENERATED_KEYS);
 
-					pStmt.setInt(1, entity.getCardId().getId());
-					pStmt.setInt(2, entity.getGameId().getId());
-					pStmt.setInt(3, entity.getPlayerId().getId());
+					pStmt.setInt(1, entity.getCard().getId());
+					pStmt.setInt(2, entity.getGame().getId());
+					pStmt.setInt(3, entity.getPlayer().getId());
 					pStmt.setString(4, entity.getCardStatus().name());
 					pStmt.setObject(5, entity.getCreated(), Types.TIMESTAMP);
 					pStmt.setObject(6, entity.getUpdated(), Types.TIMESTAMP);

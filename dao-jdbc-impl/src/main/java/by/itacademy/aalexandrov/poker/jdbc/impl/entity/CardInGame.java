@@ -8,39 +8,39 @@ import by.itacademy.aalexandrov.poker.dao.api.entity.table.IPlayer;
 
 public class CardInGame extends BaseEntity implements ICardInGame {
 
-	private ICard cardId;
-	private IGame gameId;
-	private IPlayer playerId;
+	private ICard card;
+	private IGame game;
+	private IPlayer player;
 	private CardStatus cardStatus;
 
 	@Override
-	public ICard getCardId() {
-		return cardId;
+	public ICard getCard() {
+		return card;
 	}
 
 	@Override
-	public void setCardId(ICard cardId) {
-		this.cardId = cardId;
+	public void setCard(ICard card) {
+		this.card = card;
 	}
 
 	@Override
-	public IGame getGameId() {
-		return gameId;
+	public IGame getGame() {
+		return game;
 	}
 
 	@Override
-	public void setGameId(IGame gameId) {
-		this.gameId = gameId;
+	public void setGame(IGame game) {
+		this.game = game;
 	}
 
 	@Override
-	public IPlayer getPlayerId() {
-		return playerId;
+	public IPlayer getPlayer() {
+		return player;
 	}
 
 	@Override
-	public void setPlayerId(IPlayer playerId) {
-		this.playerId = playerId;
+	public void setPlayer(IPlayer player) {
+		this.player = player;
 	}
 
 	@Override
@@ -55,8 +55,8 @@ public class CardInGame extends BaseEntity implements ICardInGame {
 
 	@Override
 	public String toString() {
-		return "CardInGame [cardId=" + cardId + ", gameId=" + gameId + ", playerId=" + playerId + ", cardStatus="
-				+ cardStatus + "]";
+		return "CardInGame [card=" + card + ", game=" + game + ", player=" + player + ", cardStatus=" + cardStatus
+				+ "]";
 	}
 
 }

@@ -17,16 +17,16 @@ public interface IPlayer extends IBaseEntity {
 
 	boolean isInGame();
 
-	void setPositionId(PlayerPosition positionId);
+	void setPosition(PlayerPosition position);
 
-	PlayerPosition getPositionId();
+	PlayerPosition getPosition();
 
-	void setUserAccountId(IUserAccount userAccountId);
+	void setUserAccount(IUserAccount userAccount);
 
-	IUserAccount getUserAccountId();
+	IUserAccount getUserAccount();
 
-	void setGameId(IGame gameId);
+	void setGame(IGame game);
 
-	IGame getGameId();
+	IGame getGame();
 
 }

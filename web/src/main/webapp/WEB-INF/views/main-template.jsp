@@ -2,7 +2,22 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"
 	scope="request" />
+<c:set var="pagesCard" value="${contextPath}/card" scope="request" />
+<c:set var="pagesCardInGame" value="${contextPath}/cardInGame"
+	scope="request" />
+<c:set var="pagesChat" value="${contextPath}/chat" scope="request" />
+<c:set var="pagesCountry" value="${contextPath}/country" scope="request" />
+<c:set var="pagesGame" value="${contextPath}/game" scope="request" />
+<c:set var="pagesPlayerAction" value="${contextPath}/playerAction"
+	scope="request" />
+<c:set var="pagesPlayer" value="${contextPath}/player" scope="request" />
+<c:set var="pagesStatistic" value="${contextPath}/statistic"
+	scope="request" />
 <c:set var="pagesTiket" value="${contextPath}/tiket" scope="request" />
+<c:set var="pagesTransaction" value="${contextPath}/transaction"
+	scope="request" />
+<c:set var="pagesUserAccount" value="${contextPath}/userAccount"
+	scope="request" />
 
 
 
