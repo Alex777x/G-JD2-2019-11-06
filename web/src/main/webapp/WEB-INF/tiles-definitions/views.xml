@@ -76,6 +76,10 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/userAccount/list.jsp" />
 	</definition>
+	
+	<definition name="tiket.edit" extends="DefaultTemplate">
+		<put-attribute name="body" value="/WEB-INF/views/tiket/form.jsp" />
+	</definition>
 
 
 </tiles-definitions>

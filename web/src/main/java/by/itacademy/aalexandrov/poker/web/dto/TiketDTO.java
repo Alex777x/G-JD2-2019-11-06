@@ -2,13 +2,17 @@ package by.itacademy.aalexandrov.poker.web.dto;
 
 import java.util.Date;
 
-import by.itacademy.aalexandrov.poker.dao.api.entity.table.IUserAccount;
+import javax.validation.constraints.Size;
+
 
 public class TiketDTO {
 
 	private Integer id;
-	private IUserAccount userAccount;
+	
+	private Integer userAccount;
+	@Size(min = 1, max = 50)
 	private String tiketTitle;
+	@Size(min = 1, max = 50)
 	private String tiketText;
 	private String status;
 	private Date created;
@@ -30,11 +34,11 @@ public class TiketDTO {
 		this.updated = updated;
 	}
 
-	public IUserAccount getUserAccount() {
+	public Integer getUserAccount() {
 		return userAccount;
 	}
 
-	public void setUserAccount(IUserAccount userAccount) {
+	public void setUserAccount(Integer userAccount) {
 		this.userAccount = userAccount;
 	}
 
