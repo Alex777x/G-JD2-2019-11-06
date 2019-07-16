@@ -3,20 +3,30 @@ body {
 	min-height: 100vh;
 	flex-direction: column;
 	background-image: url(fon-site.jpg);
+	color: white;
 }
 
 main {
 	flex: 1 0 auto;
 }
 
-.nav {
+.navheader {
 	background-image: url(fon-header2.png);
+	background-color: transparent;
+	background-size: cover;
 }
 
 .page-footer {
 	background-image: url(fon-footer.png);
 	padding-top: 0px;
+	background-size: cover;
 }
+
+.imglogo {
+	height: 100px;
+	margin-top: -17%;
+}
+
 
 .input-field label.multiselect-label, .input-field label.switch-label {
 	position: absolute;

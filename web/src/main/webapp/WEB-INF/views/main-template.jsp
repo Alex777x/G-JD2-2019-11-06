@@ -37,6 +37,11 @@
 <link rel="stylesheet" href="${contextPath}/resources/css/custom.css">
 <script src="${contextPath}/resources/js/init-materialize-forms.js"></script>
 <script src="${contextPath}/resources/js/init-menu.js"></script>
+<script>
+	$(document).ready(function() {
+		$('.sidenav').sidenav();
+	});
+</script>
 </head>
 <body>
 	<tiles:insertAttribute name="header" />
