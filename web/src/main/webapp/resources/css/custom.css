@@ -2,10 +2,20 @@ body {
 	display: flex;
 	min-height: 100vh;
 	flex-direction: column;
+	background-image: url(fon-site.jpg);
 }
 
 main {
 	flex: 1 0 auto;
+}
+
+.nav {
+	background-image: url(fon-header2.png);
+}
+
+.page-footer {
+	background-image: url(fon-footer.png);
+	padding-top: 0px;
 }
 
 .input-field label.multiselect-label, .input-field label.switch-label {
