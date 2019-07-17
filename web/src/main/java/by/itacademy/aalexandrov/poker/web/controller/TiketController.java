@@ -76,7 +76,7 @@ public class TiketController extends AbstractController {
 		final Map<String, Object> hashMap = new HashMap<>();
 		//final ITiket newEntity = tiketService.createEntity();
 		hashMap.put("formTiket", new TiketDTO());
-		loadCommonFormUserAccounts(hashMap);
+		loadCommonFormUserTikets(hashMap);
 		return new ModelAndView("tiket.edit", hashMap);
 	}
 
@@ -85,7 +85,7 @@ public class TiketController extends AbstractController {
 		if (result.hasErrors()) {
 			final Map<String, Object> hashMap = new HashMap<>();
 			hashMap.put("formTiket", formTiket);
-			loadCommonFormUserAccounts(hashMap);
+			loadCommonFormUserTikets(hashMap);
 			return new ModelAndView("tiket.edit", hashMap);
 		} else {
 			final ITiket entity = fromDtoConverter.apply(formTiket);
@@ -101,7 +101,7 @@ public class TiketController extends AbstractController {
 		final Map<String, Object> hashMap = new HashMap<>();
 		hashMap.put("formTiket", dto);
 		hashMap.put("readonly", true);
-		loadCommonFormUserAccounts(hashMap);
+		loadCommonFormUserTikets(hashMap);
 		return new ModelAndView("tiket.edit", hashMap);
 	}
 
@@ -111,7 +111,7 @@ public class TiketController extends AbstractController {
 
 		final Map<String, Object> hashMap = new HashMap<>();
 		hashMap.put("formTiket", dto);
-		loadCommonFormUserAccounts(hashMap);
+		loadCommonFormUserTikets(hashMap);
 
 		return new ModelAndView("tiket.edit", hashMap);
 	}
@@ -122,7 +122,7 @@ public class TiketController extends AbstractController {
 		return "redirect:/tiket";
 	}
 
-	private void loadCommonFormUserAccounts(final Map<String, Object> hashMap) {
+	private void loadCommonFormUserTikets(final Map<String, Object> hashMap) {
 		final List<IUserAccount> userAccounts = userAccountService.getAll();
 
 		final Map<Integer, String> userAccountsMap = userAccounts.stream()

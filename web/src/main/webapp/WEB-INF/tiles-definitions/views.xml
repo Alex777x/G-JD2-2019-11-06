@@ -81,6 +81,11 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/tiket/form.jsp" />
 	</definition>
+	
+	<definition name="userAccount.edit" extends="DefaultTemplate">
+		<put-attribute name="body"
+			value="/WEB-INF/views/userAccount/form.jsp" />
+	</definition>
 
 	<definition name="ajax-samples" extends="DefaultTemplate">
 		<put-attribute name="body"

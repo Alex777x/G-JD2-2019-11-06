@@ -27,11 +27,11 @@ public class UserAccountDTO {
 	private String email;
 	private String foto;
 	@NotNull(message = "You must choose a country")
-	private ICountry country;
-	private IStatistic statistic;
+	private Integer country;
+	private Integer statistic;
 	private UserRole userRole;
 	private UserStatus userStatus;
-	private ITransaction transaction;
+	private Integer transaction;
 	private Date created;
 	private Date updated;
 
@@ -75,19 +75,19 @@ public class UserAccountDTO {
 		this.foto = foto;
 	}
 
-	public ICountry getCountry() {
+	public Integer getCountry() {
 		return country;
 	}
 
-	public void setCountry(ICountry country) {
+	public void setCountry(Integer country) {
 		this.country = country;
 	}
 
-	public IStatistic getStatistic() {
+	public Integer getStatistic() {
 		return statistic;
 	}
 
-	public void setStatistic(IStatistic statistic) {
+	public void setStatistic(Integer statistic) {
 		this.statistic = statistic;
 	}
 
@@ -107,11 +107,11 @@ public class UserAccountDTO {
 		this.userStatus = userStatus;
 	}
 
-	public ITransaction getTransaction() {
+	public Integer getTransaction() {
 		return transaction;
 	}
 
-	public void setTransaction(ITransaction transaction) {
+	public void setTransaction(Integer transaction) {
 		this.transaction = transaction;
 	}
 
