@@ -19,8 +19,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.ITiket;
+import by.itacademy.aalexandrov.poker.dao.api.entity.table.IUserAccount;
 import by.itacademy.aalexandrov.poker.dao.api.filter.TiketFilter;
 import by.itacademy.aalexandrov.poker.service.ITiketService;
+import by.itacademy.aalexandrov.poker.service.IUserAccountService;
 import by.itacademy.aalexandrov.poker.web.converter.TiketFromDTOConverter;
 import by.itacademy.aalexandrov.poker.web.converter.TiketToDTOConverter;
 import by.itacademy.aalexandrov.poker.web.dto.TiketDTO;
@@ -36,13 +38,16 @@ public class TiketController extends AbstractController {
 
 	private TiketFromDTOConverter fromDtoConverter;
 
+	private IUserAccountService userAccountService;
+
 	@Autowired
 	public TiketController(ITiketService tiketService, TiketToDTOConverter toDtoConverter,
-			TiketFromDTOConverter fromDtoConverter) {
+			TiketFromDTOConverter fromDtoConverter, IUserAccountService userAccountService) {
 		super();
 		this.tiketService = tiketService;
 		this.toDtoConverter = toDtoConverter;
 		this.fromDtoConverter = fromDtoConverter;
+		this.userAccountService = userAccountService;
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
@@ -61,35 +66,32 @@ public class TiketController extends AbstractController {
 		List<TiketDTO> dtos = entities.stream().map(toDtoConverter).collect(Collectors.toList());
 		gridState.setTotalCount(tiketService.getCount(filter));
 
-		final Map<String, Object> models = new HashMap<>();
-		models.put("gridItems", dtos);
-		return new ModelAndView("tiket.list", models);
+		final Map<String, Object> tikets = new HashMap<>();
+		tikets.put("gridItems", dtos);
+		return new ModelAndView("tiket.list", tikets);
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public ModelAndView showForm() {
 		final Map<String, Object> hashMap = new HashMap<>();
-		final ITiket newEntity = tiketService.createEntity();
-		hashMap.put("formModel", toDtoConverter.apply(newEntity));
-
+		//final ITiket newEntity = tiketService.createEntity();
+		hashMap.put("formTiket", new TiketDTO());
+		loadCommonFormUserAccounts(hashMap);
 		return new ModelAndView("tiket.edit", hashMap);
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public String save(@Valid @ModelAttribute("formModel") final TiketDTO formModel, final BindingResult result) {
+	public Object save(@Valid @ModelAttribute("formTiket") final TiketDTO formTiket, final BindingResult result) {
 		if (result.hasErrors()) {
-			return "tiket.edit";
+			final Map<String, Object> hashMap = new HashMap<>();
+			hashMap.put("formTiket", formTiket);
+			loadCommonFormUserAccounts(hashMap);
+			return new ModelAndView("tiket.edit", hashMap);
 		} else {
-			final ITiket entity = fromDtoConverter.apply(formModel);
+			final ITiket entity = fromDtoConverter.apply(formTiket);
 			tiketService.save(entity);
 			return "redirect:/tiket";
 		}
-	}
-
-	@RequestMapping(value = "/{id}/delete", method = RequestMethod.GET)
-	public String delete(@PathVariable(name = "id", required = true) final Integer id) {
-		tiketService.delete(id);
-		return "redirect:/tiket";
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
@@ -97,9 +99,9 @@ public class TiketController extends AbstractController {
 		final ITiket dbModel = tiketService.get(id);
 		final TiketDTO dto = toDtoConverter.apply(dbModel);
 		final Map<String, Object> hashMap = new HashMap<>();
-		hashMap.put("formModel", dto);
+		hashMap.put("formTiket", dto);
 		hashMap.put("readonly", true);
-
+		loadCommonFormUserAccounts(hashMap);
 		return new ModelAndView("tiket.edit", hashMap);
 	}
 
@@ -108,9 +110,24 @@ public class TiketController extends AbstractController {
 		final TiketDTO dto = toDtoConverter.apply(tiketService.get(id));
 
 		final Map<String, Object> hashMap = new HashMap<>();
-		hashMap.put("formModel", dto);
+		hashMap.put("formTiket", dto);
+		loadCommonFormUserAccounts(hashMap);
 
 		return new ModelAndView("tiket.edit", hashMap);
+	}
+
+	@RequestMapping(value = "/{id}/delete", method = RequestMethod.GET)
+	public String delete(@PathVariable(name = "id", required = true) final Integer id) {
+		tiketService.delete(id);
+		return "redirect:/tiket";
+	}
+
+	private void loadCommonFormUserAccounts(final Map<String, Object> hashMap) {
+		final List<IUserAccount> userAccounts = userAccountService.getAll();
+
+		final Map<Integer, String> userAccountsMap = userAccounts.stream()
+				.collect(Collectors.toMap(IUserAccount::getId, IUserAccount::getNickname));
+		hashMap.put("userAccountsChoices", userAccountsMap);
 	}
 
 }

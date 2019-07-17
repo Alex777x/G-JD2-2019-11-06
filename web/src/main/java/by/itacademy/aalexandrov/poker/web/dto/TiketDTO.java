@@ -2,6 +2,7 @@ package by.itacademy.aalexandrov.poker.web.dto;
 
 import java.util.Date;
 
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 
@@ -9,11 +10,13 @@ public class TiketDTO {
 
 	private Integer id;
 	
+	@NotNull
 	private Integer userAccount;
 	@Size(min = 1, max = 50)
 	private String tiketTitle;
-	@Size(min = 1, max = 50)
+	@Size(min = 1, max = 500)
 	private String tiketText;
+	@NotNull
 	private String status;
 	private Date created;
 	private Date updated;

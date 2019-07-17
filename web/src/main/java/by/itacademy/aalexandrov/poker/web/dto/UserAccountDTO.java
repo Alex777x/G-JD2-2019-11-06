@@ -2,6 +2,10 @@ package by.itacademy.aalexandrov.poker.web.dto;
 
 import java.util.Date;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.UserRole;
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.UserStatus;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.ICountry;
@@ -11,10 +15,18 @@ import by.itacademy.aalexandrov.poker.dao.api.entity.table.ITransaction;
 public class UserAccountDTO {
 
 	private Integer id;
+	@Size(min = 1, max = 50)
 	private String nickname;
+	@Size(min = 6)
 	private String password;
+	@NotNull(message = "Email must be specified")
+	@Pattern(regexp = "^(?:[a-zA-Z0-9_'^&/+-])+(?:\\.(?:[a-zA-Z0-9_'^&/+-])+)"
+			+ "*@(?:(?:\\[?(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?))\\.)"
+			+ "{3}(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\]?)|(?:[a-zA-Z0-9-]+\\.)"
+			+ "+(?:[a-zA-Z]){2,}\\.?)$", message = "given email cannot exist")
 	private String email;
 	private String foto;
+	@NotNull(message = "You must choose a country")
 	private ICountry country;
 	private IStatistic statistic;
 	private UserRole userRole;

@@ -9,14 +9,14 @@
 		<tr>
 			<th><mytaglib:sort-link column="id" pageUrl="${pagesTiket}">id</mytaglib:sort-link></th>
 			<th><mytaglib:sort-link column="user_account_id"
-					pageUrl="${pagesTiket}">userAccount</mytaglib:sort-link></th>
+					pageUrl="${pagesTiket}">User Account ID</mytaglib:sort-link></th>
 			<th><mytaglib:sort-link column="tiket_title"
-					pageUrl="${pagesTiket}">tiketTitle</mytaglib:sort-link></th>
+					pageUrl="${pagesTiket}">Tiket Title</mytaglib:sort-link></th>
 			<th><mytaglib:sort-link column="tiket_text"
-					pageUrl="${pagesTiket}">tiketText</mytaglib:sort-link></th>
-			<th><mytaglib:sort-link column="status" pageUrl="${pagesTiket}">status</mytaglib:sort-link></th>
-			<th><mytaglib:sort-link column="created" pageUrl="${pagesTiket}">created</mytaglib:sort-link></th>
-			<th><mytaglib:sort-link column="updated" pageUrl="${pagesTiket}">updated</mytaglib:sort-link></th>
+					pageUrl="${pagesTiket}">Tiket Text</mytaglib:sort-link></th>
+			<th><mytaglib:sort-link column="status" pageUrl="${pagesTiket}">Status</mytaglib:sort-link></th>
+			<th><mytaglib:sort-link column="created" pageUrl="${pagesTiket}">Created</mytaglib:sort-link></th>
+			<th><mytaglib:sort-link column="updated" pageUrl="${pagesTiket}">Updated</mytaglib:sort-link></th>
 			<th></th>
 		</tr>
 		<c:forEach var="tiket" items="${gridItems}" varStatus="loopCounter">

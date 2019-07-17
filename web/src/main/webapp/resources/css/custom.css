@@ -2,7 +2,7 @@ body {
 	display: flex;
 	min-height: 100vh;
 	flex-direction: column;
-/* 	background-image: url(fon-site.jpg); */
+	background-image: url(fon-site.jpg);
 /* 	color: white; */
 }
 
@@ -10,9 +10,10 @@ main {
 	flex: 1 0 auto;
 }
 
-.input-field {
-	color: white;
+html * {
+	color: white !important;
 }
+
 
 .navheader {
 	background-image: url(fon-header2.png);
