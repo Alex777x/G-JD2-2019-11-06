@@ -38,6 +38,8 @@ public class UserAccountFromDTOConverter implements Function<UserAccountDTO, IUs
 		entity.setPassword(dto.getPassword());
 		entity.setEmail(dto.getEmail());
 		entity.setFoto(dto.getFoto());
+		//entity.setStatistic(dto.getStatistic());
+		//entity.setTransaction(null);
 
 		ICountry country = countryService.createEntity();
 		country.setId(dto.getCountry());
@@ -47,8 +49,8 @@ public class UserAccountFromDTOConverter implements Function<UserAccountDTO, IUs
 		statistic.setId(dto.getStatistic());
 		entity.setStatistic(statistic);
 
-		entity.setUserRole(dto.getUserRole());
-		entity.setUserStatus(dto.getUserStatus());
+		entity.setUserRole(dto.getUserRole().MEMBER);
+		entity.setUserStatus(dto.getUserStatus().ACTIVE);
 
 		ITransaction transaction = transactionService.createEntity();
 		transaction.setId(dto.getTransaction());

@@ -8,9 +8,6 @@ import javax.validation.constraints.Size;
 
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.UserRole;
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.UserStatus;
-import by.itacademy.aalexandrov.poker.dao.api.entity.table.ICountry;
-import by.itacademy.aalexandrov.poker.dao.api.entity.table.IStatistic;
-import by.itacademy.aalexandrov.poker.dao.api.entity.table.ITransaction;
 
 public class UserAccountDTO {
 

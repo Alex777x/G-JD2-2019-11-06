@@ -19,8 +19,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.ICountry;
-import by.itacademy.aalexandrov.poker.dao.api.entity.table.IStatistic;
-import by.itacademy.aalexandrov.poker.dao.api.entity.table.ITransaction;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IUserAccount;
 import by.itacademy.aalexandrov.poker.dao.api.filter.UserAccountFilter;
 import by.itacademy.aalexandrov.poker.service.ICountryService;
@@ -44,9 +42,9 @@ public class UserAccountController extends AbstractController {
 
 	private ICountryService countryService;
 
-	private IStatisticService statisticService;
-
-	private ITransactionService transactionService;
+//	private IStatisticService statisticService;
+//
+//	private ITransactionService transactionService;
 
 	@Autowired
 	public UserAccountController(IUserAccountService userAccountService, UserAccountToDTOConverter toDtoConverter,
@@ -57,8 +55,8 @@ public class UserAccountController extends AbstractController {
 		this.toDtoConverter = toDtoConverter;
 		this.fromDtoConverter = fromDtoConverter;
 		this.countryService = countryService;
-		this.statisticService = statisticService;
-		this.transactionService = transactionService;
+//		this.statisticService = statisticService;
+//		this.transactionService = transactionService;
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
@@ -96,7 +94,7 @@ public class UserAccountController extends AbstractController {
 		if (result.hasErrors()) {
 			final Map<String, Object> hashMap = new HashMap<>();
 			hashMap.put("formUserAccount", formUserAccount);
-			loadCommonFormUserAccounts(hashMap); // тут заменить, добавить
+			loadCommonFormUserAccounts(hashMap);
 			return new ModelAndView("userAccount.edit", hashMap);
 		} else {
 			final IUserAccount entity = fromDtoConverter.apply(formUserAccount);
@@ -112,7 +110,7 @@ public class UserAccountController extends AbstractController {
 		final Map<String, Object> hashMap = new HashMap<>();
 		hashMap.put("formUserAccount", dto);
 		hashMap.put("readonly", true);
-		loadCommonFormUserAccounts(hashMap); // !!!!!!!!!!
+		loadCommonFormUserAccounts(hashMap);
 		return new ModelAndView("userAccount.edit", hashMap);
 	}
 
@@ -122,7 +120,7 @@ public class UserAccountController extends AbstractController {
 
 		final Map<String, Object> hashMap = new HashMap<>();
 		hashMap.put("formUserAccount", dto);
-		loadCommonFormUserAccounts(hashMap); // !!!!
+		loadCommonFormUserAccounts(hashMap);
 
 		return new ModelAndView("userAccount.edit", hashMap);
 	}
@@ -135,20 +133,20 @@ public class UserAccountController extends AbstractController {
 
 	private void loadCommonFormUserAccounts(final Map<String, Object> hashMap) {
 		final List<ICountry> countries = countryService.getAll();
-		final List<IStatistic> statistics = statisticService.getAll();
-		final List<ITransaction> transactions = transactionService.getAll();
+		//final List<IStatistic> statistics = statisticService.getAll();
+		//final List<ITransaction> transactions = transactionService.getAll();
 
 		final Map<Integer, String> countriesMap = countries.stream()
 				.collect(Collectors.toMap(ICountry::getId, ICountry::getCountry));
 		hashMap.put("countriesChoices", countriesMap);
 		
-		final Map<Integer, String> statisticsMap = statistics.stream()
-				.collect(Collectors.toMap(IStatistic::getId, IStatistic::toString));
-		hashMap.put("statisticsChoices", statisticsMap);
-		
-		final Map<Integer, String> transactionsMap = transactions.stream()
-				.collect(Collectors.toMap(ITransaction::getId, ITransaction::getComment));
-		hashMap.put("transactionsChoices", transactionsMap);
+//		final Map<Integer, String> statisticsMap = statistics.stream()
+//				.collect(Collectors.toMap(IStatistic::getId, IStatistic::toString));
+//		hashMap.put("statisticsChoices", statisticsMap);
+//		
+//		final Map<Integer, String> transactionsMap = transactions.stream()
+//				.collect(Collectors.toMap(ITransaction::getId, ITransaction::getComment));
+//		hashMap.put("transactionsChoices", transactionsMap);
 	}
 
 }
