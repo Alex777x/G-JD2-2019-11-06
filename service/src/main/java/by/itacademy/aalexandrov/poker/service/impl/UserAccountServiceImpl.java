@@ -28,7 +28,9 @@ public class UserAccountServiceImpl implements IUserAccountService {
 
 	@Override
 	public IUserAccount createEntity() {
-		return dao.createEntity();
+		IUserAccount createEntity = dao.createEntity();
+		//TODO set defaulr fields
+		return createEntity;
 	}
 
 	@Override

@@ -20,7 +20,7 @@
 			<th></th>
 		</tr>
 		<c:forEach var="tiket" items="${gridItems}" varStatus="loopCounter">
-			<tr>
+			<tr brandId="${tiket.id}" class="clickable-row">
 				<td><c:out value="${tiket.id}" /></td>
 				<td><c:out value="${tiket.userAccount}" /></td>
 				<td><c:out value="${tiket.tiketTitle}" /></td>

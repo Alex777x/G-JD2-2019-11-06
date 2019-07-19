@@ -3,7 +3,7 @@ body {
 	min-height: 100vh;
 	flex-direction: column;
 	background-image: url(fon-site.jpg);
-/* 	color: white; */
+	/* 	color: white; */
 }
 
 main {
@@ -14,6 +14,9 @@ html * {
 	color: white !important;
 }
 
+.dropdown-content {
+	background-color: black;
+}
 
 .navheader {
 	background-image: url(fon-header2.png);
@@ -31,7 +34,6 @@ html * {
 	height: 100px;
 	margin-top: -17%;
 }
-
 
 .input-field label.multiselect-label, .input-field label.switch-label {
 	position: absolute;

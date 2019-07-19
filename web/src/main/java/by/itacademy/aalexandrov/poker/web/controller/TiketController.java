@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -74,7 +76,7 @@ public class TiketController extends AbstractController {
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public ModelAndView showForm() {
 		final Map<String, Object> hashMap = new HashMap<>();
-		//final ITiket newEntity = tiketService.createEntity();
+		// final ITiket newEntity = tiketService.createEntity();
 		hashMap.put("formTiket", new TiketDTO());
 		loadCommonFormUserTikets(hashMap);
 		return new ModelAndView("tiket.edit", hashMap);
@@ -128,6 +130,13 @@ public class TiketController extends AbstractController {
 		final Map<Integer, String> userAccountsMap = userAccounts.stream()
 				.collect(Collectors.toMap(IUserAccount::getId, IUserAccount::getNickname));
 		hashMap.put("userAccountsChoices", userAccountsMap);
+	}
+
+	@RequestMapping(value = "/json", method = RequestMethod.GET)
+	public ResponseEntity<TiketDTO> getTikets(@RequestParam(name = "id", required = true) final Integer id) {
+		final TiketDTO dto = toDtoConverter.apply(tiketService.get(id));
+
+		return new ResponseEntity<TiketDTO>(dto, HttpStatus.OK);
 	}
 
 }
