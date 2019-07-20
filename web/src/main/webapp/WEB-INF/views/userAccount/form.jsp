@@ -8,11 +8,11 @@
 	<form:form class="col s12" method="POST" action="${pagesUserAccount}"
 		modelAttribute="formUserAccount">
 		<form:input path="id" type="hidden" />
-<%-- 		<form:input path="foto" type="hidden" /> --%>
-<%-- 		<form:input path="statistic" type="hidden" /> --%>
-<%-- 		<form:input path="userRole" type="hidden" /> --%>
-<%-- 		<form:input path="userStatus" type="hidden" /> --%>
-<%-- 		<form:input path="transaction" type="hidden" /> --%>
+		<form:input path="foto" type="hidden" />
+		<form:input path="statistic" type="hidden" />
+		<form:input path="userRole" type="hidden" />
+		<form:input path="userStatus" type="hidden" />
+		<form:input path="transaction" type="hidden" />
 
 		<div class="row">
 			<div class="input-field col s12">
@@ -44,7 +44,7 @@
 				<label for="country">Country</label>
 			</div>
 		</div>
-		
+
 		<div class="row">
 			<div class="col s6"></div>
 			<div class="col s3">
@@ -53,7 +53,9 @@
 				</c:if>
 			</div>
 			<div class="col s3">
-				<a class="btn waves-effect waves-light right" href="${pagesUserAccount}">К списку<i class="material-icons right"></i>
+				<a class="btn waves-effect waves-light right"
+					href="${pagesUserAccount}">К списку<i
+					class="material-icons right"></i>
 				</a>
 			</div>
 		</div>
