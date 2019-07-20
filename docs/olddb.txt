@@ -4,25 +4,14 @@ CREATE TABLE "user_account" (
 	"password" character varying(250) NOT NULL,
 	"email" character varying(250) NOT NULL UNIQUE,
 	"foto" character varying,
-	"statistic_id" integer NOT NULL,
 	"country_id" integer NOT NULL,
 	"role_id" character varying NOT NULL,
-	"status_id" character varying NOT NULL,
-	"transaction_id" integer,
+	"status_id" character varying,
+	"sum_games" integer,
+	"won_games" integer,
 	"created" TIMESTAMP NOT NULL,
 	"updated" TIMESTAMP,
 	CONSTRAINT "user_account_pk" PRIMARY KEY ("id")
-) WITH (
-  OIDS=FALSE
-);
-
-
-
-CREATE TABLE "statistic" (
-	"id" serial NOT NULL,
-	"sum_games" integer,
-	"won_games" integer,
-	CONSTRAINT "statistic_pk" PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
 );
@@ -56,6 +45,7 @@ CREATE TABLE "country" (
 
 CREATE TABLE "transaction" (
 	"id" serial NOT NULL,
+	"user_account_id" bigint NOT NULL,
 	"amount" DECIMAL NOT NULL,
 	"comment" character varying(50) NOT NULL,
 	"created" TIMESTAMP NOT NULL,
@@ -158,14 +148,12 @@ CREATE TABLE "card_in_game" (
 
 
 
-ALTER TABLE "user_account" ADD CONSTRAINT "user_account_fk0" FOREIGN KEY ("statistic_id") REFERENCES "statistic"("id");
-ALTER TABLE "user_account" ADD CONSTRAINT "user_account_fk1" FOREIGN KEY ("country_id") REFERENCES "country"("id");
-ALTER TABLE "user_account" ADD CONSTRAINT "user_account_fk2" FOREIGN KEY ("transaction_id") REFERENCES "transaction"("id");
-
+ALTER TABLE "user_account" ADD CONSTRAINT "user_account_fk0" FOREIGN KEY ("country_id") REFERENCES "country"("id");
 
 ALTER TABLE "tiket" ADD CONSTRAINT "tiket_fk0" FOREIGN KEY ("user_account_id") REFERENCES "user_account"("id");
 
 
+ALTER TABLE "transaction" ADD CONSTRAINT "transaction_fk0" FOREIGN KEY ("user_account_id") REFERENCES "user_account"("id");
 
 ALTER TABLE "player" ADD CONSTRAINT "player_fk0" FOREIGN KEY ("game_id") REFERENCES "game"("id");
 ALTER TABLE "player" ADD CONSTRAINT "player_fk1" FOREIGN KEY ("user_account_id") REFERENCES "user_account"("id");
