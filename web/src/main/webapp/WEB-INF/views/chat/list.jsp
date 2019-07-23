@@ -16,8 +16,8 @@
 		<c:forEach var="chat" items="${gridItems}" varStatus="loopCounter">
 			<tr>
 				<td><c:out value="${chat.id}" /></td>
-				<td><c:out value="${chat.game.id}" /></td>
-				<td><c:out value="${chat.userAccount.id}" /></td>
+				<td><c:out value="${chat.game}" /></td>
+				<td><c:out value="${chat.userAccount}" /></td>
 				<td><c:out value="${chat.message}" /></td>
 				<td><fmt:formatDate pattern="yyyy-MM-dd"
 						value="${chat.created}" /></td>

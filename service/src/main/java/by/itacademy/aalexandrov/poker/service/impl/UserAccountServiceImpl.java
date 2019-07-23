@@ -31,7 +31,7 @@ public class UserAccountServiceImpl implements IUserAccountService {
 	@Override
 	public IUserAccount createEntity() {
 		IUserAccount createEntity = dao.createEntity();
-		//TODO set default fields
+		// TODO set default fields
 		createEntity.setFoto("/web/src/main/webapp/resources/img/foto.png");
 		createEntity.setSumGames(0);
 		createEntity.setWonGames(0);
@@ -102,5 +102,11 @@ public class UserAccountServiceImpl implements IUserAccountService {
 	public long getCount(UserAccountFilter filter) {
 		return dao.getCount(filter);
 	}
+
+	@Override
+	public IUserAccount findNickname(String username) {
+		return dao.findNickname(username);
+	}
+
 
 }

@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Types;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -20,6 +21,7 @@ import by.itacademy.aalexandrov.poker.jdbc.impl.entity.Country;
 import by.itacademy.aalexandrov.poker.jdbc.impl.entity.UserAccount;
 import by.itacademy.aalexandrov.poker.jdbc.impl.util.PreparedStatementAction;
 import by.itacademy.aalexandrov.poker.jdbc.impl.util.SQLExecutionException;
+import by.itacademy.aalexandrov.poker.jdbc.impl.util.StatementAction;
 
 @Repository
 public class UserAccountDaoImpl extends AbstractDaoImpl<IUserAccount, Integer> implements IUserAccountDao {
@@ -183,6 +185,28 @@ public class UserAccountDaoImpl extends AbstractDaoImpl<IUserAccount, Integer> i
 	@Override
 	public long getCount(UserAccountFilter filter) {
 		return executeCountQuery("");
+	}
+	
+	@Override
+	public IUserAccount findNickname(String username) {
+		StatementAction<IUserAccount> action = (statement) -> {
+			String sql = String.format("select * from user_account where nickname='%s'", username);
+			statement.executeQuery(sql);
+
+			final ResultSet resultSet = statement.getResultSet();
+
+			final boolean hasNext = resultSet.next();
+			IUserAccount result = null;
+			if (hasNext) {
+				result = parseRow(resultSet, new HashSet<>());
+			}
+
+			resultSet.close();
+			return result;
+		};
+		IUserAccount entityByNickname = executeStatement(action);
+		return entityByNickname;
+		
 	}
 
 }

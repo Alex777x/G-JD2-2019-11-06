@@ -25,4 +25,7 @@ public interface IUserAccountService {
 
 	IUserAccount createEntity();
 
+	IUserAccount findNickname(String username);
+
+
 }

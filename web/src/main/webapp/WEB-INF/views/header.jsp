@@ -1,9 +1,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"
 	scope="request" />
 <header>
 	<nav class="navheader">
-		<a href="/poker" class="brand-logo"><img class="imglogo" src="${contextPath}/resources/img/logo.png" alt="" /></a> <a href="#"
+		<a href="/poker" class="brand-logo"><img class="imglogo"
+			src="${contextPath}/resources/img/logo.png" alt="" /></a> <a href="#"
 			data-target="mobile-demo" class="sidenav-trigger"><i
 			class="material-icons">menu</i></a>
 		<div class="nav-wrapper container">
@@ -19,6 +22,10 @@
 				<li><a href="${pagesTiket}">Tiket</a></li>
 				<li><a href="${pagesTransaction}">Transaction</a></li>
 				<li><a href="${pagesUserAccount}">UserAccount</a></li>
+				<sec:authorize access="!isAnonymous()">
+					<a class="right" href="${contextPath}/execute_logout"
+						title="logout"><i class="material-icons">arrow_forward</i></a>
+				</sec:authorize>
 			</ul>
 		</div>
 	</nav>

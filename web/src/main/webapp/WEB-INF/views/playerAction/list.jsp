@@ -20,7 +20,7 @@
 		<c:forEach var="playerAction" items="${gridItems}" varStatus="loopCounter">
 			<tr>
 				<td><c:out value="${playerAction.id}" /></td>
-				<td><c:out value="${playerAction.player.id}" /></td>
+				<td><c:out value="${playerAction.player}" /></td>
 				<td><c:out value="${playerAction.bet}" /></td>
 				<td><c:out value="${playerAction.call}" /></td>
 				<td><c:out value="${playerAction.raise}" /></td>

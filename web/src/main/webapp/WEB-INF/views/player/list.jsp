@@ -19,8 +19,8 @@
 		<c:forEach var="player" items="${gridItems}" varStatus="loopCounter">
 			<tr>
 				<td><c:out value="${player.id}" /></td>
-				<td><c:out value="${player.game.id}" /></td>
-				<td><c:out value="${player.userAccount.id}" /></td>
+				<td><c:out value="${player.game}" /></td>
+				<td><c:out value="${player.userAccount}" /></td>
 				<td><c:out value="${player.position}" /></td>
 				<td><c:out value="${player.inGame}" /></td>
 				<td><c:out value="${player.state}" /></td>

@@ -17,9 +17,9 @@
 		<c:forEach var="cardInGame" items="${gridItems}" varStatus="loopCounter">
 			<tr>
 				<td><c:out value="${cardInGame.id}" /></td>
-				<td><c:out value="${cardInGame.card.id}" /></td>
-				<td><c:out value="${cardInGame.game.id}" /></td>
-				<td><c:out value="${cardInGame.player.id}" /></td>
+				<td><c:out value="${cardInGame.card}" /></td>
+				<td><c:out value="${cardInGame.game}" /></td>
+				<td><c:out value="${cardInGame.player}" /></td>
 				<td><c:out value="${cardInGame.cardStatus}" /></td>
 				<td><fmt:formatDate pattern="yyyy-MM-dd"
 						value="${cardInGame.created}" /></td>
