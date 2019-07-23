@@ -22,7 +22,6 @@ import by.itacademy.aalexandrov.poker.dao.api.entity.table.ICountry;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IUserAccount;
 import by.itacademy.aalexandrov.poker.dao.api.filter.UserAccountFilter;
 import by.itacademy.aalexandrov.poker.service.ICountryService;
-import by.itacademy.aalexandrov.poker.service.ITransactionService;
 import by.itacademy.aalexandrov.poker.service.IUserAccountService;
 import by.itacademy.aalexandrov.poker.web.converter.UserAccountFromDTOConverter;
 import by.itacademy.aalexandrov.poker.web.converter.UserAccountToDTOConverter;
@@ -41,20 +40,14 @@ public class UserAccountController extends AbstractController {
 
 	private ICountryService countryService;
 
-//	private IStatisticService statisticService;
-//
-//	private ITransactionService transactionService;
-
 	@Autowired
 	public UserAccountController(IUserAccountService userAccountService, UserAccountToDTOConverter toDtoConverter,
-			UserAccountFromDTOConverter fromDtoConverter, ICountryService countryService,
-			ITransactionService transactionService) {
+			UserAccountFromDTOConverter fromDtoConverter, ICountryService countryService) {
 		super();
 		this.userAccountService = userAccountService;
 		this.toDtoConverter = toDtoConverter;
 		this.fromDtoConverter = fromDtoConverter;
 		this.countryService = countryService;
-//		this.transactionService = transactionService;
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
@@ -131,16 +124,10 @@ public class UserAccountController extends AbstractController {
 
 	private void loadCommonFormUserAccounts(final Map<String, Object> hashMap) {
 		final List<ICountry> countries = countryService.getAll();
-		// final List<ITransaction> transactions = transactionService.getAll();
 
 		final Map<Integer, String> countriesMap = countries.stream()
 				.collect(Collectors.toMap(ICountry::getId, ICountry::getCountry));
 		hashMap.put("countriesChoices", countriesMap);
-
-//		
-//		final Map<Integer, String> transactionsMap = transactions.stream()
-//				.collect(Collectors.toMap(ITransaction::getId, ITransaction::getComment));
-//		hashMap.put("transactionsChoices", transactionsMap);
 	}
 
 }

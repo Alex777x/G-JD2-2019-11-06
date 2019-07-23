@@ -3,16 +3,13 @@ package by.itacademy.aalexandrov.poker.web.dto;
 import java.util.Date;
 
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.CardStatus;
-import by.itacademy.aalexandrov.poker.dao.api.entity.table.ICard;
-import by.itacademy.aalexandrov.poker.dao.api.entity.table.IGame;
-import by.itacademy.aalexandrov.poker.dao.api.entity.table.IPlayer;
 
 public class CardInGameDTO {
 
 	private Integer id;
-	private ICard card;
-	private IGame game;
-	private IPlayer player;
+	private Integer card;
+	private Integer game;
+	private Integer player;
 	private CardStatus cardStatus;
 	private Date created;
 	private Date updated;
@@ -25,27 +22,27 @@ public class CardInGameDTO {
 		this.id = id;
 	}
 
-	public ICard getCard() {
+	public Integer getCard() {
 		return card;
 	}
 
-	public void setCard(ICard card) {
+	public void setCard(Integer card) {
 		this.card = card;
 	}
 
-	public IGame getGame() {
+	public Integer getGame() {
 		return game;
 	}
 
-	public void setGame(IGame game) {
+	public void setGame(Integer game) {
 		this.game = game;
 	}
 
-	public IPlayer getPlayer() {
+	public Integer getPlayer() {
 		return player;
 	}
 
-	public void setPlayer(IPlayer player) {
+	public void setPlayer(Integer player) {
 		this.player = player;
 	}
 

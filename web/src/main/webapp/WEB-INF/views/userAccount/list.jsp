@@ -40,7 +40,7 @@
 				<td><c:out value="${userAccount.nickname}" /></td>
 				<td><c:out value="${userAccount.password}" /></td>
 				<td><c:out value="${userAccount.email}" /></td>
-				<td><c:out value="${userAccount.foto}" /></td>
+				<td><img src="${contextPath}/resources/img/foto.png"/></td>
 				<td><c:out value="${userAccount.country}" /></td>
 				<td><c:out value="${userAccount.userRole}" /></td>
 				<td><c:out value="${userAccount.userStatus}" /></td>

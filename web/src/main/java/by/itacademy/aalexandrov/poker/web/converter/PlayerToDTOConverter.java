@@ -4,7 +4,9 @@ import java.util.function.Function;
 
 import org.springframework.stereotype.Component;
 
+import by.itacademy.aalexandrov.poker.dao.api.entity.table.IGame;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IPlayer;
+import by.itacademy.aalexandrov.poker.dao.api.entity.table.IUserAccount;
 import by.itacademy.aalexandrov.poker.web.dto.PlayerDTO;
 
 @Component
@@ -14,8 +16,17 @@ public class PlayerToDTOConverter implements Function<IPlayer, PlayerDTO> {
 	public PlayerDTO apply(IPlayer entity) {
 		PlayerDTO dto = new PlayerDTO();
 		dto.setId(entity.getId());
-		dto.setGame(entity.getGame());
-		dto.setUserAccount(entity.getUserAccount());
+		
+		IGame game = entity.getGame();
+		if (game != null) {
+			dto.setGame(game.getId());
+		}
+		
+		IUserAccount userAccount = entity.getUserAccount();
+		if (userAccount != null) {
+			dto.setUserAccount(userAccount.getId());
+		}
+		
 		dto.setPosition(entity.getPosition());
 		dto.setInGame(entity.isInGame());
 		dto.setState(entity.getState());

@@ -2,14 +2,11 @@ package by.itacademy.aalexandrov.poker.web.dto;
 
 import java.util.Date;
 
-import by.itacademy.aalexandrov.poker.dao.api.entity.table.IGame;
-import by.itacademy.aalexandrov.poker.dao.api.entity.table.IUserAccount;
-
 public class ChatDTO {
 
 	private Integer id;
-	private IGame game;
-	private IUserAccount userAccount;
+	private Integer game;
+	private Integer userAccount;
 	private String message;
 	private Date created;
 	private Date updated;
@@ -22,19 +19,19 @@ public class ChatDTO {
 		this.id = id;
 	}
 
-	public IGame getGame() {
+	public Integer getGame() {
 		return game;
 	}
 
-	public void setGame(IGame game) {
+	public void setGame(Integer game) {
 		this.game = game;
 	}
 
-	public IUserAccount getUserAccount() {
+	public Integer getUserAccount() {
 		return userAccount;
 	}
 
-	public void setUserAccount(IUserAccount userAccount) {
+	public void setUserAccount(Integer userAccount) {
 		this.userAccount = userAccount;
 	}
 

@@ -4,14 +4,12 @@ import java.util.Date;
 
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.PlayerPosition;
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.PlayerStatus;
-import by.itacademy.aalexandrov.poker.dao.api.entity.table.IGame;
-import by.itacademy.aalexandrov.poker.dao.api.entity.table.IUserAccount;
 
 public class PlayerDTO {
 
 	private Integer id;
-	private IGame game;
-	private IUserAccount userAccount;
+	private Integer gameId;
+	private Integer userAccountId;
 	private PlayerPosition position;
 	private boolean inGame;
 	private PlayerStatus state;
@@ -27,20 +25,20 @@ public class PlayerDTO {
 		this.id = id;
 	}
 
-	public IGame getGame() {
-		return game;
+	public Integer getGame() {
+		return gameId;
 	}
 
-	public void setGame(IGame game) {
-		this.game = game;
+	public void setGame(Integer game) {
+		this.gameId = game;
 	}
 
-	public IUserAccount getUserAccount() {
-		return userAccount;
+	public Integer getUserAccount() {
+		return userAccountId;
 	}
 
-	public void setUserAccount(IUserAccount userAccount) {
-		this.userAccount = userAccount;
+	public void setUserAccount(Integer userAccount) {
+		this.userAccountId = userAccount;
 	}
 
 	public PlayerPosition getPosition() {

@@ -15,8 +15,9 @@ html * {
 }
 
 .dropdown-content {
-	background-color: black;
+	background-color: #400040;
 }
+
 
 .navheader {
 	background-image: url(fon-header2.png);

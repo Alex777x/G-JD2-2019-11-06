@@ -2,12 +2,11 @@ package by.itacademy.aalexandrov.poker.web.dto;
 
 import java.util.Date;
 
-import by.itacademy.aalexandrov.poker.dao.api.entity.table.IPlayer;
 
 public class PlayerActionDTO {
 
 	private Integer id;
-	private IPlayer player;
+	private Integer player;
 	private int bet;
 	private int call;
 	private int raise;
@@ -25,11 +24,11 @@ public class PlayerActionDTO {
 		this.id = id;
 	}
 
-	public IPlayer getPlayer() {
+	public Integer getPlayer() {
 		return player;
 	}
 
-	public void setPlayer(IPlayer player) {
+	public void setPlayer(Integer player) {
 		this.player = player;
 	}
 
