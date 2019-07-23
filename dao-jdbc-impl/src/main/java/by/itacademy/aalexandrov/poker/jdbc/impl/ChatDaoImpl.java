@@ -14,6 +14,7 @@ import org.springframework.stereotype.Repository;
 import by.itacademy.aalexandrov.poker.dao.api.IChatDao;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IChat;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IGame;
+import by.itacademy.aalexandrov.poker.dao.api.entity.table.IUserAccount;
 import by.itacademy.aalexandrov.poker.dao.api.filter.ChatFilter;
 import by.itacademy.aalexandrov.poker.jdbc.impl.entity.Chat;
 import by.itacademy.aalexandrov.poker.jdbc.impl.entity.Game;
@@ -101,7 +102,7 @@ public class ChatDaoImpl extends AbstractDaoImpl<IChat, Integer> implements ICha
 
 		Integer userAccountId = (Integer) resultSet.getObject("user_account_id");
 		if (userAccountId != null) {
-			final UserAccount userAccount = new UserAccount();
+			final IUserAccount userAccount = new UserAccount();
 			userAccount.setId(userAccountId);
 			if (columns.contains("user_account_id")) {
 				userAccount.setNickname(resultSet.getString("user_account_id"));

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 
 import by.itacademy.aalexandrov.poker.dao.api.ITiketDao;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.ITiket;
+import by.itacademy.aalexandrov.poker.dao.api.entity.table.IUserAccount;
 import by.itacademy.aalexandrov.poker.dao.api.filter.TiketFilter;
 import by.itacademy.aalexandrov.poker.jdbc.impl.entity.Tiket;
 import by.itacademy.aalexandrov.poker.jdbc.impl.entity.UserAccount;
@@ -93,13 +94,12 @@ public class TiketDaoImpl extends AbstractDaoImpl<ITiket, Integer> implements IT
 
 		Integer userAccountId = (Integer) resultSet.getObject("user_account_id");
 		if (userAccountId != null) {
-			final UserAccount userAccount = new UserAccount();
+			final IUserAccount userAccount = new UserAccount();
 			userAccount.setId(userAccountId);
 			if (columns.contains("user_account_id")) {
 				userAccount.setNickname(resultSet.getString("user_account_id"));
 				userAccount.setPassword(resultSet.getString("user_account_id"));
 				userAccount.setEmail(resultSet.getString("user_account_id"));
-				userAccount.setFoto(resultSet.getString("user_account_id"));
 				userAccount.setFoto(resultSet.getString("user_account_id"));
 			}
 			entity.setUserAccount(userAccount);

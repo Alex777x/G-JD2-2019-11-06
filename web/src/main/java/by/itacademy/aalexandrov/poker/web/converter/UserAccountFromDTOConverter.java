@@ -6,12 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.ICountry;
-import by.itacademy.aalexandrov.poker.dao.api.entity.table.IStatistic;
-import by.itacademy.aalexandrov.poker.dao.api.entity.table.ITransaction;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IUserAccount;
 import by.itacademy.aalexandrov.poker.service.ICountryService;
-import by.itacademy.aalexandrov.poker.service.IStatisticService;
-import by.itacademy.aalexandrov.poker.service.ITransactionService;
 import by.itacademy.aalexandrov.poker.service.IUserAccountService;
 import by.itacademy.aalexandrov.poker.web.dto.UserAccountDTO;
 
@@ -24,12 +20,6 @@ public class UserAccountFromDTOConverter implements Function<UserAccountDTO, IUs
 	@Autowired
 	private ICountryService countryService;
 
-	@Autowired
-	private IStatisticService statisticService;
-
-	@Autowired
-	private ITransactionService transactionService;
-
 	@Override
 	public IUserAccount apply(UserAccountDTO dto) {
 		IUserAccount entity = userAccountService.createEntity();
@@ -37,24 +27,11 @@ public class UserAccountFromDTOConverter implements Function<UserAccountDTO, IUs
 		entity.setNickname(dto.getNickname());
 		entity.setPassword(dto.getPassword());
 		entity.setEmail(dto.getEmail());
-		entity.setFoto(dto.getFoto());
-		//entity.setStatistic(dto.getStatistic());
-		//entity.setTransaction(null);
 
 		ICountry country = countryService.createEntity();
 		country.setId(dto.getCountry());
 		entity.setCountry(country);
 
-		IStatistic statistic = statisticService.createEntity();
-		statistic.setId(dto.getStatistic());
-		entity.setStatistic(statistic);
-
-		entity.setUserRole(dto.getUserRole().MEMBER);
-		entity.setUserStatus(dto.getUserStatus().ACTIVE);
-
-		ITransaction transaction = transactionService.createEntity();
-		transaction.setId(dto.getTransaction());
-		entity.setTransaction(transaction);
 		return entity;
 	}
 

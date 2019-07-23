@@ -60,11 +60,6 @@
 			value="/WEB-INF/views/playerAction/list.jsp" />
 	</definition>
 
-	<definition name="statistic.list" extends="DefaultTemplate">
-		<put-attribute name="body"
-			value="/WEB-INF/views/statistic/list.jsp" />
-	</definition>
-
 	<definition name="transaction.list"
 		extends="DefaultTemplate">
 		<put-attribute name="body"

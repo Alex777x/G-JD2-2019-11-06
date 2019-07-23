@@ -21,6 +21,7 @@ public class TransactionServiceTest extends AbstractTest {
 		final ITransaction entityFromDb = transactionService.get(entity.getId());
 
 		assertNotNull(entityFromDb);
+		assertEquals(entity.getUserAccount().getId(), entityFromDb.getUserAccount().getId());
 		assertEquals(entity.getAmount(), entityFromDb.getAmount());
 		assertEquals(entity.getComment(), entityFromDb.getComment());
 		assertNotNull(entityFromDb.getId());
@@ -53,6 +54,7 @@ public class TransactionServiceTest extends AbstractTest {
 
 		double newAmount = entity.getAmount() + 1001;
 		String newComment = entity.getComment() + "_updated";
+		entity.setUserAccount(saveNewUserAccount());
 		entity.setAmount(newAmount);
 		entity.setComment(newComment);
 		Thread.sleep(2000);
@@ -82,6 +84,7 @@ public class TransactionServiceTest extends AbstractTest {
 		final List<ITransaction> allEntities = transactionService.getAll();
 
 		for (final ITransaction entityFromDb : allEntities) {
+			assertNotNull(entityFromDb.getUserAccount().getId());
 			assertNotNull(entityFromDb.getAmount());
 			assertNotNull(entityFromDb.getComment());
 			assertNotNull(entityFromDb.getId());

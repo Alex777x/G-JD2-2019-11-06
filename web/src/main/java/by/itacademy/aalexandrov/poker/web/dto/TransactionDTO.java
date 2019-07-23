@@ -5,6 +5,7 @@ import java.util.Date;
 public class TransactionDTO {
 
 	private Integer id;
+	private Integer userAccountId;
 	private double amount;
 	private String comment;
 	private Date created;
@@ -48,6 +49,14 @@ public class TransactionDTO {
 
 	public void setUpdated(Date updated) {
 		this.updated = updated;
+	}
+
+	public Integer getUserAccountId() {
+		return userAccountId;
+	}
+
+	public void setUserAccountId(Integer userAccountId) {
+		this.userAccountId = userAccountId;
 	}
 
 }

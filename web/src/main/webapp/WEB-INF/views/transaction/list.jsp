@@ -6,6 +6,7 @@
 	<tbody>
 		<tr>
 			<th>id</th>
+			<th>user account</th>
 			<th>amount</th>
 			<th>comment</th>
 			<th>created</th>
@@ -15,6 +16,7 @@
 		<c:forEach var="transaction" items="${gridItems}" varStatus="loopCounter">
 			<tr>
 				<td><c:out value="${transaction.id}" /></td>
+				<td><c:out value="${transaction.userAccountId}" /></td>
 				<td><c:out value="${transaction.amount}" /></td>
 				<td><c:out value="${transaction.comment}" /></td>
 				<td><fmt:formatDate pattern="yyyy-MM-dd"

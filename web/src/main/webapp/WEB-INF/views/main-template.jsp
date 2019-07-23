@@ -11,8 +11,6 @@
 <c:set var="pagesPlayerAction" value="${contextPath}/playerAction"
 	scope="request" />
 <c:set var="pagesPlayer" value="${contextPath}/player" scope="request" />
-<c:set var="pagesStatistic" value="${contextPath}/statistic"
-	scope="request" />
 <c:set var="pagesTiket" value="${contextPath}/tiket" scope="request" />
 <c:set var="pagesTransaction" value="${contextPath}/transaction"
 	scope="request" />

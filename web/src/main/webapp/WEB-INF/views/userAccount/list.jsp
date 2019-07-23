@@ -7,7 +7,8 @@
 <table class="bordered highlight">
 	<tbody>
 		<tr>
-			<th><mytaglib:sort-link column="id" pageUrl="${pagesUserAccount}">id</mytaglib:sort-link></th>
+			<th><mytaglib:sort-link column="id"
+					pageUrl="${pagesUserAccount}">id</mytaglib:sort-link></th>
 			<th><mytaglib:sort-link column="nickname"
 					pageUrl="${pagesUserAccount}">Nickname</mytaglib:sort-link></th>
 			<th><mytaglib:sort-link column="password"
@@ -18,14 +19,14 @@
 					pageUrl="${pagesUserAccount}">Foto</mytaglib:sort-link></th>
 			<th><mytaglib:sort-link column="country_id"
 					pageUrl="${pagesUserAccount}">Country</mytaglib:sort-link></th>
-			<th><mytaglib:sort-link column="statistic_id"
-					pageUrl="${pagesUserAccount}">Statistic</mytaglib:sort-link></th>
 			<th><mytaglib:sort-link column="role_id"
-					pageUrl="${pagesUserAccount}">User role</mytaglib:sort-link></th>
-			<th><mytaglib:sort-link column="status_id"
-					pageUrl="${pagesUserAccount}">User status</mytaglib:sort-link></th>
-			<th><mytaglib:sort-link column="transaction_id"
-					pageUrl="${pagesUserAccount}">Transaction</mytaglib:sort-link></th>
+					pageUrl="${pagesUserAccount}">Role</mytaglib:sort-link></th>
+					<th><mytaglib:sort-link column="status_id"
+					pageUrl="${pagesUserAccount}">Status</mytaglib:sort-link></th>
+			<th><mytaglib:sort-link column="sum_games"
+					pageUrl="${pagesUserAccount}">Sum games</mytaglib:sort-link></th>
+			<th><mytaglib:sort-link column="won_games"
+					pageUrl="${pagesUserAccount}">Won games</mytaglib:sort-link></th>
 			<th><mytaglib:sort-link column="created"
 					pageUrl="${pagesUserAccount}">Created</mytaglib:sort-link></th>
 			<th><mytaglib:sort-link column="updated"
@@ -41,10 +42,10 @@
 				<td><c:out value="${userAccount.email}" /></td>
 				<td><c:out value="${userAccount.foto}" /></td>
 				<td><c:out value="${userAccount.country}" /></td>
-				<td><c:out value="${userAccount.statistic}" /></td>
 				<td><c:out value="${userAccount.userRole}" /></td>
 				<td><c:out value="${userAccount.userStatus}" /></td>
-				<td><c:out value="${userAccount.transaction}" /></td>
+				<td><c:out value="${userAccount.sumGames}" /></td>
+				<td><c:out value="${userAccount.wonGames}" /></td>
 				<td><fmt:formatDate pattern="yyyy-MM-dd"
 						value="${userAccount.created}" /></td>
 				<td><fmt:formatDate pattern="yyyy-MM-dd"

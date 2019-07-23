@@ -3,8 +3,6 @@ package by.itacademy.aalexandrov.poker.jdbc.impl.entity;
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.UserRole;
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.UserStatus;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.ICountry;
-import by.itacademy.aalexandrov.poker.dao.api.entity.table.IStatistic;
-import by.itacademy.aalexandrov.poker.dao.api.entity.table.ITransaction;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IUserAccount;
 
 public class UserAccount extends BaseEntity implements IUserAccount {
@@ -14,40 +12,10 @@ public class UserAccount extends BaseEntity implements IUserAccount {
 	private String email;
 	private String foto;
 	private ICountry country;
-	private IStatistic statistic;
 	private UserRole userRole;
 	private UserStatus userStatus;
-	private ITransaction transaction;
-
-	@Override
-	public ICountry getCountry() {
-		return country;
-	}
-
-	@Override
-	public void setCountry(ICountry country) {
-		this.country = country;
-	}
-
-	@Override
-	public IStatistic getStatistic() {
-		return statistic;
-	}
-
-	@Override
-	public void setStatistic(IStatistic statistic) {
-		this.statistic = statistic;
-	}
-
-	@Override
-	public ITransaction getTransaction() {
-		return transaction;
-	}
-
-	@Override
-	public void setTransaction(ITransaction transaction) {
-		this.transaction = transaction;
-	}
+	private int sumGames;
+	private int wonGames;
 
 	@Override
 	public String getNickname() {
@@ -90,6 +58,16 @@ public class UserAccount extends BaseEntity implements IUserAccount {
 	}
 
 	@Override
+	public ICountry getCountry() {
+		return country;
+	}
+
+	@Override
+	public void setCountry(ICountry country) {
+		this.country = country;
+	}
+
+	@Override
 	public UserRole getUserRole() {
 		return userRole;
 	}
@@ -110,10 +88,30 @@ public class UserAccount extends BaseEntity implements IUserAccount {
 	}
 
 	@Override
+	public int getSumGames() {
+		return sumGames;
+	}
+
+	@Override
+	public void setSumGames(int sumGames) {
+		this.sumGames = sumGames;
+	}
+
+	@Override
+	public int getWonGames() {
+		return wonGames;
+	}
+
+	@Override
+	public void setWonGames(int wonGames) {
+		this.wonGames = wonGames;
+	}
+
+	@Override
 	public String toString() {
 		return "UserAccount [nickname=" + nickname + ", password=" + password + ", email=" + email + ", foto=" + foto
-				+ ", country=" + country + ", statistic=" + statistic + ", userRole=" + userRole + ", userStatus="
-				+ userStatus + ", transaction=" + transaction + "]";
+				+ ", country=" + country + ", userRole=" + userRole + ", userStatus=" + userStatus + ", sumGames="
+				+ sumGames + ", wonGames=" + wonGames + "]";
 	}
 
 }

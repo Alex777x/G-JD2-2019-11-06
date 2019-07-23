@@ -17,8 +17,6 @@ import by.itacademy.aalexandrov.poker.dao.api.entity.enums.UserStatus;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IUserAccount;
 import by.itacademy.aalexandrov.poker.dao.api.filter.UserAccountFilter;
 import by.itacademy.aalexandrov.poker.jdbc.impl.entity.Country;
-import by.itacademy.aalexandrov.poker.jdbc.impl.entity.Statistic;
-import by.itacademy.aalexandrov.poker.jdbc.impl.entity.Transaction;
 import by.itacademy.aalexandrov.poker.jdbc.impl.entity.UserAccount;
 import by.itacademy.aalexandrov.poker.jdbc.impl.util.PreparedStatementAction;
 import by.itacademy.aalexandrov.poker.jdbc.impl.util.SQLExecutionException;
@@ -34,7 +32,7 @@ public class UserAccountDaoImpl extends AbstractDaoImpl<IUserAccount, Integer> i
 	@Override
 	public void insert(IUserAccount entity) {
 		executeStatement(new PreparedStatementAction<IUserAccount>(String.format(
-				"insert into %s (nickname, password, email, foto, statistic_id, country_id, role_id, status_id, transaction_id, created, updated) values(?,?,?,?,?,?,?,?,?,?,?)",
+				"insert into %s (nickname, password, email, foto, country_id, role_id, status_id, sum_games, won_games, created, updated) values(?,?,?,?,?,?,?,?,?,?,?)",
 				getTableName()), true) {
 			@Override
 			public IUserAccount doWithPreparedStatement(final PreparedStatement pStmt) throws SQLException {
@@ -42,11 +40,11 @@ public class UserAccountDaoImpl extends AbstractDaoImpl<IUserAccount, Integer> i
 				pStmt.setString(2, entity.getPassword());
 				pStmt.setString(3, entity.getEmail());
 				pStmt.setString(4, entity.getFoto());
-				pStmt.setInt(5, entity.getStatistic().getId());
-				pStmt.setInt(6, entity.getCountry().getId());
-				pStmt.setString(7, entity.getUserRole().name());
-				pStmt.setString(8, entity.getUserStatus().name());
-				pStmt.setInt(9, entity.getTransaction().getId());
+				pStmt.setInt(5, entity.getCountry().getId());
+				pStmt.setString(6, entity.getUserRole().name());
+				pStmt.setString(7, entity.getUserStatus().name());
+				pStmt.setInt(8, entity.getSumGames());
+				pStmt.setInt(9, entity.getWonGames());
 				pStmt.setObject(10, entity.getCreated(), Types.TIMESTAMP);
 				pStmt.setObject(11, entity.getUpdated(), Types.TIMESTAMP);
 
@@ -68,7 +66,7 @@ public class UserAccountDaoImpl extends AbstractDaoImpl<IUserAccount, Integer> i
 	public void update(IUserAccount entity) {
 		try {
 			executeStatement(new PreparedStatementAction<IUserAccount>(String.format(
-					"update %s set nickname=?, password=?, email=?, foto=?, statistic_id=?, country_id=?, role_id=?, status_id=?, transaction_id=?, updated=? where id=?",
+					"update %s set nickname=?, password=?, email=?, foto=?, country_id=?, role_id=?, status_id=?, sum_games=?, won_games=?, updated=? where id=?",
 					getTableName())) {
 				@Override
 				public IUserAccount doWithPreparedStatement(final PreparedStatement pStmt) throws SQLException {
@@ -76,11 +74,11 @@ public class UserAccountDaoImpl extends AbstractDaoImpl<IUserAccount, Integer> i
 					pStmt.setString(2, entity.getPassword());
 					pStmt.setString(3, entity.getEmail());
 					pStmt.setString(4, entity.getFoto());
-					pStmt.setInt(5, entity.getStatistic().getId());
-					pStmt.setInt(6, entity.getCountry().getId());
-					pStmt.setString(7, entity.getUserRole().name());
-					pStmt.setString(8, entity.getUserStatus().name());
-					pStmt.setInt(9, entity.getTransaction().getId());
+					pStmt.setInt(5, entity.getCountry().getId());
+					pStmt.setString(6, entity.getUserRole().name());
+					pStmt.setString(7, entity.getUserStatus().name());
+					pStmt.setInt(8, entity.getSumGames());
+					pStmt.setInt(9, entity.getWonGames());
 					pStmt.setObject(10, entity.getUpdated(), Types.TIMESTAMP);
 					pStmt.setInt(11, entity.getId());
 
@@ -109,6 +107,8 @@ public class UserAccountDaoImpl extends AbstractDaoImpl<IUserAccount, Integer> i
 		entity.setFoto(resultSet.getString("foto"));
 		entity.setUserRole(UserRole.valueOf(resultSet.getString("role_id")));
 		entity.setUserStatus(UserStatus.valueOf(resultSet.getString("status_id")));
+		entity.setSumGames(resultSet.getInt("sum_games"));
+		entity.setWonGames(resultSet.getInt("won_games"));
 		entity.setCreated(resultSet.getTimestamp("created"));
 		entity.setUpdated(resultSet.getTimestamp("updated"));
 
@@ -122,28 +122,6 @@ public class UserAccountDaoImpl extends AbstractDaoImpl<IUserAccount, Integer> i
 			entity.setCountry(country);
 		}
 
-		Integer statisticId = (Integer) resultSet.getObject("statistic_id");
-		if (statisticId != null) {
-			final Statistic statistic = new Statistic();
-			statistic.setId(statisticId);
-			if (columns.contains("statistic_id")) {
-				statistic.setSumGames(resultSet.getInt("statistic_id"));
-				statistic.setWonGames(resultSet.getInt("statistic_id"));
-			}
-			entity.setStatistic(statistic);
-		}
-
-		Integer tranzactionId = (Integer) resultSet.getObject("transaction_id");
-		if (tranzactionId != null) {
-			final Transaction tranzaction = new Transaction();
-			tranzaction.setId(tranzactionId);
-			if (columns.contains("transaction_id")) {
-				tranzaction.setAmount(resultSet.getInt("transaction_id"));
-				tranzaction.setComment(resultSet.getString("transaction_id"));
-			}
-			entity.setTransaction(tranzaction);
-		}
-
 		return entity;
 	}
 
@@ -155,18 +133,18 @@ public class UserAccountDaoImpl extends AbstractDaoImpl<IUserAccount, Integer> i
 
 				for (IUserAccount entity : entities) {
 					PreparedStatement pStmt = c.prepareStatement(String.format(
-							"insert into %s (nickname, password, email, foto, statistic_id, country_id, role_id, status_id, transaction_id, created, updated) values(?,?,?,?,?,?,?,?,?,?)",
+							"insert into %s (nickname, password, email, foto, country_id, role_id, status_id, sum_games, won_games, created, updated) values(?,?,?,?,?,?,?,?,?,?)",
 							getTableName()), Statement.RETURN_GENERATED_KEYS);
 
 					pStmt.setString(1, entity.getNickname());
 					pStmt.setString(2, entity.getPassword());
 					pStmt.setString(3, entity.getEmail());
 					pStmt.setString(4, entity.getFoto());
-					pStmt.setInt(5, entity.getStatistic().getId());
-					pStmt.setInt(6, entity.getCountry().getId());
-					pStmt.setString(7, entity.getUserRole().name());
-					pStmt.setString(8, entity.getUserStatus().name());
-					pStmt.setInt(9, entity.getTransaction().getId());
+					pStmt.setInt(5, entity.getCountry().getId());
+					pStmt.setString(6, entity.getUserRole().name());
+					pStmt.setString(7, entity.getUserStatus().name());
+					pStmt.setInt(8, entity.getSumGames());
+					pStmt.setInt(9, entity.getWonGames());
 					pStmt.setObject(10, entity.getCreated(), Types.TIMESTAMP);
 					pStmt.setObject(11, entity.getUpdated(), Types.TIMESTAMP);
 

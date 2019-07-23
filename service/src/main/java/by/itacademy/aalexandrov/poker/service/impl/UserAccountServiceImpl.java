@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import by.itacademy.aalexandrov.poker.dao.api.IUserAccountDao;
+import by.itacademy.aalexandrov.poker.dao.api.entity.enums.UserRole;
+import by.itacademy.aalexandrov.poker.dao.api.entity.enums.UserStatus;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IUserAccount;
 import by.itacademy.aalexandrov.poker.dao.api.filter.UserAccountFilter;
 import by.itacademy.aalexandrov.poker.service.IUserAccountService;
@@ -29,7 +31,12 @@ public class UserAccountServiceImpl implements IUserAccountService {
 	@Override
 	public IUserAccount createEntity() {
 		IUserAccount createEntity = dao.createEntity();
-		//TODO set defaulr fields
+		//TODO set default fields
+		createEntity.setFoto("img/foto");
+		createEntity.setSumGames(0);
+		createEntity.setWonGames(0);
+		createEntity.setUserRole(UserRole.MEMBER);
+		createEntity.setUserStatus(UserStatus.ACTIVE);
 		return createEntity;
 	}
 

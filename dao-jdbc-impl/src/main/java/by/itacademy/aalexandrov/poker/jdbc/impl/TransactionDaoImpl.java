@@ -7,13 +7,16 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Types;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.stereotype.Repository;
 
 import by.itacademy.aalexandrov.poker.dao.api.ITransactionDao;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.ITransaction;
+import by.itacademy.aalexandrov.poker.dao.api.entity.table.IUserAccount;
 import by.itacademy.aalexandrov.poker.dao.api.filter.TransactionFilter;
 import by.itacademy.aalexandrov.poker.jdbc.impl.entity.Transaction;
+import by.itacademy.aalexandrov.poker.jdbc.impl.entity.UserAccount;
 import by.itacademy.aalexandrov.poker.jdbc.impl.util.PreparedStatementAction;
 import by.itacademy.aalexandrov.poker.jdbc.impl.util.SQLExecutionException;
 
@@ -28,14 +31,16 @@ public class TransactionDaoImpl extends AbstractDaoImpl<ITransaction, Integer> i
 	@Override
 	public void insert(ITransaction entity) {
 		executeStatement(new PreparedStatementAction<ITransaction>(
-				String.format("insert into %s (amount, comment, created, updated) values(?,?,?,?)", getTableName()),
+				String.format("insert into %s (user_account_id, amount, comment, created, updated) values(?,?,?,?,?)",
+						getTableName()),
 				true) {
 			@Override
 			public ITransaction doWithPreparedStatement(final PreparedStatement pStmt) throws SQLException {
-				pStmt.setDouble(1, entity.getAmount());
-				pStmt.setString(2, entity.getComment());
-				pStmt.setObject(3, entity.getCreated(), Types.TIMESTAMP);
-				pStmt.setObject(4, entity.getUpdated(), Types.TIMESTAMP);
+				pStmt.setInt(1, entity.getUserAccount().getId());
+				pStmt.setDouble(2, entity.getAmount());
+				pStmt.setString(3, entity.getComment());
+				pStmt.setObject(4, entity.getCreated(), Types.TIMESTAMP);
+				pStmt.setObject(5, entity.getUpdated(), Types.TIMESTAMP);
 
 				pStmt.executeUpdate();
 
@@ -53,14 +58,15 @@ public class TransactionDaoImpl extends AbstractDaoImpl<ITransaction, Integer> i
 
 	@Override
 	public void update(ITransaction entity) {
-		executeStatement(new PreparedStatementAction<ITransaction>(
-				String.format("update %s set amount=?, comment=?, updated=? where id=?", getTableName())) {
+		executeStatement(new PreparedStatementAction<ITransaction>(String
+				.format("update %s set user_account_id=?, amount=?, comment=?, updated=? where id=?", getTableName())) {
 			@Override
 			public ITransaction doWithPreparedStatement(final PreparedStatement pStmt) throws SQLException {
-				pStmt.setDouble(1, entity.getAmount());
-				pStmt.setString(2, entity.getComment());
-				pStmt.setObject(3, entity.getUpdated(), Types.TIMESTAMP);
-				pStmt.setInt(4, entity.getId());
+				pStmt.setInt(1, entity.getUserAccount().getId());
+				pStmt.setDouble(2, entity.getAmount());
+				pStmt.setString(3, entity.getComment());
+				pStmt.setObject(4, entity.getUpdated(), Types.TIMESTAMP);
+				pStmt.setInt(5, entity.getId());
 
 				pStmt.executeUpdate();
 				return entity;
@@ -75,13 +81,29 @@ public class TransactionDaoImpl extends AbstractDaoImpl<ITransaction, Integer> i
 	}
 
 	@Override
-	protected ITransaction parseRow(final ResultSet resultSet) throws SQLException {
+	protected ITransaction parseRow(final ResultSet resultSet, Set<String> columns) throws SQLException {
 		final ITransaction entity = createEntity();
 		entity.setId((Integer) resultSet.getObject("id"));
 		entity.setAmount(resultSet.getDouble("amount"));
 		entity.setComment(resultSet.getString("comment"));
 		entity.setCreated(resultSet.getTimestamp("created"));
 		entity.setUpdated(resultSet.getTimestamp("updated"));
+
+		Integer userAccountId = (Integer) resultSet.getInt("user_account_id");
+		if (userAccountId != null) {
+			final IUserAccount userAccount = new UserAccount();
+			userAccount.setId(userAccountId);
+			if (columns.contains("user_account_id")) {
+				userAccount.setNickname(resultSet.getString("user_account_id"));
+				userAccount.setPassword(resultSet.getString("user_account_id"));
+				userAccount.setEmail(resultSet.getString("user_account_id"));
+				userAccount.setFoto(resultSet.getString("user_account_id"));
+				userAccount.setSumGames(resultSet.getInt("user_account_id"));
+				userAccount.setWonGames(resultSet.getInt("user_account_id"));
+			}
+			entity.setUserAccount(userAccount);
+		}
+
 		return entity;
 	}
 
@@ -93,14 +115,15 @@ public class TransactionDaoImpl extends AbstractDaoImpl<ITransaction, Integer> i
 
 				for (ITransaction entity : entities) {
 					PreparedStatement pStmt = c.prepareStatement(
-							String.format("insert into %s (amount, comment, created, updated) values(?,?,?,?)",
+							String.format("insert into %s (user_account_id, amount, comment, created, updated) values(?,?,?,?,?)",
 									getTableName()),
 							Statement.RETURN_GENERATED_KEYS);
 
-					pStmt.setDouble(1, entity.getAmount());
-					pStmt.setString(2, entity.getComment());
-					pStmt.setObject(3, entity.getCreated(), Types.TIMESTAMP);
-					pStmt.setObject(4, entity.getUpdated(), Types.TIMESTAMP);
+					pStmt.setInt(1, entity.getUserAccount().getId());
+					pStmt.setDouble(2, entity.getAmount());
+					pStmt.setString(3, entity.getComment());
+					pStmt.setObject(4, entity.getCreated(), Types.TIMESTAMP);
+					pStmt.setObject(5, entity.getUpdated(), Types.TIMESTAMP);
 
 					pStmt.executeUpdate();
 

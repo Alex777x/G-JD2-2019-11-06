@@ -28,10 +28,10 @@ public class UserAccountServiceTest extends AbstractTest {
 		assertEquals(entity.getEmail(), entityFromDb.getEmail());
 		assertEquals(entity.getFoto(), entityFromDb.getFoto());
 		assertEquals(entity.getCountry().getId(), entityFromDb.getCountry().getId());
-		assertEquals(entity.getStatistic().getId(), entityFromDb.getStatistic().getId());
 		assertEquals(entity.getUserRole(), entityFromDb.getUserRole());
 		assertEquals(entity.getUserStatus(), entityFromDb.getUserStatus());
-		assertEquals(entity.getTransaction().getId(), entityFromDb.getTransaction().getId());
+		assertEquals(entity.getSumGames(), entityFromDb.getSumGames());
+		assertEquals(entity.getWonGames(), entityFromDb.getWonGames());
 		assertNotNull(entityFromDb.getId());
 		assertNotNull(entityFromDb.getCreated());
 		assertNotNull(entityFromDb.getUpdated());
@@ -48,11 +48,11 @@ public class UserAccountServiceTest extends AbstractTest {
 		entity1.setEmail(getRandomPrefix());
 		entity1.setFoto(getRandomPrefix());
 		entity1.setCountry(saveNewCountry());
-		entity1.setStatistic(saveNewStatistic());
 		entity1.setUserRole(UserRole.MEMBER);
 		entity1.setUserStatus(UserStatus.ACTIVE);
-		entity1.setTransaction(saveNewTransaction());
-
+		entity1.setSumGames(getRandomObjectsCount());
+		entity1.setWonGames(getRandomObjectsCount());
+		
 		try {
 			final IUserAccount entity2 = userAccountService.createEntity();
 			userAccountService.save(entity1, entity2);
@@ -73,12 +73,16 @@ public class UserAccountServiceTest extends AbstractTest {
 		String newFoto = entity.getFoto() + "_updated";
 		UserRole newUserRole = entity.getUserRole();
 		UserStatus newUserStatus = entity.getUserStatus();
+		Integer newSumGames = entity.getSumGames() + 1001;
+		Integer newWonGames = entity.getWonGames() + 1001;
 		entity.setNickname(newNickname);
 		entity.setPassword(newPassword);
 		entity.setEmail(newEmail);
 		entity.setFoto(newFoto);
 		entity.setUserRole(newUserRole);
 		entity.setUserStatus(newUserStatus);
+		entity.setSumGames(newSumGames);
+		entity.setWonGames(newWonGames);
 		Thread.sleep(2000);
 		userAccountService.save(entity);
 
@@ -91,6 +95,8 @@ public class UserAccountServiceTest extends AbstractTest {
 		assertEquals(newFoto, entityFromDb.getFoto());
 		assertEquals(newUserRole, entityFromDb.getUserRole());
 		assertEquals(newUserStatus, entityFromDb.getUserStatus());
+		assertEquals(newSumGames, entityFromDb.getSumGames());
+		assertEquals(newWonGames, entityFromDb.getWonGames());
 		assertNotNull(entityFromDb.getId());
 		assertNotNull(entityFromDb.getCreated());
 		assertNotNull(entityFromDb.getUpdated());
@@ -115,10 +121,10 @@ public class UserAccountServiceTest extends AbstractTest {
 			assertNotNull(entityFromDb.getEmail());
 			assertNotNull(entityFromDb.getFoto());
 			assertNotNull(entityFromDb.getCountry().getId());
-			assertNotNull(entityFromDb.getStatistic());
 			assertNotNull(entityFromDb.getUserRole());
 			assertNotNull(entityFromDb.getUserStatus());
-			assertNotNull(entityFromDb.getTransaction());
+			assertNotNull(entityFromDb.getSumGames());
+			assertNotNull(entityFromDb.getWonGames());
 			assertNotNull(entityFromDb.getId());
 			assertNotNull(entityFromDb.getCreated());
 			assertNotNull(entityFromDb.getUpdated());

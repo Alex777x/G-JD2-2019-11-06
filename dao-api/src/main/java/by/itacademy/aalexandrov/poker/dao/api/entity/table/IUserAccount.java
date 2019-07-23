@@ -5,6 +5,14 @@ import by.itacademy.aalexandrov.poker.dao.api.entity.enums.UserStatus;
 
 public interface IUserAccount extends IBaseEntity {
 
+	void setWonGames(int wonGames);
+
+	int getWonGames();
+
+	void setSumGames(int sumGames);
+
+	int getSumGames();
+
 	void setUserStatus(UserStatus userStatus);
 
 	UserStatus getUserStatus();
@@ -12,6 +20,10 @@ public interface IUserAccount extends IBaseEntity {
 	void setUserRole(UserRole userRole);
 
 	UserRole getUserRole();
+
+	void setCountry(ICountry country);
+
+	ICountry getCountry();
 
 	void setFoto(String foto);
 
@@ -28,17 +40,5 @@ public interface IUserAccount extends IBaseEntity {
 	void setNickname(String nickname);
 
 	String getNickname();
-
-	void setStatistic(IStatistic statistic);
-
-	IStatistic getStatistic();
-
-	void setCountry(ICountry country);
-
-	ICountry getCountry();
-
-	void setTransaction(ITransaction transaction);
-
-	ITransaction getTransaction();
 
 }

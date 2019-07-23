@@ -16,7 +16,6 @@
 				<li><a href="${pagesGame}">Game</a></li>
 				<li><a href="${pagesPlayerAction}">Player Action</a></li>
 				<li><a href="${pagesPlayer}">Player</a></li>
-				<li><a href="${pagesStatistic}">Statistic</a></li>
 				<li><a href="${pagesTiket}">Tiket</a></li>
 				<li><a href="${pagesTransaction}">Transaction</a></li>
 				<li><a href="${pagesUserAccount}">UserAccount</a></li>
@@ -33,7 +32,6 @@
 		<li><a href="${pagesGame}">Game</a></li>
 		<li><a href="${pagesPlayerAction}">Player Action</a></li>
 		<li><a href="${pagesPlayer}">Player</a></li>
-		<li><a href="${pagesStatistic}">Statistic</a></li>
 		<li><a href="${pagesTiket}">Tiket</a></li>
 		<li><a href="${pagesTransaction}">Transaction</a></li>
 		<li><a href="${pagesUserAccount}">UserAccount</a></li>

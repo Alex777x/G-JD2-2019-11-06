@@ -22,7 +22,6 @@ import by.itacademy.aalexandrov.poker.dao.api.entity.table.ICountry;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IUserAccount;
 import by.itacademy.aalexandrov.poker.dao.api.filter.UserAccountFilter;
 import by.itacademy.aalexandrov.poker.service.ICountryService;
-import by.itacademy.aalexandrov.poker.service.IStatisticService;
 import by.itacademy.aalexandrov.poker.service.ITransactionService;
 import by.itacademy.aalexandrov.poker.service.IUserAccountService;
 import by.itacademy.aalexandrov.poker.web.converter.UserAccountFromDTOConverter;
@@ -49,13 +48,12 @@ public class UserAccountController extends AbstractController {
 	@Autowired
 	public UserAccountController(IUserAccountService userAccountService, UserAccountToDTOConverter toDtoConverter,
 			UserAccountFromDTOConverter fromDtoConverter, ICountryService countryService,
-			IStatisticService statisticService, ITransactionService transactionService) {
+			ITransactionService transactionService) {
 		super();
 		this.userAccountService = userAccountService;
 		this.toDtoConverter = toDtoConverter;
 		this.fromDtoConverter = fromDtoConverter;
 		this.countryService = countryService;
-//		this.statisticService = statisticService;
 //		this.transactionService = transactionService;
 	}
 
@@ -133,16 +131,12 @@ public class UserAccountController extends AbstractController {
 
 	private void loadCommonFormUserAccounts(final Map<String, Object> hashMap) {
 		final List<ICountry> countries = countryService.getAll();
-		//final List<IStatistic> statistics = statisticService.getAll();
-		//final List<ITransaction> transactions = transactionService.getAll();
+		// final List<ITransaction> transactions = transactionService.getAll();
 
 		final Map<Integer, String> countriesMap = countries.stream()
 				.collect(Collectors.toMap(ICountry::getId, ICountry::getCountry));
 		hashMap.put("countriesChoices", countriesMap);
-		
-//		final Map<Integer, String> statisticsMap = statistics.stream()
-//				.collect(Collectors.toMap(IStatistic::getId, IStatistic::toString));
-//		hashMap.put("statisticsChoices", statisticsMap);
+
 //		
 //		final Map<Integer, String> transactionsMap = transactions.stream()
 //				.collect(Collectors.toMap(ITransaction::getId, ITransaction::getComment));

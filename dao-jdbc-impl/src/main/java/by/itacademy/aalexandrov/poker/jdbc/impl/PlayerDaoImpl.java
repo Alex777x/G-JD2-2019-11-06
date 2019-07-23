@@ -16,6 +16,7 @@ import by.itacademy.aalexandrov.poker.dao.api.entity.enums.PlayerPosition;
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.PlayerStatus;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IGame;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IPlayer;
+import by.itacademy.aalexandrov.poker.dao.api.entity.table.IUserAccount;
 import by.itacademy.aalexandrov.poker.dao.api.filter.PlayerFilter;
 import by.itacademy.aalexandrov.poker.jdbc.impl.entity.Game;
 import by.itacademy.aalexandrov.poker.jdbc.impl.entity.Player;
@@ -102,7 +103,7 @@ public class PlayerDaoImpl extends AbstractDaoImpl<IPlayer, Integer> implements 
 
 		Integer userAccountId = (Integer) resultSet.getObject("user_account_id");
 		if (userAccountId != null) {
-			final UserAccount userAccount = new UserAccount();
+			final IUserAccount userAccount = new UserAccount();
 			userAccount.setId(userAccountId);
 			if (columns.contains("user_account_id")) {
 				userAccount.setNickname(resultSet.getString("user_account_id"));

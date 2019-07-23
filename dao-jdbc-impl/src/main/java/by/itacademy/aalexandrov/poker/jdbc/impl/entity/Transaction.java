@@ -1,11 +1,13 @@
 package by.itacademy.aalexandrov.poker.jdbc.impl.entity;
 
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.ITransaction;
+import by.itacademy.aalexandrov.poker.dao.api.entity.table.IUserAccount;
 
 public class Transaction extends BaseEntity implements ITransaction {
 
 	private double amount;
 	private String comment;
+	private IUserAccount userAccount;
 
 	@Override
 	public double getAmount() {
@@ -28,8 +30,18 @@ public class Transaction extends BaseEntity implements ITransaction {
 	}
 
 	@Override
+	public IUserAccount getUserAccount() {
+		return userAccount;
+	}
+
+	@Override
+	public void setUserAccount(IUserAccount userAccount) {
+		this.userAccount = userAccount;
+	}
+
+	@Override
 	public String toString() {
-		return "Tranzaction [amount=" + amount + ", comment=" + comment + "]";
+		return "Transaction [amount=" + amount + ", comment=" + comment + ", userAccount=" + userAccount + "]";
 	}
 
 }

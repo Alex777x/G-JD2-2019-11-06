@@ -21,7 +21,6 @@ import by.itacademy.aalexandrov.poker.dao.api.entity.table.ICountry;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IGame;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IPlayer;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IPlayerAction;
-import by.itacademy.aalexandrov.poker.dao.api.entity.table.IStatistic;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.ITiket;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.ITransaction;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IUserAccount;
@@ -32,7 +31,6 @@ import by.itacademy.aalexandrov.poker.service.ICountryService;
 import by.itacademy.aalexandrov.poker.service.IGameService;
 import by.itacademy.aalexandrov.poker.service.IPlayerActionService;
 import by.itacademy.aalexandrov.poker.service.IPlayerService;
-import by.itacademy.aalexandrov.poker.service.IStatisticService;
 import by.itacademy.aalexandrov.poker.service.ITiketService;
 import by.itacademy.aalexandrov.poker.service.ITransactionService;
 import by.itacademy.aalexandrov.poker.service.IUserAccountService;
@@ -43,8 +41,6 @@ public abstract class AbstractTest {
 	protected ITiketService tiketService;
 	@Autowired
 	protected ICountryService countryService;
-	@Autowired
-	protected IStatisticService statisticService;
 	@Autowired
 	protected ITransactionService transactionService;
 	@Autowired
@@ -74,10 +70,9 @@ public abstract class AbstractTest {
 		playerActionService.deleteAll();
 		playerService.deleteAll();
 		gameService.deleteAll();
+		transactionService.deleteAll();
 		userAccountService.deleteAll();
 		countryService.deleteAll();
-		transactionService.deleteAll();
-		statisticService.deleteAll();
 
 	}
 
@@ -110,16 +105,9 @@ public abstract class AbstractTest {
 		return entity;
 	}
 
-	protected IStatistic saveNewStatistic() {
-		IStatistic entity = statisticService.createEntity();
-		entity.setSumGames(getRandomObjectsCount());
-		entity.setWonGames(getRandomObjectsCount());
-		statisticService.save(entity);
-		return entity;
-	}
-
 	protected ITransaction saveNewTransaction() {
 		ITransaction entity = transactionService.createEntity();
+		entity.setUserAccount(saveNewUserAccount());
 		entity.setAmount(getRandomObjectsCount());
 		entity.setComment("comment" + getRandomPrefix());
 		transactionService.save(entity);
@@ -146,10 +134,10 @@ public abstract class AbstractTest {
 		entity.setEmail("email" + getRandomPrefix());
 		entity.setFoto("foto" + getRandomPrefix());
 		entity.setCountry(saveNewCountry());
-		entity.setStatistic(saveNewStatistic());
 		entity.setUserRole(UserRole.MEMBER);
 		entity.setUserStatus(UserStatus.ACTIVE);
-		entity.setTransaction(saveNewTransaction());
+		entity.setSumGames(getRandomObjectsCount());
+		entity.setWonGames(getRandomObjectsCount());
 		userAccountService.save(entity);
 		return entity;
 	}

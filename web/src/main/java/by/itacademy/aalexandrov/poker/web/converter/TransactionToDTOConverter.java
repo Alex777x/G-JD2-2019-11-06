@@ -14,6 +14,7 @@ public class TransactionToDTOConverter implements Function<ITransaction, Transac
 	public TransactionDTO apply(ITransaction entity) {
 		TransactionDTO dto = new TransactionDTO();
 		dto.setId(entity.getId());
+		dto.setUserAccountId(entity.getUserAccount().getId());
 		dto.setAmount(entity.getAmount());
 		dto.setComment(entity.getComment());
 		dto.setCreated(entity.getCreated());
