@@ -2,11 +2,17 @@ package by.itacademy.aalexandrov.poker.web.dto;
 
 import java.util.Date;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class TransactionDTO {
 
 	private Integer id;
+	@NotNull
 	private Integer userAccountId;
+	@NotNull
 	private double amount;
+	@Size(min = 1, max = 50)
 	private String comment;
 	private Date created;
 	private Date updated;

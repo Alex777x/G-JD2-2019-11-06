@@ -2,15 +2,21 @@ package by.itacademy.aalexandrov.poker.web.dto;
 
 import java.util.Date;
 
+import javax.validation.constraints.NotNull;
+
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.Rank;
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.Suits;
 
 public class CardDTO {
 
 	private Integer id;
+	@NotNull
 	private Suits suit;
+	@NotNull
 	private Rank rank;
+	@NotNull
 	private String filename;
+	@NotNull
 	private Date created;
 	private Date updated;
 

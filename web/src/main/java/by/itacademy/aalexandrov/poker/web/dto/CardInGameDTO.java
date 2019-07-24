@@ -2,14 +2,20 @@ package by.itacademy.aalexandrov.poker.web.dto;
 
 import java.util.Date;
 
+import javax.validation.constraints.NotNull;
+
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.CardStatus;
 
 public class CardInGameDTO {
 
 	private Integer id;
+	@NotNull
 	private Integer card;
+	@NotNull
 	private Integer game;
+	@NotNull
 	private Integer player;
+	@NotNull
 	private CardStatus cardStatus;
 	private Date created;
 	private Date updated;

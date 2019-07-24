@@ -2,10 +2,13 @@ package by.itacademy.aalexandrov.poker.web.dto;
 
 import java.util.Date;
 
+import javax.validation.constraints.NotNull;
+
 
 public class PlayerActionDTO {
 
 	private Integer id;
+	@NotNull
 	private Integer player;
 	private int bet;
 	private int call;

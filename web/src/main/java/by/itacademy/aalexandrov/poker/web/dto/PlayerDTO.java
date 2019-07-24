@@ -2,15 +2,20 @@ package by.itacademy.aalexandrov.poker.web.dto;
 
 import java.util.Date;
 
+import javax.validation.constraints.NotNull;
+
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.PlayerPosition;
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.PlayerStatus;
 
 public class PlayerDTO {
 
 	private Integer id;
+	@NotNull
 	private Integer gameId;
+	@NotNull
 	private Integer userAccountId;
 	private PlayerPosition position;
+	@NotNull
 	private boolean inGame;
 	private PlayerStatus state;
 	private double stack;
