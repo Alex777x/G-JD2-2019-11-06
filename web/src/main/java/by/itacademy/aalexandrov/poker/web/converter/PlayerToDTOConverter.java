@@ -19,12 +19,12 @@ public class PlayerToDTOConverter implements Function<IPlayer, PlayerDTO> {
 		
 		IGame game = entity.getGame();
 		if (game != null) {
-			dto.setGame(game.getId());
+			dto.setGameId(game.getId());
 		}
 		
 		IUserAccount userAccount = entity.getUserAccount();
 		if (userAccount != null) {
-			dto.setUserAccount(userAccount.getId());
+			dto.setUserAccountId(userAccount.getId());
 		}
 		
 		dto.setPosition(entity.getPosition());

@@ -52,7 +52,7 @@
 			</div>
 			<div class="col s3">
 				<a class="btn waves-effect waves-light right"
-					href="${pagesUserAccount}">К списку<i
+					href="${pagesUserAccount}">List<i
 					class="material-icons right"></i>
 				</a>
 			</div>

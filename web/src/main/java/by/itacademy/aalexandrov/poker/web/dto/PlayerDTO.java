@@ -25,20 +25,20 @@ public class PlayerDTO {
 		this.id = id;
 	}
 
-	public Integer getGame() {
+	public Integer getGameId() {
 		return gameId;
 	}
 
-	public void setGame(Integer game) {
-		this.gameId = game;
+	public void setGameId(Integer gameId) {
+		this.gameId = gameId;
 	}
 
-	public Integer getUserAccount() {
+	public Integer getUserAccountId() {
 		return userAccountId;
 	}
 
-	public void setUserAccount(Integer userAccount) {
-		this.userAccountId = userAccount;
+	public void setUserAccountId(Integer userAccountId) {
+		this.userAccountId = userAccountId;
 	}
 
 	public PlayerPosition getPosition() {

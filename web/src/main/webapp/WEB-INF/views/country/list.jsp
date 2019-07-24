@@ -1,12 +1,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="mytaglib" uri="my-custom-tags-uri"%>
+<%@ taglib prefix="jspFragments" tagdir="/WEB-INF/tags"%>
 
 <h4 class="header">Country</h4>
 <table class="bordered highlight">
 	<tbody>
 		<tr>
-			<th>id</th>
-			<th>country</th>
+			<th><mytaglib:sort-link column="id" pageUrl="${pagesCountry}">Id</mytaglib:sort-link></th>
+			<th><mytaglib:sort-link column="country" pageUrl="${pagesCountry}">Country</mytaglib:sort-link></th>
 			<th></th>
 		</tr>
 		<c:forEach var="country" items="${gridItems}" varStatus="loopCounter">
@@ -25,3 +27,4 @@
 </table>
 <a class="waves-effect waves-light btn right" href="${pagesCountry}/add"><i
 	class="material-icons">add</i></a>
+<jspFragments:paging />

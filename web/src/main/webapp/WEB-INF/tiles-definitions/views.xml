@@ -23,36 +23,72 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/card/list.jsp" />
 	</definition>
+	
+	<definition name="card.edit" extends="DefaultTemplate">
+		<put-attribute name="body"
+			value="/WEB-INF/views/card/form.jsp" />
+	</definition>
 
 	<definition name="cardInGame.list" extends="DefaultTemplate">
 		<put-attribute name="body"
 			value="/WEB-INF/views/cardInGame/list.jsp" />
+	</definition>
+	
+	<definition name="cardInGame.edit" extends="DefaultTemplate">
+		<put-attribute name="body"
+			value="/WEB-INF/views/cardInGame/form.jsp" />
 	</definition>
 
 	<definition name="chat.list" extends="DefaultTemplate">
 		<put-attribute name="body"
 			value="/WEB-INF/views/chat/list.jsp" />
 	</definition>
+	
+	<definition name="chat.edit" extends="DefaultTemplate">
+		<put-attribute name="body"
+			value="/WEB-INF/views/chat/form.jsp" />
+	</definition>
 
 	<definition name="country.list" extends="DefaultTemplate">
 		<put-attribute name="body"
 			value="/WEB-INF/views/country/list.jsp" />
+	</definition>
+	
+	<definition name="country.edit" extends="DefaultTemplate">
+		<put-attribute name="body"
+			value="/WEB-INF/views/country/form.jsp" />
 	</definition>
 
 	<definition name="game.list" extends="DefaultTemplate">
 		<put-attribute name="body"
 			value="/WEB-INF/views/game/list.jsp" />
 	</definition>
+	
+	<definition name="game.edit" extends="DefaultTemplate">
+		<put-attribute name="body"
+			value="/WEB-INF/views/game/form.jsp" />
+	</definition>
 
 	<definition name="player.list" extends="DefaultTemplate">
 		<put-attribute name="body"
 			value="/WEB-INF/views/player/list.jsp" />
+	</definition>
+	
+	<definition name="player.edit" extends="DefaultTemplate">
+		<put-attribute name="body"
+			value="/WEB-INF/views/player/form.jsp" />
 	</definition>
 
 	<definition name="playerAction.list"
 		extends="DefaultTemplate">
 		<put-attribute name="body"
 			value="/WEB-INF/views/playerAction/list.jsp" />
+	</definition>
+	
+	<definition name="playerAction.edit"
+		extends="DefaultTemplate">
+		<put-attribute name="body"
+			value="/WEB-INF/views/playerAction/form.jsp" />
 	</definition>
 
 	<definition name="transaction.list"

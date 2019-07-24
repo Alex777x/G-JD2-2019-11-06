@@ -31,11 +31,11 @@ public class PlayerFromDTOConverter implements Function<PlayerDTO, IPlayer> {
 		entity.setId(dto.getId());
 
 		IGame game = gameService.createEntity();
-		game.setId(dto.getGame());
+		game.setId(dto.getGameId());
 		entity.setGame(game);
 
 		IUserAccount userAccount = userAccountService.createEntity();
-		userAccount.setId(dto.getUserAccount());
+		userAccount.setId(dto.getUserAccountId());
 		entity.setUserAccount(userAccount);
 
 		entity.setPosition(dto.getPosition());

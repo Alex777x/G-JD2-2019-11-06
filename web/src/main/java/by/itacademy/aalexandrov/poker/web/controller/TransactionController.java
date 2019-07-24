@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import by.itacademy.aalexandrov.poker.dao.api.entity.table.ICountry;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.ITransaction;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IUserAccount;
 import by.itacademy.aalexandrov.poker.dao.api.filter.TransactionFilter;
@@ -27,7 +26,6 @@ import by.itacademy.aalexandrov.poker.service.IUserAccountService;
 import by.itacademy.aalexandrov.poker.web.converter.TransactionFromDTOConverter;
 import by.itacademy.aalexandrov.poker.web.converter.TransactionToDTOConverter;
 import by.itacademy.aalexandrov.poker.web.dto.TransactionDTO;
-import by.itacademy.aalexandrov.poker.web.dto.UserAccountDTO;
 import by.itacademy.aalexandrov.poker.web.dto.grid.GridStateDTO;
 
 @Controller

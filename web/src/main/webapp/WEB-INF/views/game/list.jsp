@@ -1,15 +1,17 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="mytaglib" uri="my-custom-tags-uri"%>
+<%@ taglib prefix="jspFragments" tagdir="/WEB-INF/tags"%>
 
 <h4 class="header">Game</h4>
 <table class="bordered highlight">
 	<tbody>
 		<tr>
-			<th>id</th>
-			<th>state</th>
-			<th>bank</th>
-			<th>created</th>
-			<th>updated</th>
+			<th><mytaglib:sort-link column="id" pageUrl="${pagesGame}">Id</mytaglib:sort-link></th>
+			<th><mytaglib:sort-link column="state" pageUrl="${pagesGame}">State</mytaglib:sort-link></th>
+			<th><mytaglib:sort-link column="bank" pageUrl="${pagesGame}">Bank</mytaglib:sort-link></th>
+			<th><mytaglib:sort-link column="created" pageUrl="${pagesGame}">Created</mytaglib:sort-link></th>
+			<th><mytaglib:sort-link column="updated" pageUrl="${pagesGame}">Updated</mytaglib:sort-link></th>
 			<th></th>
 		</tr>
 		<c:forEach var="game" items="${gridItems}" varStatus="loopCounter">
@@ -25,11 +27,11 @@
 					href="${pagesGame}/${game.id}"><i class="material-icons">info</i></a>
 					<a class="btn-floating" href="${pagesGame}/${game.id}/edit"><i
 						class="material-icons">edit</i></a> <a class="btn-floating red"
-					href="${pagesGame}/${game.id}/delete"><i
-						class="material-icons">delete</i></a></td>
+					href="${pagesGame}/${game.id}/delete"><i class="material-icons">delete</i></a></td>
 			</tr>
 		</c:forEach>
 	</tbody>
 </table>
 <a class="waves-effect waves-light btn right" href="${pagesGame}/add"><i
 	class="material-icons">add</i></a>
+<jspFragments:paging />
