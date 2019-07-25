@@ -2,39 +2,42 @@ body {
 	display: flex;
 	min-height: 100vh;
 	flex-direction: column;
-	background-image: url(fon-site.jpg);
+	background-image: url(fon-site.png);
 	/* 	color: white; */}
 
 main {
 	flex: 1 0 auto;
 }
 
-html * {
-	color: white !important;
-}
+/* html * { */
+/* 	color: white !important; */
+/* } */
 
-.dropdown-content {
-	background-color: #400040;
-}
+/* .dropdown-content { */
+/* 	background-color: #400040; */
+/* } */
 
-.sidenav {
-	background-color: #400000;
+/* .sidenav { */
+/* 	background-color: #400000; */
+/* } */
+
+/* .navheader { */
+/* 	background-image: url(fon-header2.png); */
+/* 	background-size: cover; */
+/* } */
+
+.page-footer {
+	background-color: #000080;
 }
 
 .navheader {
-	background-image: url(fon-header2.png);
-	background-size: cover;
-}
-
-.page-footer {
-	background-image: url(fon-footer.png);
-	padding-top: 0px;
-	background-size: cover;
+	background-color: #000080;
+	height: 125px;
 }
 
 .imglogo {
-	height: 100px;
-	margin-top: -17%;
+    height: 200px;
+    margin-top: -18%;
 }
 
 .input-field label.multiselect-label, .input-field label.switch-label {
