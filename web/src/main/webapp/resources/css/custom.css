@@ -3,7 +3,8 @@ body {
 	min-height: 100vh;
 	flex-direction: column;
 	background-image: url(fon-site.png);
-	/* 	color: white; */}
+	background-size: cover;
+}
 
 main {
 	flex: 1 0 auto;
@@ -25,19 +26,19 @@ main {
 /* 	background-image: url(fon-header2.png); */
 /* 	background-size: cover; */
 /* } */
-
 .page-footer {
 	background-color: #000080;
 }
 
+}
 .navheader {
 	background-color: #000080;
 	height: 125px;
 }
 
 .imglogo {
-    height: 200px;
-    margin-top: -18%;
+	height: 200px;
+	margin-top: -18%;
 }
 
 .input-field label.multiselect-label, .input-field label.switch-label {
