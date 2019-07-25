@@ -19,13 +19,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.ICard;
-import by.itacademy.aalexandrov.poker.dao.api.entity.table.ITransaction;
 import by.itacademy.aalexandrov.poker.dao.api.filter.CardFilter;
 import by.itacademy.aalexandrov.poker.service.ICardService;
 import by.itacademy.aalexandrov.poker.web.converter.CardFromDTOConverter;
 import by.itacademy.aalexandrov.poker.web.converter.CardToDTOConverter;
 import by.itacademy.aalexandrov.poker.web.dto.CardDTO;
-import by.itacademy.aalexandrov.poker.web.dto.TransactionDTO;
 import by.itacademy.aalexandrov.poker.web.dto.grid.GridStateDTO;
 
 @Controller

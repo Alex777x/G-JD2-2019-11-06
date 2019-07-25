@@ -29,7 +29,7 @@
 		</tr>
 		<c:forEach var="playerAction" items="${gridItems}"
 			varStatus="loopCounter">
-			<tr>
+			<tr playerActionId="${playerAction.id}" class="clickable-row">
 				<td><c:out value="${playerAction.id}" /></td>
 				<td><c:out value="${playerAction.player}" /></td>
 				<td><c:out value="${playerAction.bet}" /></td>
@@ -56,3 +56,20 @@
 <a class="waves-effect waves-light btn right"
 	href="${pagesPlayerAction}/add"><i class="material-icons">add</i></a>
 <jspFragments:paging />
+
+<script>
+	var baseUrl = '${pageContext.request.contextPath}';
+	$("tr.clickable-row").each(function(index) {
+		var selectedRow = this;
+		$(selectedRow).click(function() {
+			$(selectedRow).hide(2000);
+			var playerActionId = $(selectedRow).attr('playerActionId');
+			$.get(baseUrl + '/playerAction/json?id=' + playerActionId, function(playerActionData) {
+				M.toast({
+					html : 'You removed:' + JSON.stringify(playerActionData)
+				}) // simple popup message using Materialize framework
+			});
+
+		});
+	});
+</script>

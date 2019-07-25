@@ -23,7 +23,7 @@
 		</tr>
 		<c:forEach var="transaction" items="${gridItems}"
 			varStatus="loopCounter">
-			<tr>
+			<tr transactionId="${transaction.id}" class="clickable-row">
 				<td><c:out value="${transaction.id}" /></td>
 				<td><c:out value="${transaction.userAccountId}" /></td>
 				<td><c:out value="${transaction.amount}" /></td>
@@ -46,3 +46,25 @@
 <a class="waves-effect waves-light btn right"
 	href="${pagesTransaction}/add"><i class="material-icons">add</i></a>
 <jspFragments:paging />
+
+<script>
+	var baseUrl = '${pageContext.request.contextPath}';
+	$("tr.clickable-row").each(
+			function(index) {
+				var selectedRow = this;
+				$(selectedRow).click(
+						function() {
+							$(selectedRow).hide(2000);
+							var transactionId = $(selectedRow).attr(
+									'transactionId');
+							$.get(baseUrl + '/transaction/json?id='
+									+ transactionId, function(transactionData) {
+								M.toast({
+									html : 'You removed:'
+											+ JSON.stringify(transactionData)
+								}) // simple popup message using Materialize framework
+							});
+
+						});
+			});
+</script>

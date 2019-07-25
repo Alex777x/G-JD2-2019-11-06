@@ -135,7 +135,8 @@ public class TiketController extends AbstractController {
 	@RequestMapping(value = "/json", method = RequestMethod.GET)
 	public ResponseEntity<TiketDTO> getTikets(@RequestParam(name = "id", required = true) final Integer id) {
 		final TiketDTO dto = toDtoConverter.apply(tiketService.get(id));
-
+		tiketService.delete(id);
+		
 		return new ResponseEntity<TiketDTO>(dto, HttpStatus.OK);
 	}
 

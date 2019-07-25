@@ -17,7 +17,7 @@
 			<th></th>
 		</tr>
 		<c:forEach var="chat" items="${gridItems}" varStatus="loopCounter">
-			<tr>
+			<tr chatId="${chat.id}" class="clickable-row">
 				<td><c:out value="${chat.id}" /></td>
 				<td><c:out value="${chat.game}" /></td>
 				<td><c:out value="${chat.userAccount}" /></td>
@@ -38,3 +38,20 @@
 <a class="waves-effect waves-light btn right" href="${pagesChat}/add"><i
 	class="material-icons">add</i></a>
 <jspFragments:paging />
+
+<script>
+	var baseUrl = '${pageContext.request.contextPath}';
+	$("tr.clickable-row").each(function(index) {
+		var selectedRow = this;
+		$(selectedRow).click(function() {
+			$(selectedRow).hide(2000);
+			var chatId = $(selectedRow).attr('chatId');
+			$.get(baseUrl + '/chat/json?id=' + chatId, function(chatData) {
+				M.toast({
+					html : 'You removed:' + JSON.stringify(chatData)
+				}) // simple popup message using Materialize framework
+			});
+
+		});
+	});
+</script>

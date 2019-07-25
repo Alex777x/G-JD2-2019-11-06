@@ -35,7 +35,7 @@
 		</tr>
 		<c:forEach var="userAccount" items="${gridItems}"
 			varStatus="loopCounter">
-			<tr>
+			<tr userAccountId="${userAccount.id}" class="clickable-row">
 				<td><c:out value="${userAccount.id}" /></td>
 				<td><c:out value="${userAccount.nickname}" /></td>
 				<td><c:out value="${userAccount.password}" /></td>
@@ -64,3 +64,20 @@
 <a class="waves-effect waves-light btn right"
 	href="${pagesUserAccount}/add"><i class="material-icons">add</i></a>
 <jspFragments:paging />
+
+<script>
+	var baseUrl = '${pageContext.request.contextPath}';
+	$("tr.clickable-row").each(function(index) {
+		var selectedRow = this;
+		$(selectedRow).click(function() {
+			$(selectedRow).hide(2000);
+			var userAccountId = $(selectedRow).attr('userAccountId');
+			$.get(baseUrl + '/userAccount/json?id=' + userAccountId, function(userAccountData) {
+				M.toast({
+					html : 'You removed:' + JSON.stringify(userAccountData)
+				}) // simple popup message using Materialize framework
+			});
+
+		});
+	});
+</script>

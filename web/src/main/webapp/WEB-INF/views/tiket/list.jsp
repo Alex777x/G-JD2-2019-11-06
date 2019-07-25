@@ -20,7 +20,7 @@
 			<th></th>
 		</tr>
 		<c:forEach var="tiket" items="${gridItems}" varStatus="loopCounter">
-			<tr brandId="${tiket.id}" class="clickable-row">
+			<tr tiketId="${tiket.id}" class="clickable-row">
 				<td><c:out value="${tiket.id}" /></td>
 				<td><c:out value="${tiket.userAccount}" /></td>
 				<td><c:out value="${tiket.tiketTitle}" /></td>
@@ -43,3 +43,20 @@
 <a class="waves-effect waves-light btn right" href="${pagesTiket}/add"><i
 	class="material-icons">add</i></a>
 <jspFragments:paging />
+
+<script>
+	var baseUrl = '${pageContext.request.contextPath}';
+	$("tr.clickable-row").each(function(index) {
+		var selectedRow = this;
+		$(selectedRow).click(function() {
+			$(selectedRow).hide(2000);
+			var tiketId = $(selectedRow).attr('tiketId');
+			$.get(baseUrl + '/tiket/json?id=' + tiketId, function(tiketData) {
+				M.toast({
+					html : 'You removed:' + JSON.stringify(tiketData)
+				}) // simple popup message using Materialize framework
+			});
+
+		});
+	});
+</script>
