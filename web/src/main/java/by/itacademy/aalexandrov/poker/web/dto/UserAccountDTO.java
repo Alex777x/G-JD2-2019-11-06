@@ -8,13 +8,14 @@ import javax.validation.constraints.Size;
 
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.UserRole;
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.UserStatus;
+import by.itacademy.aalexandrov.poker.service.PasswordUtils;
 
 public class UserAccountDTO {
 
 	private Integer id;
 	@Size(min = 1, max = 50)
 	private String nickname;
-	@Size(min = 6)
+	
 	private String password;
 	@NotNull(message = "Email must be specified")
 	@Pattern(regexp = "^(?:[a-zA-Z0-9_'^&/+-])+(?:\\.(?:[a-zA-Z0-9_'^&/+-])+)"
@@ -31,7 +32,7 @@ public class UserAccountDTO {
 	private Integer wonGames;
 	private Date created;
 	private Date updated;
-
+	
 	public Integer getId() {
 		return id;
 	}
@@ -53,7 +54,9 @@ public class UserAccountDTO {
 	}
 
 	public void setPassword(String password) {
-		this.password = password;
+		String salt = PasswordUtils.getSalt(password.length());
+		String cryptPassword = PasswordUtils.generateSecurePassword(password, salt);
+		this.password = cryptPassword;
 	}
 
 	public String getEmail() {

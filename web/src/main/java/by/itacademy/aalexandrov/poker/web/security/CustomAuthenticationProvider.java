@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.UserRole;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IUserAccount;
 import by.itacademy.aalexandrov.poker.service.IUserAccountService;
+import by.itacademy.aalexandrov.poker.service.PasswordUtils;
 
 @Component("customAuthenticationProvider")
 public class CustomAuthenticationProvider implements AuthenticationProvider {
@@ -34,12 +35,17 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 		if (account == null) {
 			throw new BadCredentialsException("1000");
 		}
-
-		if (!account.getPassword().equals(password)) {
+		
+		String salt = PasswordUtils.getSalt(password.length());
+		
+		
+		if (PasswordUtils.verifyUserPassword(password, account.getPassword(), salt)) {
 			throw new BadCredentialsException("1000");
 		}
 
 		final int userId = account.getId();
+		
+		//String role = account.getUserRole().name();
 
 		UserRole userRole = account.getUserRole();
 		final List<SimpleGrantedAuthority> authorities = new ArrayList<>();
@@ -48,6 +54,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 
 		ExtendedToken token = new ExtendedToken(username, password, authorities);
 		token.setId(userId);
+		token.setUserRole(userRole);
 		return token;
 
 	}

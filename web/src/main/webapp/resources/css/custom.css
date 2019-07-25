@@ -3,8 +3,7 @@ body {
 	min-height: 100vh;
 	flex-direction: column;
 	background-image: url(fon-site.jpg);
-	/* 	color: white; */
-}
+	/* 	color: white; */}
 
 main {
 	flex: 1 0 auto;
@@ -18,10 +17,12 @@ html * {
 	background-color: #400040;
 }
 
+.sidenav {
+	background-color: #400000;
+}
 
 .navheader {
 	background-image: url(fon-header2.png);
-	background-color: transparent;
 	background-size: cover;
 }
 

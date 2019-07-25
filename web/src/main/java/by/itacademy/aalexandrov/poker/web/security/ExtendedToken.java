@@ -5,9 +5,13 @@ import java.util.Collection;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 
+import by.itacademy.aalexandrov.poker.dao.api.entity.enums.UserRole;
+
 public class ExtendedToken extends UsernamePasswordAuthenticationToken {
 
 	private Integer id;
+
+	private UserRole userRole;
 
 	public ExtendedToken(final Object principal, final Object credentials,
 			final Collection<? extends GrantedAuthority> authorities) {
@@ -20,6 +24,14 @@ public class ExtendedToken extends UsernamePasswordAuthenticationToken {
 
 	public void setId(final Integer id) {
 		this.id = id;
+	}
+
+	public UserRole getUserRole() {
+		return userRole;
+	}
+
+	public void setUserRole(UserRole userRole) {
+		this.userRole = userRole;
 	}
 
 }

@@ -23,8 +23,19 @@
 				<li><a href="${pagesTransaction}">Transaction</a></li>
 				<li><a href="${pagesUserAccount}">UserAccount</a></li>
 				<sec:authorize access="!isAnonymous()">
-					<a class="right" href="${contextPath}/execute_logout"
-						title="logout"><i class="material-icons">arrow_forward</i></a>
+						id:
+						<sec:authentication property="id" />
+						name:
+						<sec:authentication property="principal" />
+						role:
+						<sec:authentication property="userRole" />
+				</sec:authorize>
+				<sec:authorize access="isAnonymous()">
+					Logged user: You are not logged in!
+				</sec:authorize>
+				<sec:authorize access="!isAnonymous()">
+					<a class="left" href="${contextPath}/execute_logout" title="logout"><i
+						class="material-icons">arrow_forward</i></a>
 				</sec:authorize>
 			</ul>
 		</div>
@@ -42,6 +53,22 @@
 		<li><a href="${pagesTiket}">Tiket</a></li>
 		<li><a href="${pagesTransaction}">Transaction</a></li>
 		<li><a href="${pagesUserAccount}">UserAccount</a></li>
+		<sec:authorize access="!isAnonymous()">
+						id:
+						<sec:authentication property="id" />
+						name:
+						<sec:authentication property="principal" />
+						role:
+						<sec:authentication property="userRole" />
+		</sec:authorize>
+		<sec:authorize access="isAnonymous()">
+					Logged user: You are not logged in!
+				</sec:authorize>
+		<sec:authorize access="!isAnonymous()">
+			<a class="left" href="${contextPath}/execute_logout" title="logout"><i
+				class="material-icons">arrow_forward</i></a>
+		</sec:authorize>
 	</ul>
+
 
 </header>
