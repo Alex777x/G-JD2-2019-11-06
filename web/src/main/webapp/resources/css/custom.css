@@ -2,7 +2,7 @@ body {
 	display: flex;
 	min-height: 100vh;
 	flex-direction: column;
-	background-image: url(fon-site.png);
+	background-image: url(HpOqb_croper_ru.jpeg);
 	background-size: cover;
 }
 
@@ -23,8 +23,9 @@ html * {
 }
 
 /* .navheader { */
-/* 	background-image: url(fon-header2.png); */
+/* 	background-image: url(fon-header.png); */
 /* 	background-size: cover; */
+/* 	filter: blur(5px); */
 /* } */
 
 .imglogo {
