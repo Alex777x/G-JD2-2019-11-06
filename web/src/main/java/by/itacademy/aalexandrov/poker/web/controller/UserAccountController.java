@@ -63,7 +63,7 @@ public class UserAccountController extends AbstractController {
 		prepareFilter(gridState, filter);
 
 		final List<IUserAccount> entities = userAccountService.find(filter);
-		List<UserAccountDTO> dtos = entities.stream().map(toDtoConverter).collect(Collectors.toList());
+		final List<UserAccountDTO> dtos = entities.stream().map(toDtoConverter).collect(Collectors.toList());
 		gridState.setTotalCount(userAccountService.getCount(filter));
 
 		final Map<String, Object> userAccounts = new HashMap<>();

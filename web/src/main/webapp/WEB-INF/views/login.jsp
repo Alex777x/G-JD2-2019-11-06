@@ -31,7 +31,7 @@
 			</c:if>
 			<div class="row">
 				<div class="col s12 center">
-					<button class="btn waves-effect waves-light " type="submit">войти</button>
+					<button class="btn waves-effect waves-light " type="submit">Sign In</button>
 				</div>
 			</div>
 		</form>

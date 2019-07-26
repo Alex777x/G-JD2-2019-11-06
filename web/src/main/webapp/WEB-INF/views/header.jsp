@@ -8,16 +8,24 @@
 		<div class="nav-wrapper container">
 			<ul class="left hide-on-med-and-down">
 				<li><a href="${contextPath}/">Home</a></li>
-				<li><a href="${pagesCard}">Card</a></li>
-				<li><a href="${pagesCardInGame}">Card In Game</a></li>
-				<li><a href="${pagesChat}">Chat</a></li>
-				<li><a href="${pagesCountry}">Country</a></li>
-				<li><a href="${pagesGame}">Game</a></li>
-				<li><a href="${pagesPlayerAction}">Player Action</a></li>
-				<li><a href="${pagesPlayer}">Player</a></li>
-				<li><a href="${pagesTiket}">Tiket</a></li>
-				<li><a href="${pagesTransaction}">Transaction</a></li>
-				<li><a href="${pagesUserAccount}">UserAccount</a></li>
+				<sec:authorize access="isAnonymous()">
+					<li><a href="${contextPath}/login">Login</a></li>
+					<li><a href="${contextPath}/registration">Registration</a></li>
+				</sec:authorize>
+				<sec:authorize access="!isAnonymous()">
+					<li><a href="${pagesCard}">Card</a></li>
+					<li><a href="${pagesCardInGame}">Card In Game</a></li>
+					<li><a href="${pagesChat}">Chat</a></li>
+					<li><a href="${pagesCountry}">Country</a></li>
+					<li><a href="${pagesGame}">Game</a></li>
+					<li><a href="${pagesPlayerAction}">Player Action</a></li>
+					<li><a href="${pagesPlayer}">Player</a></li>
+					<li><a href="${pagesTiket}">Tiket</a></li>
+					<li><a href="${pagesTransaction}">Transaction</a></li>
+<%-- 					<sec:authorize access="hasRole(ROLE_ADMIN)"> --%>
+						<li><a href="${pagesUserAccount}">UserAccount</a></li>
+<%-- 					</sec:authorize> --%>
+				</sec:authorize>
 				<sec:authorize access="!isAnonymous()">
 						Id: <sec:authentication property="id" />
 						Name: <sec:authentication property="principal" />
@@ -35,6 +43,8 @@
 
 	<ul class="sidenav" id="mobile-demo">
 		<li><a href="${contextPath}/">Home</a></li>
+		<li><a href="${contextPath}/login">Login</a></li>
+		<li><a href="${contextPath}/registration">Registration</a></li>
 		<li><a href="${pagesCard}">Card</a></li>
 		<li><a href="${pagesCardInGame}">Card In Game</a></li>
 		<li><a href="${pagesChat}">Chat</a></li>

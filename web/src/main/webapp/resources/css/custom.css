@@ -10,17 +10,17 @@ main {
 	flex: 1 0 auto;
 }
 
-/* html * { */
-/* 	color: white !important; */
-/* } */
+html * {
+	color: white !important;
+}
 
 /* .dropdown-content { */
 /* 	background-color: #400040; */
 /* } */
 
-/* .sidenav { */
-/* 	background-color: #400000; */
-/* } */
+.sidenav {
+	background-color: #400000;
+}
 
 /* .navheader { */
 /* 	background-image: url(fon-header2.png); */

@@ -11,6 +11,8 @@
 <c:set var="pagesTiket" value="${contextPath}/tiket" scope="request" />
 <c:set var="pagesTransaction" value="${contextPath}/transaction" scope="request" />
 <c:set var="pagesUserAccount" value="${contextPath}/userAccount" scope="request" />
+<c:set var="pagesLogin" value="${contextPath}/login" scope="request" />
+<c:set var="pagesRegistration" value="${contextPath}/registration" scope="request" />
 
 
 
