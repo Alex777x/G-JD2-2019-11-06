@@ -13,6 +13,8 @@ public class ExtendedToken extends UsernamePasswordAuthenticationToken {
 
 	private UserRole userRole;
 
+	private String foto;
+
 	public ExtendedToken(final Object principal, final Object credentials,
 			final Collection<? extends GrantedAuthority> authorities) {
 		super(principal, credentials, authorities);
@@ -32,6 +34,14 @@ public class ExtendedToken extends UsernamePasswordAuthenticationToken {
 
 	public void setUserRole(UserRole userRole) {
 		this.userRole = userRole;
+	}
+
+	public String getFoto() {
+		return foto;
+	}
+
+	public void setFoto(String foto) {
+		this.foto = foto;
 	}
 
 }

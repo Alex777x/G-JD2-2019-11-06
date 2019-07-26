@@ -30,31 +30,30 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 		final String username = authentication.getPrincipal() + "";
 		final String password = authentication.getCredentials() + "";
 
-		IUserAccount account = userAccountService.findNickname(username);
+		final IUserAccount account = userAccountService.findNickname(username);
 
 		if (account == null) {
 			throw new BadCredentialsException("1000");
 		}
-		
-		String salt = PasswordUtils.getSalt(password.length());
-		
-		
+
+		final String salt = PasswordUtils.getSalt(password.length());
+
 		if (PasswordUtils.verifyUserPassword(password, account.getPassword(), salt)) {
 			throw new BadCredentialsException("1000");
 		}
 
 		final int userId = account.getId();
-		
-		//String role = account.getUserRole().name();
+		final String foto = account.getFoto();
 
-		UserRole userRole = account.getUserRole();
+		final UserRole userRole = account.getUserRole();
 		final List<SimpleGrantedAuthority> authorities = new ArrayList<>();
 
 		authorities.add(new SimpleGrantedAuthority("ROLE_" + userRole.name()));
 
-		ExtendedToken token = new ExtendedToken(username, password, authorities);
+		final ExtendedToken token = new ExtendedToken(username, password, authorities);
 		token.setId(userId);
 		token.setUserRole(userRole);
+		token.setFoto(foto);
 		return token;
 
 	}
