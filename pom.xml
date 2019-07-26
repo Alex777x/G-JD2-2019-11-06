@@ -267,7 +267,7 @@
 	</dependencyManagement>
 
 	<build>
-		<finalName>ROOT</finalName>
+		<finalName>poker</finalName>
 		<pluginManagement>
 			<plugins>
 				<plugin>

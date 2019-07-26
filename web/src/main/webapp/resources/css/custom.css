@@ -2,7 +2,7 @@ body {
 	display: flex;
 	min-height: 100vh;
 	flex-direction: column;
-	background-image: url(HpOqb_croper_ru.jpeg);
+	background-image: url(fon-site.png);
 	background-size: cover;
 }
 
@@ -14,9 +14,9 @@ html * {
 	color: white !important;
 }
 
-/* .dropdown-content { */
-/* 	background-color: #400040; */
-/* } */
+.dropdown-content {
+	background-color: #400040;
+}
 
 .sidenav {
 	background-color: #400000;

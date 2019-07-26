@@ -43,6 +43,6 @@ public class AuthHelper {
 	}
 
 	public static boolean isAdmin() {
-		return hasRole("admin");
+		return hasRole("ADMIN");
 	}
 }
