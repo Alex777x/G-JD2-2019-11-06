@@ -2,7 +2,7 @@ body {
 	display: flex;
 	min-height: 100vh;
 	flex-direction: column;
-	background-image: url(fon-site.png);
+	background-image: url(background_02.jpg);
 	background-size: cover;
 }
 
@@ -27,7 +27,6 @@ html * {
 /* 	background-size: cover; */
 /* 	filter: blur(5px); */
 /* } */
-
 .imglogo {
 	height: 200px;
 	margin-top: -18%;
@@ -43,7 +42,6 @@ html * {
 }
 
 }
-
 .input-field label.multiselect-label, .input-field label.switch-label {
 	position: absolute;
 	top: -26px;
