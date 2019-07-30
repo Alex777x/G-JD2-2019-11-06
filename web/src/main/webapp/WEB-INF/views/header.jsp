@@ -11,36 +11,31 @@
 				<sec:authorize access="isAnonymous()">
 					<li><a href="${contextPath}/login">Login</a></li>
 					<li><a href="${contextPath}/registration">Registration</a></li>
+					<li>Logged user: You are not logged in!</li>
 				</sec:authorize>
 				<sec:authorize access="!isAnonymous()">
-					<li><a href="${pagesCard}">Card</a></li>
-					<li><a href="${pagesCardInGame}">Card In Game</a></li>
-					<li><a href="${pagesChat}">Chat</a></li>
-					<li><a href="${pagesCountry}">Country</a></li>
-					<li><a href="${pagesGame}">Game</a></li>
-					<li><a href="${pagesPlayerAction}">Player Action</a></li>
-					<li><a href="${pagesPlayer}">Player</a></li>
-					<li><a href="${pagesTiket}">Tiket</a></li>
-					<li><a href="${pagesTransaction}">Transaction</a></li>
+					<li><a href="${pagesNews}">News</a></li>
+					<li><a href="${pagesTopPlayers}">Top Players</a></li>
+					<li><a href="${pagesHowToPlay}">How to play</a></li>
+					<li><a href="${pagesSupport}">Support</a></li>
 					<sec:authorize access="hasRole('ROLE_ADMIN')">
-						<li><a href="${pagesUserAccount}">UserAccount</a></li>
+						<li><a href="${pagesAdminPanel}">AdminPanel</a></li>
+					</sec:authorize>
+					<sec:authorize access="!isAnonymous()">
+						<li><a class="right" href="${contextPath}/execute_logout" title="logout">Logout</a></li>
 					</sec:authorize>
 				</sec:authorize>
-				<sec:authorize access="!isAnonymous()">
-						Id: <sec:authentication property="id" />
-						Name: <sec:authentication property="principal" />
-						Role: <sec:authentication property="userRole" />
-						Foto: 
-						
-						<img src="${contextPath}<sec:authentication property="foto" />"  />
-				</sec:authorize>
-				<sec:authorize access="isAnonymous()">
-					Logged user: You are not logged in!
-				</sec:authorize>
-				<sec:authorize access="!isAnonymous()">
-					<a class="left" href="${contextPath}/execute_logout" title="logout"><i class="material-icons">arrow_forward</i></a>
-				</sec:authorize>
 			</ul>
+			<div class="user-data">
+				<ul class="left hide-on-med-and-down">
+					<sec:authorize access="!isAnonymous()">
+						<li><img src="<sec:authentication property="foto" />" /></li>
+						<li class="id-data">Id: <sec:authentication property="id" /></li>
+						<li class="name-data">Name: <sec:authentication property="principal" /></li>
+						<li class="role-data">Role: <sec:authentication property="userRole" /></li>
+					</sec:authorize>
+				</ul>
+			</div>
 		</div>
 	</nav>
 
@@ -49,33 +44,26 @@
 		<sec:authorize access="isAnonymous()">
 			<li><a href="${contextPath}/login">Login</a></li>
 			<li><a href="${contextPath}/registration">Registration</a></li>
+			<li>Logged user: You are not logged in!</li>
 		</sec:authorize>
 		<sec:authorize access="!isAnonymous()">
-			<li><a href="${pagesCard}">Card</a></li>
-			<li><a href="${pagesCardInGame}">Card In Game</a></li>
-			<li><a href="${pagesChat}">Chat</a></li>
-			<li><a href="${pagesCountry}">Country</a></li>
-			<li><a href="${pagesGame}">Game</a></li>
-			<li><a href="${pagesPlayerAction}">Player Action</a></li>
-			<li><a href="${pagesPlayer}">Player</a></li>
-			<li><a href="${pagesTiket}">Tiket</a></li>
-			<li><a href="${pagesTransaction}">Transaction</a></li>
+			<li><a href="${pagesNews}">News</a></li>
+			<li><a href="${pagesTopPlayers}">Top Players</a></li>
+			<li><a href="${pagesHowToPlay}">How to play</a></li>
+			<li><a href="${pagesSupport}">Support</a></li>
+			<li><img src="<sec:authentication property="foto" />" /></li>
+			<li>Id: <sec:authentication property="id" /></li>
+			<li>Name: <sec:authentication property="principal" /></li>
+			<li>Role: <sec:authentication property="userRole" /></li>
 			<sec:authorize access="hasRole('ROLE_ADMIN')">
-				<li><a href="${pagesUserAccount}">UserAccount</a></li>
+				<li><a href="${pagesAdminPanel}">AdminPanel</a></li>
+			</sec:authorize>
+			<sec:authorize access="!isAnonymous()">
+				<li><a class="right" href="${contextPath}/execute_logout" title="logout">Logout</a></li>
 			</sec:authorize>
 		</sec:authorize>
 		<sec:authorize access="!isAnonymous()">
-						Id: <sec:authentication property="id" />
-						Name: <sec:authentication property="principal" />
-						Role: <sec:authentication property="userRole" />
-		</sec:authorize>
-		<sec:authorize access="isAnonymous()">
-					Logged user: You are not logged in!
-				</sec:authorize>
-		<sec:authorize access="!isAnonymous()">
-			<a class="left" href="${contextPath}/execute_logout" title="logout"><i class="material-icons">arrow_forward</i></a>
+
 		</sec:authorize>
 	</ul>
-
-
 </header>

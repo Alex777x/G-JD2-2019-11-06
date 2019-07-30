@@ -2,7 +2,7 @@ body {
 	display: flex;
 	min-height: 100vh;
 	flex-direction: column;
-	background-image: url(background_02.jpg);
+	background-image: url(fon-poker.png);
 	background-size: cover;
 }
 
@@ -12,6 +12,56 @@ main {
 
 html * {
 	color: white !important;
+	font-weight: bold;
+}
+
+a {
+	font-size: 2em;
+	text-transform: uppercase;
+	text-decoration: none;
+	letter-spacing: 0.1em;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+@media screen and (max-width:1280px) {
+	.user-data {
+		display: none;
+	}
+}
+
+.right {
+	color: red;
+}
+
+.user-data {
+	float: right;
+}
+
+.user-data li {
+	float: initial;
+}
+
+.id-data {
+	margin-top: -115px;
+	margin-left: -125px;
+}
+
+.name-data {
+	margin-top: -47px;
+	margin-left: -125px;
+}
+
+.role-data {
+	margin-top: -47px;
+	margin-left: -125px;
+}
+
+.logout-data {
+	margin-top: -26px;
+	margin-left: 28px;
 }
 
 .dropdown-content {
@@ -22,23 +72,21 @@ html * {
 	background-color: #400000;
 }
 
-/* .navheader { */
-/* 	background-image: url(fon-header.png); */
-/* 	background-size: cover; */
-/* 	filter: blur(5px); */
-/* } */
 .imglogo {
-	height: 200px;
+	height: 115px;
 	margin-top: -18%;
 }
 
 .navheader {
-	background-color: #000080;
-	height: 125px;
+	background-color: transparent;
+	height: 72px;
+	border-bottom-style: groove;
+	border-bottom-color: black;
+	filter: drop-shadow(2px 4px 6px black);
 }
 
 .page-footer {
-	background-color: #000080;
+	background-color: transparent;
 }
 
 }

@@ -32,7 +32,7 @@ public class UserAccountServiceImpl implements IUserAccountService {
 	public IUserAccount createEntity() {
 		IUserAccount createEntity = dao.createEntity();
 		// TODO set default fields
-		createEntity.setFoto("/web/src/main/webapp/resources/img/foto.png");
+		createEntity.setFoto("resources/img/foto.png");
 		createEntity.setSumGames(0);
 		createEntity.setWonGames(0);
 		createEntity.setUserRole(UserRole.MEMBER);
@@ -107,6 +107,5 @@ public class UserAccountServiceImpl implements IUserAccountService {
 	public IUserAccount findNickname(String username) {
 		return dao.findNickname(username);
 	}
-
 
 }
