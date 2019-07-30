@@ -1,4 +1,5 @@
 package by.itacademy.aalexandrov.poker.web.controller;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -6,7 +7,6 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.security.GeneralSecurityException;
-import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.stereotype.Controller;
@@ -41,7 +41,8 @@ public class FileUploadController {
 	}
 
 	@RequestMapping(value = "/image")
-	public @ResponseBody byte[] getImage(@RequestParam(name = "uuid", required = false) String uuid) throws IOException {
+	public @ResponseBody byte[] getImage(@RequestParam(name = "uuid", required = false) String uuid)
+			throws IOException {
 
 		if (uuid == null) {
 			uuid = lastUploadedFileUid;

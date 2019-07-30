@@ -1,8 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <div>
-	<form method="POST" enctype="multipart/form-data"
-		action="${contextPath}/file">
+	<form method="POST" enctype="multipart/form-data" action="${contextPath}/file">
 		<table>
 			<tr>
 				<td>File to upload:</td>
@@ -15,6 +14,6 @@
 		</table>
 	</form>
 
-	<img alt="no image"
-		src="${contextPath}/file/image" />
+	<img alt="no image" src="${contextPath}/file/image" />
 </div>
+

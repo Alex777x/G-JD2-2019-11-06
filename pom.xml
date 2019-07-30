@@ -24,9 +24,10 @@
 
 	<modules>
 		<module>dao-api</module>
-		<module>dao-jdbc-impl</module>
+		<module>dao-orm-impl</module>
 		<module>service</module>
 		<module>web</module>
+		
 	</modules>
 
 	<dependencyManagement>
@@ -59,6 +60,12 @@
 			<dependency>
 				<groupId>com.itacademy.jd2.aa.casino</groupId>
 				<artifactId>dao-jdbc-impl</artifactId>
+				<version>1.0.0</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>com.itacademy.jd2.aa.casino</groupId>
+				<artifactId>dao-orm-impl</artifactId>
 				<version>1.0.0</version>
 			</dependency>
 
@@ -180,6 +187,31 @@
 				<groupId>taglibs</groupId>
 				<artifactId>standard</artifactId>
 				<version>${tld.version}</version>
+			</dependency>
+
+			<!-- Hibernate -->
+			<dependency>
+				<groupId>org.hibernate.javax.persistence</groupId>
+				<artifactId>hibernate-jpa-2.1-api</artifactId>
+				<version>1.0.0.Final</version>
+			</dependency>
+			<dependency>
+				<groupId>org.hibernate</groupId>
+				<artifactId>hibernate-entitymanager</artifactId>
+				<version>4.3.8.Final</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.hibernate</groupId>
+				<artifactId>hibernate-jpamodelgen</artifactId>
+				<version>4.3.4.Final</version>
+				<scope>provided</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>commons-dbcp</groupId>
+				<artifactId>commons-dbcp</artifactId>
+				<version>1.4</version>
 			</dependency>
 
 			<!-- Servlet Dependency -->
