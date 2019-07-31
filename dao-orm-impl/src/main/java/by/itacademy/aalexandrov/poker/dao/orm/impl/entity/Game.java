@@ -1,0 +1,43 @@
+package by.itacademy.aalexandrov.poker.dao.orm.impl.entity;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+
+import by.itacademy.aalexandrov.poker.dao.api.entity.enums.GameStatus;
+import by.itacademy.aalexandrov.poker.dao.api.entity.table.IGame;
+
+@Entity
+public class Game extends BaseEntity implements IGame {
+
+	@Column
+	private GameStatus state;
+
+	@Column
+	private double bank;
+
+	@Override
+	public GameStatus getState() {
+		return state;
+	}
+
+	@Override
+	public void setState(GameStatus state) {
+		this.state = state;
+	}
+
+	@Override
+	public double getBank() {
+		return bank;
+	}
+
+	@Override
+	public void setBank(double bank) {
+		this.bank = bank;
+	}
+
+	@Override
+	public String toString() {
+		return "Game [state=" + state + ", bank=" + bank + "]";
+	}
+
+}

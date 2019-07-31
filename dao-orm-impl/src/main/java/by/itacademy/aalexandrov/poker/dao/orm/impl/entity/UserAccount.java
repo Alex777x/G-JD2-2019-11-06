@@ -12,16 +12,16 @@ import by.itacademy.aalexandrov.poker.dao.api.entity.table.IUserAccount;
 @Entity
 public class UserAccount extends BaseEntity implements IUserAccount {
 
-	@Column // simple column
+	@Column
 	private String nickname;
 
-	@Column // simple column
+	@Column
 	private String password;
 
-	@Column // simple column
+	@Column
 	private String email;
 
-	@Column // simple column
+	@Column
 	private String foto;
 
 	// @OneToOne(fetch = FetchType.LAZY, mappedBy = "country", targetEntity =
@@ -29,19 +29,19 @@ public class UserAccount extends BaseEntity implements IUserAccount {
 	@Transient
 	private ICountry country;
 
-	@Column // simple column
+	@Column
 	private UserRole userRole;
 
-	@Column // simple column
+	@Column
 	private UserStatus userStatus;
 
-	@Column // simple column
+	@Column
 	private int sumGames;
 
-	@Column // simple column
+	@Column
 	private int wonGames;
 
-	@Transient // skip from DB mapping
+	@Transient
 	private String upperCaseName;
 
 	public String getUpperCaseName() {

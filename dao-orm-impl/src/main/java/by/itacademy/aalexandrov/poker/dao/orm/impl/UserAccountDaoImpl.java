@@ -23,23 +23,23 @@ public class UserAccountDaoImpl extends AbstractDaoImpl<IUserAccount, Integer> i
 
 	@Override
 	public List<IUserAccount> find(UserAccountFilter filter) {
-		throw new RuntimeException();
+		throw new RuntimeException("not implemented");
 	}
 
 	@Override
 	public long getCount(UserAccountFilter filter) {
-		throw new RuntimeException();
+		throw new RuntimeException("not implemented");
 	}
 
 	@Override
 	public void save(IUserAccount... entities) {
-		throw new RuntimeException();
+		throw new RuntimeException("not implemented");
 
 	}
 
 	@Override
 	public IUserAccount findNickname(String username) {
-		throw new RuntimeException();
+		throw new RuntimeException("not implemented");
 	}
 
 }
