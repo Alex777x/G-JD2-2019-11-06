@@ -20,6 +20,17 @@ public class Chat extends BaseEntity implements IChat {
 	@Column
 	private String message;
 
+	@Transient
+	private String upperCaseName;
+
+	public String getUpperCaseName() {
+		return upperCaseName;
+	}
+
+	public void setUpperCaseName(String upperCaseName) {
+		this.upperCaseName = upperCaseName;
+	}
+
 	@Override
 	public IGame getGame() {
 		return game;

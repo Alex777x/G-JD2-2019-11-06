@@ -9,10 +9,10 @@ import by.itacademy.aalexandrov.poker.dao.api.entity.table.ICountry;
 @Entity
 public class Country extends BaseEntity implements ICountry {
 
-	@Column // simple column
+	@Column
 	private String country;
 
-	@Transient // skip from DB mapping
+	@Transient
 	private String upperCaseName;
 
 	public String getUpperCaseName() {

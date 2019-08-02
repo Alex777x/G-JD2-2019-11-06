@@ -19,6 +19,17 @@ public class Transaction extends BaseEntity implements ITransaction {
 	@Transient
 	private IUserAccount userAccount;
 
+	@Transient
+	private String upperCaseName;
+
+	public String getUpperCaseName() {
+		return upperCaseName;
+	}
+
+	public void setUpperCaseName(String upperCaseName) {
+		this.upperCaseName = upperCaseName;
+	}
+
 	@Override
 	public double getAmount() {
 		return amount;

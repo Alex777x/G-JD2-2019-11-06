@@ -2,6 +2,8 @@ package by.itacademy.aalexandrov.poker.dao.orm.impl.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Transient;
 
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.CardStatus;
@@ -22,8 +24,20 @@ public class CardInGame extends BaseEntity implements ICardInGame {
 	@Transient
 	private IPlayer player;
 
-	@Column
+	@Column(name = "card_state")
+	@Enumerated(EnumType.STRING)
 	private CardStatus cardStatus;
+
+	@Transient
+	private String upperCaseName;
+
+	public String getUpperCaseName() {
+		return upperCaseName;
+	}
+
+	public void setUpperCaseName(String upperCaseName) {
+		this.upperCaseName = upperCaseName;
+	}
 
 	@Override
 	public ICard getCard() {

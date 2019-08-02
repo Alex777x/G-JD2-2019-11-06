@@ -2,6 +2,8 @@ package by.itacademy.aalexandrov.poker.dao.orm.impl.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Transient;
 
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.UserRole;
@@ -30,15 +32,17 @@ public class UserAccount extends BaseEntity implements IUserAccount {
 	private ICountry country;
 
 	@Column
+	@Enumerated(EnumType.STRING)
 	private UserRole userRole;
 
 	@Column
+	@Enumerated(EnumType.STRING)
 	private UserStatus userStatus;
 
-	@Column
+	@Column(name = "sum_games")
 	private int sumGames;
 
-	@Column
+	@Column(name = "won_games")
 	private int wonGames;
 
 	@Transient

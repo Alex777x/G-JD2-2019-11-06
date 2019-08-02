@@ -2,6 +2,9 @@ package by.itacademy.aalexandrov.poker.dao.orm.impl.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.Transient;
 
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.Rank;
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.Suits;
@@ -11,13 +14,26 @@ import by.itacademy.aalexandrov.poker.dao.api.entity.table.ICard;
 public class Card extends BaseEntity implements ICard {
 
 	@Column
+	@Enumerated(EnumType.STRING)
 	private Suits suit;
 
 	@Column
+	@Enumerated(EnumType.STRING)
 	private Rank rank;
 
 	@Column
 	private String filename;
+
+	@Transient
+	private String upperCaseName;
+
+	public String getUpperCaseName() {
+		return upperCaseName;
+	}
+
+	public void setUpperCaseName(String upperCaseName) {
+		this.upperCaseName = upperCaseName;
+	}
 
 	@Override
 	public Suits getSuit() {

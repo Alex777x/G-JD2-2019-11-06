@@ -13,14 +13,25 @@ public class Tiket extends BaseEntity implements ITiket {
 	@Transient
 	private IUserAccount userAccount;
 
-	@Column
+	@Column(name = "tiket_title")
 	private String tiketTitle;
 
-	@Column
+	@Column(name = "tiket_text")
 	private String tiketText;
 
 	@Column
 	private String status;
+
+	@Transient
+	private String upperCaseName;
+
+	public String getUpperCaseName() {
+		return upperCaseName;
+	}
+
+	public void setUpperCaseName(String upperCaseName) {
+		this.upperCaseName = upperCaseName;
+	}
 
 	@Override
 	public IUserAccount getUserAccount() {

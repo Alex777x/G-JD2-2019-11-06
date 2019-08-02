@@ -25,11 +25,22 @@ public class PlayerAction extends BaseEntity implements IPlayerAction {
 	@Column
 	private boolean fold;
 
-	@Column
+	@Column(name = "check_check")
 	private boolean check;
 
-	@Column
+	@Column(name = "all_in")
 	private int allIn;
+
+	@Transient
+	private String upperCaseName;
+
+	public String getUpperCaseName() {
+		return upperCaseName;
+	}
+
+	public void setUpperCaseName(String upperCaseName) {
+		this.upperCaseName = upperCaseName;
+	}
 
 	@Override
 	public IPlayer getPlayer() {

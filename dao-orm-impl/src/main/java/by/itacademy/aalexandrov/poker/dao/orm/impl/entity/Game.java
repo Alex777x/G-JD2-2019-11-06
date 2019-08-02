@@ -2,6 +2,9 @@ package by.itacademy.aalexandrov.poker.dao.orm.impl.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.Transient;
 
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.GameStatus;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IGame;
@@ -10,10 +13,22 @@ import by.itacademy.aalexandrov.poker.dao.api.entity.table.IGame;
 public class Game extends BaseEntity implements IGame {
 
 	@Column
+	@Enumerated(EnumType.STRING)
 	private GameStatus state;
 
 	@Column
 	private double bank;
+
+	@Transient
+	private String upperCaseName;
+
+	public String getUpperCaseName() {
+		return upperCaseName;
+	}
+
+	public void setUpperCaseName(String upperCaseName) {
+		this.upperCaseName = upperCaseName;
+	}
 
 	@Override
 	public GameStatus getState() {
