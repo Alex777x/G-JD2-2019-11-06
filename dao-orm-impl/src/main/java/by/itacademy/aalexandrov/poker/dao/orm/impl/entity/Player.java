@@ -4,6 +4,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.PlayerPosition;
@@ -15,16 +17,16 @@ import by.itacademy.aalexandrov.poker.dao.api.entity.table.IUserAccount;
 @Entity
 public class Player extends BaseEntity implements IPlayer {
 
-	@Transient
+	@ManyToOne(fetch = FetchType.LAZY, targetEntity = Game.class)
 	private IGame game;
 
-	@Transient
+	@ManyToOne(fetch = FetchType.LAZY, targetEntity = UserAccount.class)
 	private IUserAccount userAccount;
 
 	@Column
 	private PlayerPosition position;
 
-	@Column(name = "in_game")
+	@Column
 	private boolean inGame;
 
 	@Column

@@ -2,6 +2,8 @@ package by.itacademy.aalexandrov.poker.dao.orm.impl.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IChat;
@@ -11,10 +13,10 @@ import by.itacademy.aalexandrov.poker.dao.api.entity.table.IUserAccount;
 @Entity
 public class Chat extends BaseEntity implements IChat {
 
-	@Transient
+	@ManyToOne(fetch = FetchType.LAZY, targetEntity = Game.class)
 	private IGame game;
 
-	@Transient
+	@ManyToOne(fetch = FetchType.LAZY, targetEntity = UserAccount.class)
 	private IUserAccount userAccount;
 
 	@Column

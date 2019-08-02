@@ -4,6 +4,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.CardStatus;
@@ -15,16 +17,16 @@ import by.itacademy.aalexandrov.poker.dao.api.entity.table.IPlayer;
 @Entity
 public class CardInGame extends BaseEntity implements ICardInGame {
 
-	@Transient
+	@ManyToOne(fetch = FetchType.LAZY, targetEntity = Card.class)
 	private ICard card;
 
-	@Transient
+	@ManyToOne(fetch = FetchType.LAZY, targetEntity = Game.class)
 	private IGame game;
 
-	@Transient
+	@ManyToOne(fetch = FetchType.LAZY, targetEntity = Player.class)
 	private IPlayer player;
 
-	@Column(name = "card_state")
+	@Column
 	@Enumerated(EnumType.STRING)
 	private CardStatus cardStatus;
 

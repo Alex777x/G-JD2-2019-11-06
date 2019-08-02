@@ -5,8 +5,8 @@ CREATE TABLE "user_account" (
 	"email" character varying(250) NOT NULL UNIQUE,
 	"foto" character varying,
 	"country_id" integer NOT NULL,
-	"role_id" character varying NOT NULL,
-	"status_id" character varying,
+	"user_role" character varying NOT NULL,
+	"user_status" character varying,
 	"sum_games" integer,
 	"won_games" integer,
 	"created" TIMESTAMP NOT NULL,
@@ -36,6 +36,8 @@ CREATE TABLE "tiket" (
 CREATE TABLE "country" (
 	"id" serial NOT NULL,
 	"country" character varying NOT NULL,
+	"created" TIMESTAMP,
+	"updated" TIMESTAMP,
 	CONSTRAINT "country_pk" PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
@@ -61,7 +63,7 @@ CREATE TABLE "player" (
 	"id" serial NOT NULL,
 	"game_id" integer NOT NULL,
 	"user_account_id" integer NOT NULL,
-	"position_id" character varying,
+	"position" character varying,
 	"in_game" BOOLEAN NOT NULL,
 	"state" character varying(50) NOT NULL,
 	"stack" DECIMAL NOT NULL,
@@ -89,7 +91,7 @@ CREATE TABLE "game" (
 
 CREATE TABLE "card" (
 	"id" serial NOT NULL,
-	"suite" character varying(50) NOT NULL,
+	"suit" character varying(50) NOT NULL,
 	"rank" character varying NOT NULL,
 	"filename" character varying NOT NULL UNIQUE,
 	"created" TIMESTAMP NOT NULL,
@@ -138,7 +140,7 @@ CREATE TABLE "card_in_game" (
 	"card_id" integer NOT NULL,
 	"game_id" integer NOT NULL,
 	"player_id" integer,
-	"card_state" character varying NOT NULL,
+	"card_status" character varying NOT NULL,
 	"created" TIMESTAMP NOT NULL,
 	"updated" TIMESTAMP NOT NULL,
 	CONSTRAINT "card_in_game_pk" PRIMARY KEY ("id")

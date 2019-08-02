@@ -4,6 +4,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.UserRole;
@@ -26,9 +28,7 @@ public class UserAccount extends BaseEntity implements IUserAccount {
 	@Column
 	private String foto;
 
-	// @OneToOne(fetch = FetchType.LAZY, mappedBy = "country", targetEntity =
-	// Country.class)
-	@Transient
+	@ManyToOne(fetch = FetchType.LAZY, targetEntity = Country.class)
 	private ICountry country;
 
 	@Column
@@ -39,10 +39,10 @@ public class UserAccount extends BaseEntity implements IUserAccount {
 	@Enumerated(EnumType.STRING)
 	private UserStatus userStatus;
 
-	@Column(name = "sum_games")
+	@Column
 	private int sumGames;
 
-	@Column(name = "won_games")
+	@Column
 	private int wonGames;
 
 	@Transient

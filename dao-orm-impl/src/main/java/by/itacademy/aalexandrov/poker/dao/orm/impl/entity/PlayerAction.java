@@ -2,15 +2,19 @@ package by.itacademy.aalexandrov.poker.dao.orm.impl.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IPlayer;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IPlayerAction;
 
 @Entity
+@Table(name = "action")
 public class PlayerAction extends BaseEntity implements IPlayerAction {
 
-	@Transient
+	@ManyToOne(fetch = FetchType.LAZY, targetEntity = Player.class)
 	private IPlayer player;
 
 	@Column
@@ -28,7 +32,7 @@ public class PlayerAction extends BaseEntity implements IPlayerAction {
 	@Column(name = "check_check")
 	private boolean check;
 
-	@Column(name = "all_in")
+	@Column
 	private int allIn;
 
 	@Transient

@@ -2,12 +2,22 @@ package by.itacademy.aalexandrov.poker.dao.orm.impl;
 
 import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Path;
+import javax.persistence.criteria.Root;
+import javax.persistence.metamodel.SingularAttribute;
+
+import org.hibernate.jpa.criteria.OrderImpl;
 import org.springframework.stereotype.Repository;
 
 import by.itacademy.aalexandrov.poker.dao.api.IUserAccountDao;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IUserAccount;
 import by.itacademy.aalexandrov.poker.dao.api.filter.UserAccountFilter;
 import by.itacademy.aalexandrov.poker.dao.orm.impl.entity.UserAccount;
+import by.itacademy.aalexandrov.poker.dao.orm.impl.entity.UserAccount_;
 
 @Repository
 public class UserAccountDaoImpl extends AbstractDaoImpl<IUserAccount, Integer> implements IUserAccountDao {
@@ -23,12 +33,42 @@ public class UserAccountDaoImpl extends AbstractDaoImpl<IUserAccount, Integer> i
 
 	@Override
 	public List<IUserAccount> find(UserAccountFilter filter) {
-		throw new RuntimeException("not implemented");
+		final EntityManager em = getEntityManager();
+		final CriteriaBuilder cb = em.getCriteriaBuilder();
+
+		final CriteriaQuery<IUserAccount> cq = cb.createQuery(IUserAccount.class);
+
+		final Root<UserAccount> from = cq.from(UserAccount.class);// select from brand
+		cq.select(from); // select what? select *
+
+		if (filter.getSortColumn() != null) {
+			final SingularAttribute<? super UserAccount, ?> sortProperty = toMetamodelFormat(filter.getSortColumn());
+			final Path<?> expression = from.get(sortProperty); // build path to
+			// sort
+			// property
+			cq.orderBy(new OrderImpl(expression, filter.getSortOrder())); // order
+			// by
+			// column_name
+			// order
+		}
+
+		final TypedQuery<IUserAccount> q = em.createQuery(cq);
+		setPaging(filter, q);
+
+		return q.getResultList();
 	}
 
 	@Override
 	public long getCount(UserAccountFilter filter) {
-		throw new RuntimeException("not implemented");
+		final EntityManager em = getEntityManager();
+		final CriteriaBuilder cb = em.getCriteriaBuilder();
+		final CriteriaQuery<Long> cq = cb.createQuery(Long.class); // define
+																	// type of
+		// result
+		final Root<UserAccount> from = cq.from(UserAccount.class); // select from brand
+		cq.select(cb.count(from)); // select what? select count(*)
+		final TypedQuery<Long> q = em.createQuery(cq);
+		return q.getSingleResult(); // execute query
 	}
 
 	@Override
@@ -40,6 +80,35 @@ public class UserAccountDaoImpl extends AbstractDaoImpl<IUserAccount, Integer> i
 	@Override
 	public IUserAccount findNickname(String username) {
 		throw new RuntimeException("not implemented");
+	}
+
+	private SingularAttribute<? super UserAccount, ?> toMetamodelFormat(final String sortColumn) {
+		switch (sortColumn) {
+		case "created":
+			return UserAccount_.created;
+		case "updated":
+			return UserAccount_.updated;
+		case "id":
+			return UserAccount_.id;
+		case "nickname":
+			return UserAccount_.nickname;
+		case "password":
+			return UserAccount_.password;
+		case "email":
+			return UserAccount_.email;
+		case "foto":
+			return UserAccount_.foto;
+		case "userRole":
+			return UserAccount_.userRole;
+		case "userStatus":
+			return UserAccount_.userStatus;
+		case "sumGames":
+			return UserAccount_.sumGames;
+		case "wonGames":
+			return UserAccount_.wonGames;
+		default:
+			throw new UnsupportedOperationException("sorting is not supported by column:" + sortColumn);
+		}
 	}
 
 }

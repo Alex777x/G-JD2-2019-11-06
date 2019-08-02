@@ -1,5 +1,8 @@
 package by.itacademy.aalexandrov.poker.service.impl;
 
+import static org.junit.Assert.assertTrue;
+
+import java.util.List;
 import java.util.Random;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -14,6 +17,7 @@ import by.itacademy.aalexandrov.poker.dao.api.entity.enums.Rank;
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.Suits;
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.UserRole;
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.UserStatus;
+import by.itacademy.aalexandrov.poker.dao.api.entity.table.IBaseEntity;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.ICard;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.ICardInGame;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IChat;
@@ -188,6 +192,23 @@ public abstract class AbstractTest {
 		entity.setCardStatus(CardStatus.PLAYERCARDOPEN);
 		cardInGameService.save(entity);
 		return entity;
+	}
+
+	protected IBaseEntity verifyOrderById(List<? extends IBaseEntity> ascBrands, boolean ascending) {
+		IBaseEntity previousEntity = null;
+		for (IBaseEntity entity : ascBrands) {
+			if (previousEntity == null) {
+				previousEntity = entity;
+				continue;
+			}
+			if (ascending) {
+				assertTrue(previousEntity.getId().intValue() < entity.getId().intValue());
+			} else {
+				assertTrue(previousEntity.getId().intValue() > entity.getId().intValue());
+			}
+			previousEntity = entity;
+		}
+		return previousEntity;
 	}
 
 }

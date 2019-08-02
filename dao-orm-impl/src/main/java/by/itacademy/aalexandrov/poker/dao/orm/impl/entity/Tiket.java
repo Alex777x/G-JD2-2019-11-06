@@ -2,6 +2,8 @@ package by.itacademy.aalexandrov.poker.dao.orm.impl.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.ITiket;
@@ -10,13 +12,13 @@ import by.itacademy.aalexandrov.poker.dao.api.entity.table.IUserAccount;
 @Entity
 public class Tiket extends BaseEntity implements ITiket {
 
-	@Transient
+	@ManyToOne(fetch = FetchType.LAZY, targetEntity = UserAccount.class)
 	private IUserAccount userAccount;
 
-	@Column(name = "tiket_title")
+	@Column
 	private String tiketTitle;
 
-	@Column(name = "tiket_text")
+	@Column
 	private String tiketText;
 
 	@Column
