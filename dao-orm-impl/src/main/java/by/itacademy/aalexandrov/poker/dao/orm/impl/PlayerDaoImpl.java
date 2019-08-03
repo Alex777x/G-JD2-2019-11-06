@@ -2,12 +2,22 @@ package by.itacademy.aalexandrov.poker.dao.orm.impl;
 
 import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Path;
+import javax.persistence.criteria.Root;
+import javax.persistence.metamodel.SingularAttribute;
+
+import org.hibernate.jpa.criteria.OrderImpl;
 import org.springframework.stereotype.Repository;
 
 import by.itacademy.aalexandrov.poker.dao.api.IPlayerDao;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IPlayer;
 import by.itacademy.aalexandrov.poker.dao.api.filter.PlayerFilter;
 import by.itacademy.aalexandrov.poker.dao.orm.impl.entity.Player;
+import by.itacademy.aalexandrov.poker.dao.orm.impl.entity.Player_;
 
 @Repository
 public class PlayerDaoImpl extends AbstractDaoImpl<IPlayer, Integer> implements IPlayerDao {
@@ -23,18 +33,73 @@ public class PlayerDaoImpl extends AbstractDaoImpl<IPlayer, Integer> implements 
 
 	@Override
 	public List<IPlayer> find(PlayerFilter filter) {
-		throw new RuntimeException("not implemented");
+		final EntityManager em = getEntityManager();
+		final CriteriaBuilder cb = em.getCriteriaBuilder();
+
+		final CriteriaQuery<IPlayer> cq = cb.createQuery(IPlayer.class);
+
+		final Root<Player> from = cq.from(Player.class);// select from user_account
+		cq.select(from); // select what? select *
+
+		if (filter.getSortColumn() != null) {
+			final SingularAttribute<? super Player, ?> sortProperty = toMetamodelFormat(filter.getSortColumn());
+			final Path<?> expression = from.get(sortProperty); // build path to
+			// sort
+			// property
+			cq.orderBy(new OrderImpl(expression, filter.getSortOrder())); // order
+			// by
+			// column_name
+			// order
+		}
+
+		final TypedQuery<IPlayer> q = em.createQuery(cq);
+		setPaging(filter, q);
+
+		return q.getResultList();
 	}
 
 	@Override
 	public long getCount(PlayerFilter filter) {
-		throw new RuntimeException("not implemented");
+		final EntityManager em = getEntityManager();
+		final CriteriaBuilder cb = em.getCriteriaBuilder();
+		final CriteriaQuery<Long> cq = cb.createQuery(Long.class); // define
+																	// type of
+		// result
+		final Root<Player> from = cq.from(Player.class); // select from brand
+		cq.select(cb.count(from)); // select what? select count(*)
+		final TypedQuery<Long> q = em.createQuery(cq);
+		return q.getSingleResult(); // execute query
 	}
 
 	@Override
 	public void save(IPlayer... entities) {
 		throw new RuntimeException("not implemented");
 
+	}
+
+	private SingularAttribute<? super Player, ?> toMetamodelFormat(final String sortColumn) {
+		switch (sortColumn) {
+		case "created":
+			return Player_.created;
+		case "updated":
+			return Player_.updated;
+		case "id":
+			return Player_.id;
+		case "game":
+			return Player_.game;
+		case "stack":
+			return Player_.stack;
+		case "userAccount":
+			return Player_.userAccount;
+		case "position":
+			return Player_.position;
+		case "inGame":
+			return Player_.inGame;
+		case "state":
+			return Player_.state;
+		default:
+			throw new UnsupportedOperationException("sorting is not supported by column:" + sortColumn);
+		}
 	}
 
 }

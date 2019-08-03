@@ -38,7 +38,7 @@ public class UserAccountDaoImpl extends AbstractDaoImpl<IUserAccount, Integer> i
 
 		final CriteriaQuery<IUserAccount> cq = cb.createQuery(IUserAccount.class);
 
-		final Root<UserAccount> from = cq.from(UserAccount.class);// select from brand
+		final Root<UserAccount> from = cq.from(UserAccount.class);// select from user_account
 		cq.select(from); // select what? select *
 
 		if (filter.getSortColumn() != null) {
@@ -79,7 +79,22 @@ public class UserAccountDaoImpl extends AbstractDaoImpl<IUserAccount, Integer> i
 
 	@Override
 	public IUserAccount findNickname(String username) {
-		throw new RuntimeException("not implemented");
+		final EntityManager em = getEntityManager();
+		final CriteriaBuilder cb = em.getCriteriaBuilder();
+
+		final CriteriaQuery<IUserAccount> cq = cb.createQuery(IUserAccount.class);
+
+		final Root<UserAccount> from = cq.from(UserAccount.class);// select from user_account
+		cq.select(from);
+
+		// from.fetch(UserAccount_.nickname, JoinType.LEFT); ?
+
+		// .. where id=...
+		cq.where(cb.equal(from.get(UserAccount_.nickname), username));
+
+		final TypedQuery<IUserAccount> q = em.createQuery(cq);
+
+		return getSingleResult(q);
 	}
 
 	private SingularAttribute<? super UserAccount, ?> toMetamodelFormat(final String sortColumn) {
