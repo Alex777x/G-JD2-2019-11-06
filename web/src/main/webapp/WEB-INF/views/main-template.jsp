@@ -29,12 +29,15 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" -->
+<!-- 	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
 
 <link rel="stylesheet" href="${contextPath}/resources/css/custom.css">
 <script src="${contextPath}/resources/js/init-materialize-forms.js"></script>
 <script src="${contextPath}/resources/js/init-menu.js"></script>
 <script src="${contextPath}/resources/js/sidenav.js"></script>
+<script src="${contextPath}/resources/js/sidenav-bootstrap.js"></script>
 </head>
 <body>
 	<tiles:insertAttribute name="header" />

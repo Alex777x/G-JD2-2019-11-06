@@ -112,6 +112,16 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/tiket/list.jsp" />
 	</definition>
+	
+	<definition name="news.edit" extends="DefaultTemplate">
+		<put-attribute name="body"
+			value="/WEB-INF/views/news/form.jsp" />
+	</definition>
+
+	<definition name="news.list" extends="DefaultTemplate">
+		<put-attribute name="body"
+			value="/WEB-INF/views/news/list.jsp" />
+	</definition>
 
 	<definition name="userAccount.edit"
 		extends="DefaultTemplate">

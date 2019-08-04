@@ -2,17 +2,20 @@ body {
 	display: flex;
 	min-height: 100vh;
 	flex-direction: column;
-	background-image: url(fon-poker.png);
-	background-size: cover;
+	/* 	background-image: url(fon-poker.png); */
+	/* 	background-size: cover; */
+	/* 	background-color: 008B45; */
+	background: radial-gradient(#008080, #125252);
 }
 
 main {
 	flex: 1 0 auto;
 }
 
+
 html * {
+	font-family: Franklin Gothic Medium;
 	color: white !important;
-	font-weight: bold;
 }
 
 a {
@@ -65,11 +68,11 @@ a:hover {
 }
 
 .dropdown-content {
-	background-color: #400040;
+	background-color: #176969;
 }
 
 .sidenav {
-	background-color: #400000;
+	background-color: #125252;
 }
 
 .imglogo {
@@ -88,7 +91,6 @@ a:hover {
 .page-footer {
 	background-color: transparent;
 }
-
 }
 .input-field label.multiselect-label, .input-field label.switch-label {
 	position: absolute;
