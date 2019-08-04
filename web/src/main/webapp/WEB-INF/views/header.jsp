@@ -15,11 +15,12 @@
 				</sec:authorize>
 				<sec:authorize access="!isAnonymous()">
 					<li><a href="${pagesNews}">News</a></li>
-					<li><a href="${pagesTopPlayers}">Top Players</a></li>
 					<li><a href="${pagesHowToPlay}">How to play</a></li>
+					<li><a href="${pagesTopPlayers}">Top Players</a></li>
+					<li><a href="${pagesPersonalArea}">Personal Area</a></li>
 					<li><a href="${pagesSupport}">Support</a></li>
 					<sec:authorize access="hasRole('ROLE_ADMIN')">
-						<li><a href="${pagesAdminPanel}">AdminPanel</a></li>
+						<li><a href="${pagesAdminPanel}">Admin Panel</a></li>
 					</sec:authorize>
 					<sec:authorize access="!isAnonymous()">
 						<li><a class="right" href="${contextPath}/execute_logout" title="logout">Logout</a></li>
@@ -48,22 +49,22 @@
 		</sec:authorize>
 		<sec:authorize access="!isAnonymous()">
 			<li><a href="${pagesNews}">News</a></li>
-			<li><a href="${pagesTopPlayers}">Top Players</a></li>
 			<li><a href="${pagesHowToPlay}">How to play</a></li>
+			<li><a href="${pagesTopPlayers}">Top Players</a></li>
+			<li><a href="${pagesPersonalArea}">Personal Area</a></li>
 			<li><a href="${pagesSupport}">Support</a></li>
-			<li><img src="<sec:authentication property="foto" />" /></li>
-			<li>Id: <sec:authentication property="id" /></li>
-			<li>Name: <sec:authentication property="principal" /></li>
-			<li>Role: <sec:authentication property="userRole" /></li>
 			<sec:authorize access="hasRole('ROLE_ADMIN')">
-				<li><a href="${pagesAdminPanel}">AdminPanel</a></li>
+				<li><a href="${pagesAdminPanel}">Admin Panel</a></li>
 			</sec:authorize>
 			<sec:authorize access="!isAnonymous()">
 				<li><a class="right" href="${contextPath}/execute_logout" title="logout">Logout</a></li>
 			</sec:authorize>
 		</sec:authorize>
-		<sec:authorize access="!isAnonymous()">
-
-		</sec:authorize>
-	</ul>
+			<sec:authorize access="!isAnonymous()">
+				<li><img src="<sec:authentication property="foto" />" /></li>
+				<li class="id-data">Id: <sec:authentication property="id" /></li>
+				<li class="name-data">Name: <sec:authentication property="principal" /></li>
+				<li class="role-data">Role: <sec:authentication property="userRole" /></li>
+			</sec:authorize>
+		</ul>
 </header>

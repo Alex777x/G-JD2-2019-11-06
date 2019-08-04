@@ -13,6 +13,12 @@
 <c:set var="pagesUserAccount" value="${contextPath}/userAccount" scope="request" />
 <c:set var="pagesLogin" value="${contextPath}/login" scope="request" />
 <c:set var="pagesRegistration" value="${contextPath}/registration" scope="request" />
+<c:set var="pagesNews" value="${contextPath}/news" scope="request" />
+<c:set var="pagesTopPlayers" value="${contextPath}/topPlayers" scope="request" />
+<c:set var="pagesHowToPlay" value="${contextPath}/howToPlay" scope="request" />
+<c:set var="pagesSupport" value="${contextPath}/support" scope="request" />
+<c:set var="pagesAdminPanel" value="${contextPath}/adminPanel" scope="request" />
+<c:set var="pagesPersonalArea" value="${contextPath}/personalArea" scope="request" />
 
 
 

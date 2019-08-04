@@ -23,6 +23,7 @@ import by.itacademy.aalexandrov.poker.dao.api.entity.table.ICardInGame;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IChat;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.ICountry;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IGame;
+import by.itacademy.aalexandrov.poker.dao.api.entity.table.INews;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IPlayer;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IPlayerAction;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.ITiket;
@@ -33,6 +34,7 @@ import by.itacademy.aalexandrov.poker.service.ICardService;
 import by.itacademy.aalexandrov.poker.service.IChatService;
 import by.itacademy.aalexandrov.poker.service.ICountryService;
 import by.itacademy.aalexandrov.poker.service.IGameService;
+import by.itacademy.aalexandrov.poker.service.INewsService;
 import by.itacademy.aalexandrov.poker.service.IPlayerActionService;
 import by.itacademy.aalexandrov.poker.service.IPlayerService;
 import by.itacademy.aalexandrov.poker.service.ITiketService;
@@ -61,12 +63,15 @@ public abstract class AbstractTest {
 	protected IPlayerService playerService;
 	@Autowired
 	protected ICardInGameService cardInGameService;
+	@Autowired
+	protected INewsService newsService;
 
 	private static final Random RANDOM = new Random();
 
 	@BeforeEach
 	public void setUpMethod() {
 		// clean DB recursive
+		newsService.deleteAll();
 		tiketService.deleteAll();
 		chatService.deleteAll();
 		cardInGameService.deleteAll();
@@ -90,6 +95,14 @@ public abstract class AbstractTest {
 
 	public Random getRandom() {
 		return RANDOM;
+	}
+
+	protected INews saveNewNews() {
+		INews entity = newsService.createEntity();
+		entity.setNewsTitle(getRandomPrefix());
+		entity.setNewsText(getRandomPrefix());
+		newsService.save(entity);
+		return entity;
 	}
 
 	protected ITiket saveNewTiket() {
