@@ -4,24 +4,31 @@
 <%@ taglib prefix="jspFragments" tagdir="/WEB-INF/tags"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 
+<sec:authorize access="hasRole('ROLE_ADMIN')">
+	<button type="button" class="btn btn-light addnews">
+		<a href="${pagesNews}/add"><i class="fas fa-plus">Add News</i></a>
+	</button>
+</sec:authorize>
 
 <c:forEach var="news" items="${gridItems}" varStatus="loopCounter">
 	<div>
-		<h4>
+
+		<p class="font-weight-bold text-uppercase">
 			<c:out value="${news.newsTitle}" />
-		</h4>
+		</p>
+
 		<br>
-		<c:out value="${news.newsText}" />
+		<p class="text-justify">
+			<c:out value="${news.newsText}" />
+		</p>
 		<sec:authorize access="hasRole('ROLE_ADMIN')">
-			<a class="btn-floating right" href="${pagesNews}/${news.id}/edit"><i class="material-icons">edit</i></a>
-			<a class="btn-floating red right" href="${pagesNews}/${news.id}/delete"><i class="material-icons">delete</i></a>
+			<a href="${pagesNews}/${news.id}/edit"><i class="fas fa-edit">edit</i></a>
+			<a href="${pagesNews}/${news.id}/delete"><i class="fas fa-trash-alt">delete</i></a>
 		</sec:authorize>
 	</div>
 	<br>
 	<hr>
 </c:forEach>
 <br>
-<sec:authorize access="hasRole('ROLE_ADMIN')">
-	<a class="waves-effect waves-light btn right" href="${pagesNews}/add"><i class="material-icons">add</i></a>
-</sec:authorize>
+
 <jspFragments:paging />

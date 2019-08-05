@@ -5,52 +5,41 @@
 
 <div class="row">
 
-	<form:form class="col s12" method="POST" action="${pagesRegistration}"
-		modelAttribute="formRegistrationUserAccount">
+	<form:form method="POST" action="${pagesRegistration}" modelAttribute="formRegistrationUserAccount">
 		<form:input path="id" type="hidden" />
 		<form:input path="foto" type="hidden" />
 		<form:input path="userRole" type="hidden" />
 		<form:input path="userStatus" type="hidden" />
 
-		<div class="row">
-			<div class="input-field col s12">
-				<form:input path="nickname" type="text" disabled="${readonly}" />
-				<form:errors path="nickname" cssClass="red-text" />
-				<label for="nickname">Nickname</label>
-			</div>
-		</div>
-		<div class="row">
-			<div class="input-field col s12">
-				<form:input path="password" type="text" disabled="${readonly}" />
-				<form:errors path="password" cssClass="red-text" />
-				<label for="password">Password</label>
-			</div>
-		</div>
-		<div class="row">
-			<div class="input-field col s12">
-				<form:input path="email" type="text" disabled="${readonly}" />
-				<form:errors path="email" cssClass="red-text" />
+		<div class="form-row">
+			<div class="form-group col-md-6">
 				<label for="email">Email</label>
+				<form:input path="email" type="email" class="form-control" placeholder="Email" />
+				<form:errors path="email" cssClass="red-text" />
 			</div>
-		</div>
-		<div class="row">
-			<div class="input-field col s12">
-				<form:select path="country" disabled="${readonly}">
-					<form:options items="${countriesChoices}" />
-				</form:select>
-				<form:errors path="country" cssClass="red-text" />
-				<label for="country">Country</label>
+			<div class="form-group col-md-6">
+				<label for="password">Password</label>
+				<form:input path="password" type="password" class="form-control" placeholder="Password" />
+				<form:errors path="password" cssClass="red-text" />
 			</div>
 		</div>
 
-		<div class="row">
-			<div class="col s6"></div>
-			<div class="col s3">
-				<c:if test="${!readonly}">
-					<button class="btn waves-effect waves-light right" type="submit">Registerå</button>
-				</c:if>
+		<div class="form-row">
+			<div class="form-group col-md-6">
+				<label for="nickname">Nickname</label>
+				<form:input path="nickname" type="text" class="form-control" placeholder="Nickname" />
+				<form:errors path="nickname" cssClass="red-text" />
+			</div>
+			<div class="form-group col-md-6">
+				<label for="country">Country</label>
+				<form:select path="country" class="form-control">
+					<form:options items="${countriesChoices}" />
+				</form:select>
+				<form:errors path="country" cssClass="red-text" />
 			</div>
 		</div>
+
+		<button class="btn btn-primary" type="submit">Sign inå</button>
 	</form:form>
 </div>
 

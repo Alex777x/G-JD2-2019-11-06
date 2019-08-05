@@ -4,31 +4,31 @@
 		<ul class="pagination">
 			<c:choose>
 				<c:when test="${currentPageGridState.firstPage}">
-					<li class="disabled"><a class="material-icons"><i>chevron_left</i></a></li>
+					<li class="page-item disabled"><a class="page-link"><i class="fas fa-arrow-left"></i></a></li>
 				</c:when>
 				<c:otherwise>
-					<li class="waves-effect"><a class="material-icons"
-						href="?page=${currentPageGridState.page-1}"><i>chevron_left</i></a></li>
+					<li class="page-item"><a class="page-link"
+						href="?page=${currentPageGridState.page-1}"><i class="fas fa-arrow-left"></i></a></li>
 				</c:otherwise>
 			</c:choose>
 			<c:forEach begin="1" end="${currentPageGridState.pageCount}"
 				varStatus="loop">
 				<c:choose>
 					<c:when test="${loop.index == currentPageGridState.page}">
-						<li class="active"><a>${loop.index}</a></li>
+						<li class="page-item active" aria-current="page"><a class="page-link">${loop.index} <span class="sr-only">(current)</span></a></li>
 					</c:when>
 					<c:otherwise>
-						<li class="waves-effect"><a href="?page=${loop.index}">${loop.index}</a></li>
+						<li class="page-item" aria-current="page"><a class="page-link" href="?page=${loop.index}">${loop.index}</a></li>
 					</c:otherwise>
 				</c:choose>
 			</c:forEach>
 			<c:choose>
 				<c:when test="${currentPageGridState.lastPage}">
-					<li class="disabled"><a class="material-icons"><i>chevron_right</i></a></li>
+					<li class="disabled"><a class="page-link"><i class="fas fa-arrow-right"></i></a></li>
 				</c:when>
 				<c:otherwise>
-					<li class="waves-effect"><a class="material-icons"
-						href="?page=${currentPageGridState.page+1}"><i>chevron_right</i></a></li>
+					<li class="page-item"><a class="page-link"
+						href="?page=${currentPageGridState.page+1}"><i class="fas fa-arrow-right"></i></a></li>
 				</c:otherwise>
 			</c:choose>
 		</ul>

@@ -1,40 +1,29 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <h2>Login with Username and Password</h2>
-<div class="row">
-	<div class="col s3"></div>
-	<div class="col s6">
-		<form name='loginForm' action="<c:url value='login' />" method='POST'>
-			<div class="row">
-				<div class="input-field col s12 center">
-					<input type='text' name='username' value=''> <label
-						for="username">User:</label>
-				</div>
-			</div>
-			<div class="row">
-				<div class="input-field col s12 center">
-					<input type='password' name='password' /><label for="password">Password:</label>
-				</div>
-			</div>
-			<c:if test="${not empty error}">
-				<div class="row">
-					<div class="col s12 center">
-						<div class="error">${error}</div>
-					</div>
-				</div>
-			</c:if>
-			<c:if test="${not empty msg}">
-				<div class="row">
-					<div class="col s12 center">
-						<div class="msg">${msg}</div>
-					</div>
-				</div>
-			</c:if>
-			<div class="row">
-				<div class="col s12 center">
-					<button class="btn waves-effect waves-light " type="submit">Sign In</button>
-				</div>
-			</div>
-		</form>
+
+
+<form class="col-6" name='loginForm' action="<c:url value='login' />" method='POST'>
+	<div class="form-group">
+		<label for="username">Nickname</label> <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+			placeholder="Enter nickname" name='username' value=''>
 	</div>
-	<div class="col s3"></div>
-</div>
+	<div class="form-group">
+		<label for="password">Password</label> <input type='password' name='password' class="form-control" id="exampleInputPassword1"
+			placeholder="Password">
+	</div>
+	<c:if test="${not empty error}">
+		<div class="row">
+			<div class="col s12 center">
+				<div class="error">${error}</div>
+			</div>
+		</div>
+	</c:if>
+	<c:if test="${not empty msg}">
+		<div class="row">
+			<div class="col s12 center">
+				<div class="msg">${msg}</div>
+			</div>
+		</div>
+	</c:if>
+	<button type="submit" class="btn btn-primary">Submit</button>
+</form>

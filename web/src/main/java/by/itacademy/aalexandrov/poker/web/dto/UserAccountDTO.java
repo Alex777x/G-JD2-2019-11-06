@@ -13,9 +13,10 @@ import by.itacademy.aalexandrov.poker.service.PasswordUtils;
 public class UserAccountDTO {
 
 	private Integer id;
+	@NotNull
 	@Size(min = 1, max = 50)
 	private String nickname;
-	
+	@NotNull
 	private String password;
 	@NotNull(message = "Email must be specified")
 	@Pattern(regexp = "^(?:[a-zA-Z0-9_'^&/+-])+(?:\\.(?:[a-zA-Z0-9_'^&/+-])+)"
@@ -32,7 +33,7 @@ public class UserAccountDTO {
 	private Integer wonGames;
 	private Date created;
 	private Date updated;
-	
+
 	public Integer getId() {
 		return id;
 	}
