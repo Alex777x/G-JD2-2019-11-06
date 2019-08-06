@@ -2,6 +2,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="mytaglib" uri="my-custom-tags-uri"%>
 <%@ taglib prefix="jspFragments" tagdir="/WEB-INF/tags"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
 <!-- <div> -->
 <%-- 	<form method="POST" enctype="multipart/form-data" action="${contextPath}/file"> --%>
@@ -32,7 +33,7 @@
 						<th scope="col">Players</th>
 						<th scope="col">Average Bank</th>
 						<th scope="col">Created</th>
-						<th scope="col"> </th>
+						<th scope="col"></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -53,3 +54,12 @@
 
 	</div>
 </div>
+
+
+
+
+<div>
+	<spring:message code="page.home.title" /> 
+</div>
+
+<div>${welcomeMessage}</div>

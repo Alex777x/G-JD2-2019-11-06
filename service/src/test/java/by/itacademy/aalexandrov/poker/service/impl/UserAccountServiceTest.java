@@ -21,14 +21,14 @@ public class UserAccountServiceTest extends AbstractTest {
 	public void testCreate() {
 		IUserAccount entity = saveNewUserAccount();
 
-		final IUserAccount entityFromDb = userAccountService.get(entity.getId());
+		final IUserAccount entityFromDb = userAccountService.getFullInfo(entity.getId());
 
 		assertNotNull(entityFromDb);
 		assertEquals(entity.getNickname(), entityFromDb.getNickname());
 		assertEquals(entity.getPassword(), entityFromDb.getPassword());
 		assertEquals(entity.getEmail(), entityFromDb.getEmail());
 		assertEquals(entity.getFoto(), entityFromDb.getFoto());
-		// assertEquals(entity.getCountry().getId(), entityFromDb.getCountry().getId());
+		assertEquals(entity.getCountry().getId(), entityFromDb.getCountry().getId());
 		assertEquals(entity.getUserRole(), entityFromDb.getUserRole());
 		assertEquals(entity.getUserStatus(), entityFromDb.getUserStatus());
 		assertEquals(entity.getSumGames(), entityFromDb.getSumGames());
@@ -114,14 +114,14 @@ public class UserAccountServiceTest extends AbstractTest {
 			saveNewUserAccount();
 		}
 
-		final List<IUserAccount> allEntities = userAccountService.getAll();
+		final List<IUserAccount> allEntities = userAccountService.getFullInfo();
 
 		for (final IUserAccount entityFromDb : allEntities) {
 			assertNotNull(entityFromDb.getNickname());
 			assertNotNull(entityFromDb.getPassword());
 			assertNotNull(entityFromDb.getEmail());
 			assertNotNull(entityFromDb.getFoto());
-			// assertNotNull(entityFromDb.getCountry().getId());
+			assertNotNull(entityFromDb.getCountry().getId());
 			assertNotNull(entityFromDb.getUserRole());
 			assertNotNull(entityFromDb.getUserStatus());
 			assertNotNull(entityFromDb.getSumGames());

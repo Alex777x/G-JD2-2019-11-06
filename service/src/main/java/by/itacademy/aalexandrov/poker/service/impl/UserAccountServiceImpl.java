@@ -112,4 +112,14 @@ public class UserAccountServiceImpl implements IUserAccountService {
 		return dao.findNickname(username);
 	}
 
+	@Override
+	public IUserAccount getFullInfo(Integer id) {
+		return dao.getFullInfo(id);
+	}
+
+	@Override
+	public List<IUserAccount> getFullInfo() {
+		return dao.getFullInfo();
+	}
+
 }

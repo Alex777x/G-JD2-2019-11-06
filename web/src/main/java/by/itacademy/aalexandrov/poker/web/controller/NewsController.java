@@ -74,7 +74,7 @@ public class NewsController extends AbstractController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public Object save(@Valid @ModelAttribute("formCountry") final NewsDTO formNews, final BindingResult result) {
+	public Object save(@Valid @ModelAttribute("formNews") final NewsDTO formNews, final BindingResult result) {
 		if (result.hasErrors()) {
 			final Map<String, Object> hashMap = new HashMap<>();
 			hashMap.put("formNews", formNews);

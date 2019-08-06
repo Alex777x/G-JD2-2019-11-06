@@ -15,7 +15,7 @@ public class ExtendedToken extends UsernamePasswordAuthenticationToken {
 
 	private String foto;
 
-	private long sum;
+	// private long sum;
 
 	public ExtendedToken(final Object principal, final Object credentials,
 			final Collection<? extends GrantedAuthority> authorities) {
@@ -30,13 +30,13 @@ public class ExtendedToken extends UsernamePasswordAuthenticationToken {
 		this.id = id;
 	}
 
-	public long getSum() {
-		return sum;
-	}
-
-	public void setSum(long sum) {
-		this.sum = sum;
-	}
+	// public long getSum() {
+	// return sum;
+	// }
+	//
+	// public void setSum(long sum) {
+	// this.sum = sum;
+	// }
 
 	public UserRole getUserRole() {
 		return userRole;

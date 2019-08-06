@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Root;
 import javax.persistence.metamodel.SingularAttribute;
@@ -124,6 +125,46 @@ public class UserAccountDaoImpl extends AbstractDaoImpl<IUserAccount, Integer> i
 		default:
 			throw new UnsupportedOperationException("sorting is not supported by column:" + sortColumn);
 		}
+	}
+
+	@Override
+	public IUserAccount getFullInfo(Integer id) {
+		final EntityManager em = getEntityManager();
+		final CriteriaBuilder cb = em.getCriteriaBuilder();
+
+		final CriteriaQuery<IUserAccount> cq = cb.createQuery(IUserAccount.class);
+		final Root<UserAccount> from = cq.from(UserAccount.class);
+
+		cq.select(from); // define what need to be selected
+
+		from.fetch(UserAccount_.country, JoinType.LEFT);
+
+		cq.distinct(true);
+
+		cq.where(cb.equal(from.get(UserAccount_.id), id));
+
+		final TypedQuery<IUserAccount> q = em.createQuery(cq);
+
+		return getSingleResult(q);
+	}
+
+	@Override
+	public List<IUserAccount> getFullInfo() {
+		final EntityManager em = getEntityManager();
+		final CriteriaBuilder cb = em.getCriteriaBuilder();
+
+		final CriteriaQuery<IUserAccount> cq = cb.createQuery(IUserAccount.class);
+		final Root<UserAccount> from = cq.from(UserAccount.class);
+
+		cq.select(from);
+
+		from.fetch(UserAccount_.country, JoinType.LEFT);
+
+		cq.distinct(true);
+
+		final TypedQuery<IUserAccount> q = em.createQuery(cq);
+
+		return q.getResultList();
 	}
 
 }

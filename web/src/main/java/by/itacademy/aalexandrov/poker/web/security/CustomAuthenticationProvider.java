@@ -52,15 +52,12 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 		final UserRole userRole = account.getUserRole();
 		final List<SimpleGrantedAuthority> authorities = new ArrayList<>();
 
-		// long sum = transactionService.getSum(account.getId());
-
 		authorities.add(new SimpleGrantedAuthority("ROLE_" + userRole.name()));
 
 		final ExtendedToken token = new ExtendedToken(username, password, authorities);
 		token.setId(userId);
 		token.setUserRole(userRole);
 		token.setFoto(foto);
-		// token.setSum(sum);
 		return token;
 
 	}

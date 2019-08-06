@@ -36,4 +36,10 @@ public interface IUserAccountService {
 	@Transactional
 	IUserAccount findNickname(String username);
 
+	@Transactional
+	IUserAccount getFullInfo(Integer id);
+
+	@Transactional
+	List<IUserAccount> getFullInfo();
+
 }

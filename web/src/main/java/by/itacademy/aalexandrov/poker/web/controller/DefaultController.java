@@ -2,12 +2,15 @@ package by.itacademy.aalexandrov.poker.web.controller;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,6 +31,9 @@ import by.itacademy.aalexandrov.poker.web.dto.grid.GridStateDTO;
 @Controller
 @RequestMapping(value = "/")
 public class DefaultController extends AbstractController {
+
+	@Autowired
+	private MessageSource messageSource;
 
 	private IGameService gameService;
 
@@ -54,15 +60,15 @@ public class DefaultController extends AbstractController {
 		this.chatFromDtoConverter = chatFromDtoConverter;
 	}
 
-//	@RequestMapping(method = RequestMethod.GET)
-//	public String index() {
-//		return "home";
-//	}
+	// @RequestMapping(method = RequestMethod.GET)
+	// public String index() {
+	// return "home";
+	// }
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView index(final HttpServletRequest req,
 			@RequestParam(name = "page", required = false) final Integer pageNumber,
-			@RequestParam(name = "sort", required = false) final String sortColumn) {
+			@RequestParam(name = "sort", required = false) final String sortColumn, Locale locale) {
 
 		final GridStateDTO gridState = getListDTO(req);
 		gridState.setPage(pageNumber);
@@ -77,7 +83,15 @@ public class DefaultController extends AbstractController {
 
 		final Map<String, Object> games = new HashMap<>();
 		games.put("gridItems", dtos);
-		return new ModelAndView("home", games);
+
+		ModelAndView modelAndView = new ModelAndView("home", games);
+
+		String login = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
+
+		modelAndView.addObject("welcomeMessage",
+				messageSource.getMessage("page.home.welcomeMessage", new Object[] { login }, locale));
+
+		return modelAndView;
 	}
 
 }

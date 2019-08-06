@@ -14,6 +14,9 @@ public interface IUserAccountDao extends IDao<IUserAccount, Integer> {
 	void save(IUserAccount... entities);
 
 	IUserAccount findNickname(String username);
-	
+
+	IUserAccount getFullInfo(Integer id);
+
+	List<IUserAccount> getFullInfo();
 
 }

@@ -2,6 +2,14 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" scope="request" />
 
+<c:set var="currentLocale" value="${sessionScope['org.springframework.web.servlet.i18n.SessionLocaleResolver.LOCALE']}"/> 
+
+<style>
+.highlighted-menu-${currentLocale!=null?currentLocale:'ru'} {
+text-decoration: underline;
+}
+</style>
+
 <!-- Navigation -->
 <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark static-top">
 	<div class="container">
@@ -15,6 +23,8 @@
 
 		<div class="collapse navbar-collapse" id="navbarResponsive">
 			<ul class="navbar-nav ml-auto">
+				<li class="nav-item active"><a class="highlighted-menu-ru nav-link" href="?lang=ru">RU</a></li>
+				<li class="nav-item active"><a class="highlighted-menu-en nav-link" href="?lang=en">EN</a></li>
 				<li class="nav-item active"><a class="nav-link" href="${contextPath}/">Home <span class="sr-only">(current)</span>
 				</a></li>
 				<sec:authorize access="isAnonymous()">
@@ -39,7 +49,7 @@
 						<ul class="nav flex-column">
 							<li class="navbar-text">Name: <sec:authentication property="principal" /></li>
 							<li class="navbar-text">Role: <sec:authentication property="userRole" /></li>
-<%-- 							<li class="navbar-text">Balance: <sec:authentication property="sum" /></li> --%>
+							<%-- 							<li class="navbar-text">Balance: <sec:authentication property="sum" /></li> --%>
 
 							<li class="navbar-text"><a href="${contextPath}/execute_logout" title="logout">Logout <i class="fas fa-sign-out-alt"></i></a></li>
 						</ul>
