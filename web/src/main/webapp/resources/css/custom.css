@@ -2,10 +2,11 @@ body {
 	display: flex;
 	min-height: 100vh;
 	flex-direction: column;
-	/* 	background-image: url(fon-poker.png); */
+		background-image: url(goldenrod-scratone.png);
+		background-attachment: fixed;
 	/* 	background-size: cover; */
 	/* 	background-color: 008B45; */
-	background: radial-gradient(#008080, #125252);
+/* 	background: radial-gradient(#008080, #125252); */
 }
 
 main {
@@ -27,6 +28,10 @@ main {
 
 .fas {
 	height: 20px;
+}
+
+.rules {
+	background-color: #f2f2ee;
 }
 
 /* html * { */

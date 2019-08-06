@@ -39,6 +39,7 @@
 						<ul class="nav flex-column">
 							<li class="navbar-text">Name: <sec:authentication property="principal" /></li>
 							<li class="navbar-text">Role: <sec:authentication property="userRole" /></li>
+<%-- 							<li class="navbar-text">Balance: <sec:authentication property="sum" /></li> --%>
 
 							<li class="navbar-text"><a href="${contextPath}/execute_logout" title="logout">Logout <i class="fas fa-sign-out-alt"></i></a></li>
 						</ul>

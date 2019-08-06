@@ -134,6 +134,18 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/userAccount/list.jsp" />
 	</definition>
+	
+	<definition name="howToPlay.edit"
+		extends="DefaultTemplate">
+		<put-attribute name="body"
+			value="/WEB-INF/views/howToPlay/form.jsp" />
+	</definition>
+
+	<definition name="howToPlay.rules"
+		extends="DefaultTemplate">
+		<put-attribute name="body"
+			value="/WEB-INF/views/howToPlay/rules.jsp" />
+	</definition>
 
 	<definition name="ajax-samples" extends="DefaultTemplate">
 		<put-attribute name="body"

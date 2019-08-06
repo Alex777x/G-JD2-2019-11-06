@@ -96,4 +96,17 @@ public class TransactionDaoImpl extends AbstractDaoImpl<ITransaction, Integer> i
 		}
 	}
 
+	@Override
+	public long getSum(Integer id) {
+		final EntityManager em = getEntityManager();
+		// final CriteriaBuilder cb = em.getCriteriaBuilder();
+		// final CriteriaQuery<Long> cq = cb.createQuery(Long.class);
+
+		// final Root<Transaction> from = cq.from(Transaction.class);
+		// cq.select(cb.sum(from));
+		final Long q = (Long) em.createQuery(String.format("SELECT sum(amount) from Transaction where id = %s", id))
+				.getSingleResult();
+		return q;
+	}
+
 }

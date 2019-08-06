@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.UserRole;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IUserAccount;
+import by.itacademy.aalexandrov.poker.service.ITransactionService;
 import by.itacademy.aalexandrov.poker.service.IUserAccountService;
 import by.itacademy.aalexandrov.poker.service.PasswordUtils;
 
@@ -22,6 +23,9 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 
 	@Autowired
 	private IUserAccountService userAccountService;
+
+	@Autowired
+	private ITransactionService transactionService;
 
 	// TODO inject UserService
 
@@ -48,12 +52,15 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 		final UserRole userRole = account.getUserRole();
 		final List<SimpleGrantedAuthority> authorities = new ArrayList<>();
 
+		// long sum = transactionService.getSum(account.getId());
+
 		authorities.add(new SimpleGrantedAuthority("ROLE_" + userRole.name()));
 
 		final ExtendedToken token = new ExtendedToken(username, password, authorities);
 		token.setId(userId);
 		token.setUserRole(userRole);
 		token.setFoto(foto);
+		// token.setSum(sum);
 		return token;
 
 	}

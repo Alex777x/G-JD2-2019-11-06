@@ -1,9 +1,9 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<h4 class="header">User registration</h4>
+<h2 class="header">User registration</h2>
 
-<div class="row">
+<div class="row justify-content-center">
 
 	<form:form method="POST" action="${pagesRegistration}" modelAttribute="formRegistrationUserAccount">
 		<form:input path="id" type="hidden" />
@@ -39,7 +39,7 @@
 			</div>
 		</div>
 
-		<button class="btn btn-primary" type="submit">Sign inŒ</button>
+		<button type="submit" class="btn btn-primary">Submit</button>
 	</form:form>
 </div>
 

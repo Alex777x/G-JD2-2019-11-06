@@ -94,4 +94,9 @@ public class TransactionServiceImpl implements ITransactionService {
 		return dao.getCount(filter);
 	}
 
+	@Override
+	public long getSum(Integer id) {
+		return dao.getSum(id);
+	}
+
 }

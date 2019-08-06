@@ -33,4 +33,7 @@ public interface ITransactionService {
 	@Transactional
 	ITransaction createEntity();
 
+	@Transactional
+	long getSum(Integer id);
+
 }

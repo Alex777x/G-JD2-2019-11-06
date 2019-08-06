@@ -162,4 +162,10 @@ public class TransactionDaoImpl extends AbstractDaoImpl<ITransaction, Integer> i
 		return executeCountQuery("");
 	}
 
+	@Override
+	public long getSum(TransactionFilter filter, Integer id) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

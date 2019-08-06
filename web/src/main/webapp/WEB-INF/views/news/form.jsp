@@ -15,7 +15,7 @@
 
 	<div class="form-group">
 		<label for="newsText">Text</label>
-		<form:textarea class="form-control" path="newsText" type="text" rows="3" />
+		<form:textarea class="form-control" path="newsText" type="text" rows="15" />
 		<form:errors path="newsText" cssClass="red-text" />
 	</div>
 
