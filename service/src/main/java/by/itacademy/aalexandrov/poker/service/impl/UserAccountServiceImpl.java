@@ -35,7 +35,7 @@ public class UserAccountServiceImpl implements IUserAccountService {
 	public IUserAccount createEntity() {
 		IUserAccount createEntity = dao.createEntity();
 		// TODO set default fields
-		createEntity.setFoto("${contextPath}/resources/img/foto.png");
+		createEntity.setFoto("resources/img/foto.png");
 		createEntity.setSumGames(0);
 		createEntity.setWonGames(0);
 		createEntity.setUserRole(UserRole.MEMBER);
