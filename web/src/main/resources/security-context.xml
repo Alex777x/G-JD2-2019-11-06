@@ -16,9 +16,10 @@ http://www.springframework.org/schema/context/spring-context-4.2.xsd">
 
 	<http>
 <!-- 		<intercept-url pattern="/**" access="hasRole('ROLE_ADMIN')" /> -->
-<!-- 		<intercept-url pattern="/adminPanel**" access="hasRole('ROLE_ADMIN')" /> -->
+		<intercept-url pattern="/adminPanel**" access="hasRole('ROLE_ADMIN')" />
 <!-- 		<intercept-url pattern="/" access="hasRole('ROLE_MEMBER')" /> -->
-<!-- 		<intercept-url pattern="/" access="!isAnonymous()" /> -->
+<!-- 		<intercept-url pattern="/login" access="isAnonymous()" /> -->
+<!-- 		<intercept-url pattern="/registration" access="isAnonymous()" /> -->
 
 		<form-login login-page="/login" default-target-url="/"
 			authentication-failure-url="/login?error"

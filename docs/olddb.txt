@@ -150,6 +150,19 @@ CREATE TABLE "card_in_game" (
 
 
 
+CREATE TABLE "news" (
+	"id" serial NOT NULL,
+	"news_title" character varying NOT NULL,
+	"news_text" TEXT NOT NULL,
+	"created" TIMESTAMP NOT NULL,
+	"updated" TIMESTAMP NOT NULL,
+	CONSTRAINT "news_pk" PRIMARY KEY ("id")
+) WITH (
+  OIDS=FALSE
+);
+
+
+
 ALTER TABLE "user_account" ADD CONSTRAINT "user_account_fk0" FOREIGN KEY ("country_id") REFERENCES "country"("id");
 
 ALTER TABLE "tiket" ADD CONSTRAINT "tiket_fk0" FOREIGN KEY ("user_account_id") REFERENCES "user_account"("id");
@@ -170,3 +183,4 @@ ALTER TABLE "chat" ADD CONSTRAINT "chat_fk1" FOREIGN KEY ("user_account_id") REF
 ALTER TABLE "card_in_game" ADD CONSTRAINT "card_in_game_fk0" FOREIGN KEY ("card_id") REFERENCES "card"("id");
 ALTER TABLE "card_in_game" ADD CONSTRAINT "card_in_game_fk1" FOREIGN KEY ("game_id") REFERENCES "game"("id");
 ALTER TABLE "card_in_game" ADD CONSTRAINT "card_in_game_fk2" FOREIGN KEY ("player_id") REFERENCES "player"("id");
+
