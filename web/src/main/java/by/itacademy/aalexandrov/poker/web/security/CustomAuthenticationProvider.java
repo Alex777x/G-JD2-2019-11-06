@@ -10,13 +10,14 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Component;
 
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.UserRole;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IUserAccount;
 import by.itacademy.aalexandrov.poker.service.ITransactionService;
 import by.itacademy.aalexandrov.poker.service.IUserAccountService;
-import by.itacademy.aalexandrov.poker.service.PasswordUtils;
 
 @Component("customAuthenticationProvider")
 public class CustomAuthenticationProvider implements AuthenticationProvider {
@@ -34,15 +35,15 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 		final String username = authentication.getPrincipal() + "";
 		final String password = authentication.getCredentials() + "";
 
-		final IUserAccount account = userAccountService.findNickname(username);
+		IUserAccount account;
 
-		if (account == null) {
-			throw new BadCredentialsException("1000");
+		try {
+			account = userAccountService.findNickname(username);
+		} catch (Exception e) {
+			throw new UsernameNotFoundException("No user found with username: " + username);
 		}
 
-		final String salt = PasswordUtils.getSalt(password.length());
-
-		if (PasswordUtils.verifyUserPassword(password, account.getPassword(), salt)) {
+		if (!BCrypt.checkpw(password, account.getPassword())) {
 			throw new BadCredentialsException("1000");
 		}
 

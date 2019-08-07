@@ -10,6 +10,7 @@
 	<entry key="page.registration.nickname">Никнэйм</entry>
 	<entry key="page.registration.country">Страна</entry>
 	<entry key="page.registration.submit">Подтвердить</entry>
+	<entry key="page.registration.checbox">Мне есть 18 лет.</entry>
 	
 	<entry key="page.news.addNews">Добавить новость</entry>
 	<entry key="page.news.edit">Редактировать</entry>

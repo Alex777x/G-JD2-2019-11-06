@@ -88,8 +88,6 @@ public class UserAccountDaoImpl extends AbstractDaoImpl<IUserAccount, Integer> i
 		final Root<UserAccount> from = cq.from(UserAccount.class);// select from user_account
 		cq.select(from);
 
-		// from.fetch(UserAccount_.nickname, JoinType.LEFT); ?
-
 		// .. where id=...
 		cq.where(cb.equal(from.get(UserAccount_.nickname), username));
 

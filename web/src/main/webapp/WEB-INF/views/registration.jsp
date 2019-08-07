@@ -39,7 +39,16 @@
 			</div>
 		</div>
 
-		<button type="submit" class="btn btn-primary"><spring:message code="page.registration.submit" /></button>
+<!-- 		<div class="form-check"> -->
+<%-- 			<label class="form-check-label" for="dropdownCheck"> <spring:message code="page.registration.checbox" /></label> --%>
+<%-- 			<form:input path="checkbox" type="checkbox" class="form-check-input" id="dropdownCheck" /> --%>
+<%-- 			<form:errors path="checkbox" cssClass="red-text" /> --%>
+<!-- 		</div> -->
+
+		<br>
+		<button type="submit" class="btn btn-primary">
+			<spring:message code="page.registration.submit" />
+		</button>
 	</form:form>
 </div>
 

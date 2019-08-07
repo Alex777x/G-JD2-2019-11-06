@@ -10,6 +10,8 @@
 	<entry key="page.registration.nickname">NickName</entry>
 	<entry key="page.registration.country">Country</entry>
 	<entry key="page.registration.submit">Submit</entry>
+	<entry key="page.registration.checbox">I am 18 years old.</entry>
+	
 	
 	<entry key="page.news.addNews">Add News</entry>
 	<entry key="page.news.edit">Edit</entry>

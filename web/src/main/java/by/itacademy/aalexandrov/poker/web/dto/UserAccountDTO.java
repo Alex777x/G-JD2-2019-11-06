@@ -6,9 +6,10 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import org.springframework.security.crypto.bcrypt.BCrypt;
+
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.UserRole;
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.UserStatus;
-import by.itacademy.aalexandrov.poker.service.PasswordUtils;
 
 public class UserAccountDTO {
 
@@ -55,9 +56,8 @@ public class UserAccountDTO {
 	}
 
 	public void setPassword(String password) {
-		String salt = PasswordUtils.getSalt(password.length());
-		String cryptPassword = PasswordUtils.generateSecurePassword(password, salt);
-		this.password = cryptPassword;
+		String pw_hash = BCrypt.hashpw(password, BCrypt.gensalt(10));
+		this.password = pw_hash;
 	}
 
 	public String getEmail() {
