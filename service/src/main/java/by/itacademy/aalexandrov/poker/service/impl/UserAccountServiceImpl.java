@@ -8,7 +8,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import by.itacademy.aalexandrov.poker.dao.api.ITransactionDao;
 import by.itacademy.aalexandrov.poker.dao.api.IUserAccountDao;
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.UserRole;
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.UserStatus;
@@ -22,8 +21,6 @@ public class UserAccountServiceImpl implements IUserAccountService {
 	private static final Logger LOGGER = LoggerFactory.getLogger(UserAccountServiceImpl.class);
 
 	private IUserAccountDao dao;
-
-	private ITransactionDao daoT;
 
 	@Autowired
 	public UserAccountServiceImpl(IUserAccountDao dao) {

@@ -18,7 +18,7 @@ public class TransactionServiceTest extends AbstractTest {
 	public void testCreate() {
 		final ITransaction entity = saveNewTransaction();
 
-		final ITransaction entityFromDb = transactionService.get(entity.getId());
+		final ITransaction entityFromDb = transactionService.getFullInfo(entity.getId());
 
 		assertNotNull(entityFromDb);
 		assertEquals(entity.getUserAccount().getId(), entityFromDb.getUserAccount().getId());
@@ -81,7 +81,7 @@ public class TransactionServiceTest extends AbstractTest {
 			saveNewTransaction();
 		}
 
-		final List<ITransaction> allEntities = transactionService.getAll();
+		final List<ITransaction> allEntities = transactionService.getFullInfo();
 
 		for (final ITransaction entityFromDb : allEntities) {
 			assertNotNull(entityFromDb.getUserAccount().getId());

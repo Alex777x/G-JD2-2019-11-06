@@ -20,7 +20,7 @@ public class PlayerServiceTest extends AbstractTest {
 	public void testCreate() {
 		IPlayer entity = saveNewPlayer();
 
-		final IPlayer entityFromDb = playerService.get(entity.getId());
+		final IPlayer entityFromDb = playerService.getFullInfo(entity.getId());
 
 		assertNotNull(entityFromDb);
 		assertEquals(entity.getGame().getId(), entityFromDb.getGame().getId());
@@ -93,7 +93,7 @@ public class PlayerServiceTest extends AbstractTest {
 			saveNewPlayer();
 		}
 
-		final List<IPlayer> allEntities = playerService.getAll();
+		final List<IPlayer> allEntities = playerService.getFullInfo();
 
 		for (final IPlayer entityFromDb : allEntities) {
 			assertNotNull(entityFromDb.getGame().getId());

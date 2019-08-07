@@ -33,4 +33,7 @@ public interface IChatService {
 	@Transactional
 	IChat createEntity();
 
+	@Transactional
+	IChat getFullInfo(Integer id);
+
 }

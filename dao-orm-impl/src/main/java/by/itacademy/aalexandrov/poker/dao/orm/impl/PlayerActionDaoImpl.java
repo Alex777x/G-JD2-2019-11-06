@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Root;
 import javax.persistence.metamodel.SingularAttribute;
@@ -102,6 +103,46 @@ public class PlayerActionDaoImpl extends AbstractDaoImpl<IPlayerAction, Integer>
 		default:
 			throw new UnsupportedOperationException("sorting is not supported by column:" + sortColumn);
 		}
+	}
+
+	@Override
+	public IPlayerAction getFullInfo(Integer id) {
+		final EntityManager em = getEntityManager();
+		final CriteriaBuilder cb = em.getCriteriaBuilder();
+
+		final CriteriaQuery<IPlayerAction> cq = cb.createQuery(IPlayerAction.class);
+		final Root<PlayerAction> from = cq.from(PlayerAction.class);
+
+		cq.select(from); // define what need to be selected
+
+		from.fetch(PlayerAction_.player, JoinType.LEFT);
+
+		cq.distinct(true);
+
+		cq.where(cb.equal(from.get(PlayerAction_.id), id));
+
+		final TypedQuery<IPlayerAction> q = em.createQuery(cq);
+
+		return getSingleResult(q);
+	}
+
+	@Override
+	public List<IPlayerAction> getFullInfo() {
+		final EntityManager em = getEntityManager();
+		final CriteriaBuilder cb = em.getCriteriaBuilder();
+
+		final CriteriaQuery<IPlayerAction> cq = cb.createQuery(IPlayerAction.class);
+		final Root<PlayerAction> from = cq.from(PlayerAction.class);
+
+		cq.select(from);
+
+		from.fetch(PlayerAction_.player, JoinType.LEFT);
+
+		cq.distinct(true);
+
+		final TypedQuery<IPlayerAction> q = em.createQuery(cq);
+
+		return q.getResultList();
 	}
 
 }

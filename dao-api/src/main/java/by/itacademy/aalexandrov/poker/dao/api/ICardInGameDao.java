@@ -13,4 +13,8 @@ public interface ICardInGameDao extends IDao<ICardInGame, Integer> {
 
 	void save(ICardInGame... entities);
 
+	ICardInGame getFullInfo(Integer id);
+
+	List<ICardInGame> getFullInfo();
+
 }

@@ -18,7 +18,7 @@ public class PlayerActionServiceTest extends AbstractTest {
 	public void testCreate() {
 		final IPlayerAction entity = saveNewPlayerAction();
 
-		final IPlayerAction entityFromDb = playerActionService.get(entity.getId());
+		final IPlayerAction entityFromDb = playerActionService.getFullInfo(entity.getId());
 
 		assertNotNull(entityFromDb);
 		assertEquals(entity.getPlayer().getId(), entityFromDb.getPlayer().getId());
@@ -102,7 +102,7 @@ public class PlayerActionServiceTest extends AbstractTest {
 			saveNewPlayerAction();
 		}
 
-		final List<IPlayerAction> allEntities = playerActionService.getAll();
+		final List<IPlayerAction> allEntities = playerActionService.getFullInfo();
 
 		for (final IPlayerAction entityFromDb : allEntities) {
 			assertNotNull(entityFromDb.getPlayer().getId());

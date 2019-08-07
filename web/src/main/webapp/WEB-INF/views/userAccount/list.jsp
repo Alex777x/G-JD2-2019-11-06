@@ -43,7 +43,6 @@
 	</tbody>
 </table>
 <a class="waves-effect waves-light btn right" href="${pagesUserAccount}/add"><i class="material-icons">add</i></a>
-<c:out value="{4*5+12}" />
 <jspFragments:paging />
 
 <script>

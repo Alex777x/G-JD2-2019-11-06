@@ -33,4 +33,10 @@ public interface ICardInGameService {
 	@Transactional
 	ICardInGame createEntity();
 
+	@Transactional
+	ICardInGame getFullInfo(Integer id);
+
+	@Transactional
+	List<ICardInGame> getFullInfo();
+
 }

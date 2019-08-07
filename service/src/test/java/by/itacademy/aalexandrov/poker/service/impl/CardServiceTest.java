@@ -118,7 +118,7 @@ public class CardServiceTest extends AbstractTest {
 	@Test
 	public void testFind() {
 		for (int i = 0; i < 6; i++) {
-			saveNewUserAccount();
+			saveNewCard();
 		}
 
 		CardFilter filter = new CardFilter();

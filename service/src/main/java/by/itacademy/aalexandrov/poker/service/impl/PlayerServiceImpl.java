@@ -94,4 +94,14 @@ public class PlayerServiceImpl implements IPlayerService {
 		return dao.getCount(filter);
 	}
 
+	@Override
+	public IPlayer getFullInfo(Integer id) {
+		return dao.getFullInfo(id);
+	}
+
+	@Override
+	public List<IPlayer> getFullInfo() {
+		return dao.getFullInfo();
+	}
+
 }

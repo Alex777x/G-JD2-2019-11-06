@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Root;
 import javax.persistence.metamodel.SingularAttribute;
@@ -94,6 +95,28 @@ public class ChatDaoImpl extends AbstractDaoImpl<IChat, Integer> implements ICha
 		default:
 			throw new UnsupportedOperationException("sorting is not supported by column:" + sortColumn);
 		}
+	}
+
+	@Override
+	public IChat getFullInfo(Integer id) {
+		final EntityManager em = getEntityManager();
+		final CriteriaBuilder cb = em.getCriteriaBuilder();
+
+		final CriteriaQuery<IChat> cq = cb.createQuery(IChat.class);
+		final Root<Chat> from = cq.from(Chat.class);
+
+		cq.select(from); // define what need to be selected
+
+		from.fetch(Chat_.game, JoinType.LEFT);
+		from.fetch(Chat_.userAccount, JoinType.LEFT);
+
+		cq.distinct(true);
+
+		cq.where(cb.equal(from.get(Chat_.id), id));
+
+		final TypedQuery<IChat> q = em.createQuery(cq);
+
+		return getSingleResult(q);
 	}
 
 }

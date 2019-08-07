@@ -15,4 +15,8 @@ public interface ITransactionDao extends IDao<ITransaction, Integer> {
 
 	long getSum(Integer id);
 
+	ITransaction getFullInfo(Integer id);
+
+	List<ITransaction> getFullInfo();
+
 }

@@ -33,4 +33,10 @@ public interface IPlayerService {
 	@Transactional
 	IPlayer createEntity();
 
+	@Transactional
+	IPlayer getFullInfo(Integer id);
+
+	@Transactional
+	List<IPlayer> getFullInfo();
+
 }

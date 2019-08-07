@@ -12,5 +12,9 @@ public interface IPlayerActionDao extends IDao<IPlayerAction, Integer> {
 	long getCount(PlayerActionFilter filter);
 
 	void save(IPlayerAction... entities);
-	
+
+	IPlayerAction getFullInfo(Integer id);
+
+	List<IPlayerAction> getFullInfo();
+
 }

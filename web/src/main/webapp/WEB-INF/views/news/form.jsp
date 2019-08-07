@@ -8,17 +8,17 @@
 	<form:input path="id" type="hidden" />
 
 	<div class="form-group">
-		<label for="newsTitle">Title</label>
+		<label for="newsTitle"><spring:message code="page.news.title" /></label>
 		<form:input  class="form-control" path="newsTitle" type="text" />
 		<form:errors path="newsTitle" cssClass="red-text" />
 	</div>
 
 	<div class="form-group">
-		<label for="newsText">Text</label>
+		<label for="newsText"><spring:message code="page.news.text" /></label>
 		<form:textarea class="form-control" path="newsText" type="text" rows="15" />
 		<form:errors path="newsText" cssClass="red-text" />
 	</div>
 
-	<button class="btn btn-primary" type="submit">Save</button>
-	<a class="btn btn-primary" href="${pagesNews}">Back</a>
+	<button class="btn btn-primary" type="submit"><spring:message code="page.news.save" /></button>
+	<a class="btn btn-primary" href="${pagesNews}"><spring:message code="page.news.back" /></a>
 </form:form>

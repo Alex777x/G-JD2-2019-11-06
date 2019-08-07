@@ -33,4 +33,7 @@ public interface ITiketService {
 	@Transactional
 	long getCount(TiketFilter filter);
 
+	@Transactional
+	ITiket getFullInfo(Integer id);
+
 }

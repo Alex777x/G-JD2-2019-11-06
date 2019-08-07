@@ -36,4 +36,10 @@ public interface ITransactionService {
 	@Transactional
 	long getSum(Integer id);
 
+	@Transactional
+	ITransaction getFullInfo(Integer id);
+
+	@Transactional
+	List<ITransaction> getFullInfo();
+
 }

@@ -4,4 +4,34 @@
 	<entry key="page.home.title">Home Page</entry>
 	<entry key="page.home.welcomeMessage">Hello, {0}</entry>
 	<entry key="page.login.credentialsError">Invalid username and password!</entry>
+	
+	<entry key="page.registration.email">Email</entry>
+	<entry key="page.registration.password">Password</entry>
+	<entry key="page.registration.nickname">NickName</entry>
+	<entry key="page.registration.country">Country</entry>
+	<entry key="page.registration.submit">Submit</entry>
+	
+	<entry key="page.news.addNews">Add News</entry>
+	<entry key="page.news.edit">Edit</entry>
+	<entry key="page.news.delete">Delete</entry>
+	<entry key="page.news.title">Title</entry>
+	<entry key="page.news.text">Text</entry>
+	<entry key="page.news.save">Save</entry>
+	<entry key="page.news.back">Back</entry>
+	
+	<entry key="page.home.language">Language</entry>
+	<entry key="page.home.home">Home</entry>
+	<entry key="page.home.login">Login</entry>
+	<entry key="page.home.registration">Registration</entry>
+	<entry key="page.home.notLogged">Logged user: You are not logged in!</entry>
+	<entry key="page.home.news">News</entry>
+	<entry key="page.home.howToPlay">Poker Rules</entry>
+	<entry key="page.home.topPlayers">Top Players</entry>
+	<entry key="page.home.personalArea">Personal Area</entry>
+	<entry key="page.home.support">Support</entry>
+	<entry key="page.home.adminPanel">Admin Panel</entry>
+	<entry key="page.home.name">Name:</entry>
+	<entry key="page.home.role">Role:</entry>
+	<entry key="page.home.logout">Logout</entry>
+	
 </properties>

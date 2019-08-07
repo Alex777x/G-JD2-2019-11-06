@@ -94,4 +94,14 @@ public class PlayerActionServiceImpl implements IPlayerActionService {
 		return dao.getCount(filter);
 	}
 
+	@Override
+	public IPlayerAction getFullInfo(Integer id) {
+		return dao.getFullInfo(id);
+	}
+
+	@Override
+	public List<IPlayerAction> getFullInfo() {
+		return dao.getFullInfo();
+	}
+
 }

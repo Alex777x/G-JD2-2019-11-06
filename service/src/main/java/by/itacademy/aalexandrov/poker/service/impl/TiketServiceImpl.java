@@ -93,4 +93,9 @@ public class TiketServiceImpl implements ITiketService {
 	public long getCount(TiketFilter filter) {
 		return dao.getCount(filter);
 	}
+
+	@Override
+	public ITiket getFullInfo(Integer id) {
+		return dao.getFullInfo(id);
+	}
 }

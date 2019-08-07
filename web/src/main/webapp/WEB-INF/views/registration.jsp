@@ -13,12 +13,12 @@
 
 		<div class="form-row">
 			<div class="form-group col-md-6">
-				<label for="email">Email</label>
+				<label for="email"><spring:message code="page.registration.email" /> </label>
 				<form:input path="email" type="email" class="form-control" placeholder="Email" />
 				<form:errors path="email" cssClass="red-text" />
 			</div>
 			<div class="form-group col-md-6">
-				<label for="password">Password</label>
+				<label for="password"><spring:message code="page.registration.password" /></label>
 				<form:input path="password" type="password" class="form-control" placeholder="Password" />
 				<form:errors path="password" cssClass="red-text" />
 			</div>
@@ -26,12 +26,12 @@
 
 		<div class="form-row">
 			<div class="form-group col-md-6">
-				<label for="nickname">Nickname</label>
+				<label for="nickname"><spring:message code="page.registration.nickname" /></label>
 				<form:input path="nickname" type="text" class="form-control" placeholder="Nickname" />
 				<form:errors path="nickname" cssClass="red-text" />
 			</div>
 			<div class="form-group col-md-6">
-				<label for="country">Country</label>
+				<label for="country"><spring:message code="page.registration.country" /></label>
 				<form:select path="country" class="form-control">
 					<form:options items="${countriesChoices}" />
 				</form:select>
@@ -39,7 +39,7 @@
 			</div>
 		</div>
 
-		<button type="submit" class="btn btn-primary">Submit</button>
+		<button type="submit" class="btn btn-primary"><spring:message code="page.registration.submit" /></button>
 	</form:form>
 </div>
 

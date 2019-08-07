@@ -18,7 +18,7 @@ public class ChatServiceTest extends AbstractTest {
 	public void testCreate() {
 		final IChat entity = saveNewChat();
 
-		final IChat entityFromDb = chatService.get(entity.getId());
+		final IChat entityFromDb = chatService.getFullInfo(entity.getId());
 
 		assertNotNull(entityFromDb);
 		assertEquals(entity.getGame().getId(), entityFromDb.getGame().getId());

@@ -13,4 +13,6 @@ public interface ITiketDao extends IDao<ITiket, Integer> {
 
 	void save(ITiket... entities);
 
+	ITiket getFullInfo(Integer id);
+
 }

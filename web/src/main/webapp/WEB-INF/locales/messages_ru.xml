@@ -4,4 +4,34 @@
 	<entry key="page.home.title">Домашняя страница</entry>
 	<entry key="page.home.welcomeMessage">Привет, {0}</entry>
 	<entry key="page.login.credentialsError">Неверный логин или пароль!</entry>
+	
+	<entry key="page.registration.email">Электронная почта</entry>
+	<entry key="page.registration.password">Пароль</entry>
+	<entry key="page.registration.nickname">Никнэйм</entry>
+	<entry key="page.registration.country">Страна</entry>
+	<entry key="page.registration.submit">Подтвердить</entry>
+	
+	<entry key="page.news.addNews">Добавить новость</entry>
+	<entry key="page.news.edit">Редактировать</entry>
+	<entry key="page.news.delete">Удалить</entry>
+	<entry key="page.news.title">Заголовок</entry>
+	<entry key="page.news.text">Текст</entry>
+	<entry key="page.news.save">Сохранить</entry>
+	<entry key="page.news.back">Назад</entry>
+	
+	<entry key="page.home.language">Язык</entry>
+	<entry key="page.home.home">Домашняя Страница</entry>
+	<entry key="page.home.login">Залогиниться</entry>
+	<entry key="page.home.registration">Регистрация</entry>
+	<entry key="page.home.notLogged">Залогиненный юзер: Вы анонимус.</entry>
+	<entry key="page.home.news">Новости</entry>
+	<entry key="page.home.howToPlay">Правила Покера</entry>
+	<entry key="page.home.topPlayers">Топ Игроков</entry>
+	<entry key="page.home.personalArea">Личный Кабинет</entry>
+	<entry key="page.home.support">Поддержка</entry>
+	<entry key="page.home.adminPanel">Админ Панель</entry>
+	<entry key="page.home.name">Имя:</entry>
+	<entry key="page.home.role">Роль:</entry>
+	<entry key="page.home.logout">Выйти</entry>
+	
 </properties>

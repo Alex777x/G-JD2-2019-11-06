@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Root;
 import javax.persistence.metamodel.SingularAttribute;
@@ -107,6 +108,46 @@ public class TransactionDaoImpl extends AbstractDaoImpl<ITransaction, Integer> i
 		final Long q = (Long) em.createQuery(String.format("SELECT sum(amount) from Transaction where id = %s", id))
 				.getSingleResult();
 		return q;
+	}
+
+	@Override
+	public ITransaction getFullInfo(Integer id) {
+		final EntityManager em = getEntityManager();
+		final CriteriaBuilder cb = em.getCriteriaBuilder();
+
+		final CriteriaQuery<ITransaction> cq = cb.createQuery(ITransaction.class);
+		final Root<Transaction> from = cq.from(Transaction.class);
+
+		cq.select(from); // define what need to be selected
+
+		from.fetch(Transaction_.userAccount, JoinType.LEFT);
+
+		cq.distinct(true);
+
+		cq.where(cb.equal(from.get(Transaction_.id), id));
+
+		final TypedQuery<ITransaction> q = em.createQuery(cq);
+
+		return getSingleResult(q);
+	}
+
+	@Override
+	public List<ITransaction> getFullInfo() {
+		final EntityManager em = getEntityManager();
+		final CriteriaBuilder cb = em.getCriteriaBuilder();
+
+		final CriteriaQuery<ITransaction> cq = cb.createQuery(ITransaction.class);
+		final Root<Transaction> from = cq.from(Transaction.class);
+
+		cq.select(from); // define what need to be selected
+
+		from.fetch(Transaction_.userAccount, JoinType.LEFT);
+
+		cq.distinct(true);
+
+		final TypedQuery<ITransaction> q = em.createQuery(cq);
+
+		return q.getResultList();
 	}
 
 }

@@ -94,4 +94,9 @@ public class ChatServiceImpl implements IChatService {
 		return dao.getCount(filter);
 	}
 
+	@Override
+	public IChat getFullInfo(Integer id) {
+		return dao.getFullInfo(id);
+	}
+
 }
