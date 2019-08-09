@@ -56,7 +56,4 @@
 	</div>
 </div>
 
-<<<<<<< HEAD
-=======
-<div>${welcomeMessage}</div>
->>>>>>> feature/i18n
+
