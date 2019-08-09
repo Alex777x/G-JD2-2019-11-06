@@ -55,11 +55,4 @@
 	</div>
 </div>
 
-
-
-
-<div>
-	<spring:message code="page.home.title" /> 
-</div>
-
 <div>${welcomeMessage}</div>

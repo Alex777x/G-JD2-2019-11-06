@@ -10,6 +10,12 @@
 	<artifactId>dao-orm-impl</artifactId>
 
 	<dependencies>
+
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-search-orm</artifactId>
+		</dependency>
+
 		<dependency>
 			<groupId>com.itacademy.jd2.aa.casino</groupId>
 			<artifactId>dao-api</artifactId>

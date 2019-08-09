@@ -34,6 +34,12 @@
 		<dependencies>
 
 			<dependency>
+				<groupId>org.hibernate</groupId>
+				<artifactId>hibernate-search-orm</artifactId>
+				<version>5.0.1.Final</version>
+			</dependency>
+
+			<dependency>
 				<groupId>org.codehaus.jackson</groupId>
 				<artifactId>jackson-core-asl</artifactId>
 				<version>1.9.13</version>
