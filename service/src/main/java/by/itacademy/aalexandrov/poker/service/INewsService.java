@@ -33,4 +33,7 @@ public interface INewsService {
 	@Transactional
 	INews createEntity();
 
+	@Transactional
+	List<INews> search(String text);
+
 }

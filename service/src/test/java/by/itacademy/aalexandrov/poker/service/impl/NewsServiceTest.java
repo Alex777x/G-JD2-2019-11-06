@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import java.util.Date;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -104,6 +105,32 @@ public class NewsServiceTest extends AbstractTest {
 		saveNewNews();
 		newsService.deleteAll();
 		assertEquals(0, newsService.getAll().size());
+	}
+
+	@Test
+	public void testSearch() {
+		List<INews> result = newsService.search("test");
+		assertTrue(result.isEmpty());
+
+		saveNews("uniquedescription" + new Date());
+
+		INews savedNews = saveNews("some test data");
+		List<INews> foundModels = newsService.search("some test data");
+		assertTrue(foundModels.size() == 1);
+		assertTrue(foundModels.get(0).getId().equals(savedNews.getId()));
+
+		INews validModelInfo = saveNews("the best model in the world");
+		result = newsService.search("world model best");
+		assertEquals(1, result.size());
+		assertEquals(validModelInfo.getId().intValue(), result.get(0).getId().intValue());
+	}
+
+	private INews saveNews(String newsText) {
+		final INews entity = newsService.createEntity();
+		entity.setNewsTitle("title - " + getRandomPrefix());
+		entity.setNewsText(newsText);
+		newsService.save(entity);
+		return entity;
 	}
 
 }

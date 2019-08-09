@@ -4,15 +4,23 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Transient;
 
+import org.hibernate.search.annotations.Analyze;
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Index;
+import org.hibernate.search.annotations.Indexed;
+import org.hibernate.search.annotations.Store;
+
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.INews;
 
 @Entity
+@Indexed
 public class News extends BaseEntity implements INews {
 
 	@Column
 	private String newsTitle;
 
 	@Column
+	@Field(index = Index.YES, analyze = Analyze.YES, store = Store.NO)
 	private String newsText;
 
 	@Transient

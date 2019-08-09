@@ -13,4 +13,6 @@ public interface INewsDao extends IDao<INews, Integer> {
 
 	void save(INews... entities);
 
+	List<INews> search(String text);
+
 }

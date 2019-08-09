@@ -94,4 +94,9 @@ public class NewsServiceImpl implements INewsService {
 		return dao.getCount(filter);
 	}
 
+	@Override
+	public List<INews> search(String text) {
+		return dao.search(text);
+	}
+
 }

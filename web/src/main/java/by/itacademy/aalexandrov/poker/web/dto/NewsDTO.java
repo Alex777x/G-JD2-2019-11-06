@@ -9,7 +9,7 @@ public class NewsDTO {
 	@Size(min = 1, max = 50)
 	private String newsTitle;
 
-	@Size(min = 1, max = 1000)
+	@Size(min = 1, max = 10000)
 	private String newsText;
 
 	public Integer getId() {
