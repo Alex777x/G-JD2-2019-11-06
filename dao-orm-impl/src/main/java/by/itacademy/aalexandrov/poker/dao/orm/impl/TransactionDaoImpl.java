@@ -20,6 +20,7 @@ import by.itacademy.aalexandrov.poker.dao.api.entity.table.ITransaction;
 import by.itacademy.aalexandrov.poker.dao.api.filter.TransactionFilter;
 import by.itacademy.aalexandrov.poker.dao.orm.impl.entity.Transaction;
 import by.itacademy.aalexandrov.poker.dao.orm.impl.entity.Transaction_;
+import by.itacademy.aalexandrov.poker.dao.orm.impl.entity.UserAccount_;
 
 @Repository
 public class TransactionDaoImpl extends AbstractDaoImpl<ITransaction, Integer> implements ITransactionDao {
@@ -147,6 +148,21 @@ public class TransactionDaoImpl extends AbstractDaoImpl<ITransaction, Integer> i
 
 		return (double) q.getSingleResult();
 
+	}
+
+	@Override
+	public Double getSumm(Integer id) {
+		final EntityManager em = getEntityManager();
+		final CriteriaBuilder cb = em.getCriteriaBuilder();
+		final CriteriaQuery<Double> cq = cb.createQuery(Double.class);
+
+		final Root<Transaction> from = cq.from(Transaction.class);
+		cq.select(cb.sum(from.get(Transaction_.amount)));
+
+		cq.where(cb.equal(from.get(Transaction_.userAccount).get(UserAccount_.id), id));
+
+		final TypedQuery<Double> q = em.createQuery(cq);
+		return q.getSingleResult();
 	}
 
 }

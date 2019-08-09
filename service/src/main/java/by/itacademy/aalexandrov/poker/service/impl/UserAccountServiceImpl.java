@@ -13,6 +13,7 @@ import by.itacademy.aalexandrov.poker.dao.api.entity.enums.UserRole;
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.UserStatus;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IUserAccount;
 import by.itacademy.aalexandrov.poker.dao.api.filter.UserAccountFilter;
+import by.itacademy.aalexandrov.poker.service.ITransactionService;
 import by.itacademy.aalexandrov.poker.service.IUserAccountService;
 
 @Service
@@ -21,6 +22,8 @@ public class UserAccountServiceImpl implements IUserAccountService {
 	private static final Logger LOGGER = LoggerFactory.getLogger(UserAccountServiceImpl.class);
 
 	private IUserAccountDao dao;
+
+	protected ITransactionService transactionService;
 
 	@Autowired
 	public UserAccountServiceImpl(IUserAccountDao dao) {

@@ -42,4 +42,6 @@ public interface ITransactionService {
 	@Transactional
 	double getBalance(Integer id);
 
+	Double getSumm(Integer id);
+
 }

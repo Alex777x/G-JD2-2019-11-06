@@ -11,8 +11,21 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.ITransaction;
+import by.itacademy.aalexandrov.poker.dao.api.entity.table.IUserAccount;
 
 public class TransactionServiceTest extends AbstractTest {
+
+	@Test
+	public void testSumm() {
+
+		IUserAccount newUserAccount = saveNewUserAccount();
+		final ITransaction entity1 = saveNewTransaction(newUserAccount);
+		final ITransaction entity2 = saveNewTransaction(newUserAccount);
+
+		assertEquals(entity1.getAmount() + entity2.getAmount(),
+				transactionService.getSumm(newUserAccount.getId()).doubleValue());
+
+	}
 
 	@Test
 	public void testCreate() {

@@ -122,13 +122,17 @@ public abstract class AbstractTest {
 		return entity;
 	}
 
-	protected ITransaction saveNewTransaction() {
+	protected ITransaction saveNewTransaction(IUserAccount account) {
 		ITransaction entity = transactionService.createEntity();
-		entity.setUserAccount(saveNewUserAccount());
+		entity.setUserAccount(account);
 		entity.setAmount(getRandomObjectsCount());
 		entity.setComment("comment" + getRandomPrefix());
 		transactionService.save(entity);
 		return entity;
+	}
+
+	protected ITransaction saveNewTransaction() {
+		return saveNewTransaction(saveNewUserAccount());
 	}
 
 	protected IPlayerAction saveNewPlayerAction() {
