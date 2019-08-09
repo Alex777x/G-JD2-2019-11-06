@@ -19,4 +19,6 @@ public interface ITransactionDao extends IDao<ITransaction, Integer> {
 
 	List<ITransaction> getFullInfo();
 
+	double getBalance(Integer id);
+
 }

@@ -109,4 +109,9 @@ public class TransactionServiceImpl implements ITransactionService {
 		return dao.getFullInfo();
 	}
 
+	@Override
+	public double getBalance(Integer id) {
+		return dao.getBalance(id);
+	}
+
 }

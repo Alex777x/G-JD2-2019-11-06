@@ -47,6 +47,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 			throw new BadCredentialsException("1000");
 		}
 
+		double balance = transactionService.getBalance(account.getId());
 		final int userId = account.getId();
 		final String foto = account.getFoto();
 
@@ -59,6 +60,8 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 		token.setId(userId);
 		token.setUserRole(userRole);
 		token.setFoto(foto);
+		token.setSum(balance);
+
 		return token;
 
 	}

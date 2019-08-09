@@ -3,6 +3,7 @@ package by.itacademy.aalexandrov.poker.dao.orm.impl;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -105,7 +106,7 @@ public class TransactionDaoImpl extends AbstractDaoImpl<ITransaction, Integer> i
 
 		// final Root<Transaction> from = cq.from(Transaction.class);
 		// cq.select(cb.sum(from));
-		final Long q = (Long) em.createQuery(String.format("SELECT sum(amount) from Transaction where id = %s", id))
+		final Long q = (Long) em.createQuery(String.format("SELECT SUM(amount) FROM Transaction WHERE id = %s", id))
 				.getSingleResult();
 		return q;
 	}
@@ -148,6 +149,21 @@ public class TransactionDaoImpl extends AbstractDaoImpl<ITransaction, Integer> i
 		final TypedQuery<ITransaction> q = em.createQuery(cq);
 
 		return q.getResultList();
+	}
+
+	@Override
+	public double getBalance(Integer id) {
+		final EntityManager em = getEntityManager();
+		// final CriteriaBuilder cb = em.getCriteriaBuilder();
+
+		// final CriteriaQuery<ITransaction> cq = cb.createQuery(ITransaction.class);
+		// final Root<Transaction> from = cq.from(Transaction.class);
+
+		String hql = String.format("SELECT SUM(amount) FROM Transaction WHERE user_account_id = %s", id);
+		final Query q = em.createQuery(hql);
+
+		return (double) q.getSingleResult();
+
 	}
 
 }

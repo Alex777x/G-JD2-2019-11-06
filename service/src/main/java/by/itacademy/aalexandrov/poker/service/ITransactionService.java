@@ -42,4 +42,7 @@ public interface ITransactionService {
 	@Transactional
 	List<ITransaction> getFullInfo();
 
+	@Transactional
+	double getBalance(Integer id);
+
 }
