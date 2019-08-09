@@ -95,11 +95,6 @@ public class TransactionServiceImpl implements ITransactionService {
 	}
 
 	@Override
-	public long getSum(Integer id) {
-		return dao.getSum(id);
-	}
-
-	@Override
 	public ITransaction getFullInfo(Integer id) {
 		return dao.getFullInfo(id);
 	}

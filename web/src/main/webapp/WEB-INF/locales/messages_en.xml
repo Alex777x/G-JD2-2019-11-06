@@ -3,7 +3,9 @@
 <properties>
 	<entry key="page.home.title">Home Page</entry>
 	<entry key="page.home.welcomeMessage">Hello, {0}</entry>
-	<entry key="page.login.credentialsError">Invalid username and password!</entry>
+	<entry key="page.login.credentialsError">Invalid username or password!</entry>
+	
+	<entry key="page.all.notLogged">You are not logged in.</entry>
 	
 	<entry key="page.registration.email">Email</entry>
 	<entry key="page.registration.password">Password</entry>
@@ -35,5 +37,6 @@
 	<entry key="page.home.name">Name:</entry>
 	<entry key="page.home.role">Role:</entry>
 	<entry key="page.home.logout">Logout</entry>
+	<entry key="page.home.balance">Balance</entry>
 	
 </properties>

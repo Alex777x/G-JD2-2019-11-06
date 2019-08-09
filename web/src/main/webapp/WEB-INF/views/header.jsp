@@ -53,7 +53,7 @@
 						<ul class="nav flex-column">
 							<li class="navbar-text"><spring:message code="page.home.name" /> <sec:authentication property="principal" /></li>
 							<li class="navbar-text"><spring:message code="page.home.role" /> <sec:authentication property="userRole" /></li>
-							<li class="navbar-text">Balance: <sec:authentication property="sum" /></li>
+							<li class="navbar-text"><spring:message code="page.home.balance" /> <sec:authentication property="sum" /></li>
 
 							<li class="navbar-text"><a href="${contextPath}/execute_logout" title="logout"><spring:message code="page.home.logout" /> <i class="fas fa-sign-out-alt"></i></a></li>
 						</ul>

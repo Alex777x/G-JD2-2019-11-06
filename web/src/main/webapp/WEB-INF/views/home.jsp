@@ -26,11 +26,11 @@
 
 		<div class="col-sm">
 
-			<table class="table table-sm table-dark">
+			<table class="table table-striped table-sm table-dark">
 				<thead>
 					<tr>
 						<th scope="col">Id</th>
-						<th scope="col">Players</th>
+						<th scope="col">Players in game</th>
 						<th scope="col">Average Bank</th>
 						<th scope="col">Created</th>
 						<th scope="col"></th>
@@ -47,6 +47,7 @@
 					</c:forEach>
 				</tbody>
 			</table>
+			<jspFragments:paging />
 
 		</div>
 
@@ -55,11 +56,3 @@
 	</div>
 </div>
 
-
-
-
-<div>
-	<spring:message code="page.home.title" /> 
-</div>
-
-<div>${welcomeMessage}</div>

@@ -1,89 +1,90 @@
 package by.itacademy.aalexandrov.poker.web.dto.grid;
+
 public class GridStateDTO {
 
-    public static final String GRID_STATE_SESSION_KEY = "currentPageGridState";
+	public static final String GRID_STATE_SESSION_KEY = "currentPageGridState";
 
-    private SortDTO sort;
+	private SortDTO sort;
 
-    private long pageCount;
+	private long pageCount;
 
-    private int page = 1;
+	private int page = 1;
 
-    private int itemsPerPage;
+	private int itemsPerPage;
 
-    private long totalCount;
+	private long totalCount;
 
-    public GridStateDTO(final int itemsPerPage) {
-        super();
-        this.itemsPerPage = itemsPerPage;
-    }
+	public GridStateDTO(final int itemsPerPage) {
+		super();
+		this.itemsPerPage = itemsPerPage;
+	}
 
-    public GridStateDTO() {
-        this(5);
-    }
+	public GridStateDTO() {
+		this(20);
+	}
 
-    public SortDTO getSort() {
-        return sort;
-    }
+	public SortDTO getSort() {
+		return sort;
+	}
 
-    private void setSort(final SortDTO sort) {
-        this.sort = sort;
-    }
+	private void setSort(final SortDTO sort) {
+		this.sort = sort;
+	}
 
-    public void setSort(final String sortColumn, String defaultSortColumn) {
-        if (sortColumn == null) {
-            if (getSort() == null) {
-                setSort(new SortDTO(defaultSortColumn));
-            }
-            return;
-        }
+	public void setSort(final String sortColumn, String defaultSortColumn) {
+		if (sortColumn == null) {
+			if (getSort() == null) {
+				setSort(new SortDTO(defaultSortColumn));
+			}
+			return;
+		}
 
-        final String[] sortParams = sortColumn.split(":");
-        // unsafe operation below but assumes that JSP doesn't have bugs
-        if (sortParams.length == 1) {
-            setSort(new SortDTO(sortParams[0]));
-        } else {
-            setSort(new SortDTO(sortParams[0], "asc".equals(sortParams[1])));
-        }
-    }
+		final String[] sortParams = sortColumn.split(":");
+		// unsafe operation below but assumes that JSP doesn't have bugs
+		if (sortParams.length == 1) {
+			setSort(new SortDTO(sortParams[0]));
+		} else {
+			setSort(new SortDTO(sortParams[0], "asc".equals(sortParams[1])));
+		}
+	}
 
-    public int getPage() {
-        return page;
-    }
+	public int getPage() {
+		return page;
+	}
 
-    public void setPage(final Integer pageNumber) {
-        if ((pageNumber == null) || (pageNumber == 0)) {
-            return;
-        }
+	public void setPage(final Integer pageNumber) {
+		if ((pageNumber == null) || (pageNumber == 0)) {
+			return;
+		}
 
-        this.page = pageNumber;
-    }
+		this.page = pageNumber;
+	}
 
-    public int getItemsPerPage() {
-        return itemsPerPage;
-    }
+	public int getItemsPerPage() {
+		return itemsPerPage;
+	}
 
-    public boolean getFirstPage() {
-        return getPage() == 1;
-    }
+	public boolean getFirstPage() {
+		return getPage() == 1;
+	}
 
-    public boolean getLastPage() {
-        return getPage() >= this.pageCount;
-    }
+	public boolean getLastPage() {
+		return getPage() >= this.pageCount;
+	}
 
-    public long getPageCount() {
-        return pageCount;
-    }
+	public long getPageCount() {
+		return pageCount;
+	}
 
-    public void setTotalCount(final long totalCount) {
-        this.totalCount = totalCount;
-        this.pageCount = (totalCount / itemsPerPage);
-        if ((totalCount % itemsPerPage) > 0) {
-            this.pageCount++;
-        }
-    }
+	public void setTotalCount(final long totalCount) {
+		this.totalCount = totalCount;
+		this.pageCount = (totalCount / itemsPerPage);
+		if ((totalCount % itemsPerPage) > 0) {
+			this.pageCount++;
+		}
+	}
 
-    public long getTotalCount() {
-        return totalCount;
-    }
+	public long getTotalCount() {
+		return totalCount;
+	}
 }

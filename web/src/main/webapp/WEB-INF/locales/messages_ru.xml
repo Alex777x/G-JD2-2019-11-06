@@ -5,6 +5,8 @@
 	<entry key="page.home.welcomeMessage">Привет, {0}</entry>
 	<entry key="page.login.credentialsError">Неверный логин или пароль!</entry>
 	
+	<entry key="page.all.notLogged">Вы не вошли в аккаунт.</entry>
+	
 	<entry key="page.registration.email">Электронная почта</entry>
 	<entry key="page.registration.password">Пароль</entry>
 	<entry key="page.registration.nickname">Никнэйм</entry>
@@ -34,5 +36,6 @@
 	<entry key="page.home.name">Имя:</entry>
 	<entry key="page.home.role">Роль:</entry>
 	<entry key="page.home.logout">Выйти</entry>
+	<entry key="page.home.balance">Баланс</entry>
 	
 </properties>

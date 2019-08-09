@@ -7,31 +7,38 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<sec:authorize access="hasRole('ROLE_ADMIN')">
-	<button type="button" class="btn btn-light addnews">
-		<a href="${pagesNews}/add"><i class="fas fa-plus"><spring:message code="page.news.addNews" /></i></a>
-	</button>
+<sec:authorize access="isAnonymous()">
+	<p class="text-center"><spring:message code="page.all.notLogged" /></p>
 </sec:authorize>
 
-<c:forEach var="news" items="${gridItems}" varStatus="loopCounter">
-	<div>
 
-		<p class="font-weight-bold text-uppercase">
-			<c:out value="${news.newsTitle}" />
-		</p>
+<sec:authorize access="!isAnonymous()">
+	<sec:authorize access="hasRole('ROLE_ADMIN')">
+		<button type="button" class="btn btn-light addnews">
+			<a href="${pagesNews}/add"><i class="fas fa-plus"><spring:message code="page.news.addNews" /></i></a>
+		</button>
+	</sec:authorize>
 
+	<c:forEach var="news" items="${gridItems}" varStatus="loopCounter">
+		<div>
+
+			<p class="font-weight-bold text-uppercase">
+				<c:out value="${news.newsTitle}" />
+			</p>
+
+			<br>
+			<p class="text-justify">
+				<c:out value="${news.newsText}" />
+			</p>
+			<sec:authorize access="hasRole('ROLE_ADMIN')">
+				<a href="${pagesNews}/${news.id}/edit"><i class="fas fa-edit"><spring:message code="page.news.edit" /></i></a>
+				<a href="${pagesNews}/${news.id}/delete"><i class="fas fa-trash-alt"><spring:message code="page.news.delete" /></i></a>
+			</sec:authorize>
+		</div>
 		<br>
-		<p class="text-justify">
-			<c:out value="${news.newsText}" />
-		</p>
-		<sec:authorize access="hasRole('ROLE_ADMIN')">
-			<a href="${pagesNews}/${news.id}/edit"><i class="fas fa-edit"><spring:message code="page.news.edit" /></i></a>
-			<a href="${pagesNews}/${news.id}/delete"><i class="fas fa-trash-alt"><spring:message code="page.news.delete" /></i></a>
-		</sec:authorize>
-	</div>
+		<hr>
+	</c:forEach>
 	<br>
-	<hr>
-</c:forEach>
-<br>
 
-<jspFragments:paging />
+	<jspFragments:paging />
+</sec:authorize>

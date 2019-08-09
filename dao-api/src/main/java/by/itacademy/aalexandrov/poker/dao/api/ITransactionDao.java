@@ -13,8 +13,6 @@ public interface ITransactionDao extends IDao<ITransaction, Integer> {
 
 	void save(ITransaction... entities);
 
-	long getSum(Integer id);
-
 	ITransaction getFullInfo(Integer id);
 
 	List<ITransaction> getFullInfo();
