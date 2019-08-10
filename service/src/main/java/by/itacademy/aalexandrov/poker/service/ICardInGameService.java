@@ -12,6 +12,7 @@ public interface ICardInGameService {
 	@Transactional
 	long getCount(CardInGameFilter filter);
 
+	@Transactional
 	List<ICardInGame> find(CardInGameFilter filter);
 
 	@Transactional

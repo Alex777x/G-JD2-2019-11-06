@@ -32,7 +32,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 
 	@Override
 	public Authentication authenticate(final Authentication authentication) throws AuthenticationException {
-		final String username = authentication.getPrincipal() + "";
+		final String username = authentication.getPrincipal().toString() + "";
 		final String password = authentication.getCredentials() + "";
 
 		IUserAccount account;
@@ -47,7 +47,14 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 			throw new BadCredentialsException("1000");
 		}
 
-		double balance = transactionService.getBalance(account.getId());
+		double balance = 0;
+
+		try {
+			balance = transactionService.getSumm(account.getId());
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+
 		final int userId = account.getId();
 		final String foto = account.getFoto();
 

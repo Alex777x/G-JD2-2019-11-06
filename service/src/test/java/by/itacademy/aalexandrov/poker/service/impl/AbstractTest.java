@@ -21,6 +21,7 @@ import by.itacademy.aalexandrov.poker.dao.api.entity.table.IBaseEntity;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.ICard;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.ICardInGame;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IChat;
+import by.itacademy.aalexandrov.poker.dao.api.entity.table.IChatInHome;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.ICountry;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IGame;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.INews;
@@ -31,6 +32,7 @@ import by.itacademy.aalexandrov.poker.dao.api.entity.table.ITransaction;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IUserAccount;
 import by.itacademy.aalexandrov.poker.service.ICardInGameService;
 import by.itacademy.aalexandrov.poker.service.ICardService;
+import by.itacademy.aalexandrov.poker.service.IChatInHomeService;
 import by.itacademy.aalexandrov.poker.service.IChatService;
 import by.itacademy.aalexandrov.poker.service.ICountryService;
 import by.itacademy.aalexandrov.poker.service.IGameService;
@@ -65,12 +67,15 @@ public abstract class AbstractTest {
 	protected ICardInGameService cardInGameService;
 	@Autowired
 	protected INewsService newsService;
+	@Autowired
+	protected IChatInHomeService chatInHomeService;
 
 	private static final Random RANDOM = new Random();
 
 	@BeforeEach
 	public void setUpMethod() {
 		// clean DB recursive
+		chatInHomeService.deleteAll();
 		newsService.deleteAll();
 		tiketService.deleteAll();
 		chatService.deleteAll();
@@ -112,6 +117,14 @@ public abstract class AbstractTest {
 		entity.setTiketText("tiket-text" + getRandomPrefix());
 		entity.setStatus("tiket-status" + getRandomPrefix());
 		tiketService.save(entity);
+		return entity;
+	}
+
+	protected IChatInHome saveNewChatInHome() {
+		IChatInHome entity = chatInHomeService.createEntity();
+		entity.setUserAccount(saveNewUserAccount());
+		entity.setMessage(getRandomPrefix());
+		chatInHomeService.save(entity);
 		return entity;
 	}
 

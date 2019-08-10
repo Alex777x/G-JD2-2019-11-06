@@ -163,6 +163,18 @@ CREATE TABLE "news" (
 
 
 
+CREATE TABLE "chat_in_home" (
+	"id" integer DEFAULT '0',
+	"user_account_id" integer NOT NULL,
+	"message" character varying(50) NOT NULL,
+	"created" TIMESTAMP NOT NULL,
+	"updated" TIMESTAMP NOT NULL
+) WITH (
+  OIDS=FALSE
+);
+
+
+
 ALTER TABLE "user_account" ADD CONSTRAINT "user_account_fk0" FOREIGN KEY ("country_id") REFERENCES "country"("id");
 
 ALTER TABLE "tiket" ADD CONSTRAINT "tiket_fk0" FOREIGN KEY ("user_account_id") REFERENCES "user_account"("id");
@@ -184,3 +196,5 @@ ALTER TABLE "card_in_game" ADD CONSTRAINT "card_in_game_fk0" FOREIGN KEY ("card_
 ALTER TABLE "card_in_game" ADD CONSTRAINT "card_in_game_fk1" FOREIGN KEY ("game_id") REFERENCES "game"("id");
 ALTER TABLE "card_in_game" ADD CONSTRAINT "card_in_game_fk2" FOREIGN KEY ("player_id") REFERENCES "player"("id");
 
+
+ALTER TABLE "chat_in_home" ADD CONSTRAINT "chat_in_home_fk0" FOREIGN KEY ("user_account_id") REFERENCES "user_account"("id");

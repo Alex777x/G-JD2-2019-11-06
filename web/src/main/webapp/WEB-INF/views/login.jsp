@@ -3,8 +3,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <h2>Login with Username and Password</h2>
 
-
-<form class="col-6" name='loginForm' action="<c:url value='login' />" method='POST'>
+<div class="row">
+<div class="col-4"></div>
+<form class="col-4 login-form" name='loginForm' action="<c:url value='login' />" method='POST'>
 	<div class="form-group">
 		<label for="username"><spring:message code="page.registration.nickname" /></label><input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
 			placeholder="Enter nickname" name='username' value=''>
@@ -29,3 +30,5 @@
 	</c:if>
 	<button type="submit" class="btn btn-primary"><spring:message code="page.registration.submit" /></button>
 </form>
+<div class="col-4"></div>
+</div>

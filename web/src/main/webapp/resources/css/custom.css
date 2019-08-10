@@ -8,7 +8,7 @@ body {
 	display: flex;
 	min-height: 100vh;
 	flex-direction: column;
-	background-image: url(goldenrod-scratone.png);
+	background-image: url(spring-green-oblique-lines.png);
 	background-attachment: fixed;
 	/* 	background-size: cover; */
 	/* 	background-color: 008B45; */
@@ -17,6 +17,10 @@ body {
 
 main {
 	flex: 1 0 auto;
+}
+
+.table-dark {
+	margin-top: 5%;
 }
 
 .img-thumbnail {
@@ -38,6 +42,25 @@ main {
 
 .rules {
 	background-color: #f2f2ee;
+	padding-top: 20px;
+}
+
+.login-form {
+	margin-top: 5%;
+	background-color: #343a40;
+	border-radius: 10px;
+	padding-bottom: 14px;
+	color: aquamarine;
+	box-shadow: 0 0 10px 4px black;
+}
+
+.registration-form {
+	margin-top: 5%;
+	background-color: #343a40;
+	border-radius: 10px;
+	padding-bottom: 14px;
+	color: aquamarine;
+	box-shadow: 0 0 10px 4px black;
 }
 
 /* html * { */

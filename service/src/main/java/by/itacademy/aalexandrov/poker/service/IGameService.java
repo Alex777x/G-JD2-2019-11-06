@@ -12,6 +12,7 @@ public interface IGameService {
 	@Transactional
 	long getCount(GameFilter filter);
 
+	@Transactional
 	List<IGame> find(GameFilter filter);
 
 	@Transactional
@@ -20,6 +21,7 @@ public interface IGameService {
 	@Transactional
 	void save(IGame... entities);
 
+	@Transactional
 	List<IGame> getAll();
 
 	@Transactional
@@ -28,6 +30,7 @@ public interface IGameService {
 	@Transactional
 	void delete(final Integer id);
 
+	@Transactional
 	IGame get(final Integer id);
 
 	@Transactional

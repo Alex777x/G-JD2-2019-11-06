@@ -3,9 +3,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <h2 class="header">User registration</h2>
 
-<div class="row justify-content-center">
-
-	<form:form method="POST" action="${pagesRegistration}" modelAttribute="formRegistrationUserAccount">
+<div class="row">
+<div class="col-4"></div>
+	<form:form class="col-4 registration-form" method="POST" action="${pagesRegistration}" modelAttribute="formRegistrationUserAccount">
 		<form:input path="id" type="hidden" />
 		<form:input path="foto" type="hidden" />
 		<form:input path="userRole" type="hidden" />
@@ -50,6 +50,7 @@
 			<spring:message code="page.registration.submit" />
 		</button>
 	</form:form>
+	<div class="col-4"></div>
 </div>
 
 

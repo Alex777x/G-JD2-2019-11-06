@@ -12,6 +12,7 @@ public interface ICardService {
 	@Transactional
 	long getCount(CardFilter filter);
 
+	@Transactional
 	List<ICard> find(CardFilter filter);
 
 	@Transactional
