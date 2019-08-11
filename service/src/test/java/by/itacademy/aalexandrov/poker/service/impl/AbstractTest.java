@@ -170,8 +170,13 @@ public abstract class AbstractTest {
 		entity.setCountry(saveNewCountry());
 		entity.setUserRole(UserRole.MEMBER);
 		entity.setUserStatus(UserStatus.ACTIVE);
-		entity.setSumGames(getRandomObjectsCount());
-		entity.setWonGames(getRandomObjectsCount());
+
+		int min = 10;
+		int max = 20;
+		int diff = max - min;
+
+		entity.setSumGames(RANDOM.nextInt(diff + 1));
+		entity.setWonGames(RANDOM.nextInt(10) + 1);
 		userAccountService.save(entity);
 		return entity;
 	}

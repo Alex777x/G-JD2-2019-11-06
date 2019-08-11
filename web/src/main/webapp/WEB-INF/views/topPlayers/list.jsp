@@ -6,7 +6,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script type="text/javascript">
 window.onload = function() {
  
@@ -15,12 +15,12 @@ var chart = new CanvasJS.Chart("chartContainer", {
 	theme: "dark2", // "light1", "light2", "dark1"
 	animationEnabled: true,
 	title: {
-		text: "Movie Studio Revenue"
+		text: "Top Players"
 	},
 	axisY: {
-		title: "Revenue (in billion dollars USD)",
-		prefix: "$",
-		suffix: "bn"
+		title: "Win rate (ratio of all games to winning)",
+		prefix: " ",
+		suffix: "%"
 	},
 	data: [{
 		type: "bar",

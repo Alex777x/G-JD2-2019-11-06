@@ -1,6 +1,8 @@
 package by.itacademy.aalexandrov.poker.dao.orm.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -30,6 +32,27 @@ public class UserAccountDaoImpl extends AbstractDaoImpl<IUserAccount, Integer> i
 	@Override
 	public IUserAccount createEntity() {
 		return new UserAccount();
+	}
+
+	@Override
+	public Map<String, Integer> getCoefficient() {
+		UserAccountFilter filter = new UserAccountFilter();
+
+		List<IUserAccount> listUsers = find(filter);
+		Map<String, Integer> result = new HashMap<String, Integer>();
+
+		for (int i = 0; i < listUsers.size(); i++) {
+			IUserAccount user = listUsers.get(i);
+			int s = user.getSumGames();
+			int w = user.getWonGames();
+			int n = s / w;
+			int coef = 100 / n;
+			String nickName = user.getNickname();
+
+			result.put(nickName, coef);
+		}
+
+		return result;
 	}
 
 	@Override

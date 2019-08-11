@@ -53,6 +53,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 			balance = transactionService.getSumm(account.getId());
 		} catch (Exception e) {
 			System.out.println(e);
+			System.out.println("balance not found");
 		}
 
 		final int userId = account.getId();
