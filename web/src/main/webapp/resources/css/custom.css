@@ -63,6 +63,10 @@ main {
 	box-shadow: 0 0 10px 4px black;
 }
 
+.page-footer {
+	background-color: #343a40;
+}
+
 /* html * { */
 /* 	font-family: Franklin Gothic Medium; */
 /* 	color: white !important; */
@@ -132,9 +136,7 @@ a:hover {
 /* 	filter: drop-shadow(2px 4px 6px black); */
 /* } */
 
-/* .page-footer { */
-/* 	background-color: transparent; */
-/* } */
+
 .input-field label.multiselect-label, .input-field label.switch-label {
 	position: absolute;
 	top: -26px;

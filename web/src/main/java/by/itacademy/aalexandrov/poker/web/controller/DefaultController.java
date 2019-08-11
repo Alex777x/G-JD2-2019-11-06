@@ -15,15 +15,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import by.itacademy.aalexandrov.poker.dao.api.entity.table.IGame;
-import by.itacademy.aalexandrov.poker.dao.api.filter.GameFilter;
+import by.itacademy.aalexandrov.poker.dao.api.entity.table.IChatInHome;
+import by.itacademy.aalexandrov.poker.dao.api.filter.ChatInHomeFilter;
 import by.itacademy.aalexandrov.poker.service.IChatInHomeService;
 import by.itacademy.aalexandrov.poker.service.IGameService;
 import by.itacademy.aalexandrov.poker.web.converter.ChatInHomeFromDTOConverter;
 import by.itacademy.aalexandrov.poker.web.converter.ChatInHomeToDTOConverter;
 import by.itacademy.aalexandrov.poker.web.converter.GameFromDTOConverter;
 import by.itacademy.aalexandrov.poker.web.converter.GameToDTOConverter;
-import by.itacademy.aalexandrov.poker.web.dto.GameDTO;
+import by.itacademy.aalexandrov.poker.web.dto.ChatInHomeDTO;
 import by.itacademy.aalexandrov.poker.web.dto.grid.GridStateDTO;
 
 @Controller
@@ -67,23 +67,23 @@ public class DefaultController extends AbstractController {
 		gridState.setPage(pageNumber);
 		gridState.setSort(sortColumn, "id");
 
-		final GameFilter filter = new GameFilter();
-		prepareFilter(gridState, filter);
-
-		final List<IGame> entities = gameService.find(filter);
-		List<GameDTO> dtos = entities.stream().map(gameToDtoConverter).collect(Collectors.toList());
-		gridState.setTotalCount(gameService.getCount(filter));
-
-//		ChatInHomeFilter filterC = new ChatInHomeFilter();
-//		prepareFilter(gridState, filterC);
+//		final GameFilter filter = new GameFilter();
+//		prepareFilter(gridState, filter);
 //
-//		List<IChatInHome> messages = chatInHomeService.find(filterC);
-//		List<ChatInHomeDTO> dtosC = messages.stream().map(chatToDtoConverter).collect(Collectors.toList());
-//		gridState.setTotalCount(chatInHomeService.getCount(filterC));
+//		final List<IGame> entities = gameService.find(filter);
+//		List<GameDTO> dtos = entities.stream().map(gameToDtoConverter).collect(Collectors.toList());
+//		gridState.setTotalCount(gameService.getCount(filter));
+
+		ChatInHomeFilter filterC = new ChatInHomeFilter();
+		prepareFilter(gridState, filterC);
+
+		List<IChatInHome> messages = chatInHomeService.find(filterC);
+		List<ChatInHomeDTO> dtosC = messages.stream().map(chatToDtoConverter).collect(Collectors.toList());
+		gridState.setTotalCount(chatInHomeService.getCount(filterC));
 
 		final Map<String, Object> gamesAndChats = new HashMap<>();
-		gamesAndChats.put("gridItems", dtos);
-//		gamesAndChats.put("gridItems", dtosC);
+//		gamesAndChats.put("gridItems", dtos);
+		gamesAndChats.put("gridItems", dtosC);
 
 		ModelAndView modelAndView = new ModelAndView("home", gamesAndChats);
 

@@ -164,11 +164,12 @@ CREATE TABLE "news" (
 
 
 CREATE TABLE "chat_in_home" (
-	"id" integer DEFAULT '0',
+	"id" serial NOT NULL,
 	"user_account_id" integer NOT NULL,
 	"message" character varying(50) NOT NULL,
 	"created" TIMESTAMP NOT NULL,
-	"updated" TIMESTAMP NOT NULL
+	"updated" TIMESTAMP NOT NULL,
+	CONSTRAINT "chat_in_home_pk" PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
 );

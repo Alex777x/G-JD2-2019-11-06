@@ -146,6 +146,18 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/howToPlay/rules.jsp" />
 	</definition>
+	
+		<definition name="topPlayers.edit"
+		extends="DefaultTemplate">
+		<put-attribute name="body"
+			value="/WEB-INF/views/topPlayers/form.jsp" />
+	</definition>
+
+	<definition name="topPlayers.list"
+		extends="DefaultTemplate">
+		<put-attribute name="body"
+			value="/WEB-INF/views/topPlayers/list.jsp" />
+	</definition>
 
 	<definition name="ajax-samples" extends="DefaultTemplate">
 		<put-attribute name="body"

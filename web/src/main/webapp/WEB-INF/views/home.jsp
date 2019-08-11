@@ -28,54 +28,54 @@
 
 		<div class="col-sm">
 
-			<table class="table table-striped table-sm table-dark">
-				<thead>
-					<tr>
-						<th scope="col">Id</th>
-						<th scope="col">Players in game</th>
-						<th scope="col">Average Bank</th>
-						<th scope="col">Created</th>
-						<th scope="col">Action</th>
-					</tr>
-				</thead>
-				<tbody>
-					<c:forEach var="game" items="${gridItems}" varStatus="loopCounter">
-						<tr>
-							<td><c:out value="${game.id}" /></td>
-							<td><c:out value="${game.id}" /></td>
-							<td><c:out value="${game.bank}" /></td>
-							<td><fmt:formatDate pattern="yyyy-MM-dd" value="${game.created}" /></td>
-							<td></td>
-						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
-			<jspFragments:paging />
+<!-- 			<table class="table table-striped table-sm table-dark"> -->
+<!-- 				<thead> -->
+<!-- 					<tr> -->
+<!-- 						<th scope="col">Id</th> -->
+<!-- 						<th scope="col">Players in game</th> -->
+<!-- 						<th scope="col">Average Bank</th> -->
+<!-- 						<th scope="col">Created</th> -->
+<!-- 						<th scope="col">Action</th> -->
+<!-- 					</tr> -->
+<!-- 				</thead> -->
+<!-- 				<tbody> -->
+<%-- 					<c:forEach var="game" items="${gridItems}" varStatus="loopCounter"> --%>
+<!-- 						<tr> -->
+<%-- 							<td><c:out value="${game.id}" /></td> --%>
+<%-- 							<td><c:out value="${game.id}" /></td> --%>
+<%-- 							<td><c:out value="${game.bank}" /></td> --%>
+<%-- 							<td><fmt:formatDate pattern="yyyy-MM-dd" value="${game.created}" /></td> --%>
+<!-- 							<td></td> -->
+<!-- 						</tr> -->
+<%-- 					</c:forEach> --%>
+<!-- 				</tbody> -->
+<!-- 			</table> -->
+<%-- 			<jspFragments:paging /> --%>
 
 		</div>
 
 		<div class="col-sm">
 
 
-<!-- 			<table class="table table-borderless table-sm table-dark"> -->
-<!-- 				<thead> -->
-<!-- 					<tr> -->
-<!-- 						<th scope="col">NickName</th> -->
-<!-- 						<th scope="col">Message</th> -->
-<!-- 						<th scope="col">Time</th> -->
-<!-- 					</tr> -->
-<!-- 				</thead> -->
-<!-- 				<tbody> -->
-<%-- 					<c:forEach var="chatInHome" items="${gridItems}" varStatus="loopCounter"> --%>
-<!-- 						<tr> -->
-<%-- 							<td><c:out value="${chatInHome.userAccount}" /></td> --%>
-<%-- 							<td><c:out value="${chatInHome.message}" /></td> --%>
-<%-- 							<td><fmt:formatDate pattern="yyyy-MM-dd" value="${chatInHome.created}" /></td> --%>
-<!-- 							<td></td> -->
-<!-- 						</tr> -->
-<%-- 					</c:forEach> --%>
-<!-- 				</tbody> -->
-<!-- 			</table> -->
+			<table class="table table-borderless table-sm table-dark">
+				<thead>
+					<tr>
+						<th scope="col">NickName</th>
+						<th scope="col">Message</th>
+						<th scope="col">Time</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach var="chatInHome" items="${gridItems}" varStatus="loopCounter">
+						<tr>
+							<td><c:out value="${chatInHome.userAccount}" /></td>
+							<td><c:out value="${chatInHome.message}" /></td>
+							<td><fmt:formatDate pattern="yyyy-MM-dd" value="${chatInHome.created}" /></td>
+							<td></td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
 
 		</div>
 
