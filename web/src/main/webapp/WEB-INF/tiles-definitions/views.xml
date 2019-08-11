@@ -23,7 +23,7 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/card/list.jsp" />
 	</definition>
-	
+
 	<definition name="card.edit" extends="DefaultTemplate">
 		<put-attribute name="body"
 			value="/WEB-INF/views/card/form.jsp" />
@@ -33,7 +33,7 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/cardInGame/list.jsp" />
 	</definition>
-	
+
 	<definition name="cardInGame.edit" extends="DefaultTemplate">
 		<put-attribute name="body"
 			value="/WEB-INF/views/cardInGame/form.jsp" />
@@ -43,7 +43,7 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/chat/list.jsp" />
 	</definition>
-	
+
 	<definition name="chat.edit" extends="DefaultTemplate">
 		<put-attribute name="body"
 			value="/WEB-INF/views/chat/form.jsp" />
@@ -53,7 +53,7 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/country/list.jsp" />
 	</definition>
-	
+
 	<definition name="country.edit" extends="DefaultTemplate">
 		<put-attribute name="body"
 			value="/WEB-INF/views/country/form.jsp" />
@@ -63,7 +63,7 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/game/list.jsp" />
 	</definition>
-	
+
 	<definition name="game.edit" extends="DefaultTemplate">
 		<put-attribute name="body"
 			value="/WEB-INF/views/game/form.jsp" />
@@ -73,7 +73,7 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/player/list.jsp" />
 	</definition>
-	
+
 	<definition name="player.edit" extends="DefaultTemplate">
 		<put-attribute name="body"
 			value="/WEB-INF/views/player/form.jsp" />
@@ -84,7 +84,7 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/playerAction/list.jsp" />
 	</definition>
-	
+
 	<definition name="playerAction.edit"
 		extends="DefaultTemplate">
 		<put-attribute name="body"
@@ -96,7 +96,7 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/transaction/list.jsp" />
 	</definition>
-	
+
 	<definition name="transaction.edit"
 		extends="DefaultTemplate">
 		<put-attribute name="body"
@@ -112,7 +112,7 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/tiket/list.jsp" />
 	</definition>
-	
+
 	<definition name="news.edit" extends="DefaultTemplate">
 		<put-attribute name="body"
 			value="/WEB-INF/views/news/form.jsp" />
@@ -134,29 +134,37 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/userAccount/list.jsp" />
 	</definition>
-	
-	<definition name="howToPlay.edit"
-		extends="DefaultTemplate">
+
+	<definition name="howToPlay.edit" extends="DefaultTemplate">
 		<put-attribute name="body"
 			value="/WEB-INF/views/howToPlay/form.jsp" />
 	</definition>
 
-	<definition name="howToPlay.rules"
-		extends="DefaultTemplate">
+	<definition name="howToPlay.rules" extends="DefaultTemplate">
 		<put-attribute name="body"
 			value="/WEB-INF/views/howToPlay/rules.jsp" />
 	</definition>
-	
-		<definition name="topPlayers.edit"
-		extends="DefaultTemplate">
-		<put-attribute name="body"
-			value="/WEB-INF/views/topPlayers/form.jsp" />
-	</definition>
 
-	<definition name="topPlayers.list"
-		extends="DefaultTemplate">
+	<definition name="topPlayers.list" extends="DefaultTemplate">
 		<put-attribute name="body"
 			value="/WEB-INF/views/topPlayers/list.jsp" />
+	</definition>
+
+	<definition name="personalArea.index"
+		extends="DefaultTemplate">
+		<put-attribute name="body"
+			value="/WEB-INF/views/personalArea/index.jsp" />
+	</definition>
+
+	<definition name="support.index" extends="DefaultTemplate">
+		<put-attribute name="body"
+			value="/WEB-INF/views/support/index.jsp" />
+	</definition>
+
+	<definition name="adminPanel.index"
+		extends="DefaultTemplate">
+		<put-attribute name="body"
+			value="/WEB-INF/views/adminPanel/index.jsp" />
 	</definition>
 
 	<definition name="ajax-samples" extends="DefaultTemplate">
@@ -168,7 +176,7 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/login.jsp" />
 	</definition>
-	
+
 	<definition name="registration" extends="DefaultTemplate">
 		<put-attribute name="body"
 			value="/WEB-INF/views/registration.jsp" />

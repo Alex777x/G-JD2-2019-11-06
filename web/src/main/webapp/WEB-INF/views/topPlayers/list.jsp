@@ -3,60 +3,54 @@
 <%@ taglib prefix="mytaglib" uri="my-custom-tags-uri"%>
 <%@ taglib prefix="jspFragments" tagdir="/WEB-INF/tags"%>
 
-<!DOCTYPE HTML>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<head>  
-<script>
-window.onload = function () {
-	
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<script type="text/javascript">
+window.onload = function() {
+ 
+var dps = [[]];
 var chart = new CanvasJS.Chart("chartContainer", {
+	theme: "dark2", // "light1", "light2", "dark1"
 	animationEnabled: true,
-	
-	title:{
-		text:"Fortune 500 Companies by Country"
+	title: {
+		text: "Movie Studio Revenue"
 	},
-	axisX:{
-		interval: 1
-	},
-	axisY2:{
-		interlacedColor: "rgba(1,77,101,.2)",
-		gridColor: "rgba(1,77,101,.1)",
-		title: "Number of Companies"
+	axisY: {
+		title: "Revenue (in billion dollars USD)",
+		prefix: "$",
+		suffix: "bn"
 	},
 	data: [{
 		type: "bar",
-		name: "companies",
-		axisYType: "secondary",
-		color: "#014D65",
-		dataPoints: [
-			{ y: 3, label: "Sweden" },
-			{ y: 7, label: "Taiwan" },
-			{ y: 5, label: "Russia" },
-			{ y: 9, label: "Spain" },
-			{ y: 7, label: "Brazil" },
-			{ y: 7, label: "India" },
-			{ y: 9, label: "Italy" },
-			{ y: 8, label: "Australia" },
-			{ y: 11, label: "Canada" },
-			{ y: 15, label: "South Korea" },
-			{ y: 12, label: "Netherlands" },
-			{ y: 15, label: "Switzerland" },
-			{ y: 25, label: "Britain" },
-			{ y: 28, label: "Germany" },
-			{ y: 29, label: "France" },
-			{ y: 52, label: "Japan" },
-			{ y: 103, label: "China" },
-			{ y: 134, label: "US" }
-		]
+		yValueFormatString: "$#,##0.0bn",
+		indexLabel: "{y}",
+		dataPoints: dps[0]
 	}]
 });
+ 
+var yValue;
+var label;
+ 
+<c:forEach items="${dataPointsList}" var="dataPoints" varStatus="loop">	
+	<c:forEach items="${dataPoints}" var="dataPoint">
+		yValue = parseFloat("${dataPoint.y}");
+		label = "${dataPoint.label}";
+		dps[parseInt("${loop.index}")].push({
+			label : label,
+			y : yValue
+		});		
+	</c:forEach>	
+</c:forEach> 
+ 
 chart.render();
-
+ 
 }
 </script>
 </head>
 <body>
-<div id="chartContainer" style="height: 370px; width: 100%;"></div>
-<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+	<div id="chartContainer" style="height: 370px; width: 100%;"></div>
+	<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 </body>
-</html>
+</html>                 
