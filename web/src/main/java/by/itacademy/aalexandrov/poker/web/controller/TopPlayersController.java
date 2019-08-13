@@ -9,14 +9,14 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import by.itacademy.aalexandrov.poker.service.CanvasjsChartService;
+import by.itacademy.aalexandrov.poker.service.ICanvasjsChartService;
 
 @Controller
 @RequestMapping(value = "/topPlayers")
 public class TopPlayersController extends AbstractController {
 
 	@Autowired
-	private CanvasjsChartService canvasjsChartService;
+	private ICanvasjsChartService canvasjsChartService;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String springMVC(ModelMap modelMap) {

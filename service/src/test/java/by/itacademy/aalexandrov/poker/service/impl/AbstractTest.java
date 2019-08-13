@@ -30,6 +30,7 @@ import by.itacademy.aalexandrov.poker.dao.api.entity.table.IPlayerAction;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.ITiket;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.ITransaction;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IUserAccount;
+import by.itacademy.aalexandrov.poker.service.ICanvasjsChartService;
 import by.itacademy.aalexandrov.poker.service.ICardInGameService;
 import by.itacademy.aalexandrov.poker.service.ICardService;
 import by.itacademy.aalexandrov.poker.service.IChatInHomeService;
@@ -69,6 +70,8 @@ public abstract class AbstractTest {
 	protected INewsService newsService;
 	@Autowired
 	protected IChatInHomeService chatInHomeService;
+	@Autowired
+	protected ICanvasjsChartService canvasjsChartService;
 
 	private static final Random RANDOM = new Random();
 

@@ -5,9 +5,12 @@ import java.util.Map;
 
 import javax.transaction.Transactional;
 
-public interface CanvasjsChartService {
+public interface ICanvasjsChartService {
 
 	@Transactional
 	List<List<Map<Object, Object>>> getCanvasjsChartData();
+
+	@Transactional
+	Map<String, Integer> getCoefficient();
 
 }
