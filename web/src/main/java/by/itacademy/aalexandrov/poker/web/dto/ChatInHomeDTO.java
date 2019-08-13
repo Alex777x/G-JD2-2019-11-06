@@ -10,10 +10,21 @@ public class ChatInHomeDTO {
 	private Integer id;
 	@NotNull
 	private Integer userAccount;
+
+	private String userAccountName;
+
 	@Size(min = 1, max = 50)
 	private String message;
 	private Date created;
 	private Date updated;
+
+	public String getUserAccountName() {
+		return userAccountName;
+	}
+
+	public void setUserAccountName(String userAccountName) {
+		this.userAccountName = userAccountName;
+	}
 
 	public Integer getId() {
 		return id;

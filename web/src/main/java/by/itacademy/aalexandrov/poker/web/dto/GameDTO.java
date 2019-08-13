@@ -14,6 +14,15 @@ public class GameDTO {
 	private double bank;
 	private Date created;
 	private Date updated;
+	private long plaersCount;
+
+	public long getPlaersCount() {
+		return plaersCount;
+	}
+
+	public void setPlaersCount(long plaersCount) {
+		this.plaersCount = plaersCount;
+	}
 
 	public Integer getId() {
 		return id;

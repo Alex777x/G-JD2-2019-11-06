@@ -39,4 +39,7 @@ public interface IPlayerService {
 	@Transactional
 	List<IPlayer> getFullInfo();
 
+	@Transactional
+	long getPlayersCount(Integer id);
+
 }

@@ -49,7 +49,7 @@
 					</sec:authorize>
 
 					<sec:authorize access="!isAnonymous()">
-						<li class="nav-item"><a class="nav-link"><img class="img-thumbnail" src="<sec:authentication property="foto" />" /></a></li>
+						<li class="nav-item"><a class="nav-link"><img class="img-thumbnail" src="${contextPath}/<sec:authentication property="foto" />" /></a></li>
 						<ul class="nav flex-column">
 							<li class="navbar-text"><spring:message code="page.home.name" /> <sec:authentication property="principal" /></li>
 							<li class="navbar-text"><spring:message code="page.home.role" /> <sec:authentication property="userRole" /></li>

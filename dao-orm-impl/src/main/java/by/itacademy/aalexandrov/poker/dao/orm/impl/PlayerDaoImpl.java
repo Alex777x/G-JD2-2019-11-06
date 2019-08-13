@@ -126,6 +126,22 @@ public class PlayerDaoImpl extends AbstractDaoImpl<IPlayer, Integer> implements 
 	}
 
 	@Override
+	public long getPlayersCount(Integer id) {
+		final EntityManager em = getEntityManager();
+		final CriteriaBuilder cb = em.getCriteriaBuilder();
+		final CriteriaQuery<Long> cq = cb.createQuery(Long.class); // define
+																	// type of
+		// result
+		final Root<Player> from = cq.from(Player.class); // select from brand
+		cq.select(cb.count(from));
+
+		cq.where(cb.equal(from.get(Player_.game), id));
+
+		final TypedQuery<Long> q = em.createQuery(cq);
+		return q.getSingleResult();
+	}
+
+	@Override
 	public List<IPlayer> getFullInfo() {
 		final EntityManager em = getEntityManager();
 		final CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -143,6 +159,12 @@ public class PlayerDaoImpl extends AbstractDaoImpl<IPlayer, Integer> implements 
 		final TypedQuery<IPlayer> q = em.createQuery(cq);
 
 		return q.getResultList();
+	}
+
+	@Override
+	public List<IPlayer> findByGame() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

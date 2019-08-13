@@ -42,7 +42,7 @@ public class ChatInHomeDaoImpl extends AbstractDaoImpl<IChatInHome, Integer> imp
 
 		from.fetch(ChatInHome_.userAccount, JoinType.LEFT);
 		cq.distinct(true);
-// select user_account.nickname as nickname, chat_in_home.message, chat_in_home.created from user_account, chat_in_home where chat_in_home.user_account_Id = user_account.id Я могу сделать этим запросом
+// select user_account.nickname as nickname, chat_in_home.message, chat_in_home.created from user_account, chat_in_home where chat_in_home.user_account_Id = user_account.id 
 //		if (filter.getSortColumn() != null) {
 //			final SingularAttribute<? super ChatInHome, ?> sortProperty = toMetamodelFormat(filter.getSortColumn());
 //			final Path<?> expression = from.get(sortProperty); // build path to

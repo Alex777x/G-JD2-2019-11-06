@@ -6,51 +6,36 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 
-<!-- <div> -->
-<%-- 	<form method="POST" enctype="multipart/form-data" action="${contextPath}/file"> --%>
-<!-- 		<table> -->
-<!-- 			<tr> -->
-<!-- 				<td>File to upload:</td> -->
-<!-- 				<td><input type="file" name="file" /></td> -->
-<!-- 			</tr> -->
-<!-- 			<tr> -->
-<!-- 				<td></td> -->
-<!-- 				<td><input type="submit" value="Upload" /></td> -->
-<!-- 			</tr> -->
-<!-- 		</table> -->
-<!-- 	</form> -->
-
-<%-- 	<img alt="no image" src="${contextPath}/file/image" /> --%>
-<!-- </div> -->
 
 <div class="container">
 	<div class="row">
 
 		<div class="col-sm">
 
-<!-- 			<table class="table table-striped table-sm table-dark"> -->
-<!-- 				<thead> -->
-<!-- 					<tr> -->
-<!-- 						<th scope="col">Id</th> -->
-<!-- 						<th scope="col">Players in game</th> -->
-<!-- 						<th scope="col">Average Bank</th> -->
-<!-- 						<th scope="col">Created</th> -->
-<!-- 						<th scope="col">Action</th> -->
-<!-- 					</tr> -->
-<!-- 				</thead> -->
-<!-- 				<tbody> -->
-<%-- 					<c:forEach var="game" items="${gridItems}" varStatus="loopCounter"> --%>
-<!-- 						<tr> -->
-<%-- 							<td><c:out value="${game.id}" /></td> --%>
-<%-- 							<td><c:out value="${game.id}" /></td> --%>
-<%-- 							<td><c:out value="${game.bank}" /></td> --%>
-<%-- 							<td><fmt:formatDate pattern="yyyy-MM-dd" value="${game.created}" /></td> --%>
-<!-- 							<td></td> -->
-<!-- 						</tr> -->
-<%-- 					</c:forEach> --%>
-<!-- 				</tbody> -->
-<!-- 			</table> -->
-<%-- 			<jspFragments:paging /> --%>
+			<table class="table table-striped table-sm table-dark">
+				<thead>
+					<tr>
+						<th scope="col">Id</th>
+						<th scope="col">Players in game</th>
+						<th scope="col">Average Bank</th>
+						<th scope="col">Created</th>
+						<th scope="col">Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach var="game" items="${gridItems}" varStatus="loopCounter">
+						<tr>
+							<td><c:out value="${game.id}" /></td>
+							<td><c:out value="${game.plaersCount}" /></td>
+							<td><c:out value="${game.bank}" /></td>
+							<td><fmt:formatDate pattern="yyyy-MM-dd" value="${game.created}" /></td>
+							<td><a href="${contextPath}/inGame?id=${game.id}"><button type="button" class="btn btn-secondary btn-sm">In Game</button></a></td>
+							<td></td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+			<jspFragments:paging />
 
 		</div>
 
@@ -66,9 +51,9 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach var="chatInHome" items="${gridItems}" varStatus="loopCounter">
+					<c:forEach var="chatInHome" items="${chatItems}" varStatus="loopCounter">
 						<tr>
-							<td><c:out value="${chatInHome.userAccount}" /></td>
+							<td><c:out value="${chatInHome.userAccountName}" /></td>
 							<td><c:out value="${chatInHome.message}" /></td>
 							<td><fmt:formatDate pattern="yyyy-MM-dd" value="${chatInHome.created}" /></td>
 							<td></td>

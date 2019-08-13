@@ -6,11 +6,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Root;
 import javax.persistence.metamodel.SingularAttribute;
 
-import org.hibernate.jpa.criteria.OrderImpl;
 import org.springframework.stereotype.Repository;
 
 import by.itacademy.aalexandrov.poker.dao.api.IGameDao;
@@ -41,16 +39,17 @@ public class GameDaoImpl extends AbstractDaoImpl<IGame, Integer> implements IGam
 		final Root<Game> from = cq.from(Game.class);// select from user_account
 		cq.select(from); // select what? select *
 
-		if (filter.getSortColumn() != null) {
-			final SingularAttribute<? super Game, ?> sortProperty = toMetamodelFormat(filter.getSortColumn());
-			final Path<?> expression = from.get(sortProperty); // build path to
-			// sort
-			// property
-			cq.orderBy(new OrderImpl(expression, filter.getSortOrder())); // order
-			// by
-			// column_name
-			// order
-		}
+		// if (filter.getSortColumn() != null) {
+		// final SingularAttribute<? super Game, ?> sortProperty =
+		// toMetamodelFormat(filter.getSortColumn());
+		// final Path<?> expression = from.get(sortProperty); // build path to
+		// // sort
+		// // property
+		// cq.orderBy(new OrderImpl(expression, filter.getSortOrder())); // order
+		// // by
+		// // column_name
+		// // order
+		// }
 
 		final TypedQuery<IGame> q = em.createQuery(cq);
 		setPaging(filter, q);

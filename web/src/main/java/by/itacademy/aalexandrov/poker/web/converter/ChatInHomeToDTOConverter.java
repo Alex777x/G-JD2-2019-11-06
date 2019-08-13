@@ -19,6 +19,7 @@ public class ChatInHomeToDTOConverter implements Function<IChatInHome, ChatInHom
 		IUserAccount userAccount = entity.getUserAccount();
 		if (userAccount != null) {
 			dto.setUserAccount(userAccount.getId());
+			dto.setUserAccountName(userAccount.getNickname());
 		}
 
 		dto.setMessage(entity.getMessage());

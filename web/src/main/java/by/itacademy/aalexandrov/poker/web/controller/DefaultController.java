@@ -16,47 +16,43 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IChatInHome;
+import by.itacademy.aalexandrov.poker.dao.api.entity.table.IGame;
 import by.itacademy.aalexandrov.poker.dao.api.filter.ChatInHomeFilter;
+import by.itacademy.aalexandrov.poker.dao.api.filter.GameFilter;
 import by.itacademy.aalexandrov.poker.service.IChatInHomeService;
 import by.itacademy.aalexandrov.poker.service.IGameService;
+import by.itacademy.aalexandrov.poker.service.IPlayerService;
 import by.itacademy.aalexandrov.poker.web.converter.ChatInHomeFromDTOConverter;
 import by.itacademy.aalexandrov.poker.web.converter.ChatInHomeToDTOConverter;
 import by.itacademy.aalexandrov.poker.web.converter.GameFromDTOConverter;
 import by.itacademy.aalexandrov.poker.web.converter.GameToDTOConverter;
+import by.itacademy.aalexandrov.poker.web.converter.PlayerToDTOConverter;
 import by.itacademy.aalexandrov.poker.web.dto.ChatInHomeDTO;
+import by.itacademy.aalexandrov.poker.web.dto.GameDTO;
 import by.itacademy.aalexandrov.poker.web.dto.grid.GridStateDTO;
 
 @Controller
 @RequestMapping(value = "/")
 public class DefaultController extends AbstractController {
 
-//	@Autowired
-//	private MessageSource messageSource;
-
-	private IGameService gameService;
-
-	private GameToDTOConverter gameToDtoConverter;
-
-	private GameFromDTOConverter gameFromDtoConverter;
-
-	private IChatInHomeService chatInHomeService;
-
-	private ChatInHomeFromDTOConverter chatFromDtoConverter;
-
-	private ChatInHomeToDTOConverter chatToDtoConverter;
-
+	// @Autowired
+	// private MessageSource messageSource;
 	@Autowired
-	public DefaultController(IGameService gameService, GameToDTOConverter gameToDtoConverter,
-			GameFromDTOConverter gameFromDtoConverter, IChatInHomeService chatInHomeService,
-			ChatInHomeFromDTOConverter chatFromDtoConverter, ChatInHomeToDTOConverter chatToDtoConverter) {
-		super();
-		this.gameService = gameService;
-		this.gameToDtoConverter = gameToDtoConverter;
-		this.gameFromDtoConverter = gameFromDtoConverter;
-		this.chatInHomeService = chatInHomeService;
-		this.chatFromDtoConverter = chatFromDtoConverter;
-		this.chatToDtoConverter = chatToDtoConverter;
-	}
+	private IGameService gameService;
+	@Autowired
+	private GameToDTOConverter gameToDtoConverter;
+	@Autowired
+	private GameFromDTOConverter gameFromDtoConverter;
+	@Autowired
+	private IChatInHomeService chatInHomeService;
+	@Autowired
+	private ChatInHomeFromDTOConverter chatFromDtoConverter;
+	@Autowired
+	private ChatInHomeToDTOConverter chatToDtoConverter;
+	@Autowired
+	private IPlayerService playerService;
+	@Autowired
+	private PlayerToDTOConverter playerToDtoConverter;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView index(final HttpServletRequest req,
@@ -67,30 +63,38 @@ public class DefaultController extends AbstractController {
 		gridState.setPage(pageNumber);
 		gridState.setSort(sortColumn, "id");
 
-//		final GameFilter filter = new GameFilter();
-//		prepareFilter(gridState, filter);
-//
-//		final List<IGame> entities = gameService.find(filter);
-//		List<GameDTO> dtos = entities.stream().map(gameToDtoConverter).collect(Collectors.toList());
-//		gridState.setTotalCount(gameService.getCount(filter));
+		final GameFilter filter = new GameFilter();
+		prepareFilter(gridState, filter);
+
+		final List<IGame> gamesEntities = gameService.find(filter);
+		List<GameDTO> dtos = gamesEntities.stream().map(gameToDtoConverter).collect(Collectors.toList());
+
+		for (GameDTO gameDTO : dtos) {
+			long playerCount = playerService.getPlayersCount(gameDTO.getId());
+			gameDTO.setPlaersCount(playerCount);
+		}
+
+		gridState.setTotalCount(gameService.getCount(filter));
 
 		ChatInHomeFilter filterC = new ChatInHomeFilter();
 		prepareFilter(gridState, filterC);
 
-		List<IChatInHome> messages = chatInHomeService.find(filterC);
-		List<ChatInHomeDTO> dtosC = messages.stream().map(chatToDtoConverter).collect(Collectors.toList());
+		List<IChatInHome> messagesEntities = chatInHomeService.find(filterC);
+		List<ChatInHomeDTO> dtosC = messagesEntities.stream().map(chatToDtoConverter).collect(Collectors.toList());
 		gridState.setTotalCount(chatInHomeService.getCount(filterC));
 
-		final Map<String, Object> gamesAndChats = new HashMap<>();
-//		gamesAndChats.put("gridItems", dtos);
-		gamesAndChats.put("gridItems", dtosC);
+		final Map<String, Object> model = new HashMap<>();
+		model.put("gridItems", dtos);
+		model.put("chatItems", dtosC);
 
-		ModelAndView modelAndView = new ModelAndView("home", gamesAndChats);
+		ModelAndView modelAndView = new ModelAndView("home", model);
 
-//		String login = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
+		// String login =
+		// SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
 
-//		modelAndView.addObject("welcomeMessage",
-//				messageSource.getMessage("page.home.welcomeMessage", new Object[] { login }, locale));
+		// modelAndView.addObject("welcomeMessage",
+		// messageSource.getMessage("page.home.welcomeMessage", new Object[] { login },
+		// locale));
 
 		return modelAndView;
 	}

@@ -17,4 +17,8 @@ public interface IPlayerDao extends IDao<IPlayer, Integer> {
 
 	List<IPlayer> getFullInfo();
 
+	List<IPlayer> findByGame();
+
+	long getPlayersCount(Integer id);
+
 }
