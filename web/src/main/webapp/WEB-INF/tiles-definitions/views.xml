@@ -171,6 +171,11 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/ajax/content.jsp" />
 	</definition>
+	
+	<definition name="inGame.index" extends="DefaultTemplate">
+		<put-attribute name="body"
+			value="/WEB-INF/views/inGame/index.jsp" />
+	</definition>
 
 	<definition name="login" extends="DefaultTemplate">
 		<put-attribute name="body"

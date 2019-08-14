@@ -19,6 +19,68 @@ main {
 	flex: 1 0 auto;
 }
 
+.rounded-pill {
+    width: 65%;
+    height: 50%;
+    border-radius: 50rem!important;
+    margin-top: 70px;
+    margin-left: 8%;
+    border: solid;
+    border-width: 17px;
+    border-color: saddlebrown;
+}
+
+/* .logo1 { */
+/* 	margin-left: 25%; */
+/*     margin-top: -2%; */
+/* } */
+
+/* .logo2 { */
+/* 	margin-left: 10%; */
+/*     margin-top: -11%; */
+/* } */
+
+/* .logo3 { */
+/* 	margin-left: 5%; */
+/*     margin-top: -18%; */
+/* } */
+
+/* .logo4 { */
+/* 	margin-left: 10%; */
+/*     margin-top: -17%; */
+/* } */
+
+/* .logo5 { */
+/* 	margin-left: 25%; */
+/*     margin-top: -11%; */
+/* } */
+
+/* .logo6 { */
+/* 	margin-left: 47%; */
+/*     margin-top: -6%; */
+/* } */
+
+/* .logo7 { */
+/* 	margin-left: 66%; */
+/*     margin-top: 1%; */
+/* } */
+
+/* .logo8 { */
+/* 	margin-left: 70%; */
+/*     margin-top: 6%; */
+/* } */
+
+/* .logo9 { */
+/* 	margin-left: 65%; */
+/*     margin-top: 7%; */
+/* } */
+
+/* .logo10 { */
+/* 	margin-left: 47%; */
+/*     margin-top: -1%; */
+/* } */
+
+
 .table-dark {
 	margin-top: 5%;
 }

@@ -9,11 +9,13 @@ import by.itacademy.aalexandrov.poker.dao.api.entity.enums.GameStatus;
 public class GameDTO {
 
 	private Integer id;
+	@NotNull
 	private GameStatus state;
 	@NotNull
 	private double bank;
 	private Date created;
 	private Date updated;
+	@NotNull
 	private long plaersCount;
 
 	public long getPlaersCount() {

@@ -60,7 +60,7 @@ http://www.springframework.org/schema/context/spring-context.xsd">
 
 	<bean id="localeResolver"
 		class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
-		<property name="defaultLocale" value="en" />
+		<property name="defaultLocale" value="ru" />
 	</bean>
 
 </beans>

@@ -37,22 +37,11 @@ public class ChatInHomeDaoImpl extends AbstractDaoImpl<IChatInHome, Integer> imp
 
 		final CriteriaQuery<IChatInHome> cq = cb.createQuery(IChatInHome.class);
 
-		final Root<ChatInHome> from = cq.from(ChatInHome.class);// select from user_account
-		cq.select(from); // select what? select *
+		final Root<ChatInHome> from = cq.from(ChatInHome.class);
+		cq.select(from);
 
 		from.fetch(ChatInHome_.userAccount, JoinType.LEFT);
 		cq.distinct(true);
-// select user_account.nickname as nickname, chat_in_home.message, chat_in_home.created from user_account, chat_in_home where chat_in_home.user_account_Id = user_account.id 
-//		if (filter.getSortColumn() != null) {
-//			final SingularAttribute<? super ChatInHome, ?> sortProperty = toMetamodelFormat(filter.getSortColumn());
-//			final Path<?> expression = from.get(sortProperty); // build path to
-//			// sort
-//			// property
-//			cq.orderBy(new OrderImpl(expression, filter.getSortOrder())); // order
-//			// by
-//			// column_name
-//			// order
-//		}
 
 		final TypedQuery<IChatInHome> q = em.createQuery(cq);
 		setPaging(filter, q);

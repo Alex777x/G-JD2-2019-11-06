@@ -9,6 +9,8 @@ import java.util.stream.Collectors;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -86,6 +88,7 @@ public class DefaultController extends AbstractController {
 		final Map<String, Object> model = new HashMap<>();
 		model.put("gridItems", dtos);
 		model.put("chatItems", dtosC);
+		model.put("formChats", new ChatInHomeDTO());
 
 		ModelAndView modelAndView = new ModelAndView("home", model);
 
@@ -97,6 +100,14 @@ public class DefaultController extends AbstractController {
 		// locale));
 
 		return modelAndView;
+	}
+
+	@RequestMapping(value = "/json", method = RequestMethod.GET)
+	public ResponseEntity<ChatInHomeDTO> getTikets(@RequestParam(name = "id", required = true) final Integer id) {
+		final ChatInHomeDTO dto = chatToDtoConverter.apply(chatInHomeService.get(id));
+		chatInHomeService.save();
+
+		return new ResponseEntity<ChatInHomeDTO>(dto, HttpStatus.OK);
 	}
 
 }

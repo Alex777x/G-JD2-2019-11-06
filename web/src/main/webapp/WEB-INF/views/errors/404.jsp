@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" scope="request" />
 
-<link rel="stylesheet" href="${contextPath}/resources/css/error.css">
+<link rel="stylesheet" href="${contextPath}/resources/css/error404.css">
 
 
 <a href="${contextPath}/">

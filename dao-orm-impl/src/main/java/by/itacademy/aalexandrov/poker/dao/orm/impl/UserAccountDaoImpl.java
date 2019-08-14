@@ -36,9 +36,8 @@ public class UserAccountDaoImpl extends AbstractDaoImpl<IUserAccount, Integer> i
 
 	@Override
 	public Map<String, Integer> getCoefficient() {
-		UserAccountFilter filter = new UserAccountFilter();
 
-		List<IUserAccount> listUsers = find(filter);
+		List<IUserAccount> listUsers = getFullInfo();
 		Map<String, Integer> result = new HashMap<String, Integer>();
 
 		for (int i = 0; i < listUsers.size(); i++) {

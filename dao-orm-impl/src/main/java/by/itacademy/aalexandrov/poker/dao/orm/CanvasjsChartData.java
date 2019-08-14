@@ -7,8 +7,6 @@ import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
-import by.itacademy.aalexandrov.poker.dao.api.IUserAccountDao;
-
 @Service
 public class CanvasjsChartData {
 
@@ -16,16 +14,16 @@ public class CanvasjsChartData {
 	static List<List<Map<Object, Object>>> list = new ArrayList<List<Map<Object, Object>>>();
 	static List<Map<Object, Object>> dataPoints1 = new ArrayList<Map<Object, Object>>();
 
-	IUserAccountDao dao;
-	Map<String, Integer> coefMap = dao.getCoefficient();
-
-	Map<String, Integer> coefMapSorted = sort(coefMap);
-
-	public Map<String, Integer> sort(Map<String, Integer> coefMap) {
-		Map<String, Integer> coefMapSorted = coefMap;
-		coefMapSorted.entrySet().stream().sorted(Map.Entry.<String, Integer>comparingByValue().reversed());
-		return coefMapSorted;
-	}
+//	IUserAccountDao dao;
+//	Map<String, Integer> coefMap = dao.getCoefficient();
+//
+//	Map<String, Integer> coefMapSorted = sort(coefMap);
+//
+//	public Map<String, Integer> sort(Map<String, Integer> coefMap) {
+//		Map<String, Integer> coefMapSorted = coefMap;
+//		coefMapSorted.entrySet().stream().sorted(Map.Entry.<String, Integer>comparingByValue().reversed());
+//		return coefMapSorted;
+//	}
 
 	static {
 		map = new HashMap<Object, Object>();

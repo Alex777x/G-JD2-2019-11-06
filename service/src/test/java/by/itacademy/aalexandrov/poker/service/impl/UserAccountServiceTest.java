@@ -76,7 +76,7 @@ public class UserAccountServiceTest extends AbstractTest {
 		UserRole newUserRole = entity.getUserRole();
 		UserStatus newUserStatus = entity.getUserStatus();
 		Integer newSumGames = entity.getSumGames() + 1001;
-		Integer newWonGames = entity.getWonGames() + 1001;
+		Integer newWonGames = entity.getWonGames();
 		entity.setNickname(newNickname);
 		entity.setPassword(newPassword);
 		entity.setEmail(newEmail);
