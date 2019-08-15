@@ -62,15 +62,15 @@
 				</tbody>
 			</table>
 
-			<form:form method="POST" action="${contextPath}" modelAttribute="formChats">
+			<form:form id="ajax_form" method="POST" action="${contextPath}" modelAttribute="formChats">
 				<form:input path="id" type="hidden" />
-
 				<div class="form-group">
 					<label for="message">Message</label>
-					<form:input class="form-control input" path="message" type="text" />
+					<form:input id="message" class="form-control " path="message" type="text" />
 					<form:errors path="message" cssClass="red-text" />
 				</div>
-					<button class="btn btn-primary chatBtn" type="button">Send</button>
+				<button id="chatbtn" class="btn btn-primary" type="button">Send</button>
+
 			</form:form>
 
 		</div>
@@ -79,28 +79,18 @@
 </div>
 
 <script>
-	const sendBtn = document.querySelector('.chatBtn');
-	const chat = document.querySelector('.chat');
-	const input = document.querySelector('.input');
-
-	sendBtn.addEventListener('click', send);
-
-	input.addEventListener('keyup', function() {
-		if (event.keyCode === 13) {
-			send();
-		}
-	})
-
-	function send() {
-		if (!input.value)
-			return;
-		let msg = document.createElement('div');
-		msg.textContent = input.value;
-		input.value = '';
-		msg.classList.add('msg');
-		chat.appendChild(msg);
-		chat.scrollTop = chat.scrollHeight;
-	}
+	var baseUrl = '${pageContext.request.contextPath}';
+	var $message = $("#message").serialize();
+	var chatId = '${UserAccount.id}';
+	$('#chatbtn').click(function() {
+		$.ajax({
+			url : baseUrl+'/json?id=' + chatId + '&message=' + $("#message").val() ,
+			type : 'post',
+			success : function(result) {
+				// действия при получения ответа (result) от сервера
+			}
+		});
+	});
 </script>
 
 

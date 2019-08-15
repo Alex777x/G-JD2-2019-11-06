@@ -19,11 +19,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IChatInHome;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IGame;
+import by.itacademy.aalexandrov.poker.dao.api.entity.table.IUserAccount;
 import by.itacademy.aalexandrov.poker.dao.api.filter.ChatInHomeFilter;
 import by.itacademy.aalexandrov.poker.dao.api.filter.GameFilter;
 import by.itacademy.aalexandrov.poker.service.IChatInHomeService;
 import by.itacademy.aalexandrov.poker.service.IGameService;
 import by.itacademy.aalexandrov.poker.service.IPlayerService;
+import by.itacademy.aalexandrov.poker.service.IUserAccountService;
 import by.itacademy.aalexandrov.poker.web.converter.ChatInHomeFromDTOConverter;
 import by.itacademy.aalexandrov.poker.web.converter.ChatInHomeToDTOConverter;
 import by.itacademy.aalexandrov.poker.web.converter.GameFromDTOConverter;
@@ -32,6 +34,7 @@ import by.itacademy.aalexandrov.poker.web.converter.PlayerToDTOConverter;
 import by.itacademy.aalexandrov.poker.web.dto.ChatInHomeDTO;
 import by.itacademy.aalexandrov.poker.web.dto.GameDTO;
 import by.itacademy.aalexandrov.poker.web.dto.grid.GridStateDTO;
+import by.itacademy.aalexandrov.poker.web.security.AuthHelper;
 
 @Controller
 @RequestMapping(value = "/")
@@ -55,6 +58,8 @@ public class DefaultController extends AbstractController {
 	private IPlayerService playerService;
 	@Autowired
 	private PlayerToDTOConverter playerToDtoConverter;
+	@Autowired
+	private IUserAccountService userAccountService;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView index(final HttpServletRequest req,
@@ -102,10 +107,17 @@ public class DefaultController extends AbstractController {
 		return modelAndView;
 	}
 
-	@RequestMapping(value = "/json", method = RequestMethod.GET)
-	public ResponseEntity<ChatInHomeDTO> getTikets(@RequestParam(name = "id", required = true) final Integer id) {
-		final ChatInHomeDTO dto = chatToDtoConverter.apply(chatInHomeService.get(id));
-		chatInHomeService.save();
+	@RequestMapping(value = "/json", method = RequestMethod.POST)
+	public ResponseEntity<ChatInHomeDTO> getChatsInHome(
+			@RequestParam(name = "message", required = true) final String message) {
+		Integer loggedUserId = AuthHelper.getLoggedUserId();
+		IUserAccount curentUser = userAccountService.getFullInfo(loggedUserId);
+		IChatInHome entity = chatInHomeService.createEntity();
+		entity.setUserAccount(curentUser);
+		entity.setMessage(message);
+		chatInHomeService.save(entity);
+
+		ChatInHomeDTO dto = chatToDtoConverter.apply(chatInHomeService.getFullInfo(entity.getId()));
 
 		return new ResponseEntity<ChatInHomeDTO>(dto, HttpStatus.OK);
 	}

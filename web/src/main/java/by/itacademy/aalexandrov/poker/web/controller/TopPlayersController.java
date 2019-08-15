@@ -41,8 +41,19 @@ public class TopPlayersController extends AbstractController {
 			String nickName = userAccountDTO.getNickname();
 			int s = userAccountDTO.getSumGames();
 			int w = userAccountDTO.getWonGames();
-			int n = s / w;
-			int coef = 100 / n;
+			int n = 0;
+			try {
+				n = s / w;
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+
+			int coef = 0;
+			try {
+				coef = 100 / n;
+			} catch (Exception e) {
+				System.out.println(e);
+			}
 
 			coefMap.put(nickName, coef);
 		}

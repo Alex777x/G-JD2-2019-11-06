@@ -7,7 +7,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.List;
-import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 
@@ -175,16 +174,6 @@ public class UserAccountServiceTest extends AbstractTest {
 		filter.setSortOrder(false);
 		List<IUserAccount> descBrands = userAccountService.find(filter);
 		verifyOrderById(descBrands, false);
-
-	}
-
-	@Test
-	public void testGetCoefficient() {
-		Map<String, Integer> coefMap = canvasjsChartService.getCoefficient();
-
-		for (Map.Entry<String, Integer> entry : coefMap.entrySet()) {
-			System.out.println("Name =  " + entry.getKey() + " Coefficient = " + entry.getValue());
-		}
 
 	}
 
