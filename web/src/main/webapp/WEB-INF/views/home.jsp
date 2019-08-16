@@ -53,10 +53,15 @@
 				</thead>
 				<tbody>
 					<c:forEach var="chatInHome" items="${chatItems}" varStatus="loopCounter">
-						<tr>
+						<tr id="resultTr">
 							<td><c:out value="${chatInHome.userAccountName}" /></td>
 							<td><c:out value="${chatInHome.message}" /></td>
 							<td><fmt:formatDate pattern="hh:mm:ss" value="${chatInHome.created}" /></td>
+						</tr>
+						<tr>
+							<td id="result_user"></td>
+							<td id="result_message"></td>
+							<td id="result_created"><fmt:formatDate pattern="hh:mm:ss" value="${result.created}" /></td>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -82,12 +87,22 @@
 	var baseUrl = '${pageContext.request.contextPath}';
 	var $message = $("#message").serialize();
 	var chatId = '${UserAccount.id}';
+	var $resultTr = $("#message").serialize();
 	$('#chatbtn').click(function() {
 		$.ajax({
 			url : baseUrl+'/json?id=' + chatId + '&message=' + $("#message").val() ,
 			type : 'post',
 			success : function(result) {
 				// действия при получения ответа (result) от сервера
+// 				$('#result_user').html(result.userAccountName);
+// 				$('#result_message').html(result.message);
+// 				$('#result_created').html(result.created);
+				
+				var $resultTr = $('<tr>').append(
+			            $('<td>').text(result.userAccountName),
+			            $('<td>').text(result.message),
+			            $('<td>').text(result.created)
+				);
 			}
 		});
 	});
