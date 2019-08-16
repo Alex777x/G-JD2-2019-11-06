@@ -42,30 +42,26 @@
 
 		<div class="col-sm">
 
-
-			<table class="table table-borderless table-sm table-dark chat">
-				<thead>
-					<tr>
-						<th scope="col">NickName</th>
-						<th scope="col">Message</th>
-						<th scope="col">Time</th>
-					</tr>
-				</thead>
-				<tbody>
-					<c:forEach var="chatInHome" items="${chatItems}" varStatus="loopCounter">
-						<tr id="resultTr">
-							<td><c:out value="${chatInHome.userAccountName}" /></td>
-							<td><c:out value="${chatInHome.message}" /></td>
-							<td><fmt:formatDate pattern="hh:mm:ss" value="${chatInHome.created}" /></td>
-						</tr>
+			<div class="overflow-auto chatOver">
+				<table class="table table-striped table-bordered table-sm table-dark chat">
+					<thead>
 						<tr>
-							<td id="result_user"></td>
-							<td id="result_message"></td>
-							<td id="result_created"><fmt:formatDate pattern="hh:mm:ss" value="${result.created}" /></td>
+							<th scope="col">NickName</th>
+							<th scope="col">Message</th>
+							<th scope="col">Time</th>
 						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
+					</thead>
+					<tbody>
+						<c:forEach var="chatInHome" items="${chatItems}" varStatus="loopCounter">
+							<tr id="resultTr">
+								<td><c:out value="${chatInHome.userAccountName}" /></td>
+								<td><c:out value="${chatInHome.message}" /></td>
+								<td><fmt:formatDate pattern="hh:mm:ss" value="${chatInHome.created}" /></td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</div>
 
 			<form:form id="ajax_form" method="POST" action="${contextPath}" modelAttribute="formChats">
 				<form:input path="id" type="hidden" />
@@ -88,24 +84,25 @@
 	var $message = $("#message").serialize();
 	var chatId = '${UserAccount.id}';
 	var $resultTr = $("#message").serialize();
-	$('#chatbtn').click(function() {
-		$.ajax({
-			url : baseUrl+'/json?id=' + chatId + '&message=' + $("#message").val() ,
-			type : 'post',
-			success : function(result) {
-				// действия при получения ответа (result) от сервера
-// 				$('#result_user').html(result.userAccountName);
-// 				$('#result_message').html(result.message);
-// 				$('#result_created').html(result.created);
-				
-				var $resultTr = $('<tr>').append(
-			            $('<td>').text(result.userAccountName),
-			            $('<td>').text(result.message),
-			            $('<td>').text(result.created)
-				);
-			}
-		});
-	});
+	$('#chatbtn').click(
+			function() {
+				$.ajax({
+					url : baseUrl + '/json?id=' + chatId + '&message='
+							+ $("#message").val(),
+					type : 'post',
+					success : function(result) {
+						// действия при получения ответа (result) от сервера
+						// 				$('#result_user').html(result.userAccountName);
+						// 				$('#result_message').html(result.message);
+						// 				$('#result_created').html(result.created);
+
+						var $resultTr = $('<tr>').append(
+								$('<td>').text(result.userAccountName),
+								$('<td>').text(result.message),
+								$('<td>').text(result.created));
+					}
+				});
+			});
 </script>
 
 

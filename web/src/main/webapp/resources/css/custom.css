@@ -19,6 +19,10 @@ main {
 	flex: 1 0 auto;
 }
 
+.chatOver {
+	height: 400px;
+}
+
 .rounded-pill {
     width: 65%;
     height: 50%;
