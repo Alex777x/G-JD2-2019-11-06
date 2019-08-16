@@ -22,7 +22,7 @@ public class CardInGameServiceTest extends AbstractTest {
 		final ICardInGame entityFromDb = cardInGameService.getFullInfo(entity.getId());
 
 		assertNotNull(entityFromDb);
-		assertEquals(entity.getCard().getId(), entityFromDb.getCard().getId());
+		assertEquals(entity.getCard().getId().intValue(), entityFromDb.getCard().getId().intValue());
 		assertEquals(entity.getGame().getId(), entityFromDb.getGame().getId());
 		assertEquals(entity.getPlayer().getId(), entityFromDb.getPlayer().getId());
 		assertEquals(entity.getCardStatus(), entityFromDb.getCardStatus());

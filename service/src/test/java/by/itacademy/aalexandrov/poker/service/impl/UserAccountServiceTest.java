@@ -28,7 +28,7 @@ public class UserAccountServiceTest extends AbstractTest {
 		assertEquals(entity.getPassword(), entityFromDb.getPassword());
 		assertEquals(entity.getEmail(), entityFromDb.getEmail());
 		assertEquals(entity.getFoto(), entityFromDb.getFoto());
-		assertEquals(entity.getCountry().getId(), entityFromDb.getCountry().getId());
+		assertEquals(entity.getCountry().getId().intValue(), entityFromDb.getCountry().getId().intValue());
 		assertEquals(entity.getUserRole(), entityFromDb.getUserRole());
 		assertEquals(entity.getUserStatus(), entityFromDb.getUserStatus());
 		assertEquals(entity.getSumGames(), entityFromDb.getSumGames());

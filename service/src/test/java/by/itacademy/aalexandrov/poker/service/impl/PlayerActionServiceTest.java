@@ -21,7 +21,7 @@ public class PlayerActionServiceTest extends AbstractTest {
 		final IPlayerAction entityFromDb = playerActionService.getFullInfo(entity.getId());
 
 		assertNotNull(entityFromDb);
-		assertEquals(entity.getPlayer().getId(), entityFromDb.getPlayer().getId());
+		assertEquals(entity.getPlayer().getId().intValue(), entityFromDb.getPlayer().getId().intValue());
 		assertEquals(entity.getBet(), entityFromDb.getBet());
 		assertEquals(entity.getCall(), entityFromDb.getCall());
 		assertEquals(entity.getRaise(), entityFromDb.getRaise());

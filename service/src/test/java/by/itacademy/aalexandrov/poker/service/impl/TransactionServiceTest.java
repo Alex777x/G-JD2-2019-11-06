@@ -34,7 +34,7 @@ public class TransactionServiceTest extends AbstractTest {
 		final ITransaction entityFromDb = transactionService.getFullInfo(entity.getId());
 
 		assertNotNull(entityFromDb);
-		assertEquals(entity.getUserAccount().getId(), entityFromDb.getUserAccount().getId());
+		assertEquals(entity.getUserAccount().getId().intValue(), entityFromDb.getUserAccount().getId().intValue());
 		assertEquals(entity.getAmount(), entityFromDb.getAmount());
 		assertEquals(entity.getComment(), entityFromDb.getComment());
 		assertNotNull(entityFromDb.getId());

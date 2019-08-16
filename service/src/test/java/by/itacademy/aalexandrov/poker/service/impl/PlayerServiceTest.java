@@ -23,7 +23,7 @@ public class PlayerServiceTest extends AbstractTest {
 		final IPlayer entityFromDb = playerService.getFullInfo(entity.getId());
 
 		assertNotNull(entityFromDb);
-		assertEquals(entity.getGame().getId(), entityFromDb.getGame().getId());
+		assertEquals(entity.getGame().getId().intValue(), entityFromDb.getGame().getId().intValue());
 		assertEquals(entity.getUserAccount().getId(), entityFromDb.getUserAccount().getId());
 		assertEquals(entity.getPosition(), entityFromDb.getPosition());
 		assertEquals(entity.isInGame(), entityFromDb.isInGame());

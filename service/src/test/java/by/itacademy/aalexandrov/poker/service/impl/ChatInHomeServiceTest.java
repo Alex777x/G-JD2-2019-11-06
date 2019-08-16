@@ -21,7 +21,7 @@ public class ChatInHomeServiceTest extends AbstractTest {
 		final IChatInHome entityFromDb = chatInHomeService.getFullInfo(entity.getId());
 
 		assertNotNull(entityFromDb);
-		assertEquals(entity.getUserAccount().getId(), entityFromDb.getUserAccount().getId());
+		assertEquals(entity.getUserAccount().getId().intValue(), entityFromDb.getUserAccount().getId().intValue());
 		assertEquals(entity.getMessage(), entityFromDb.getMessage());
 		assertNotNull(entityFromDb.getId());
 		assertNotNull(entityFromDb.getCreated());

@@ -96,7 +96,7 @@
 						// 				$('#result_message').html(result.message);
 						// 				$('#result_created').html(result.created);
 
-						var $resultTr = $('<tr>').append(
+						var $resultTr = $('tr').append(
 								$('<td>').text(result.userAccountName),
 								$('<td>').text(result.message),
 								$('<td>').text(result.created));
