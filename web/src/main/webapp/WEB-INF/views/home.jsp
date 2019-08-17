@@ -44,26 +44,41 @@
 
 		<div class="col-sm">
 
-			<div class="overflow-auto chatOver">
-				<table class="table table-striped table-sm">
-					<thead>
-						<tr>
-							<th scope="col">NickName</th>
-							<th scope="col">Message</th>
-							<th scope="col">Time</th>
-						</tr>
-					</thead>
-					<tbody>
-						<c:forEach var="chatInHome" items="${chatItems}" varStatus="loopCounter">
-							<tr id="resultTr">
-								<td><c:out value="${chatInHome.userAccountName}" /></td>
-								<td><c:out value="${chatInHome.message}" /></td>
-								<td><fmt:formatDate pattern="hh:mm:ss" value="${chatInHome.created}" /></td>
-							</tr>
-						</c:forEach>
-					</tbody>
-				</table>
-			</div>
+			<!-- 			<div class="overflow-auto chatOver"> -->
+			<!-- 				<table class="table table-striped table-sm"> -->
+			<!-- 					<thead> -->
+			<!-- 						<tr> -->
+			<!-- 							<th scope="col">NickName</th> -->
+			<!-- 							<th scope="col">Message</th> -->
+			<!-- 							<th scope="col">Time</th> -->
+			<!-- 						</tr> -->
+			<!-- 					</thead> -->
+			<!-- 					<tbody> -->
+			<%-- 						<c:forEach var="chatInHome" items="${chatItems}" varStatus="loopCounter"> --%>
+			<!-- 							<tr id="resultTr"> -->
+			<%-- 								<td><c:out value="${chatInHome.userAccountName}" /></td> --%>
+			<%-- 								<td><c:out value="${chatInHome.message}" /></td> --%>
+			<%-- 								<td><fmt:formatDate pattern="hh:mm:ss" value="${chatInHome.created}" /></td> --%>
+			<!-- 							</tr> -->
+			<%-- 						</c:forEach> --%>
+			<!-- 					</tbody> -->
+			<!-- 				</table> -->
+			<!-- 			</div> -->
+
+
+			<c:forEach var="chatInHome" items="${chatItems}" varStatus="loopCounter">
+				<div id="resultTr">
+					<p class="text-justify">
+						<c:out value="${chatInHome.userAccountName}" />
+					</p>
+					<p class="text-justify">
+						<c:out value="${chatInHome.message}" />
+					</p>
+					<p class="text-justify">
+						<fmt:formatDate pattern="hh:mm:ss" value="${chatInHome.created}" />
+					</p>
+				</div>
+			</c:forEach>
 
 			<form:form id="ajax_form" method="POST" action="${contextPath}" modelAttribute="formChats">
 				<form:input path="id" type="hidden" />
@@ -95,9 +110,9 @@
 					success : function(result) {
 
 						var $resultTr = $('#resultTr').append(
-								$('<td>').text(result.userAccountName),
-								$('<td>').text(result.message),
-								$('<td>').text(result.created));
+								$('<p>').text(result.userAccountName),
+								$('<p>').text(result.message),
+								$('<p>').text(result.created));
 					}
 				});
 			});

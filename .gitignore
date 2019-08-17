@@ -43,3 +43,5 @@ service/logs/2019-06/app-06-29-2019-1.log.gz
 service/logs/2019-06/app-06-28-2019-1.log.gz
 service/logs/
 web/logs/
+dao-orm-impl/.classpath
+dao-orm-impl/bin/
