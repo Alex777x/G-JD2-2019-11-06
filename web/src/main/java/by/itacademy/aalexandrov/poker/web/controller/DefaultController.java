@@ -33,7 +33,6 @@ import by.itacademy.aalexandrov.poker.web.converter.GameToDTOConverter;
 import by.itacademy.aalexandrov.poker.web.converter.PlayerToDTOConverter;
 import by.itacademy.aalexandrov.poker.web.dto.ChatInHomeDTO;
 import by.itacademy.aalexandrov.poker.web.dto.GameDTO;
-import by.itacademy.aalexandrov.poker.web.dto.grid.GridStateDTO;
 import by.itacademy.aalexandrov.poker.web.security.AuthHelper;
 
 @Controller
@@ -62,16 +61,14 @@ public class DefaultController extends AbstractController {
 	private IUserAccountService userAccountService;
 
 	@RequestMapping(method = RequestMethod.GET)
-	public ModelAndView index(final HttpServletRequest req,
-			@RequestParam(name = "page", required = false) final Integer pageNumber,
-			@RequestParam(name = "sort", required = false) final String sortColumn, Locale locale) {
+	public ModelAndView index(final HttpServletRequest req, Locale locale) {
 
-		final GridStateDTO gridState = getListDTO(req);
-		gridState.setPage(pageNumber);
-		gridState.setSort(sortColumn, "id");
+//		final GridStateDTO gridState = getListDTO(req);
+//		gridState.setPage(pageNumber);
+//		gridState.setSort(sortColumn, "id");
 
 		final GameFilter filter = new GameFilter();
-		prepareFilter(gridState, filter);
+//		prepareFilter(gridState, filter);
 
 		final List<IGame> gamesEntities = gameService.find(filter);
 		List<GameDTO> dtos = gamesEntities.stream().map(gameToDtoConverter).collect(Collectors.toList());
@@ -81,14 +78,14 @@ public class DefaultController extends AbstractController {
 			gameDTO.setPlaersCount(playerCount);
 		}
 
-		gridState.setTotalCount(gameService.getCount(filter));
+//		gridState.setTotalCount(gameService.getCount(filter));
 
 		ChatInHomeFilter filterC = new ChatInHomeFilter();
-		prepareFilter(gridState, filterC);
+//		prepareFilter(gridState, filterC);
 
 		List<IChatInHome> messagesEntities = chatInHomeService.find(filterC);
 		List<ChatInHomeDTO> dtosC = messagesEntities.stream().map(chatToDtoConverter).collect(Collectors.toList());
-		gridState.setTotalCount(chatInHomeService.getCount(filterC));
+//		gridState.setTotalCount(chatInHomeService.getCount(filterC));
 
 		final Map<String, Object> model = new HashMap<>();
 		model.put("gridItems", dtos);

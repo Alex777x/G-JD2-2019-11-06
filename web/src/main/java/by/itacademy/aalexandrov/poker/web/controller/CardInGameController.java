@@ -76,12 +76,12 @@ public class CardInGameController extends AbstractController {
 		final List<ICardInGame> entities = cardInGameService.find(filter);
 		List<CardInGameDTO> dtos = entities.stream().map(toDtoConverter).collect(Collectors.toList());
 		gridState.setTotalCount(cardInGameService.getCount(filter));
-		
+
 		final Map<String, Object> cardInGames = new HashMap<>();
 		cardInGames.put("gridItems", dtos);
 		return new ModelAndView("cardInGame.list", cardInGames);
 	}
-	
+
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public ModelAndView showForm() {
 		final Map<String, Object> hashMap = new HashMap<>();
@@ -116,7 +116,7 @@ public class CardInGameController extends AbstractController {
 		loadCommonFormTransactions(hashMap);
 		return new ModelAndView("cardInGame.edit", hashMap);
 	}
-	
+
 	@RequestMapping(value = "/{id}/edit", method = RequestMethod.GET)
 	public ModelAndView edit(@PathVariable(name = "id", required = true) final Integer id) {
 		final CardInGameDTO dto = toDtoConverter.apply(cardInGameService.get(id));
@@ -127,26 +127,25 @@ public class CardInGameController extends AbstractController {
 
 		return new ModelAndView("cardInGame.edit", hashMap);
 	}
-	
+
 	@RequestMapping(value = "/{id}/delete", method = RequestMethod.GET)
 	public String delete(@PathVariable(name = "id", required = true) final Integer id) {
 		cardInGameService.delete(id);
 		return "redirect:/cardInGame";
 	}
-	
+
 	private void loadCommonFormTransactions(final Map<String, Object> hashMap) {
 		final List<IGame> games = gameService.getAll();
 		final List<IPlayer> players = playerService.getAll();
 		final List<ICard> cards = cardService.getAll();
 
-		final Map<Integer, Integer> gamesMap = games.stream()
-				.collect(Collectors.toMap(IGame::getId, IGame::getId));
+		final Map<Integer, Integer> gamesMap = games.stream().collect(Collectors.toMap(IGame::getId, IGame::getId));
 		hashMap.put("gamesChoices", gamesMap);
-		
+
 		final Map<Integer, Integer> playersMap = players.stream()
 				.collect(Collectors.toMap(IPlayer::getId, IPlayer::getId));
 		hashMap.put("playersChoices", playersMap);
-		
+
 		final Map<Integer, String> cardsMap = cards.stream()
 				.collect(Collectors.toMap(ICard::getId, ICard::getFilename));
 		hashMap.put("cardsChoices", cardsMap);

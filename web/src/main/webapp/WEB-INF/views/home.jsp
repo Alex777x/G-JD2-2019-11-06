@@ -12,30 +12,32 @@
 
 		<div class="col-sm">
 
-			<table class="table table-striped table-sm table-dark">
-				<thead>
-					<tr>
-						<th scope="col">Id</th>
-						<th scope="col">Players in game</th>
-						<th scope="col">Current Bank</th>
-						<th scope="col">Created</th>
-						<th scope="col">Action</th>
-					</tr>
-				</thead>
-				<tbody>
-					<c:forEach var="game" items="${gridItems}" varStatus="loopCounter">
+			<div class="overflow-auto gamesOver">
+				<table class="table table-striped table-bordered table-sm table-dark listGames">
+					<thead>
 						<tr>
-							<td><c:out value="${game.id}" /></td>
-							<td><c:out value="${game.plaersCount} /10" /></td>
-							<td><c:out value="${game.bank} $" /></td>
-							<td><fmt:formatDate pattern="dd-MMMM hh:mm:ss" value="${game.created}" /></td>
-							<sec:authorize access="!isAnonymous()">
-								<td><a href="${contextPath}/inGame?id=${game.id}"><button type="button" class="btn btn-secondary btn-sm">In Game</button></a></td>
-							</sec:authorize>
+							<th scope="col">Id</th>
+							<th scope="col">Players in game</th>
+							<th scope="col">Current Bank</th>
+							<th scope="col">Created</th>
+							<th scope="col">Action</th>
 						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
+					</thead>
+					<tbody>
+						<c:forEach var="game" items="${gridItems}" varStatus="loopCounter">
+							<tr>
+								<td><c:out value="${game.id}" /></td>
+								<td><c:out value="${game.plaersCount} /10" /></td>
+								<td><c:out value="${game.bank} $" /></td>
+								<td><fmt:formatDate pattern="dd-MMMM hh:mm:ss" value="${game.created}" /></td>
+								<sec:authorize access="!isAnonymous()">
+									<td><a href="${contextPath}/inGame?id=${game.id}"><button type="button" class="btn btn-secondary btn-sm">In Game</button></a></td>
+								</sec:authorize>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</div>
 			<jspFragments:paging />
 
 		</div>
@@ -43,7 +45,7 @@
 		<div class="col-sm">
 
 			<div class="overflow-auto chatOver">
-				<table class="table table-striped table-bordered table-sm table-dark chat">
+				<table class="table table-striped table-sm">
 					<thead>
 						<tr>
 							<th scope="col">NickName</th>
@@ -91,12 +93,8 @@
 							+ $("#message").val(),
 					type : 'post',
 					success : function(result) {
-						// действия при получения ответа (result) от сервера
-						// 				$('#result_user').html(result.userAccountName);
-						// 				$('#result_message').html(result.message);
-						// 				$('#result_created').html(result.created);
 
-						var $resultTr = $('tr').append(
+						var $resultTr = $('#resultTr').append(
 								$('<td>').text(result.userAccountName),
 								$('<td>').text(result.message),
 								$('<td>').text(result.created));
