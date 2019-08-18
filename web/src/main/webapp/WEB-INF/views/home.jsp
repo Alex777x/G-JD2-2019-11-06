@@ -51,7 +51,7 @@
 				<table class="table listChat">
 					<thead>
 						<tr>
-							<th scope="col"><mytaglib:sort-link column="userAccountName" pageUrl="${contextPath}">NickName</mytaglib:sort-link></th>
+							<th scope="col" width="150"><mytaglib:sort-link column="userAccountName" pageUrl="${contextPath}">NickName</mytaglib:sort-link></th>
 							<th scope="col"><mytaglib:sort-link column="message" pageUrl="${contextPath}">Message</mytaglib:sort-link></th>
 							<th scope="col"><mytaglib:sort-link column="created" pageUrl="${contextPath}">Time</mytaglib:sort-link></th>
 						</tr>

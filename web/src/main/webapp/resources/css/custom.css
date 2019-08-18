@@ -40,6 +40,7 @@ main {
 .listGames {
     color: #fff;
     background-color: #12487d;
+    margin-bottom: 0;
 }
 
 .listChat {
@@ -74,6 +75,7 @@ main {
 .chatOver {
 	height: 400px;
 	margin-top: 5%;
+	border-radius: 5px;
 }
 
 .gamesOver {
