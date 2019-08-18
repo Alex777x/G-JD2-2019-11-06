@@ -38,59 +38,48 @@
 					</tbody>
 				</table>
 			</div>
+			<br>
+			<hr>
+			<br>
 			<jspFragments:paging />
 
 		</div>
 
 		<div class="col-sm">
 
-			<!-- 			<div class="overflow-auto chatOver"> -->
-			<!-- 				<table class="table table-striped table-sm"> -->
-			<!-- 					<thead> -->
-			<!-- 						<tr> -->
-			<!-- 							<th scope="col">NickName</th> -->
-			<!-- 							<th scope="col">Message</th> -->
-			<!-- 							<th scope="col">Time</th> -->
-			<!-- 						</tr> -->
-			<!-- 					</thead> -->
-			<!-- 					<tbody> -->
-			<%-- 						<c:forEach var="chatInHome" items="${chatItems}" varStatus="loopCounter"> --%>
-			<!-- 							<tr id="resultTr"> -->
-			<%-- 								<td><c:out value="${chatInHome.userAccountName}" /></td> --%>
-			<%-- 								<td><c:out value="${chatInHome.message}" /></td> --%>
-			<%-- 								<td><fmt:formatDate pattern="hh:mm:ss" value="${chatInHome.created}" /></td> --%>
-			<!-- 							</tr> -->
-			<%-- 						</c:forEach> --%>
-			<!-- 					</tbody> -->
-			<!-- 				</table> -->
-			<!-- 			</div> -->
+			<div id="block" class="overflow-auto chatOver">
+				<table class="table listChat">
+					<thead>
+						<tr>
+							<th scope="col"><mytaglib:sort-link column="userAccountName" pageUrl="${contextPath}">NickName</mytaglib:sort-link></th>
+							<th scope="col"><mytaglib:sort-link column="message" pageUrl="${contextPath}">Message</mytaglib:sort-link></th>
+							<th scope="col"><mytaglib:sort-link column="created" pageUrl="${contextPath}">Time</mytaglib:sort-link></th>
+						</tr>
+					</thead>
+					<tbody id="resultTr">
+						<c:forEach var="chatInHome" items="${chatItems}" varStatus="loopCounter">
+							<tr>
+								<td><c:out value="${chatInHome.userAccountName}" /></td>
+								<td><c:out value="${chatInHome.message}" /></td>
+								<td><fmt:formatDate pattern="hh:mm:ss" value="${chatInHome.created}" /></td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</div>
 
+			<sec:authorize access="!isAnonymous()">
+				<form:form id="ajax_form" method="POST" action="${contextPath}" modelAttribute="formChats">
+					<form:input path="id" type="hidden" />
+					<div class="form-group">
+						<label for="message">Message</label>
+						<form:input id="message" class="form-control " path="message" type="text" />
+						<form:errors path="message" cssClass="red-text" />
+					</div>
+					<button id="chatbtn" class="btn btn-primary" type="button">Send</button>
 
-			<c:forEach var="chatInHome" items="${chatItems}" varStatus="loopCounter">
-				<div id="resultTr">
-					<p class="text-justify">
-						<c:out value="${chatInHome.userAccountName}" />
-					</p>
-					<p class="text-justify">
-						<c:out value="${chatInHome.message}" />
-					</p>
-					<p class="text-justify">
-						<fmt:formatDate pattern="hh:mm:ss" value="${chatInHome.created}" />
-					</p>
-				</div>
-			</c:forEach>
-
-			<form:form id="ajax_form" method="POST" action="${contextPath}" modelAttribute="formChats">
-				<form:input path="id" type="hidden" />
-				<div class="form-group">
-					<label for="message">Message</label>
-					<form:input id="message" class="form-control " path="message" type="text" />
-					<form:errors path="message" cssClass="red-text" />
-				</div>
-				<button id="chatbtn" class="btn btn-primary" type="button">Send</button>
-
-			</form:form>
-
+				</form:form>
+			</sec:authorize>
 		</div>
 
 	</div>
@@ -101,6 +90,8 @@
 	var $message = $("#message").serialize();
 	var chatId = '${UserAccount.id}';
 	var $resultTr = $("#message").serialize();
+	var block = document.getElementById("block");
+	block.scrollTop = block.scrollHeight;
 	$('#chatbtn').click(
 			function() {
 				$.ajax({
@@ -108,13 +99,15 @@
 							+ $("#message").val(),
 					type : 'post',
 					success : function(result) {
-
 						var $resultTr = $('#resultTr').append(
-								$('<p>').text(result.userAccountName),
-								$('<p>').text(result.message),
-								$('<p>').text(result.created));
+								$('<td>').text(result.userAccountName),
+								$('<td>').text(result.message),
+								$('<td>').text(result.created), $('<tr>'));
 					}
 				});
+				document.getElementById("message").value = "";
+				var block = document.getElementById("block");
+				block.scrollTop = block.scrollHeight;
 			});
 </script>
 

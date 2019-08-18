@@ -7,6 +7,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
+<div class="container pageNews">
 <sec:authorize access="isAnonymous()">
 	<p class="text-center"><spring:message code="page.all.notLogged" /></p>
 </sec:authorize>
@@ -42,3 +43,4 @@
 
 	<jspFragments:paging />
 </sec:authorize>
+</div>

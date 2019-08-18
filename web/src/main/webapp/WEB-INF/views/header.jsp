@@ -30,7 +30,7 @@
 
 		<div class="collapse navbar-collapse" id="navbarResponsive">
 			<ul class="navbar-nav ml-auto">
-				<li class="nav-item active"><a class="nav-link" href="${contextPath}/"><spring:message code="page.home.home" /></a></li>
+				<li class="nav-item"><a class="nav-link" href="${contextPath}/"><spring:message code="page.home.home" /></a></li>
 				<sec:authorize access="isAnonymous()">
 					<li class="nav-item"><a class="nav-link" href="${contextPath}/login"><spring:message code="page.home.login" /></a></li>
 					<li class="nav-item"><a class="nav-link" href="${contextPath}/registration"><spring:message code="page.home.registration" /></a></li>

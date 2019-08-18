@@ -10,45 +10,41 @@
 <div class="container">
 	<div class="row">
 
-		<div class="col-sm">
-
-<%-- 			<form:form method="POST" action="${pagesPersonalArea}" modelAttribute="formChangeUserNickName"> --%>
-<%-- 				<form:input path="id" type="hidden" /> --%>
-
-<!-- 				<div class="form-group"> -->
-<!-- 					<label for="nickname">NickName</label> -->
-<%-- 					<form:input class="form-control" path="nickname" type="text" /> --%>
-<%-- 					<form:errors path="nickname" cssClass="red-text" /> --%>
-<!-- 				</div> -->
-
-<!-- 				<button class="btn btn-primary" type="submit">Save</button> -->
-<%-- 				<a class="btn btn-primary" href="${pagesPersonalArea}">Back</a> --%>
-<%-- 			</form:form> --%>
-
-		</div>
-
-
 		<div class="col-sm"></div>
+
+
+		<div class="col-sm">
+			<p>Change Name</p>
+			<div class="form-group">
+				<input class="form-control" type="text" placeholder="Set a new Nickname">
+			</div>
+			<button class="btn btn-primary" type="submit">Save</button>
+			<br>
+			<hr>
+			<br>
+			<p>Change Foto</p>
+			<div class="custom-file">
+				<input type="file" class="custom-file-input" id="customFile"> <label class="custom-file-label" for="customFile">Choose
+					foto</label>
+			</div>
+			<div><br></div>
+			<button class="btn btn-primary" type="submit">Change</button>
+			<br>
+			<hr>
+			<br>
+			<p>Add Money</p>
+			<div class="form-group">
+				<input class="form-control" type="text" placeholder="Enter amount">
+			</div>
+			<button class="btn btn-primary" type="submit">Add</button>
+			<br>
+			<hr>
+			<br>
+			<p>If you want to delete your account, click the button below.</p>
+			<button class="btn btn-danger" type="submit">Delete Account</button>
+		</div>
 
 
 	</div>
 </div>
 
-
-
-<div>
-	<form method="POST" enctype="multipart/form-data" action="${contextPath}/file">
-		<table>
-			<tr>
-				<td>File to upload:</td>
-				<td><input type="file" name="file" /></td>
-			</tr>
-			<tr>
-				<td></td>
-				<td><input type="submit" value="Upload" /></td>
-			</tr>
-		</table>
-	</form>
-
-	<img alt="no image" src="${contextPath}/file/image" />
-</div>
