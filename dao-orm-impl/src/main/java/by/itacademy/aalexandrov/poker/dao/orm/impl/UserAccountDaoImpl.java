@@ -165,4 +165,11 @@ public class UserAccountDaoImpl extends AbstractDaoImpl<IUserAccount, Integer> i
 		return q.getResultList();
 	}
 
+	@Override
+	public void updateNickName(Integer id, String message) {
+		IUserAccount entity = getFullInfo(id);
+		entity.setNickname(message);
+		super.update(entity);
+	}
+
 }

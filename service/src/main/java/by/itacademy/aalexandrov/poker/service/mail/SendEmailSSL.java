@@ -1,4 +1,4 @@
-package by.itacademy.aalexandrov.poker.web.mail;
+package by.itacademy.aalexandrov.poker.service.mail;
 
 import java.util.Properties;
 

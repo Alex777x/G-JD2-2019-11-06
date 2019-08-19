@@ -39,6 +39,8 @@
 
 <link rel="stylesheet" href="${contextPath}/resources/css/odometer-theme-car.css" />
 <script src="${contextPath}/resources/js/odometer.js"></script>
+<link href="${contextPath}/resources/css/toastr.css" rel="stylesheet"/>
+<script src="${contextPath}/resources/js/toastr.js"></script>
 
 <link rel="stylesheet" href="${contextPath}/resources/css/custom.css">
 <script src="${contextPath}/resources/js/init-menu.js"></script>

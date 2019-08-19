@@ -42,4 +42,7 @@ public interface IUserAccountService {
 	@Transactional
 	List<IUserAccount> getFullInfo();
 
+	@Transactional
+	void updateNickName(Integer id, String message);
+
 }

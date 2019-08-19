@@ -19,4 +19,6 @@ public interface IUserAccountDao extends IDao<IUserAccount, Integer> {
 
 	List<IUserAccount> getFullInfo();
 
+	void updateNickName(Integer id, String message);
+
 }

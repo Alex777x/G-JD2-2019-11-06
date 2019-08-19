@@ -15,6 +15,7 @@ import by.itacademy.aalexandrov.poker.dao.api.entity.table.IUserAccount;
 import by.itacademy.aalexandrov.poker.dao.api.filter.UserAccountFilter;
 import by.itacademy.aalexandrov.poker.service.ITransactionService;
 import by.itacademy.aalexandrov.poker.service.IUserAccountService;
+import by.itacademy.aalexandrov.poker.service.mail.SendEmailSSL;
 
 @Service
 public class UserAccountServiceImpl implements IUserAccountService {
@@ -40,7 +41,6 @@ public class UserAccountServiceImpl implements IUserAccountService {
 		createEntity.setWonGames(0);
 		createEntity.setUserRole(UserRole.MEMBER);
 		createEntity.setUserStatus(UserStatus.ACTIVE);
-
 		return createEntity;
 	}
 
@@ -48,6 +48,8 @@ public class UserAccountServiceImpl implements IUserAccountService {
 	public void save(final IUserAccount entity) {
 		final Date modifedOn = new Date();
 		entity.setUpdated(modifedOn);
+		String email = entity.getEmail();
+		SendEmailSSL.sendEmail(email);
 		if (entity.getId() == null) {
 			LOGGER.info("new UserAccount created: {}", entity);
 			entity.setCreated(modifedOn);
@@ -120,6 +122,11 @@ public class UserAccountServiceImpl implements IUserAccountService {
 	@Override
 	public List<IUserAccount> getFullInfo() {
 		return dao.getFullInfo();
+	}
+
+	@Override
+	public void updateNickName(Integer id, String message) {
+		dao.updateNickName(id, message);
 	}
 
 }

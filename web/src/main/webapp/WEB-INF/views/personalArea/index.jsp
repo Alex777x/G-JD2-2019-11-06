@@ -15,13 +15,20 @@
 				<img src="${contextPath}/resources/img/spades.png" alt="">
 			</div>
 			<div class="personalAreadata">
-				<p>Никнейм:</p>
-				<p>Дата регистрации:</p>
-				<p>Игр сыграно:</p>
-				<p>Игр выиграно:</p>
+				<p>Никнейм: ${userAccount.nickname}</p>
+				<p>
+					Дата регистрации:
+					<fmt:formatDate pattern="dd-MMMM" value="${userAccount.created}" />
+				</p>
+				<p>Игр сыграно: ${userAccount.sumGames}</p>
+				<p>Игр выиграно: ${userAccount.wonGames}</p>
 			</div>
 
-			
+			<div class="dopInfo">
+				<p>If you find a mistake or have</p>
+				<p>questions about the site,</p>
+				<p>please write a ticket to us.</p>
+			</div>
 
 		</div>
 
@@ -29,9 +36,9 @@
 		<div class="col-sm personAreaSet">
 			<p class="ptext">Change Name</p>
 			<div class="form-group">
-				<input class="form-control" type="text" placeholder="Set a new Nickname">
+				<input id="newNickName" class="form-control" type="text" placeholder="Set a new Nickname">
 			</div>
-			<button class="btn btn-primary" type="submit">Save</button>
+			<button id="setNickName" class="btn btn-primary" type="submit">Save</button>
 			<br>
 			<hr>
 			<br>
@@ -62,5 +69,22 @@
 
 	</div>
 </div>
+
+<script>
+var baseUrl = '${pageContext.request.contextPath}';
+var $message = $("#newNickName").serialize();
+var userId = ${userAccount.id};
+	$('#setNickName').click(
+			function() {
+				$.ajax({
+					url : baseUrl + '/personalArea/updateNickname?id=' + userId + '&message='
+							+ $("#newNickName").val(),
+					type : 'post',
+					success : function(result) {
+ 						toastr.success('Nickname successfully updated!')
+					}
+				});
+			});
+</script>
 
 
