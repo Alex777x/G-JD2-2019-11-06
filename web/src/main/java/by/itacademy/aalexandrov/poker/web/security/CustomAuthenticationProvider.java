@@ -18,6 +18,7 @@ import by.itacademy.aalexandrov.poker.dao.api.entity.enums.UserRole;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IUserAccount;
 import by.itacademy.aalexandrov.poker.service.ITransactionService;
 import by.itacademy.aalexandrov.poker.service.IUserAccountService;
+import by.itacademy.aalexandrov.poker.web.mail.SendEmailSSL;
 
 @Component("customAuthenticationProvider")
 public class CustomAuthenticationProvider implements AuthenticationProvider {
@@ -36,6 +37,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 		final String password = authentication.getCredentials() + "";
 
 		IUserAccount account;
+		String email;
 
 		try {
 			account = userAccountService.findNickname(username);
@@ -55,6 +57,9 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 			System.out.println(e);
 			System.out.println("balance not found");
 		}
+
+		email = account.getEmail();
+		SendEmailSSL.sendEmail(email);
 
 		final int userId = account.getId();
 		final String foto = account.getFoto();

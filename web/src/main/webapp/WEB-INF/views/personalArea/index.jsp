@@ -10,11 +10,24 @@
 <div class="container">
 	<div class="row">
 
-		<div class="col-sm"></div>
-
-
 		<div class="col-sm">
-			<p>Change Name</p>
+			<div class="personAreaSet">
+				<img src="${contextPath}/resources/img/spades.png" alt="">
+			</div>
+			<div class="personalAreadata">
+				<p>Никнейм:</p>
+				<p>Дата регистрации:</p>
+				<p>Игр сыграно:</p>
+				<p>Игр выиграно:</p>
+			</div>
+
+			
+
+		</div>
+
+
+		<div class="col-sm personAreaSet">
+			<p class="ptext">Change Name</p>
 			<div class="form-group">
 				<input class="form-control" type="text" placeholder="Set a new Nickname">
 			</div>
@@ -22,17 +35,19 @@
 			<br>
 			<hr>
 			<br>
-			<p>Change Foto</p>
+			<p class="ptext">Change Foto</p>
 			<div class="custom-file">
 				<input type="file" class="custom-file-input" id="customFile"> <label class="custom-file-label" for="customFile">Choose
 					foto</label>
 			</div>
-			<div><br></div>
+			<div>
+				<br>
+			</div>
 			<button class="btn btn-primary" type="submit">Change</button>
 			<br>
 			<hr>
 			<br>
-			<p>Add Money</p>
+			<p class="ptext">Add Money</p>
 			<div class="form-group">
 				<input class="form-control" type="text" placeholder="Enter amount">
 			</div>
@@ -40,11 +55,12 @@
 			<br>
 			<hr>
 			<br>
-			<p>If you want to delete your account, click the button below.</p>
+			<p class="ptext">If you want to delete your account, click the button below.</p>
 			<button class="btn btn-danger" type="submit">Delete Account</button>
 		</div>
 
 
 	</div>
 </div>
+
 

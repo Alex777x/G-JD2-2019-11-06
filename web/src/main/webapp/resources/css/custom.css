@@ -17,7 +17,8 @@ body {
 	min-height: 100vh;
 	flex-direction: column;
 	background-image: url(fon1.jpg);
-/* 	background-color: #f2f2ee; */
+	background-attachment: fixed;
+	/* 	background-color: #f2f2ee; */
 	filter: drop-shadow(2px 4px 6px black);
 }
 
@@ -34,19 +35,19 @@ main {
 }
 
 .navbar-dark .navbar-text {
-    color: deepskyblue;
+	color: deepskyblue;
 }
 
 .listGames {
-    color: #fff;
-    background-color: #12487d;
-    margin-bottom: 0;
+	color: #fff;
+	background-color: #12487d;
+	margin-bottom: 0;
 }
 
 .listChat {
 	margin-bottom: 0;
-    width: 100%;
-    background-color: steelblue;
+	width: 100%;
+	background-color: steelblue;
 }
 
 .navbar {
@@ -143,6 +144,49 @@ main {
 	background: #f2f2ee;
 }
 
+.ptext {
+	font-size: x-large;
+	font-family: fantasy;
+	color: yellow;
+}
+
+.personAreaSet {
+	margin-top: 25px;
+}
+
+.personalAreadata {
+	margin-top: -685px;
+	margin-left: 100px;
+	font-family: inherit;
+	font-size: x-large;
+	color: darkslateblue;
+}
+
+.odometer {
+	font-size: 80px;
+    margin-top: 34%;
+    margin-left: 36%;
+}
+
+.rollspades {
+    margin-left: auto;
+    width: 720px;
+    height: 480px;
+    background-image: url(spadesroll.png);
+    background-repeat: round;
+    padding: 8%;
+}
+
+.btnroll {
+	margin-left: 5%;
+    margin-top: -24%;
+}
+
+.proll {
+	font-family: fantasy;
+    font-size: x-large;
+    color: slategray;
+}
 
 a:hover {
 	text-decoration: underline;

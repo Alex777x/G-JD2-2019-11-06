@@ -72,7 +72,7 @@
 				<form:form id="ajax_form" method="POST" action="${contextPath}" modelAttribute="formChats">
 					<form:input path="id" type="hidden" />
 					<div class="form-group">
-						<label for="message">Message</label>
+						<label for="message" class="ptext">Message</label>
 						<form:input id="message" class="form-control " path="message" type="text" />
 						<form:errors path="message" cssClass="red-text" />
 					</div>
@@ -80,6 +80,11 @@
 
 				</form:form>
 			</sec:authorize>
+			<div class="rollspades">
+				<p class="proll">У каждого есть шанс выиграть приз в размере 1000$. Если выпадет число 777, вы счастливчик! </p>
+				<button id="rollbtn" class="btn btn-warning btnroll" type="button">I am lucky!<i class="fas fa-dice"></i></button>
+				<div id="odometer" class="odometer">123</div>
+			</div>
 		</div>
 
 	</div>
@@ -109,6 +114,13 @@
 				var block = document.getElementById("block");
 				block.scrollTop = block.scrollHeight;
 			});
+
+	$('#rollbtn').click(function() {
+		$('#odometer').innerHTML = Math.floor(Math.random() * 999);
+		setTimeout(function() {
+			odometer.innerHTML = Math.floor(Math.random() * 999);
+		}, 1000);
+	});
 </script>
 
 

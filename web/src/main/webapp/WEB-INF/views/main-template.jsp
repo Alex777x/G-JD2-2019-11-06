@@ -37,7 +37,8 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
 	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
-
+<link rel="stylesheet" href="${contextPath}/resources/css/odometer-theme-car.css" />
+<script src="${contextPath}/resources/js/odometer.js"></script>
 
 <link rel="stylesheet" href="${contextPath}/resources/css/custom.css">
 <script src="${contextPath}/resources/js/init-menu.js"></script>
