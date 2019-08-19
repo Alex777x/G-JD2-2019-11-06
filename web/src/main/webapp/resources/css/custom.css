@@ -29,7 +29,7 @@ main {
 .navbar-dark .navbar-nav .nav-link {
 	font-family: fantasy;
 	color: rgba(#00ffff, .1);
-	color: #02fd3c;
+	color: yellowgreen;
 	font-size: x-large;
 	-webkit-text-stroke: 1px black;
 }
@@ -51,7 +51,7 @@ main {
 }
 
 .navbar {
-	background-image: url(generic-brand-background.jpg);
+	background-image: url(universe-1566159_1920.jpg);
 }
 
 .chatOut {
@@ -147,7 +147,7 @@ main {
 .ptext {
 	font-size: x-large;
 	font-family: fantasy;
-	color: yellow;
+	color: yellowgreen;
 	-webkit-text-stroke: 1px black;
 }
 
