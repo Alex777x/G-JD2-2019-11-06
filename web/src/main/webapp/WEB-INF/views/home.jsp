@@ -87,10 +87,13 @@
 				</form:form>
 			</sec:authorize>
 			<div class="rollspades">
-				<p class="proll">У каждого есть шанс выиграть приз в размере 1000$. Если выпадет число 777, вы счастливчик!</p>
-				<button id="rollbtn" class="btn btn-warning btnroll" type="button">
-					I am lucky!<i class="fas fa-dice"></i>
-				</button>
+				<p class="proll">У каждого есть шанс выиграть приз в размере 1000$. Если выпадет
+					число 777, вы счастливчик!</p>
+				<sec:authorize access="!isAnonymous()">
+					<button id="rollbtn" class="btn btn-warning btnroll" type="button">
+						I am lucky!<i class="fas fa-dice"></i>
+					</button>
+				</sec:authorize>
 				<div id="odometer" class="odometer">123</div>
 			</div>
 		</div>
@@ -112,10 +115,10 @@
 							+ $("#message").val(),
 					type : 'post',
 					success : function(result) {
-						var $resultTr = $('#resultTr').append(
-								$('<td>').text(result.userAccountName),
-								$('<td>').text(result.message),
-								$('<td>').text(result.created), $('<tr>'));
+// 						var $resultTr = $('#resultTr').append(
+// 								$('<td>').text(result.userAccountName),
+// 								$('<td>').text(result.message),
+// 								$('<td>').text(result.created), $('<tr>'));
 					}
 				});
 				document.getElementById("message").value = "";
@@ -150,22 +153,36 @@
 	setInterval(function() {
 		$.get("${contextPath}/lastId", function(lastIdFromServer) {
 			if (latestId < lastIdFromServer) {
-				
-				success : $.ajax({
-						url : baseUrl + '/getfromserver?id=' + lastIdFromServer,
-						type : 'post',
-						success : function(result) {
-							var $resultTr = $('#resultTr').append(
-									$('<td>').text(result.userAccountName),
-									$('<td>').text(result.message),
-									$('<td>').text(result.created), $('<tr>'));
-						}
-					});
-				
+
+				success: $.ajax({
+					url : baseUrl + '/getfromserver?id=' + lastIdFromServer,
+					type : 'get',
+					success : function(result) {
+						
+						// list should be here (select * from message where id>=lastIdFromServer)
+						//result.forEach((row)=>{
+							
+							//var $resultTr = $('#resultTr').append(
+								//$('<td>').text(result.userAccountName),
+								//$('<td>').text(result.message),
+								//$('<td>').text(result.created), $('<tr>'));
+							
+							
+						//})
+						
+						
+						
+						var $resultTr = $('#resultTr').append(
+								$('<td>').text(result.userAccountName),
+								$('<td>').text(result.message),
+								$('<td>').text(new Date(result.created).toISOString()), $('<tr>'));
+					}
+				});
+
 				latestId = lastIdFromServer;
 			}
 		})
-	}, 5 * 1000);
+	}, 3 * 1000);
 </script>
 
 

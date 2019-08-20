@@ -168,7 +168,7 @@ public class DefaultController extends AbstractController {
 		return new ResponseEntity<Integer>(newestChat == null ? null : newestChat.getId(), HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/getfromserver", method = RequestMethod.POST)
+	@RequestMapping(value = "/getfromserver", method = RequestMethod.GET)
 	public ResponseEntity<ChatInHomeDTO> getNewestMessage(
 			@RequestParam(name = "id", required = true) final Integer id) {
 		IChatInHome entity = chatInHomeService.getFullInfo(id);
