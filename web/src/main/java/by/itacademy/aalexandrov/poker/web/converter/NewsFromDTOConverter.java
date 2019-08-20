@@ -20,6 +20,7 @@ public class NewsFromDTOConverter implements Function<NewsDTO, INews> {
 		INews entity = newsService.createEntity();
 		entity.setNewsTitle(dto.getNewsTitle());
 		entity.setNewsText(dto.getNewsText());
+		entity.setId(dto.getId());
 		return entity;
 	}
 
