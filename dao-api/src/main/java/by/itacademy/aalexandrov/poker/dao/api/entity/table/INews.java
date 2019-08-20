@@ -10,4 +10,8 @@ public interface INews extends IBaseEntity {
 
 	String getNewsTitle();
 
+	void setVersion(int version);
+
+	int getVersion();
+
 }

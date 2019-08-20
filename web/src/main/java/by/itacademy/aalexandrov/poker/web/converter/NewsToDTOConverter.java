@@ -16,6 +16,7 @@ public class NewsToDTOConverter implements Function<INews, NewsDTO> {
 		dto.setId(entity.getId());
 		dto.setNewsTitle(entity.getNewsTitle());
 		dto.setNewsText(entity.getNewsText());
+		dto.setVersion(entity.getVersion());
 		return dto;
 	}
 

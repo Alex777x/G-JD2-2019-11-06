@@ -90,7 +90,6 @@ public class NewsController extends AbstractController {
 	@RequestMapping(value = "/{id}/edit", method = RequestMethod.GET)
 	public ModelAndView edit(@PathVariable(name = "id", required = true) final Integer id) {
 		final NewsDTO dto = toDtoConverter.apply(newsService.get(id));
-
 		final Map<String, Object> hashMap = new HashMap<>();
 		hashMap.put("formNews", dto);
 

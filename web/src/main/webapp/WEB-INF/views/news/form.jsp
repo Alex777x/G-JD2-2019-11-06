@@ -13,6 +13,7 @@
 
 		<form:form method="POST" action="${pagesNews}" modelAttribute="formNews">
 			<form:input path="id" type="hidden" />
+			<form:input path="version" type="hidden" />
 
 			<div class="form-group">
 				<label for="newsTitle"><spring:message code="page.news.title" /></label>

@@ -1,5 +1,6 @@
 package by.itacademy.aalexandrov.poker.web.dto;
 
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 public class NewsDTO {
@@ -11,6 +12,17 @@ public class NewsDTO {
 
 	@Size(min = 1, max = 10000)
 	private String newsText;
+
+	@NotNull
+	private int version;
+
+	public int getVersion() {
+		return version;
+	}
+
+	public void setVersion(int version) {
+		this.version = version;
+	}
 
 	public Integer getId() {
 		return id;

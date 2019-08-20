@@ -28,7 +28,9 @@ public class NewsServiceImpl implements INewsService {
 
 	@Override
 	public INews createEntity() {
-		return dao.createEntity();
+		INews newNews = dao.createEntity();
+		newNews.setVersion(1);
+		return newNews;
 	}
 
 	@Override

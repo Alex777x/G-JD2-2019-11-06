@@ -3,6 +3,7 @@ package by.itacademy.aalexandrov.poker.dao.orm.impl.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Transient;
+import javax.persistence.Version;
 
 import org.hibernate.search.annotations.Analyze;
 import org.hibernate.search.annotations.Field;
@@ -22,6 +23,10 @@ public class News extends BaseEntity implements INews {
 	@Column
 	@Field(index = Index.YES, analyze = Analyze.YES, store = Store.NO)
 	private String newsText;
+
+	@Column
+	@Version
+	private int version;
 
 	@Transient
 	private String upperCaseName;
@@ -52,6 +57,16 @@ public class News extends BaseEntity implements INews {
 	@Override
 	public void setNewsText(String newsText) {
 		this.newsText = newsText;
+	}
+
+	@Override
+	public int getVersion() {
+		return version;
+	}
+
+	@Override
+	public void setVersion(int version) {
+		this.version = version;
 	}
 
 }
