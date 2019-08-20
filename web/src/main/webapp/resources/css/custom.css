@@ -86,18 +86,20 @@ main {
 }
 
 .rounded-pill {
-	width: 65%;
-	height: 50%;
-	border-radius: 50rem !important;
-	margin-top: 70px;
-	margin-left: 8%;
-	border: solid;
-	border-width: 17px;
-	border-color: saddlebrown;
+	position: absolute;
+    left: 140px;
+    top: 200px;
+    width: 900px;
+    height: 500px;
+    border-radius: 50rem !important;
+    border: solid;
+    border-width: 17px;
+    border-color: saddlebrown;
 }
 
 .img-thumbnail {
 	width: 75px;
+	background-color: lavender;
 }
 
 .navbar-text {
@@ -195,6 +197,76 @@ main {
     font-family: inherit;
     font-size: x-large;
     color: darkslateblue;
+}
+
+.player1 {
+    position: absolute;
+    left: 415px;
+    top: 650px;
+    width: 100px;
+}
+
+.player2 {
+	position: absolute;
+    left: 215px;
+    top: 600px;
+    width: 100px;
+}
+
+.player10 {
+	width: 100px;
+    position: absolute;
+    left: 680px;
+    top: 650px;
+}
+
+.player9 {
+	width: 100px;
+    position: absolute;
+    top: 600px;
+    left: 865px;
+}
+
+.player3 {
+	width: 100px;
+    position: absolute;
+    top: 385px;
+    left: 102px;
+}
+
+.player8 {
+	width: 100px;
+    position: absolute;
+    top: 385px;
+    left: 985px;
+}
+
+.player4 {
+	position: absolute;
+    left: 215px;
+    top: 200px;
+    width: 100px;
+}
+
+.player5 {
+	position: absolute;
+    left: 415px;
+    top: 155px;
+    width: 100px;
+}
+
+.player6 {
+	width: 100px;
+    position: absolute;
+    left: 680px;
+    top: 155px;
+}
+
+.player7 {
+	width: 100px;
+    position: absolute;
+    top: 200px;
+    left: 865px;
 }
 
 a:hover {
