@@ -269,6 +269,24 @@ main {
     left: 865px;
 }
 
+.btnCheck {
+	position: absolute;
+	left: 500px;
+    top: 795px;
+}
+
+.btnCall {
+	position: absolute;
+	left: 610px;
+    top: 795px;
+}
+
+.btnRaise {
+	position: absolute;
+	left: 700px;
+    top: 795px;
+}
+
 a:hover {
 	text-decoration: underline;
 	text-shadow: (2px 4px 6px black);
