@@ -203,39 +203,39 @@ main {
     position: absolute;
     left: 415px;
     top: 650px;
-    width: 100px;
+    width: 75px;
 }
 
 .player2 {
 	position: absolute;
     left: 215px;
     top: 600px;
-    width: 100px;
+    width: 75px;
 }
 
 .player10 {
-	width: 100px;
+	width: 75px;
     position: absolute;
     left: 680px;
     top: 650px;
 }
 
 .player9 {
-	width: 100px;
+	width: 75px;
     position: absolute;
     top: 600px;
     left: 865px;
 }
 
 .player3 {
-	width: 100px;
+	width: 75px;
     position: absolute;
     top: 385px;
     left: 102px;
 }
 
 .player8 {
-	width: 100px;
+	width: 75px;
     position: absolute;
     top: 385px;
     left: 985px;
@@ -245,25 +245,25 @@ main {
 	position: absolute;
     left: 215px;
     top: 200px;
-    width: 100px;
+    width: 75px;
 }
 
 .player5 {
 	position: absolute;
     left: 415px;
     top: 155px;
-    width: 100px;
+    width: 75px;
 }
 
 .player6 {
-	width: 100px;
+	width: 75px;
     position: absolute;
     left: 680px;
     top: 155px;
 }
 
 .player7 {
-	width: 100px;
+	width: 75px;
     position: absolute;
     top: 200px;
     left: 865px;
