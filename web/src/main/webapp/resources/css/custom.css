@@ -16,7 +16,7 @@ body {
 	display: flex;
 	min-height: 100vh;
 	flex-direction: column;
-	background-image: url(fon1.jpg);
+	background-image: url(grey-plaster.png);
 	background-attachment: fixed;
 	/* 	background-color: #f2f2ee; */
 	filter: drop-shadow(2px 4px 6px black);
@@ -51,7 +51,7 @@ main {
 }
 
 .navbar {
-	background-image: url(universe-1566159_1920.jpg);
+	background-color: midnightblue;
 }
 
 .chatOut {

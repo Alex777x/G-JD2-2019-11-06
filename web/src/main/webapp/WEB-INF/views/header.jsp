@@ -9,7 +9,7 @@
 <c:set var="currentLocale" value="${sessionScope['org.springframework.web.servlet.i18n.SessionLocaleResolver.LOCALE']}" />
 
 <!-- Navigation -->
-<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark static-top">
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark static-top">
 	<div class="container">
 		<a class="navbar-brand" href="${contextPath}/"> <img src="${contextPath}/resources/img/logo.png" alt="" width="100px">
 		</a>

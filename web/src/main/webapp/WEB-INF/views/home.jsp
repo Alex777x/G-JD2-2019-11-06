@@ -39,6 +39,8 @@
 				</table>
 			</div>
 			<br>
+			<div><button id="btnNewGame" type="button" class="btn btn-danger btn-lg">New Table</button></div>
+			<br>
 			<hr>
 			<br>
 			<jspFragments:paging />
