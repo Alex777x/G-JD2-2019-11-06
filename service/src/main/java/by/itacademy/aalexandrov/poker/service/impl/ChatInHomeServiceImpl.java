@@ -104,4 +104,9 @@ public class ChatInHomeServiceImpl implements IChatInHomeService {
 		return dao.getFullInfo();
 	}
 
+	@Override
+	public IChatInHome getNewestMessage() {
+		return dao.getNewestMessage();
+	}
+
 }

@@ -94,4 +94,9 @@ public class GameServiceImpl implements IGameService {
 		return dao.getCount(filter);
 	}
 
+	@Override
+	public IGame getFullInfo(Integer id) {
+		return dao.getFullInfo(id);
+	}
+
 }

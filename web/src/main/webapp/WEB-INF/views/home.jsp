@@ -39,7 +39,11 @@
 				</table>
 			</div>
 			<br>
-			<div><button id="btnNewGame" type="button" class="btn btn-danger btn-lg">New Table</button></div>
+			<sec:authorize access="!isAnonymous()">
+				<div>
+					<button id="btnNewGame" type="button" class="btn btn-danger btn-lg">New Table</button>
+				</div>
+			</sec:authorize>
 			<br>
 			<hr>
 			<br>
@@ -83,8 +87,10 @@
 				</form:form>
 			</sec:authorize>
 			<div class="rollspades">
-				<p class="proll">У каждого есть шанс выиграть приз в размере 1000$. Если выпадет число 777, вы счастливчик! </p>
-				<button id="rollbtn" class="btn btn-warning btnroll" type="button">I am lucky!<i class="fas fa-dice"></i></button>
+				<p class="proll">У каждого есть шанс выиграть приз в размере 1000$. Если выпадет число 777, вы счастливчик!</p>
+				<button id="rollbtn" class="btn btn-warning btnroll" type="button">
+					I am lucky!<i class="fas fa-dice"></i>
+				</button>
 				<div id="odometer" class="odometer">123</div>
 			</div>
 		</div>
@@ -123,6 +129,43 @@
 			odometer.innerHTML = Math.floor(Math.random() * 999);
 		}, 1000);
 	});
+</script>
+<script>
+	var baseUrl = '${pageContext.request.contextPath}';
+	$('#btnNewGame').click(function() {
+		$.ajax({
+			url : baseUrl + '/newGame',
+			type : 'post',
+			success : function(result) {
+				toastr.success('Game successfully created!')
+				window.location.href = baseUrl + '/inGame?id=' + result.id;
+			}
+		});
+	});
+</script>
+
+<script>
+	var baseUrl = '${pageContext.request.contextPath}';
+	var latestId = '${newestCarId}';
+	setInterval(function() {
+		$.get("${pagesCar}/lastId", function(lastIdFromServer) {
+			if (latestId < lastIdFromServer) {
+				
+					$.ajax({
+						url : baseUrl + '/json?id=' + lastIdFromServer,
+						type : 'post',
+						success : function(result) {
+							var $resultTr = $('#resultTr').append(
+									$('<td>').text(result.userAccountName),
+									$('<td>').text(result.message),
+									$('<td>').text(result.created), $('<tr>'));
+						}
+					});
+				
+				latestId = lastIdFromServer;
+			}
+		})
+	}, 5 * 1000);
 </script>
 
 

@@ -9,7 +9,7 @@ import by.itacademy.aalexandrov.poker.dao.api.entity.table.IUserAccount;
 import by.itacademy.aalexandrov.poker.web.dto.UserAccountDTO;
 
 @Component
-public class UserAccountToDTOConverter implements Function<IUserAccount, UserAccountDTO>{
+public class UserAccountToDTOConverter implements Function<IUserAccount, UserAccountDTO> {
 
 	@Override
 	public UserAccountDTO apply(IUserAccount entity) {
@@ -19,12 +19,12 @@ public class UserAccountToDTOConverter implements Function<IUserAccount, UserAcc
 		dto.setPassword(entity.getPassword());
 		dto.setEmail(entity.getEmail());
 		dto.setFoto(entity.getFoto());
-		
+
 		ICountry country = entity.getCountry();
 		if (country != null) {
 			dto.setCountry(country.getId());
 		}
-		
+
 		dto.setUserRole(entity.getUserRole());
 		dto.setUserStatus(entity.getUserStatus());
 		dto.setSumGames(entity.getSumGames());

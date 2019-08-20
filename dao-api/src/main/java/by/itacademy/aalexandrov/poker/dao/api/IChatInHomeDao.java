@@ -17,4 +17,6 @@ public interface IChatInHomeDao extends IDao<IChatInHome, Integer> {
 
 	List<IChatInHome> getFullInfo();
 
+	IChatInHome getNewestMessage();
+
 }

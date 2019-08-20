@@ -36,4 +36,7 @@ public interface IGameService {
 	@Transactional
 	IGame createEntity();
 
+	@Transactional
+	IGame getFullInfo(Integer id);
+
 }

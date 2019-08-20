@@ -16,6 +16,7 @@ import by.itacademy.aalexandrov.poker.dao.api.entity.table.IGame;
 import by.itacademy.aalexandrov.poker.dao.api.filter.GameFilter;
 import by.itacademy.aalexandrov.poker.dao.orm.impl.entity.Game;
 import by.itacademy.aalexandrov.poker.dao.orm.impl.entity.Game_;
+import by.itacademy.aalexandrov.poker.dao.orm.impl.entity.UserAccount_;
 
 @Repository
 public class GameDaoImpl extends AbstractDaoImpl<IGame, Integer> implements IGameDao {
@@ -91,6 +92,21 @@ public class GameDaoImpl extends AbstractDaoImpl<IGame, Integer> implements IGam
 		default:
 			throw new UnsupportedOperationException("sorting is not supported by column:" + sortColumn);
 		}
+	}
+
+	@Override
+	public IGame getFullInfo(Integer id) {
+		final EntityManager em = getEntityManager();
+		final CriteriaBuilder cb = em.getCriteriaBuilder();
+
+		final CriteriaQuery<IGame> cq = cb.createQuery(IGame.class);
+
+		final Root<Game> from = cq.from(Game.class);// select from user_account
+		cq.select(from);
+		cq.distinct(true);
+		cq.where(cb.equal(from.get(UserAccount_.id), id));
+		final TypedQuery<IGame> q = em.createQuery(cq);
+		return getSingleResult(q);
 	}
 
 }

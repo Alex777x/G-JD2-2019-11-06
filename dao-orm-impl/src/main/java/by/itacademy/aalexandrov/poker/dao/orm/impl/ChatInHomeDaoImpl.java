@@ -10,6 +10,7 @@ import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Root;
 import javax.persistence.metamodel.SingularAttribute;
 
+import org.hibernate.jpa.criteria.OrderImpl;
 import org.springframework.stereotype.Repository;
 
 import by.itacademy.aalexandrov.poker.dao.api.IChatInHomeDao;
@@ -123,6 +124,20 @@ public class ChatInHomeDaoImpl extends AbstractDaoImpl<IChatInHome, Integer> imp
 
 		return q.getResultList();
 
+	}
+
+	@Override
+	public IChatInHome getNewestMessage() {
+		final EntityManager em = getEntityManager();
+		final CriteriaBuilder cb = em.getCriteriaBuilder();
+		final CriteriaQuery<IChatInHome> cq = cb.createQuery(IChatInHome.class);
+		final Root<ChatInHome> from = cq.from(ChatInHome.class);
+		cq.select(from);
+		cq.orderBy(new OrderImpl(from.get(ChatInHome_.created), false));
+		final TypedQuery<IChatInHome> q = em.createQuery(cq);
+		q.setMaxResults(1);
+		List<IChatInHome> resultList = q.getResultList();
+		return resultList.isEmpty() ? null : resultList.get(0);
 	}
 
 }

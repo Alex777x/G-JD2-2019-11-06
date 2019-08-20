@@ -16,8 +16,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.ICountry;
+import by.itacademy.aalexandrov.poker.dao.api.entity.table.ITransaction;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IUserAccount;
 import by.itacademy.aalexandrov.poker.service.ICountryService;
+import by.itacademy.aalexandrov.poker.service.ITransactionService;
 import by.itacademy.aalexandrov.poker.service.IUserAccountService;
 import by.itacademy.aalexandrov.poker.web.converter.UserAccountFromDTOConverter;
 import by.itacademy.aalexandrov.poker.web.dto.UserAccountDTO;
@@ -25,21 +27,14 @@ import by.itacademy.aalexandrov.poker.web.dto.UserAccountDTO;
 @Controller
 @RequestMapping(value = "/registration")
 public class RegistrationController {
-
-	private ICountryService countryService;
-
-	private IUserAccountService userAccountService;
-
-	private UserAccountFromDTOConverter fromDtoConverter;
-
 	@Autowired
-	public RegistrationController(ICountryService countryService, IUserAccountService userAccountService,
-			UserAccountFromDTOConverter fromDtoConverter) {
-		super();
-		this.countryService = countryService;
-		this.userAccountService = userAccountService;
-		this.fromDtoConverter = fromDtoConverter;
-	}
+	private ICountryService countryService;
+	@Autowired
+	private IUserAccountService userAccountService;
+	@Autowired
+	private UserAccountFromDTOConverter fromDtoConverter;
+	@Autowired
+	private ITransactionService transactionService;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView showForm() {
@@ -61,6 +56,13 @@ public class RegistrationController {
 		} else {
 			final IUserAccount entity = fromDtoConverter.apply(formRegistrationUserAccount);
 			userAccountService.save(entity);
+
+			ITransaction transaction = transactionService.createEntity();
+			transaction.setUserAccount(entity);
+			transaction.setAmount(1000);
+			transaction.setComment("First bonus transaction");
+			transactionService.save(transaction);
+
 			return "redirect:/login";
 		}
 	}

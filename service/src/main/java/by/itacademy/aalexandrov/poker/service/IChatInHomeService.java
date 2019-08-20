@@ -41,4 +41,7 @@ public interface IChatInHomeService {
 	@Transactional
 	IChatInHome createEntity();
 
+	@Transactional
+	IChatInHome getNewestMessage();
+
 }
