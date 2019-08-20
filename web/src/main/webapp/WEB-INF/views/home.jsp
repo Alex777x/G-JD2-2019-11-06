@@ -148,11 +148,11 @@
 	var baseUrl = '${pageContext.request.contextPath}';
 	var latestId = '${newestCarId}';
 	setInterval(function() {
-		$.get("${pagesCar}/lastId", function(lastIdFromServer) {
+		$.get("${contextPath}/lastId", function(lastIdFromServer) {
 			if (latestId < lastIdFromServer) {
 				
-					$.ajax({
-						url : baseUrl + '/json?id=' + lastIdFromServer,
+				success : $.ajax({
+						url : baseUrl + '/getfromserver?id=' + lastIdFromServer,
 						type : 'post',
 						success : function(result) {
 							var $resultTr = $('#resultTr').append(
