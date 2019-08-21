@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Hepta+Slab&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Alegreya+SC&display=swap');
 
 
 
@@ -9,7 +9,7 @@
 }
 
 body {
-	font-family: 'Hepta Slab', serif;
+	font-family: 'Alegreya SC', serif;
 	display: flex;
 	min-height: 100vh;
 	flex-direction: column;
@@ -68,6 +68,7 @@ main {
 .chatOver {
 	height: 400px;
 	border-radius: 5px;
+	overflow-x:hidden;
 }
 
 .gamesOver {
@@ -129,8 +130,9 @@ main {
 }
 
 .page-footer {
-	background-color: #343a40;
-	margin-top: 5%;
+	background-color: midnightblue;
+    margin-top: 5%;
+    color: white;
 }
 
 .pageNews {
@@ -270,6 +272,13 @@ main {
 	position: absolute;
 	left: 724px;
     top: 795px;
+}
+
+.formForRaise {
+	position: absolute;
+    left: 831px;
+    top: 795px;
+    width: 175px;
 }
 
 

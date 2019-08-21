@@ -83,7 +83,7 @@ public class DefaultController extends AbstractController {
 		final GameFilter filter = new GameFilter();
 		prepareFilter(gridState, filter);
 
-		final List<IGame> gamesEntities = gameService.find(filter);
+		final List<IGame> gamesEntities = gameService.findByActivePlayer();
 		List<GameDTO> dtos = gamesEntities.stream().map(gameToDtoConverter).collect(Collectors.toList());
 
 		for (GameDTO gameDTO : dtos) {

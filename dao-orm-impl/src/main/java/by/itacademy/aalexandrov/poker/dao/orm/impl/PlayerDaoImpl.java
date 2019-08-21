@@ -1,5 +1,6 @@
 package by.itacademy.aalexandrov.poker.dao.orm.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -129,13 +130,12 @@ public class PlayerDaoImpl extends AbstractDaoImpl<IPlayer, Integer> implements 
 	public long getPlayersCount(Integer id) {
 		final EntityManager em = getEntityManager();
 		final CriteriaBuilder cb = em.getCriteriaBuilder();
-		final CriteriaQuery<Long> cq = cb.createQuery(Long.class); // define
-																	// type of
-		// result
-		final Root<Player> from = cq.from(Player.class); // select from brand
+		final CriteriaQuery<Long> cq = cb.createQuery(Long.class);
+
+		final Root<Player> from = cq.from(Player.class);
 		cq.select(cb.count(from));
 
-		cq.where(cb.equal(from.get(Player_.game), id));
+		cq.where(cb.equal(from.get(Player_.game), id), cb.and(cb.equal(from.get(Player_.inGame), true)));
 
 		final TypedQuery<Long> q = em.createQuery(cq);
 		return q.getSingleResult();
@@ -162,9 +162,46 @@ public class PlayerDaoImpl extends AbstractDaoImpl<IPlayer, Integer> implements 
 	}
 
 	@Override
-	public List<IPlayer> findByGame() {
-		// TODO Auto-generated method stub
-		return null;
+	public void updateState(Integer loggedUserId) {
+		IPlayer entity = getFullInfo(loggedUserId);
+		entity.setUpdated(new Date());
+		super.update(entity);
+		recursionFucn(loggedUserId);
+		// entity.setInGame(false);
+		// super.update(entity);
+
+	}
+
+	public void recursionFucn(Integer loggedUserId) {
+		IPlayer entity = getFullInfo(loggedUserId);
+		Date lastUpdated = entity.getUpdated();
+		long milli = lastUpdated.getTime();
+		Date curentTime = new Date();
+		long curentMilli = curentTime.getTime();
+		long diff = curentMilli - milli;
+		if (diff > 15000) {
+			EntityManager em = getEntityManager();
+
+			// Query query = em.createQuery("UPDATE Player SET in_game = false WHERE
+			// user_account_id = :user_account_id");
+			// query.setParameter("user_account_id", loggedUserId);
+
+			em.createQuery(String.format("UPDATE Player SET in_game = false WHERE user_account_id = :user_account_id"))
+					.setParameter("user_account_id", loggedUserId).executeUpdate();
+
+			// entity.setInGame(false);
+			// super.update(entity);
+			return;
+		} else {
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			recursionFucn(loggedUserId);
+		}
+
 	}
 
 }

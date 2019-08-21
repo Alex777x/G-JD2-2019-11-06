@@ -37,20 +37,8 @@ public class GameDaoImpl extends AbstractDaoImpl<IGame, Integer> implements IGam
 
 		final CriteriaQuery<IGame> cq = cb.createQuery(IGame.class);
 
-		final Root<Game> from = cq.from(Game.class);// select from user_account
-		cq.select(from); // select what? select *
-
-		// if (filter.getSortColumn() != null) {
-		// final SingularAttribute<? super Game, ?> sortProperty =
-		// toMetamodelFormat(filter.getSortColumn());
-		// final Path<?> expression = from.get(sortProperty); // build path to
-		// // sort
-		// // property
-		// cq.orderBy(new OrderImpl(expression, filter.getSortOrder())); // order
-		// // by
-		// // column_name
-		// // order
-		// }
+		final Root<Game> from = cq.from(Game.class);
+		cq.select(from);
 
 		final TypedQuery<IGame> q = em.createQuery(cq);
 		setPaging(filter, q);
@@ -107,6 +95,21 @@ public class GameDaoImpl extends AbstractDaoImpl<IGame, Integer> implements IGam
 		cq.where(cb.equal(from.get(UserAccount_.id), id));
 		final TypedQuery<IGame> q = em.createQuery(cq);
 		return getSingleResult(q);
+	}
+
+	@Override
+	public List<IGame> findByActivePlayer() {
+		final EntityManager em = getEntityManager();
+		final CriteriaBuilder cb = em.getCriteriaBuilder();
+
+		final CriteriaQuery<IGame> cq = cb.createQuery(IGame.class);
+
+		final Root<Game> from = cq.from(Game.class);
+		cq.select(from);
+
+		final TypedQuery<IGame> q = em.createQuery(cq);
+
+		return q.getResultList();
 	}
 
 }

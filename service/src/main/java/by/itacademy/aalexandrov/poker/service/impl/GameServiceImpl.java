@@ -99,4 +99,9 @@ public class GameServiceImpl implements IGameService {
 		return dao.getFullInfo(id);
 	}
 
+	@Override
+	public List<IGame> findByActivePlayer() {
+		return dao.findByActivePlayer();
+	}
+
 }

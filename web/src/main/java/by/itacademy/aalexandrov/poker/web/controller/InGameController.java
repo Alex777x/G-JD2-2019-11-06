@@ -47,9 +47,9 @@ public class InGameController extends AbstractController {
 		IPlayer player = playerService.createEntity();
 		player.setGame(game);
 		player.setUserAccount(curentUser);
-		player.setPosition(PlayerPosition.ONE);
+		player.setPosition(PlayerPosition.FREE);
 		player.setInGame(true);
-		player.setState(PlayerStatus.DEALER);
+		player.setState(PlayerStatus.INACTIVE);
 		player.setStack(balance);
 
 		playerService.save(player);

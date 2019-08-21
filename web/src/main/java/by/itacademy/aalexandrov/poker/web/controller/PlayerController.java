@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -29,6 +31,7 @@ import by.itacademy.aalexandrov.poker.web.converter.PlayerFromDTOConverter;
 import by.itacademy.aalexandrov.poker.web.converter.PlayerToDTOConverter;
 import by.itacademy.aalexandrov.poker.web.dto.PlayerDTO;
 import by.itacademy.aalexandrov.poker.web.dto.grid.GridStateDTO;
+import by.itacademy.aalexandrov.poker.web.security.AuthHelper;
 
 @Controller
 @RequestMapping(value = "/player")
@@ -137,6 +140,17 @@ public class PlayerController extends AbstractController {
 
 		final Map<Integer, Integer> gamesMap = games.stream().collect(Collectors.toMap(IGame::getId, IGame::getId));
 		hashMap.put("gamesChoices", gamesMap);
+	}
+
+	@RequestMapping(value = "/playerout", method = RequestMethod.GET)
+	public ResponseEntity<PlayerDTO> getChatsInHome() {
+		Integer loggedUserId = AuthHelper.getLoggedUserId();
+
+		playerService.updateState(loggedUserId);
+
+		PlayerDTO dto = toDtoConverter.apply(playerService.getFullInfo(loggedUserId));
+
+		return new ResponseEntity<PlayerDTO>(dto, HttpStatus.OK);
 	}
 
 }

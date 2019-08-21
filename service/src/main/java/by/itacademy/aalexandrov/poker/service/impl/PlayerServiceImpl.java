@@ -109,4 +109,10 @@ public class PlayerServiceImpl implements IPlayerService {
 		return dao.getPlayersCount(id);
 	}
 
+	@Override
+	public void updateState(Integer loggedUserId) {
+		dao.updateState(loggedUserId);
+
+	}
+
 }

@@ -15,4 +15,6 @@ public interface IGameDao extends IDao<IGame, Integer> {
 
 	IGame getFullInfo(Integer id);
 
+	List<IGame> findByActivePlayer();
+
 }

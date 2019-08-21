@@ -39,4 +39,7 @@ public interface IGameService {
 	@Transactional
 	IGame getFullInfo(Integer id);
 
+	@Transactional
+	List<IGame> findByActivePlayer();
+
 }
