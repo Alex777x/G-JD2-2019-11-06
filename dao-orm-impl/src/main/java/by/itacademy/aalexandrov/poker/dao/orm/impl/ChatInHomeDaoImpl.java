@@ -119,7 +119,7 @@ public class ChatInHomeDaoImpl extends AbstractDaoImpl<IChatInHome, Integer> imp
 
 		from.fetch(ChatInHome_.userAccount, JoinType.LEFT);
 		cq.distinct(true);
-
+		cq.orderBy(new OrderImpl(from.get(ChatInHome_.created), true));
 		final TypedQuery<IChatInHome> q = em.createQuery(cq);
 
 		return q.getResultList();
@@ -133,11 +133,34 @@ public class ChatInHomeDaoImpl extends AbstractDaoImpl<IChatInHome, Integer> imp
 		final CriteriaQuery<IChatInHome> cq = cb.createQuery(IChatInHome.class);
 		final Root<ChatInHome> from = cq.from(ChatInHome.class);
 		cq.select(from);
+		from.fetch(ChatInHome_.userAccount, JoinType.LEFT);
 		cq.orderBy(new OrderImpl(from.get(ChatInHome_.created), false));
 		final TypedQuery<IChatInHome> q = em.createQuery(cq);
 		q.setMaxResults(1);
 		List<IChatInHome> resultList = q.getResultList();
 		return resultList.isEmpty() ? null : resultList.get(0);
+	}
+
+	@Override
+	public List<IChatInHome> getLastMessages(Integer id) {
+		final EntityManager em = getEntityManager();
+		final CriteriaBuilder cb = em.getCriteriaBuilder();
+
+		final CriteriaQuery<IChatInHome> cq = cb.createQuery(IChatInHome.class);
+		final Root<ChatInHome> from = cq.from(ChatInHome.class);
+
+		cq.select(from); // define what need to be selected
+
+		from.fetch(ChatInHome_.userAccount, JoinType.LEFT);
+
+		cq.distinct(true);
+
+		cq.where(cb.greaterThan(from.get(ChatInHome_.id), id));
+		cq.orderBy(new OrderImpl(from.get(ChatInHome_.created), true));
+
+		final TypedQuery<IChatInHome> q = em.createQuery(cq);
+
+		return q.getResultList();
 	}
 
 }

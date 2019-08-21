@@ -44,4 +44,7 @@ public interface IChatInHomeService {
 	@Transactional
 	IChatInHome getNewestMessage();
 
+	@Transactional
+	List<IChatInHome> getLastMessages(Integer id);
+
 }

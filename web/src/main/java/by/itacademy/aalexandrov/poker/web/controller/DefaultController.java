@@ -96,7 +96,7 @@ public class DefaultController extends AbstractController {
 		ChatInHomeFilter filterC = new ChatInHomeFilter();
 		prepareFilter(gridState, filterC);
 
-		List<IChatInHome> messagesEntities = chatInHomeService.find(filterC);
+		List<IChatInHome> messagesEntities = chatInHomeService.getFullInfo();
 		List<ChatInHomeDTO> dtosC = messagesEntities.stream().map(chatToDtoConverter).collect(Collectors.toList());
 		gridState.setTotalCount(chatInHomeService.getCount(filterC));
 
@@ -169,13 +169,17 @@ public class DefaultController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/getfromserver", method = RequestMethod.GET)
-	public ResponseEntity<ChatInHomeDTO> getNewestMessage(
+	public ResponseEntity<List<ChatInHomeDTO>> getNewestMessage(
 			@RequestParam(name = "id", required = true) final Integer id) {
-		IChatInHome entity = chatInHomeService.getFullInfo(id);
+		// IChatInHome entity = chatInHomeService.getFullInfo(id);
 
-		ChatInHomeDTO dto = chatToDtoConverter.apply(chatInHomeService.getFullInfo(entity.getId()));
+		List<IChatInHome> messagesEntities = chatInHomeService.getLastMessages(id);
+		List<ChatInHomeDTO> dtos = messagesEntities.stream().map(chatToDtoConverter).collect(Collectors.toList());
 
-		return new ResponseEntity<ChatInHomeDTO>(dto, HttpStatus.OK);
+		// ChatInHomeDTO dto =
+		// chatToDtoConverter.apply(chatInHomeService.getFullInfo(entity.getId()));
+
+		return new ResponseEntity<List<ChatInHomeDTO>>(dtos, HttpStatus.OK);
 	}
 
 }

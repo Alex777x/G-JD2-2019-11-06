@@ -11,7 +11,7 @@
 	<div class="row">
 
 		<div class="col-sm">
-
+			<p class="ptext">List of games</p>
 			<div class="overflow-auto gamesOver">
 				<table class="table table-striped table-bordered table-sm table-dark listGames">
 					<thead>
@@ -52,22 +52,22 @@
 		</div>
 
 		<div class="col-sm">
-
+			<p class="ptext">Chat</p>
 			<div id="block" class="overflow-auto chatOver">
 				<table class="table listChat">
 					<thead>
 						<tr>
-							<th scope="col" width="150"><mytaglib:sort-link column="userAccountName" pageUrl="${contextPath}">NickName</mytaglib:sort-link></th>
-							<th scope="col"><mytaglib:sort-link column="message" pageUrl="${contextPath}">Message</mytaglib:sort-link></th>
-							<th scope="col"><mytaglib:sort-link column="created" pageUrl="${contextPath}">Time</mytaglib:sort-link></th>
+							<th scope="col" width="150">NickName</th>
+							<th scope="col">Message</th>
+							<th scope="col">Time</th>
 						</tr>
 					</thead>
 					<tbody id="resultTr">
 						<c:forEach var="chatInHome" items="${chatItems}" varStatus="loopCounter">
 							<tr>
-								<td><c:out value="${chatInHome.userAccountName}" /></td>
+								<td><c:out value="${chatInHome.userAccountName}" />:</td>
 								<td><c:out value="${chatInHome.message}" /></td>
-								<td><fmt:formatDate pattern="hh:mm:ss" value="${chatInHome.created}" /></td>
+								<td><fmt:formatDate pattern="HH:mm:ss" value="${chatInHome.created}" /></td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -79,7 +79,7 @@
 					<form:input path="id" type="hidden" />
 					<div class="form-group">
 						<label for="message" class="ptext">Message</label>
-						<form:input id="message" class="form-control " path="message" type="text" />
+						<form:input id="message" class="form-control" path="message" type="text" />
 						<form:errors path="message" cssClass="red-text" />
 					</div>
 					<button id="chatbtn" class="btn btn-primary" type="button">Send</button>
@@ -87,8 +87,7 @@
 				</form:form>
 			</sec:authorize>
 			<div class="rollspades">
-				<p class="proll">У каждого есть шанс выиграть приз в размере 1000$. Если выпадет
-					число 777, вы счастливчик!</p>
+				<p class="proll">У каждого есть шанс выиграть приз в размере 1000$. Если выпадет число 777, вы счастливчик!</p>
 				<sec:authorize access="!isAnonymous()">
 					<button id="rollbtn" class="btn btn-warning btnroll" type="button">
 						I am lucky!<i class="fas fa-dice"></i>
@@ -115,10 +114,7 @@
 							+ $("#message").val(),
 					type : 'post',
 					success : function(result) {
-// 						var $resultTr = $('#resultTr').append(
-// 								$('<td>').text(result.userAccountName),
-// 								$('<td>').text(result.message),
-// 								$('<td>').text(result.created), $('<tr>'));
+
 					}
 				});
 				document.getElementById("message").value = "";
@@ -149,7 +145,7 @@
 
 <script>
 	var baseUrl = '${pageContext.request.contextPath}';
-	var latestId = '${newestCarId}';
+	var latestId = '${newestMessage}';
 	setInterval(function() {
 		$.get("${contextPath}/lastId", function(lastIdFromServer) {
 			if (latestId < lastIdFromServer) {
@@ -158,24 +154,15 @@
 					url : baseUrl + '/getfromserver?id=' + lastIdFromServer,
 					type : 'get',
 					success : function(result) {
-						
-						// list should be here (select * from message where id>=lastIdFromServer)
-						//result.forEach((row)=>{
-							
-							//var $resultTr = $('#resultTr').append(
-								//$('<td>').text(result.userAccountName),
-								//$('<td>').text(result.message),
-								//$('<td>').text(result.created), $('<tr>'));
-							
-							
-						//})
-						
-						
-						
-						var $resultTr = $('#resultTr').append(
-								$('<td>').text(result.userAccountName),
-								$('<td>').text(result.message),
-								$('<td>').text(new Date(result.created).toISOString()), $('<tr>'));
+						result.forEach(function(row) {
+							var $resultTr = $('#resultTr').append(
+									$('<td>').text(row.userAccountName),
+									$('<td>').text(row.message),
+									$('<td>').text(
+											new Date(row.created)
+													.toLocaleTimeString()),
+									$('<tr>'));
+						});
 					}
 				});
 

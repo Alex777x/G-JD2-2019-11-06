@@ -4,7 +4,7 @@
 <h2 class="header">User registration</h2>
 
 <div class="row">
-<div class="col-4"></div>
+	<div class="col-4"></div>
 	<form:form class="col-4 registration-form" method="POST" action="${pagesRegistration}" modelAttribute="formRegistrationUserAccount">
 		<form:input path="id" type="hidden" />
 		<form:input path="foto" type="hidden" />
@@ -19,7 +19,7 @@
 			</div>
 			<div class="form-group col-md-6">
 				<label for="password"><spring:message code="page.registration.password" /></label>
-				<form:input path="password" type="password" class="form-control" placeholder="Password" />
+				<form:input id="password-id" path="password" type="password" class="form-control" placeholder="Password" />
 				<form:errors path="password" cssClass="red-text" />
 			</div>
 		</div>
@@ -39,11 +39,11 @@
 			</div>
 		</div>
 
-<!-- 		<div class="form-check"> -->
-<%-- 			<label class="form-check-label" for="dropdownCheck"> <spring:message code="page.registration.checbox" /></label> --%>
-<%-- 			<form:input path="checkbox" type="checkbox" class="form-check-input" id="dropdownCheck" /> --%>
-<%-- 			<form:errors path="checkbox" cssClass="red-text" /> --%>
-<!-- 		</div> -->
+		<!-- 		<div class="form-check"> -->
+		<%-- 			<label class="form-check-label" for="dropdownCheck"> <spring:message code="page.registration.checbox" /></label> --%>
+		<%-- 			<form:input path="checkbox" type="checkbox" class="form-check-input" id="dropdownCheck" /> --%>
+		<%-- 			<form:errors path="checkbox" cssClass="red-text" /> --%>
+		<!-- 		</div> -->
 
 		<br>
 		<button type="submit" class="btn btn-primary">
@@ -64,3 +64,10 @@
 	</script>
 
 </c:if>
+
+<script>
+	$("#password-id").strength({
+		showMeter : true,
+		toggleMask : false
+	});
+</script>

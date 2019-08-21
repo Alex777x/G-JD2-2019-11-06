@@ -1,9 +1,6 @@
-@import
-	url(https://fonts.googleapis.com/css?family=Roboto+Slab|PT+Sans+Caption&subset=latin,cyrillic);
+@import url('https://fonts.googleapis.com/css?family=Hepta+Slab&display=swap');
 
-*, *:before, *:after {
-	transition: .3s linear
-}
+
 
 @media ( min-width : 1200px) {
 	.container {
@@ -12,13 +9,12 @@
 }
 
 body {
-	font-family: 'Roboto', sans-serif;
+	font-family: 'Hepta Slab', serif;
 	display: flex;
 	min-height: 100vh;
 	flex-direction: column;
 	background-image: url(grey-plaster.png);
 	background-attachment: fixed;
-	/* 	background-color: #f2f2ee; */
 	filter: drop-shadow(2px 4px 6px black);
 }
 
@@ -27,11 +23,7 @@ main {
 }
 
 .navbar-dark .navbar-nav .nav-link {
-	font-family: fantasy;
-	color: rgba(#00ffff, .1);
-	color: yellowgreen;
-	font-size: x-large;
-	-webkit-text-stroke: 1px black;
+	color: white;
 }
 
 .navbar-dark .navbar-text {
@@ -75,13 +67,11 @@ main {
 
 .chatOver {
 	height: 400px;
-	margin-top: 5%;
 	border-radius: 5px;
 }
 
 .gamesOver {
 	height: 695px;
-	margin-top: 5%;
 	border-radius: 5px;
 }
 
@@ -140,6 +130,7 @@ main {
 
 .page-footer {
 	background-color: #343a40;
+	margin-top: 5%;
 }
 
 .pageNews {
@@ -147,10 +138,9 @@ main {
 }
 
 .ptext {
+	margin-top: 5%;
 	font-size: x-large;
-	font-family: fantasy;
 	color: yellowgreen;
-	-webkit-text-stroke: 1px black;
 }
 
 .personAreaSet {
@@ -180,11 +170,6 @@ main {
     padding: 8%;
 }
 
-.btnroll {
-	margin-left: 5%;
-    margin-top: -24%;
-}
-
 .proll {
 	font-family: fantasy;
     font-size: x-large;
@@ -192,8 +177,8 @@ main {
 }
 
 .dopInfo {
-	margin-top: 340px;
-	margin-left: 100px;
+	margin-top: 275px;
+	margin-left: 40px;
     font-family: inherit;
     font-size: x-large;
     color: darkslateblue;
@@ -277,21 +262,16 @@ main {
 
 .btnCall {
 	position: absolute;
-	left: 610px;
+	left: 625px;
     top: 795px;
 }
 
 .btnRaise {
 	position: absolute;
-	left: 700px;
+	left: 724px;
     top: 795px;
 }
 
-a:hover {
-	text-decoration: underline;
-	text-shadow: (2px 4px 6px black);
-	color: white;
-}
 
 .input-field label.multiselect-label, .input-field label.switch-label {
 	position: absolute;

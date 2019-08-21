@@ -42,6 +42,9 @@
 <link href="${contextPath}/resources/css/toastr.css" rel="stylesheet"/>
 <script src="${contextPath}/resources/js/toastr.js"></script>
 
+<script src="${contextPath}/resources/js/strength-meter.js" type="text/javascript"></script>
+<link href="${contextPath}/resources/css/strength-meter.css" media="all" rel="stylesheet" type="text/css" />
+
 <link rel="stylesheet" href="${contextPath}/resources/css/custom.css">
 <script src="${contextPath}/resources/js/init-menu.js"></script>
 <script src="https://kit.fontawesome.com/b4ac90640c.js"></script>
