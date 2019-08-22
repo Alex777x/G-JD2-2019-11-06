@@ -1,5 +1,7 @@
 package by.itacademy.aalexandrov.poker.dao.orm.impl;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Date;
 import java.util.List;
 
@@ -11,6 +13,7 @@ import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Root;
 import javax.persistence.metamodel.SingularAttribute;
+import javax.swing.Timer;
 
 import org.hibernate.jpa.criteria.OrderImpl;
 import org.springframework.stereotype.Repository;
@@ -71,6 +74,12 @@ public class PlayerDaoImpl extends AbstractDaoImpl<IPlayer, Integer> implements 
 		cq.select(cb.count(from)); // select what? select count(*)
 		final TypedQuery<Long> q = em.createQuery(cq);
 		return q.getSingleResult(); // execute query
+	}
+
+	@Override
+	public void save(IPlayer entity) {
+		throw new RuntimeException("not implemented");
+
 	}
 
 	@Override
@@ -162,44 +171,69 @@ public class PlayerDaoImpl extends AbstractDaoImpl<IPlayer, Integer> implements 
 	}
 
 	@Override
-	public void updateState(Integer loggedUserId) {
-		IPlayer entity = getFullInfo(loggedUserId);
-		entity.setUpdated(new Date());
-		super.update(entity);
-		recursionFucn(loggedUserId);
-		// entity.setInGame(false);
-		// super.update(entity);
+	public IPlayer getPlayerByUser(Integer id) {
+		final EntityManager em = getEntityManager();
+		final CriteriaBuilder cb = em.getCriteriaBuilder();
 
+		final CriteriaQuery<IPlayer> cq = cb.createQuery(IPlayer.class);
+		final Root<Player> from = cq.from(Player.class);
+
+		cq.select(from);
+
+		from.fetch(Player_.game, JoinType.LEFT);
+		from.fetch(Player_.userAccount, JoinType.LEFT);
+
+		cq.distinct(true);
+
+		cq.where(cb.equal(from.get(Player_.userAccount), id), cb.and(cb.equal(from.get(Player_.inGame), true)));
+
+		final TypedQuery<IPlayer> q = em.createQuery(cq);
+
+		return getSingleResult(q);
 	}
 
-	public void recursionFucn(Integer loggedUserId) {
-		IPlayer entity = getFullInfo(loggedUserId);
-		Date lastUpdated = entity.getUpdated();
-		long milli = lastUpdated.getTime();
-		Date curentTime = new Date();
-		long curentMilli = curentTime.getTime();
-		long diff = curentMilli - milli;
-		if (diff > 15000) {
-			EntityManager em = getEntityManager();
-
-			// Query query = em.createQuery("UPDATE Player SET in_game = false WHERE
-			// user_account_id = :user_account_id");
-			// query.setParameter("user_account_id", loggedUserId);
-
-			em.createQuery(String.format("UPDATE Player SET in_game = false WHERE user_account_id = :user_account_id"))
-					.setParameter("user_account_id", loggedUserId).executeUpdate();
-
-			// entity.setInGame(false);
-			// super.update(entity);
-			return;
-		} else {
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+	@Override
+	public void updateState(Integer loggedUserId) {
+		IPlayer entity = getPlayerByUser(loggedUserId);
+		entity.setUpdated(new Date());
+		update(entity);
+		Timer timer = new Timer(15000, new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				IPlayer entity = getPlayerByUser(loggedUserId);
+				Date lastUpdated = entity.getUpdated();
+				long milli = lastUpdated.getTime();
+				Date curentTime = new Date();
+				long curentMilli = curentTime.getTime();
+				long diff = curentMilli - milli;
+				if (diff > 15000) {
+					entity.setInGame(false);
+					update(entity);
+				}
 			}
-			recursionFucn(loggedUserId);
+		});
+		timer.setRepeats(true);
+		timer.start();
+	}
+
+	@Override
+	public boolean findPlayer(Integer loggedUserId) {
+		final EntityManager em = getEntityManager();
+		final CriteriaBuilder cb = em.getCriteriaBuilder();
+		final CriteriaQuery<Long> cq = cb.createQuery(Long.class);
+
+		final Root<Player> from = cq.from(Player.class);
+		cq.select(cb.count(from));
+
+		cq.where(cb.equal(from.get(Player_.userAccount), loggedUserId),
+				cb.and(cb.equal(from.get(Player_.inGame), true)));
+
+		final TypedQuery<Long> q = em.createQuery(cq);
+		Long result = q.getSingleResult();
+		if (result == 0) {
+			return true;
+		} else {
+			return false;
 		}
 
 	}

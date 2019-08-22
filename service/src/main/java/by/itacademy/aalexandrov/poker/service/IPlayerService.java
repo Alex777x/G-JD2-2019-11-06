@@ -45,4 +45,10 @@ public interface IPlayerService {
 	@Transactional
 	void updateState(Integer loggedUserId);
 
+	@Transactional
+	IPlayer getPlayerByUser(Integer loggedUserId);
+
+	@Transactional
+	boolean findPlayer(Integer loggedUserId);
+
 }

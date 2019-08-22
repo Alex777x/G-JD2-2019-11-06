@@ -44,15 +44,16 @@ public class InGameController extends AbstractController {
 		IUserAccount curentUser = userAccountService.getFullInfo(loggedUserId);
 		double balance = transactionService.getSumm(curentUser.getId());
 
-		IPlayer player = playerService.createEntity();
-		player.setGame(game);
-		player.setUserAccount(curentUser);
-		player.setPosition(PlayerPosition.FREE);
-		player.setInGame(true);
-		player.setState(PlayerStatus.INACTIVE);
-		player.setStack(balance);
-
-		playerService.save(player);
+		if (playerService.findPlayer(loggedUserId)) {
+			IPlayer player = playerService.createEntity();
+			player.setGame(game);
+			player.setUserAccount(curentUser);
+			player.setPosition(PlayerPosition.FREE);
+			player.setInGame(true);
+			player.setState(PlayerStatus.INACTIVE);
+			player.setStack(balance);
+			playerService.save(player);
+		}
 
 		return new ModelAndView("inGame.index");
 	}

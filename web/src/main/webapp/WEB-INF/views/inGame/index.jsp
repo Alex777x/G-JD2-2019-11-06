@@ -59,13 +59,14 @@
 
 <script>
 var baseUrl = '${pageContext.request.contextPath}';
+var $curentTime = $.now();
 	setInterval(function() {
 
 		$.ajax({
 			url : baseUrl + '/player/playerout',
 			type : 'get',
 			success : function(result) {
-				
+
 			}
 		});
 		

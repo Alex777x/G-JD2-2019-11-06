@@ -29,6 +29,7 @@ public class ChatInHomeFromDTOConverter implements Function<ChatInHomeDTO, IChat
 		entity.setUserAccount(userAccount);
 
 		entity.setMessage(dto.getMessage());
+		entity.setId(dto.getId());
 
 		return entity;
 	}

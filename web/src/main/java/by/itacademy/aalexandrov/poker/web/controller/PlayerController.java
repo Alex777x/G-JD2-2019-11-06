@@ -1,5 +1,6 @@
 package by.itacademy.aalexandrov.poker.web.controller;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -146,11 +147,14 @@ public class PlayerController extends AbstractController {
 	public ResponseEntity<PlayerDTO> getChatsInHome() {
 		Integer loggedUserId = AuthHelper.getLoggedUserId();
 
-		playerService.updateState(loggedUserId);
+		PlayerDTO dto = toDtoConverter.apply(playerService.getPlayerByUser(loggedUserId));
 
-		PlayerDTO dto = toDtoConverter.apply(playerService.getFullInfo(loggedUserId));
+		IPlayer entity = fromDtoConverter.apply(dto);
+		entity.setUpdated(new Date());
+		playerService.save(entity);
+		PlayerDTO dtonew = toDtoConverter.apply(playerService.getPlayerByUser(loggedUserId));
 
-		return new ResponseEntity<PlayerDTO>(dto, HttpStatus.OK);
+		return new ResponseEntity<PlayerDTO>(dtonew, HttpStatus.OK);
 	}
 
 }

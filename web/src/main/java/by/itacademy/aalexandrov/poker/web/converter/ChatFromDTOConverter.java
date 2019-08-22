@@ -28,6 +28,7 @@ public class ChatFromDTOConverter implements Function<ChatDTO, IChat> {
 	@Override
 	public IChat apply(ChatDTO dto) {
 		IChat entity = chatService.createEntity();
+		entity.setId(dto.getId());
 
 		IGame game = gameService.createEntity();
 		game.setId(dto.getGame());

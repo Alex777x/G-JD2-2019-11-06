@@ -33,6 +33,7 @@ public class CardInGameFromDTOConverter implements Function<CardInGameDTO, ICard
 	@Override
 	public ICardInGame apply(CardInGameDTO dto) {
 		ICardInGame entity = cardInGameService.createEntity();
+		entity.setId(dto.getId());
 
 		ICard card = cardService.createEntity();
 		card.setId(dto.getCard());

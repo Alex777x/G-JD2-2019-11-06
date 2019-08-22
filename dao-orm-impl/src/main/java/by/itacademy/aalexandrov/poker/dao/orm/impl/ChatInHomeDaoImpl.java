@@ -149,11 +149,9 @@ public class ChatInHomeDaoImpl extends AbstractDaoImpl<IChatInHome, Integer> imp
 		final CriteriaQuery<IChatInHome> cq = cb.createQuery(IChatInHome.class);
 		final Root<ChatInHome> from = cq.from(ChatInHome.class);
 
-		cq.select(from); // define what need to be selected
+		cq.select(from);
 
 		from.fetch(ChatInHome_.userAccount, JoinType.LEFT);
-
-		cq.distinct(true);
 
 		cq.where(cb.greaterThan(from.get(ChatInHome_.id), id));
 		cq.orderBy(new OrderImpl(from.get(ChatInHome_.created), true));

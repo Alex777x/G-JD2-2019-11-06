@@ -1,7 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Alegreya+SC&display=swap');
 
-
-
 @media ( min-width : 1200px) {
 	.container {
 		max-width: 1680px;
@@ -43,7 +41,8 @@ main {
 }
 
 .navbar {
-	background-color: midnightblue;
+	/* 	background-color: midnightblue; */
+	background: radial-gradient(blue, midnightblue);
 }
 
 .chatOut {
@@ -68,7 +67,7 @@ main {
 .chatOver {
 	height: 400px;
 	border-radius: 5px;
-	overflow-x:hidden;
+	overflow-x: hidden;
 }
 
 .gamesOver {
@@ -78,14 +77,14 @@ main {
 
 .rounded-pill {
 	position: absolute;
-    left: 140px;
-    top: 200px;
-    width: 900px;
-    height: 500px;
-    border-radius: 50rem !important;
-    border: solid;
-    border-width: 17px;
-    border-color: saddlebrown;
+	left: 140px;
+	top: 200px;
+	width: 900px;
+	height: 500px;
+	border-radius: 50rem !important;
+	border: solid;
+	border-width: 17px;
+	border-color: saddlebrown;
 }
 
 .img-thumbnail {
@@ -131,8 +130,8 @@ main {
 
 .page-footer {
 	background-color: midnightblue;
-    margin-top: 5%;
-    color: white;
+	margin-top: 5%;
+	color: white;
 }
 
 .pageNews {
@@ -159,128 +158,127 @@ main {
 
 .odometer {
 	font-size: 80px;
-    margin-top: 34%;
-    margin-left: 36%;
+	margin-top: 34%;
+	margin-left: 36%;
 }
 
 .rollspades {
-    margin-left: auto;
-    width: 720px;
-    height: 480px;
-    background-image: url(spadesroll.png);
-    background-repeat: round;
-    padding: 8%;
+	margin-left: auto;
+	width: 720px;
+	height: 480px;
+	background-image: url(spadesroll.png);
+	background-repeat: round;
+	padding: 8%;
 }
 
 .proll {
 	font-family: fantasy;
-    font-size: x-large;
-    color: slategray;
+	font-size: x-large;
+	color: slategray;
 }
 
 .dopInfo {
 	margin-top: 275px;
 	margin-left: 40px;
-    font-family: inherit;
-    font-size: x-large;
-    color: darkslateblue;
+	font-family: inherit;
+	font-size: x-large;
+	color: darkslateblue;
 }
 
 .player1 {
-    position: absolute;
-    left: 415px;
-    top: 650px;
-    width: 75px;
+	position: absolute;
+	left: 415px;
+	top: 650px;
+	width: 75px;
 }
 
 .player2 {
 	position: absolute;
-    left: 215px;
-    top: 600px;
-    width: 75px;
+	left: 215px;
+	top: 600px;
+	width: 75px;
 }
 
 .player10 {
 	width: 75px;
-    position: absolute;
-    left: 680px;
-    top: 650px;
+	position: absolute;
+	left: 680px;
+	top: 650px;
 }
 
 .player9 {
 	width: 75px;
-    position: absolute;
-    top: 600px;
-    left: 865px;
+	position: absolute;
+	top: 600px;
+	left: 865px;
 }
 
 .player3 {
 	width: 75px;
-    position: absolute;
-    top: 385px;
-    left: 102px;
+	position: absolute;
+	top: 385px;
+	left: 102px;
 }
 
 .player8 {
 	width: 75px;
-    position: absolute;
-    top: 385px;
-    left: 985px;
+	position: absolute;
+	top: 385px;
+	left: 985px;
 }
 
 .player4 {
 	position: absolute;
-    left: 215px;
-    top: 200px;
-    width: 75px;
+	left: 215px;
+	top: 200px;
+	width: 75px;
 }
 
 .player5 {
 	position: absolute;
-    left: 415px;
-    top: 155px;
-    width: 75px;
+	left: 415px;
+	top: 155px;
+	width: 75px;
 }
 
 .player6 {
 	width: 75px;
-    position: absolute;
-    left: 680px;
-    top: 155px;
+	position: absolute;
+	left: 680px;
+	top: 155px;
 }
 
 .player7 {
 	width: 75px;
-    position: absolute;
-    top: 200px;
-    left: 865px;
+	position: absolute;
+	top: 200px;
+	left: 865px;
 }
 
 .btnCheck {
 	position: absolute;
 	left: 500px;
-    top: 795px;
+	top: 795px;
 }
 
 .btnCall {
 	position: absolute;
 	left: 625px;
-    top: 795px;
+	top: 795px;
 }
 
 .btnRaise {
 	position: absolute;
 	left: 724px;
-    top: 795px;
+	top: 795px;
 }
 
 .formForRaise {
 	position: absolute;
-    left: 831px;
-    top: 795px;
-    width: 175px;
+	left: 831px;
+	top: 795px;
+	width: 175px;
 }
-
 
 .input-field label.multiselect-label, .input-field label.switch-label {
 	position: absolute;
