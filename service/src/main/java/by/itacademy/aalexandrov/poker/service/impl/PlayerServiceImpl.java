@@ -125,4 +125,9 @@ public class PlayerServiceImpl implements IPlayerService {
 		return dao.findPlayer(loggedUserId);
 	}
 
+	@Override
+	public List<IPlayer> getPlayersByGame(Integer id) {
+		return dao.getPlayersByGame(id);
+	}
+
 }

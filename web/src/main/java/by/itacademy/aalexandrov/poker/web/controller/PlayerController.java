@@ -144,7 +144,7 @@ public class PlayerController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/playerout", method = RequestMethod.GET)
-	public ResponseEntity<PlayerDTO> getChatsInHome() {
+	public ResponseEntity<List<PlayerDTO>> getChatsInHome() {
 		Integer loggedUserId = AuthHelper.getLoggedUserId();
 
 		PlayerDTO dto = toDtoConverter.apply(playerService.getPlayerByUser(loggedUserId));
@@ -152,9 +152,10 @@ public class PlayerController extends AbstractController {
 		IPlayer entity = fromDtoConverter.apply(dto);
 		entity.setUpdated(new Date());
 		playerService.save(entity);
-		PlayerDTO dtonew = toDtoConverter.apply(playerService.getPlayerByUser(loggedUserId));
+		List<IPlayer> players = playerService.getPlayersByGame(entity.getGame().getId());
+		List<PlayerDTO> dtos = players.stream().map(toDtoConverter).collect(Collectors.toList());
 
-		return new ResponseEntity<PlayerDTO>(dtonew, HttpStatus.OK);
+		return new ResponseEntity<List<PlayerDTO>>(dtos, HttpStatus.OK);
 	}
 
 }

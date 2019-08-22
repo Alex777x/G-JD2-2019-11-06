@@ -18,6 +18,16 @@ public class GameToDTOConverter implements Function<IGame, GameDTO> {
 		dto.setBank(entity.getBank());
 		dto.setCreated(entity.getCreated());
 		dto.setUpdated(entity.getUpdated());
+		dto.setPosition1(entity.isPosition1());
+		dto.setPosition2(entity.isPosition2());
+		dto.setPosition3(entity.isPosition3());
+		dto.setPosition4(entity.isPosition4());
+		dto.setPosition5(entity.isPosition5());
+		dto.setPosition6(entity.isPosition6());
+		dto.setPosition7(entity.isPosition7());
+		dto.setPosition8(entity.isPosition8());
+		dto.setPosition9(entity.isPosition9());
+		dto.setPosition10(entity.isPosition10());
 		return dto;
 	}
 

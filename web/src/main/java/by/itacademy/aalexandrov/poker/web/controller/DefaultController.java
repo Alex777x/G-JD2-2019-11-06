@@ -143,7 +143,7 @@ public class DefaultController extends AbstractController {
 		double balance = transactionService.getSumm(curentUser.getId());
 
 		IGame game = gameService.createEntity();
-		game.setState(GameStatus.ACTIVE);
+		game.setState(GameStatus.END);
 		game.setBank(0);
 		gameService.save(game);
 

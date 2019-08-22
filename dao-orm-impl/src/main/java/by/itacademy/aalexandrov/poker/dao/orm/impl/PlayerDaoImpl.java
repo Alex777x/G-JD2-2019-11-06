@@ -238,4 +238,25 @@ public class PlayerDaoImpl extends AbstractDaoImpl<IPlayer, Integer> implements 
 
 	}
 
+	@Override
+	public List<IPlayer> getPlayersByGame(Integer id) {
+		final EntityManager em = getEntityManager();
+		final CriteriaBuilder cb = em.getCriteriaBuilder();
+
+		final CriteriaQuery<IPlayer> cq = cb.createQuery(IPlayer.class);
+		final Root<Player> from = cq.from(Player.class);
+
+		cq.select(from); // define what need to be selected
+
+		from.fetch(Player_.game, JoinType.LEFT);
+		from.fetch(Player_.userAccount, JoinType.LEFT);
+		cq.where(cb.equal(from.get(Player_.game), id), cb.and(cb.equal(from.get(Player_.inGame), true)));
+
+		cq.distinct(true);
+
+		final TypedQuery<IPlayer> q = em.createQuery(cq);
+
+		return q.getResultList();
+	}
+
 }

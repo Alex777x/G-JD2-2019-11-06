@@ -51,4 +51,7 @@ public interface IPlayerService {
 	@Transactional
 	boolean findPlayer(Integer loggedUserId);
 
+	@Transactional
+	List<IPlayer> getPlayersByGame(Integer id);
+
 }

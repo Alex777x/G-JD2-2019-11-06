@@ -27,4 +27,6 @@ public interface IPlayerDao extends IDao<IPlayer, Integer> {
 
 	boolean findPlayer(Integer loggedUserId);
 
+	List<IPlayer> getPlayersByGame(Integer id);
+
 }
