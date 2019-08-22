@@ -73,6 +73,7 @@
 	}, 10 * 1000);
 </script>
 <script>
+var fotoUrl = '${contextPath}/<sec:authentication property="foto" />';
 	function f1(arg) {
 
 		$.ajax({
@@ -83,6 +84,7 @@
 					toastr.success('Is this seat taken!');
 				} else {
 					toastr.success('Have a nice game!');
+					document.getElementById("position" + arg).src = fotoUrl;
 				}
 				
 			}

@@ -66,6 +66,11 @@ public class InGameController extends AbstractController {
 		IPlayer player = playerService.getPlayerByUser(loggedUserId);
 		int gameId = player.getGame().getId();
 		IGame curentGame = gameService.getFullInfo(gameId);
+		String checkCurentPosition = player.getPosition().name();
+
+		if (!checkCurentPosition.equals("FREE")) {
+			return new ResponseEntity<Boolean>(false, HttpStatus.OK);
+		}
 
 		boolean flag = false;
 		switch (id) {
