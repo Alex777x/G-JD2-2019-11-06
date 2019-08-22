@@ -10,34 +10,34 @@
 <div class="container">
 	<img src="${contextPath}/resources/img/fon-poker.png" alt="" class="rounded-pill tableIngame">
 	<div>
-		<img id="player1" onclick="f1()" class="img-thumbnail player1" src="${contextPath}/resources/img/sitTable.png" />
+		<img id="position1" onclick="f1(1)" class="img-thumbnail player1" src="${contextPath}/resources/img/sitTable.png" />
 	</div>
 	<div>
-		<img id="player2" onclick="f1()" class="img-thumbnail player2" src="${contextPath}/resources/img/sitTable.png" />
+		<img id="position2" onclick="f1(2)" class="img-thumbnail player2" src="${contextPath}/resources/img/sitTable.png" />
 	</div>
 	<div>
-		<img id="player3" onclick="f1()" class="img-thumbnail player3" src="${contextPath}/resources/img/sitTable.png" />
+		<img id="position3" onclick="f1(3)" class="img-thumbnail player3" src="${contextPath}/resources/img/sitTable.png" />
 	</div>
 	<div>
-		<img id="player4" onclick="f1()" class="img-thumbnail player4" src="${contextPath}/resources/img/sitTable.png" />
+		<img id="position4" onclick="f1(4)" class="img-thumbnail player4" src="${contextPath}/resources/img/sitTable.png" />
 	</div>
 	<div>
-		<img id="player5" onclick="f1()" class="img-thumbnail player5" src="${contextPath}/resources/img/sitTable.png" />
+		<img id="position5" onclick="f1(5)" class="img-thumbnail player5" src="${contextPath}/resources/img/sitTable.png" />
 	</div>
 	<div>
-		<img id="player6" onclick="f1()" class="img-thumbnail player6" src="${contextPath}/resources/img/sitTable.png" />
+		<img id="position6" onclick="f1(6)" class="img-thumbnail player6" src="${contextPath}/resources/img/sitTable.png" />
 	</div>
 	<div>
-		<img id="player7" onclick="f1()" class="img-thumbnail player7" src="${contextPath}/resources/img/sitTable.png" />
+		<img id="position7" onclick="f1(7)" class="img-thumbnail player7" src="${contextPath}/resources/img/sitTable.png" />
 	</div>
 	<div>
-		<img id="player8" onclick="f1()" class="img-thumbnail player8" src="${contextPath}/resources/img/sitTable.png" />
+		<img id="position8" onclick="f1(8)" class="img-thumbnail player8" src="${contextPath}/resources/img/sitTable.png" />
 	</div>
 	<div>
-		<img id="player9" onclick="f1()" class="img-thumbnail player9" src="${contextPath}/resources/img/sitTable.png" />
+		<img id="position9" onclick="f1(9)" class="img-thumbnail player9" src="${contextPath}/resources/img/sitTable.png" />
 	</div>
 	<div>
-		<img id="player10" onclick="f1()" class="img-thumbnail player10" src="${contextPath}/resources/img/sitTable.png" />
+		<img id="position10" onclick="f1(10)" class="img-thumbnail player10" src="${contextPath}/resources/img/sitTable.png" />
 	</div>
 	<div>
 		<button id="btnCheck" type="button" class="btn btn-success btn-lg btnCheck">CHECK</button>
@@ -73,8 +73,21 @@
 	}, 10 * 1000);
 </script>
 <script>
-	function f1() {
-		fun();
+	function f1(arg) {
+
+		$.ajax({
+			url : baseUrl + '/inGame/setposition?id=' + arg,
+			type : 'post',
+			success : function(result) {
+				if(result == false) {
+					toastr.success('Is this seat taken!');
+				} else {
+					toastr.success('Have a nice game!');
+				}
+				
+			}
+		});
+
 	}
 </script>
 
