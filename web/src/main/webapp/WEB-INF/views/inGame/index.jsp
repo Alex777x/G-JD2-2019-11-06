@@ -29,35 +29,35 @@
 		<i class="fas fa-piggy-bank"> 72.0</i>
 	</div>
 
-	<div class="shirt1">
+	<div id="shirt1" class="shirt1" style="display: none;">
 		<img id="card1" src="${contextPath}/resources/img/cards/shirt.png" style="width: 45px;"/>
 		<img id="card1" src="${contextPath}/resources/img/cards/shirt.png" style="width: 45px;"/>
 	</div>
-	<div>
+	<div id="playerData1" style="display: none;">
 		<p style="position: absolute; color: yellow; left: 416px; top: 627px;"><sec:authentication property="principal" /></p>
 		<p style="position: absolute; color: yellow; left: 416px; top: 721px;"><sec:authentication property="sum" /></p>
 	</div>
 	<div>
-		<img id="position1" onclick="f1(1)" class="img-thumbnail player1" src="${contextPath}/<sec:authentication property="foto" />" />
+		<img id="position1" onclick="f1(1)" class="img-thumbnail player1" src="${contextPath}/resources/img/sitTable.png" />
 	</div>
 	
-	<div class="shirt2">
+	<div id="shirt2" class="shirt2" style="display: none;">
 		<img id="card2" src="${contextPath}/resources/img/cards/shirt.png" style="width: 45px;"/>
 		<img id="card2" src="${contextPath}/resources/img/cards/shirt.png" style="width: 45px;"/>
 	</div>
-	<div>
+	<div id="playerData2" style="display: none;">
 		<p style="position: absolute; color: yellow; left: 218px; top: 577px;"><sec:authentication property="principal" /></p>
 		<p style="position: absolute; color: yellow; left: 217px; top: 671px;"><sec:authentication property="sum" /></p>
 	</div>
 	<div>
-		<img id="position2" onclick="f1(2)" class="img-thumbnail player2" src="${contextPath}/<sec:authentication property="foto" />" />
+		<img id="position2" onclick="f1(2)" class="img-thumbnail player2" src="${contextPath}/resources/img/sitTable.png" />
 	</div>
 	
-	<div class="shirt3" style="visibility: hidden;">
+	<div id="shirt3" class="shirt3" style="display: none;">
 		<img id="card3" src="${contextPath}/resources/img/cards/shirt.png" style="width: 45px;"/>
 		<img id="card3" src="${contextPath}/resources/img/cards/shirt.png" style="width: 45px;"/>
 	</div>
-	<div style="visibility: hidden;">
+	<div id="playerData3" style="display: none;">
 		<p style="position: absolute; color: yellow; left: 105px; top: 363px;"><sec:authentication property="principal" /></p>
 		<p style="position: absolute; color: yellow; left: 105px; top: 456px;"><sec:authentication property="sum" /></p>
 	</div>
@@ -65,35 +65,35 @@
 		<img id="position3" onclick="f1(3)" class="img-thumbnail player3" src="${contextPath}/resources/img/sitTable.png" />
 	</div>
 	
-	<div class="shirt4">
+	<div id="shirt4" class="shirt4" style="display: none;">
 		<img id="card4" src="${contextPath}/resources/img/cards/shirt.png" style="width: 45px;"/>
 		<img id="card4" src="${contextPath}/resources/img/cards/shirt.png" style="width: 45px;"/>
 	</div>
-	<div>
+	<div id="playerData4" style="display: none;">
 		<p style="position: absolute; color: yellow; left: 218px; top: 178px;"><sec:authentication property="principal" /></p>
 		<p style="position: absolute; color: yellow; left: 218px; top: 271px;"><sec:authentication property="sum" /></p>
 	</div>
 	<div>
-		<img id="position4" onclick="f1(4)" class="img-thumbnail player4" src="${contextPath}/<sec:authentication property="foto" />" />
+		<img id="position4" onclick="f1(4)" class="img-thumbnail player4" src="${contextPath}/resources/img/sitTable.png" />
 	</div>
 	
-	<div class="shirt5">
+	<div id="shirt5" class="shirt5" style="display: none;">
 		<img id="card5" src="${contextPath}/resources/img/cards/shirt.png" style="width: 45px;"/>
 		<img id="card5" src="${contextPath}/resources/img/cards/shirt.png" style="width: 45px;"/>
 	</div>
-	<div>
+	<div id="playerData5" style="display: none;">
 		<p style="position: absolute; color: yellow; left: 418px; top: 133px;"><sec:authentication property="principal" /></p>
 		<p style="position: absolute; color: yellow; left: 418px; top: 226px;"><sec:authentication property="sum" /></p>
 	</div>
 	<div>
-		<img id="position5" onclick="f1(5)" class="img-thumbnail player5" src="${contextPath}/<sec:authentication property="foto" />" />
+		<img id="position5" onclick="f1(5)" class="img-thumbnail player5" src="${contextPath}/resources/img/sitTable.png" />
 	</div>
 	
-	<div class="shirt6" style="visibility: hidden;">
+	<div id="shirt6" class="shirt6" style="display: none;">
 		<img id="card6" src="${contextPath}/resources/img/cards/shirt.png" style="width: 45px;"/>
 		<img id="card6" src="${contextPath}/resources/img/cards/shirt.png" style="width: 45px;"/>
 	</div>
-	<div style="visibility: hidden;">
+	<div id="playerData6" style="display: none;">
 		<p style="position: absolute; color: yellow; left: 683px; top: 133px;"><sec:authentication property="principal" /></p>
 		<p style="position: absolute; color: yellow; left: 683px; top: 226px;"><sec:authentication property="sum" /></p>
 	</div>
@@ -101,47 +101,47 @@
 		<img id="position6" onclick="f1(6)" class="img-thumbnail player6" src="${contextPath}/resources/img/sitTable.png" />
 	</div>
 	
-	<div class="shirt7">
+	<div id="shirt7" class="shirt7" style="display: none;">
 		<img id="card7" src="${contextPath}/resources/img/cards/shirt.png" style="width: 45px;"/>
 		<img id="card7" src="${contextPath}/resources/img/cards/shirt.png" style="width: 45px;"/>
 	</div>
-	<div>
+	<div id="playerData7" style="display: none;">
 		<p style="position: absolute; color: yellow; left: 867px; top: 178px;"><sec:authentication property="principal" /></p>
 		<p style="position: absolute; color: yellow; left: 867px; top: 271px;"><sec:authentication property="sum" /></p>
 	</div>
 	<div>
-		<img id="position7" onclick="f1(7)" class="img-thumbnail player7" src="${contextPath}/<sec:authentication property="foto" />" />
+		<img id="position7" onclick="f1(7)" class="img-thumbnail player7" src="${contextPath}/resources/img/sitTable.png" />
 	</div>
 	
-	<div class="shirt8">
+	<div id="shirt8" class="shirt8" style="display: none;">
 		<img id="card8" src="${contextPath}/resources/img/cards/shirt.png" style="width: 45px;"/>
 		<img id="card8" src="${contextPath}/resources/img/cards/shirt.png" style="width: 45px;"/>
 	</div>
-	<div>
+	<div id="playerData8" style="display: none;">
 		<p style="position: absolute; color: yellow; left: 987px; top: 363px;"><sec:authentication property="principal" /></p>
 		<p style="position: absolute; color: yellow; left: 987px; top: 456px;"><sec:authentication property="sum" /></p>
 	</div>
 	<div>
-		<img id="position8" onclick="f1(8)" class="img-thumbnail player8" src="${contextPath}/<sec:authentication property="foto" />" />
+		<img id="position8" onclick="f1(8)" class="img-thumbnail player8" src="${contextPath}/resources/img/sitTable.png" />
 	</div>
 	
-	<div class="shirt9">
+	<div id="shirt9" class="shirt9" style="display: none;">
 		<img id="card9" src="${contextPath}/resources/img/cards/shirt.png" style="width: 45px;"/>
 		<img id="card9" src="${contextPath}/resources/img/cards/shirt.png" style="width: 45px;"/>
 	</div>
-	<div>
+	<div id="playerData9" style="display: none;">
 		<p style="position: absolute; color: yellow; left: 868px; top: 577px;"><sec:authentication property="principal" /></p>
 		<p style="position: absolute; color: yellow; left: 868px; top: 671px;"><sec:authentication property="sum" /></p>
 	</div>
 	<div>
-		<img id="position9" onclick="f1(9)" class="img-thumbnail player9" src="${contextPath}/<sec:authentication property="foto" />" />
+		<img id="position9" onclick="f1(9)" class="img-thumbnail player9" src="${contextPath}/resources/img/sitTable.png" />
 	</div>
 	
-	<div class="shirt10" style="visibility: hidden;">
+	<div id="shirt10" class="shirt10" style="display: none;">
 		<img id="card10" src="${contextPath}/resources/img/cards/shirt.png" style="width: 45px;"/>
 		<img id="card10" src="${contextPath}/resources/img/cards/shirt.png" style="width: 45px;"/>
 	</div>
-	<div style="visibility: hidden;">
+	<div id="playerData10" style="display: none;">
 		<p style="position: absolute; color: yellow; left: 683px; top: 627px;"><sec:authentication property="principal" /></p>
 		<p style="position: absolute; color: yellow; left: 683px; top: 721px;"><sec:authentication property="sum" /></p>
 	</div>
@@ -198,7 +198,9 @@
 				} else {
 					toastr.success('Have a nice game!');
 					//document.getElementById("position" + arg).src = fotoUrl;
-					$("#position" + arg).attr("src", "fotoUrl");
+					$("#position" + arg).attr("src", baseUrl + '/<sec:authentication property="foto" />');
+					$("#shirt" + arg).show();
+					$("#playerData" + arg).show();
 				}
 
 			}
