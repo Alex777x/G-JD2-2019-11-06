@@ -31,6 +31,7 @@ public class GameFromDTOConverter implements Function<GameDTO, IGame> {
 		entity.setPosition8(dto.isPosition8());
 		entity.setPosition9(dto.isPosition9());
 		entity.setPosition10(dto.isPosition10());
+		entity.setNumberOfPlayers(dto.getNumberOfPlayers());
 		return entity;
 	}
 

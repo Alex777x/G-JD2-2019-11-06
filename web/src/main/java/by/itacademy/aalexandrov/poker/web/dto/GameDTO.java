@@ -37,6 +37,16 @@ public class GameDTO {
 	private boolean position9;
 	@NotNull
 	private boolean position10;
+	@NotNull
+	private int numberOfPlayers;
+
+	public int getNumberOfPlayers() {
+		return numberOfPlayers;
+	}
+
+	public void setNumberOfPlayers(int numberOfPlayers) {
+		this.numberOfPlayers = numberOfPlayers;
+	}
 
 	public long getPlaersCount() {
 		return plaersCount;

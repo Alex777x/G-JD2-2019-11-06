@@ -9,36 +9,106 @@
 
 <div class="container">
 	<img src="${contextPath}/resources/img/fon-poker.png" alt="" class="rounded-pill tableIngame">
+
+	<div>
+		<img id="card1" class="card1" src="${contextPath}/resources/img/cards/shirt.png" />
+	</div>
+	<div>
+		<img id="card2" class="card2" src="${contextPath}/resources/img/cards/shirt.png" />
+	</div>
+	<div>
+		<img id="card3" class="card3" src="${contextPath}/resources/img/cards/shirt.png" />
+	</div>
+	<div>
+		<img id="card4" class="card4" src="${contextPath}/resources/img/cards/shirt.png" />
+	</div>
+	<div>
+		<img id="card5" class="card5" src="${contextPath}/resources/img/cards/shirt.png" />
+	</div>
+	<div>
+		<i class="fas fa-piggy-bank"> 0.0</i>
+	</div>
+
+	<div class="shirt1">
+		<img id="card1" src="${contextPath}/resources/img/cards/shirt.png" style="width: 45px;"/>
+		<img id="card1" src="${contextPath}/resources/img/cards/shirt.png" style="width: 45px;"/>
+	</div>
 	<div>
 		<img id="position1" onclick="f1(1)" class="img-thumbnail player1" src="${contextPath}/resources/img/sitTable.png" />
+	</div>
+	
+	<div class="shirt2">
+		<img id="card2" src="${contextPath}/resources/img/cards/shirt.png" style="width: 45px;"/>
+		<img id="card2" src="${contextPath}/resources/img/cards/shirt.png" style="width: 45px;"/>
 	</div>
 	<div>
 		<img id="position2" onclick="f1(2)" class="img-thumbnail player2" src="${contextPath}/resources/img/sitTable.png" />
 	</div>
+	
+	<div class="shirt3" style="visibility: hidden;">
+		<img id="card3" src="${contextPath}/resources/img/cards/shirt.png" style="width: 45px;"/>
+		<img id="card3" src="${contextPath}/resources/img/cards/shirt.png" style="width: 45px;"/>
+	</div>
 	<div>
 		<img id="position3" onclick="f1(3)" class="img-thumbnail player3" src="${contextPath}/resources/img/sitTable.png" />
+	</div>
+	
+	<div class="shirt4">
+		<img id="card4" src="${contextPath}/resources/img/cards/shirt.png" style="width: 45px;"/>
+		<img id="card4" src="${contextPath}/resources/img/cards/shirt.png" style="width: 45px;"/>
 	</div>
 	<div>
 		<img id="position4" onclick="f1(4)" class="img-thumbnail player4" src="${contextPath}/resources/img/sitTable.png" />
 	</div>
+	
+	<div class="shirt5">
+		<img id="card5" src="${contextPath}/resources/img/cards/shirt.png" style="width: 45px;"/>
+		<img id="card5" src="${contextPath}/resources/img/cards/shirt.png" style="width: 45px;"/>
+	</div>
 	<div>
 		<img id="position5" onclick="f1(5)" class="img-thumbnail player5" src="${contextPath}/resources/img/sitTable.png" />
+	</div>
+	
+	<div class="shirt6" style="visibility: hidden;">
+		<img id="card6" src="${contextPath}/resources/img/cards/shirt.png" style="width: 45px;"/>
+		<img id="card6" src="${contextPath}/resources/img/cards/shirt.png" style="width: 45px;"/>
 	</div>
 	<div>
 		<img id="position6" onclick="f1(6)" class="img-thumbnail player6" src="${contextPath}/resources/img/sitTable.png" />
 	</div>
+	
+	<div class="shirt7">
+		<img id="card7" src="${contextPath}/resources/img/cards/shirt.png" style="width: 45px;"/>
+		<img id="card7" src="${contextPath}/resources/img/cards/shirt.png" style="width: 45px;"/>
+	</div>
 	<div>
 		<img id="position7" onclick="f1(7)" class="img-thumbnail player7" src="${contextPath}/resources/img/sitTable.png" />
+	</div>
+	
+	<div class="shirt8">
+		<img id="card8" src="${contextPath}/resources/img/cards/shirt.png" style="width: 45px;"/>
+		<img id="card8" src="${contextPath}/resources/img/cards/shirt.png" style="width: 45px;"/>
 	</div>
 	<div>
 		<img id="position8" onclick="f1(8)" class="img-thumbnail player8" src="${contextPath}/resources/img/sitTable.png" />
 	</div>
+	
+	<div class="shirt9">
+		<img id="card9" src="${contextPath}/resources/img/cards/shirt.png" style="width: 45px;"/>
+		<img id="card9" src="${contextPath}/resources/img/cards/shirt.png" style="width: 45px;"/>
+	</div>
 	<div>
 		<img id="position9" onclick="f1(9)" class="img-thumbnail player9" src="${contextPath}/resources/img/sitTable.png" />
+	</div>
+	
+	<div class="shirt10" style="visibility: hidden;">
+		<img id="card10" src="${contextPath}/resources/img/cards/shirt.png" style="width: 45px;"/>
+		<img id="card10" src="${contextPath}/resources/img/cards/shirt.png" style="width: 45px;"/>
 	</div>
 	<div>
 		<img id="position10" onclick="f1(10)" class="img-thumbnail player10" src="${contextPath}/resources/img/sitTable.png" />
 	</div>
+	
 	<div>
 		<button id="btnCheck" type="button" class="btn btn-success btn-lg btnCheck">CHECK</button>
 	</div>
@@ -73,20 +143,21 @@
 	}, 10 * 1000);
 </script>
 <script>
-var fotoUrl = '${contextPath}/<sec:authentication property="foto" />';
+	var fotoUrl = '${contextPath}/<sec:authentication property="foto" />';
 	function f1(arg) {
 
 		$.ajax({
 			url : baseUrl + '/inGame/setposition?id=' + arg,
 			type : 'post',
 			success : function(result) {
-				if(result == false) {
+				if (result == false) {
 					toastr.success('Is this seat taken!');
 				} else {
 					toastr.success('Have a nice game!');
-					document.getElementById("position" + arg).src = fotoUrl;
+					//document.getElementById("position" + arg).src = fotoUrl;
+					$("#position" + arg).attr("src", "fotoUrl");
 				}
-				
+
 			}
 		});
 

@@ -28,6 +28,7 @@ public class GameToDTOConverter implements Function<IGame, GameDTO> {
 		dto.setPosition8(entity.isPosition8());
 		dto.setPosition9(entity.isPosition9());
 		dto.setPosition10(entity.isPosition10());
+		dto.setNumberOfPlayers(entity.getNumberOfPlayers());
 		return dto;
 	}
 

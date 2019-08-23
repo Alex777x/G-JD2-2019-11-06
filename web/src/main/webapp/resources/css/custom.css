@@ -41,8 +41,8 @@ main {
 }
 
 .navbar {
-	/* 	background-color: midnightblue; */
-	background: radial-gradient(blue, midnightblue);
+	background-color: midnightblue;
+/* 	background: radial-gradient(blue, midnightblue); */
 }
 
 .chatOut {
@@ -99,10 +99,6 @@ main {
 .addnews {
 	margin-left: 80%;
 	margin-top: 2%;
-}
-
-.fas {
-	height: 20px;
 }
 
 .rules {
@@ -278,6 +274,114 @@ main {
 	left: 831px;
 	top: 795px;
 	width: 175px;
+}
+
+.card1 {
+	background-color: transparent;
+    position: absolute;
+    left: 746px;
+    top: 300px;
+    width: 100px;
+}
+
+.card2 {
+	background-color: transparent;
+    position: absolute;
+    left: 639px;
+    top: 300px;
+    width: 100px;
+}
+
+.card3 {
+	background-color: transparent;
+    position: absolute;
+    left: 532px;
+    top: 300px;
+    width: 100px;
+}
+
+.card4 {
+	background-color: transparent;
+    position: absolute;
+    left: 425px;
+    top: 300px;
+    width: 100px;
+	
+}
+
+.card5 {
+	background-color: transparent;
+    position: absolute;
+    left: 318px;
+    top: 300px;
+    width: 100px;
+}
+
+.fa-piggy-bank {
+	position: absolute;
+    left: 500px;
+    top: 445px;
+    color: azure;
+}
+
+.shirt1 {
+	position: absolute;
+    left: 490px;
+    top: 648px;
+}
+
+.shirt2 {
+	position: absolute;
+    left: 290px;
+    top: 598px;
+}
+
+.shirt3 {
+	position: absolute;
+    left: 177px;
+    top: 383px;
+}
+
+.shirt4 {
+	position: absolute;
+    left: 290px;
+    top: 198px;
+}
+
+.shirt5 {
+	position: absolute;
+    left: 490px;
+    top: 153px;
+}
+
+.shirt6 {
+	position: absolute;
+    left: 755px;
+    top: 153px;
+}
+
+.shirt7 {
+	position: absolute;
+    left: 940px;
+    top: 198px;
+}
+
+.shirt8 {
+	position: absolute;
+    left: 1060px;
+    top: 383px;
+}
+
+.shirt9 {
+	position: absolute;
+    left: 940px;
+    top: 598px;
+}
+
+.shirt10 {
+	position: absolute;
+    left: 755px;
+    top: 648px;
 }
 
 .input-field label.multiselect-label, .input-field label.switch-label {

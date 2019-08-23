@@ -49,8 +49,21 @@ public class Game extends BaseEntity implements IGame {
 	@Column
 	private boolean position10;
 
+	@Column
+	private int numberOfPlayers;
+
 	@Transient
 	private String upperCaseName;
+
+	@Override
+	public int getNumberOfPlayers() {
+		return numberOfPlayers;
+	}
+
+	@Override
+	public void setNumberOfPlayers(int numberOfPlayers) {
+		this.numberOfPlayers = numberOfPlayers;
+	}
 
 	public String getUpperCaseName() {
 		return upperCaseName;

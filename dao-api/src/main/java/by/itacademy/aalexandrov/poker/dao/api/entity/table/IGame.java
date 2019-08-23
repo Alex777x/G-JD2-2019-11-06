@@ -54,4 +54,8 @@ public interface IGame extends IBaseEntity {
 
 	boolean isPosition1();
 
+	void setNumberOfPlayers(int numberOfPlayers);
+
+	int getNumberOfPlayers();
+
 }

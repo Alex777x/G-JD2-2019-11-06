@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import by.itacademy.aalexandrov.poker.dao.api.entity.enums.GameStatus;
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.PlayerPosition;
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.PlayerStatus;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IGame;
@@ -78,6 +79,7 @@ public class InGameController extends AbstractController {
 			boolean freePosition1 = curentGame.isPosition1();
 			if (!freePosition1) {
 				curentGame.setPosition1(true);
+				curentGame.setNumberOfPlayers(curentGame.getNumberOfPlayers() + 1);
 				gameService.save(curentGame);
 				player.setPosition(PlayerPosition.ONE);
 				playerService.save(player);
@@ -88,6 +90,7 @@ public class InGameController extends AbstractController {
 			boolean freePosition2 = curentGame.isPosition2();
 			if (!freePosition2) {
 				curentGame.setPosition2(true);
+				curentGame.setNumberOfPlayers(curentGame.getNumberOfPlayers() + 1);
 				gameService.save(curentGame);
 				player.setPosition(PlayerPosition.TWO);
 				playerService.save(player);
@@ -98,6 +101,7 @@ public class InGameController extends AbstractController {
 			boolean freePosition3 = curentGame.isPosition3();
 			if (!freePosition3) {
 				curentGame.setPosition3(true);
+				curentGame.setNumberOfPlayers(curentGame.getNumberOfPlayers() + 1);
 				gameService.save(curentGame);
 				player.setPosition(PlayerPosition.THREE);
 				playerService.save(player);
@@ -108,6 +112,7 @@ public class InGameController extends AbstractController {
 			boolean freePosition4 = curentGame.isPosition4();
 			if (!freePosition4) {
 				curentGame.setPosition4(true);
+				curentGame.setNumberOfPlayers(curentGame.getNumberOfPlayers() + 1);
 				gameService.save(curentGame);
 				player.setPosition(PlayerPosition.FOUR);
 				playerService.save(player);
@@ -118,6 +123,7 @@ public class InGameController extends AbstractController {
 			boolean freePosition5 = curentGame.isPosition5();
 			if (!freePosition5) {
 				curentGame.setPosition5(true);
+				curentGame.setNumberOfPlayers(curentGame.getNumberOfPlayers() + 1);
 				gameService.save(curentGame);
 				player.setPosition(PlayerPosition.FIVE);
 				playerService.save(player);
@@ -128,6 +134,7 @@ public class InGameController extends AbstractController {
 			boolean freePosition6 = curentGame.isPosition6();
 			if (!freePosition6) {
 				curentGame.setPosition6(true);
+				curentGame.setNumberOfPlayers(curentGame.getNumberOfPlayers() + 1);
 				gameService.save(curentGame);
 				player.setPosition(PlayerPosition.SIX);
 				playerService.save(player);
@@ -138,6 +145,7 @@ public class InGameController extends AbstractController {
 			boolean freePosition7 = curentGame.isPosition7();
 			if (!freePosition7) {
 				curentGame.setPosition7(true);
+				curentGame.setNumberOfPlayers(curentGame.getNumberOfPlayers() + 1);
 				gameService.save(curentGame);
 				player.setPosition(PlayerPosition.SEVEN);
 				playerService.save(player);
@@ -148,6 +156,7 @@ public class InGameController extends AbstractController {
 			boolean freePosition8 = curentGame.isPosition8();
 			if (!freePosition8) {
 				curentGame.setPosition8(true);
+				curentGame.setNumberOfPlayers(curentGame.getNumberOfPlayers() + 1);
 				gameService.save(curentGame);
 				player.setPosition(PlayerPosition.EIGHT);
 				playerService.save(player);
@@ -158,6 +167,7 @@ public class InGameController extends AbstractController {
 			boolean freePosition9 = curentGame.isPosition9();
 			if (!freePosition9) {
 				curentGame.setPosition9(true);
+				curentGame.setNumberOfPlayers(curentGame.getNumberOfPlayers() + 1);
 				gameService.save(curentGame);
 				player.setPosition(PlayerPosition.NINE);
 				playerService.save(player);
@@ -168,6 +178,7 @@ public class InGameController extends AbstractController {
 			boolean freePosition10 = curentGame.isPosition10();
 			if (!freePosition10) {
 				curentGame.setPosition10(true);
+				curentGame.setNumberOfPlayers(curentGame.getNumberOfPlayers() + 1);
 				gameService.save(curentGame);
 				player.setPosition(PlayerPosition.TEN);
 				playerService.save(player);
@@ -175,6 +186,13 @@ public class InGameController extends AbstractController {
 				break;
 			}
 		}
+
+		int checkNumberOfPlayers = curentGame.getNumberOfPlayers();
+		if (checkNumberOfPlayers >= 2) {
+			curentGame.setState(GameStatus.ACTIVE);
+			gameService.save(curentGame);
+		}
+
 		return new ResponseEntity<Boolean>(flag, HttpStatus.OK);
 
 	}
