@@ -43,9 +43,6 @@ public interface IPlayerService {
 	long getPlayersCount(Integer id);
 
 	@Transactional
-	void updateState(Integer loggedUserId);
-
-	@Transactional
 	IPlayer getPlayerByUser(Integer loggedUserId);
 
 	@Transactional

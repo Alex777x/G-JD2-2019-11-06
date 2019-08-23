@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.GameStatus;
-import by.itacademy.aalexandrov.poker.dao.api.entity.enums.PlayerPosition;
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.PlayerStatus;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IChatInHome;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IGame;
@@ -150,7 +149,7 @@ public class DefaultController extends AbstractController {
 		IPlayer player = playerService.createEntity();
 		player.setGame(game);
 		player.setUserAccount(curentUser);
-		player.setPosition(PlayerPosition.FREE);
+		player.setPosition(null);
 		player.setInGame(true);
 		player.setState(PlayerStatus.INACTIVE);
 		player.setStack(balance);

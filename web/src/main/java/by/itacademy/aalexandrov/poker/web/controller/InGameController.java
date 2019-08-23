@@ -1,5 +1,8 @@
 package by.itacademy.aalexandrov.poker.web.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -51,7 +54,7 @@ public class InGameController extends AbstractController {
 			IPlayer player = playerService.createEntity();
 			player.setGame(game);
 			player.setUserAccount(curentUser);
-			player.setPosition(PlayerPosition.FREE);
+			player.setPosition(null);
 			player.setInGame(true);
 			player.setState(PlayerStatus.INACTIVE);
 			player.setStack(balance);
@@ -62,17 +65,20 @@ public class InGameController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/setposition", method = RequestMethod.POST)
-	public ResponseEntity<Boolean> setPosition(@RequestParam(name = "id", required = true) final Integer id) {
+	public ResponseEntity<Map<Integer, Boolean>> setPosition(
+			@RequestParam(name = "id", required = true) final Integer id) {
 		Integer loggedUserId = AuthHelper.getLoggedUserId();
 		IPlayer player = playerService.getPlayerByUser(loggedUserId);
 		int gameId = player.getGame().getId();
 		IGame curentGame = gameService.getFullInfo(gameId);
 		String checkCurentPosition = player.getPosition().name();
 
+		Map<Integer, Boolean> response = new HashMap<>();
 		if (!checkCurentPosition.equals("FREE")) {
-			return new ResponseEntity<Boolean>(false, HttpStatus.OK);
+			return new ResponseEntity<Map<Integer, Boolean>>(response, HttpStatus.OK);
 		}
 
+		int position = 0;
 		boolean flag = false;
 		switch (id) {
 		case 1:
@@ -84,6 +90,7 @@ public class InGameController extends AbstractController {
 				player.setPosition(PlayerPosition.ONE);
 				playerService.save(player);
 				flag = true;
+				position = 1;
 				break;
 			}
 		case 2:
@@ -95,6 +102,7 @@ public class InGameController extends AbstractController {
 				player.setPosition(PlayerPosition.TWO);
 				playerService.save(player);
 				flag = true;
+				position = 2;
 				break;
 			}
 		case 3:
@@ -106,6 +114,7 @@ public class InGameController extends AbstractController {
 				player.setPosition(PlayerPosition.THREE);
 				playerService.save(player);
 				flag = true;
+				position = 3;
 				break;
 			}
 		case 4:
@@ -117,6 +126,7 @@ public class InGameController extends AbstractController {
 				player.setPosition(PlayerPosition.FOUR);
 				playerService.save(player);
 				flag = true;
+				position = 4;
 				break;
 			}
 		case 5:
@@ -128,6 +138,7 @@ public class InGameController extends AbstractController {
 				player.setPosition(PlayerPosition.FIVE);
 				playerService.save(player);
 				flag = true;
+				position = 5;
 				break;
 			}
 		case 6:
@@ -139,6 +150,7 @@ public class InGameController extends AbstractController {
 				player.setPosition(PlayerPosition.SIX);
 				playerService.save(player);
 				flag = true;
+				position = 6;
 				break;
 			}
 		case 7:
@@ -150,6 +162,7 @@ public class InGameController extends AbstractController {
 				player.setPosition(PlayerPosition.SEVEN);
 				playerService.save(player);
 				flag = true;
+				position = 7;
 				break;
 			}
 		case 8:
@@ -161,6 +174,7 @@ public class InGameController extends AbstractController {
 				player.setPosition(PlayerPosition.EIGHT);
 				playerService.save(player);
 				flag = true;
+				position = 8;
 				break;
 			}
 		case 9:
@@ -172,6 +186,7 @@ public class InGameController extends AbstractController {
 				player.setPosition(PlayerPosition.NINE);
 				playerService.save(player);
 				flag = true;
+				position = 9;
 				break;
 			}
 		case 10:
@@ -183,6 +198,7 @@ public class InGameController extends AbstractController {
 				player.setPosition(PlayerPosition.TEN);
 				playerService.save(player);
 				flag = true;
+				position = 10;
 				break;
 			}
 		}
@@ -192,8 +208,8 @@ public class InGameController extends AbstractController {
 			curentGame.setState(GameStatus.ACTIVE);
 			gameService.save(curentGame);
 		}
-
-		return new ResponseEntity<Boolean>(flag, HttpStatus.OK);
+		response.put(position, flag);
+		return new ResponseEntity<Map<Integer, Boolean>>(response, HttpStatus.OK);
 
 	}
 

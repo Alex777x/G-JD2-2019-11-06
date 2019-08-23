@@ -1,8 +1,5 @@
 package by.itacademy.aalexandrov.poker.dao.orm.impl;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -13,7 +10,6 @@ import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Root;
 import javax.persistence.metamodel.SingularAttribute;
-import javax.swing.Timer;
 
 import org.hibernate.jpa.criteria.OrderImpl;
 import org.springframework.stereotype.Repository;
@@ -192,29 +188,17 @@ public class PlayerDaoImpl extends AbstractDaoImpl<IPlayer, Integer> implements 
 		return getSingleResult(q);
 	}
 
-	@Override
-	public void updateState(Integer loggedUserId) {
-		IPlayer entity = getPlayerByUser(loggedUserId);
-		entity.setUpdated(new Date());
-		update(entity);
-		Timer timer = new Timer(15000, new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				IPlayer entity = getPlayerByUser(loggedUserId);
-				Date lastUpdated = entity.getUpdated();
-				long milli = lastUpdated.getTime();
-				Date curentTime = new Date();
-				long curentMilli = curentTime.getTime();
-				long diff = curentMilli - milli;
-				if (diff > 15000) {
-					entity.setInGame(false);
-					update(entity);
-				}
-			}
-		});
-		timer.setRepeats(true);
-		timer.start();
-	}
+	// @Override
+	// public void updateState(Integer loggedUserId) {
+	// long milli = lastUpdated.getTime();
+	// Date curentTime = new Date();
+	// long curentMilli = curentTime.getTime();
+	// long diff = curentMilli - milli;
+	// if (diff > 15000) {
+	// entity.setInGame(false);
+	// update(entity);
+	// }
+	// }
 
 	@Override
 	public boolean findPlayer(Integer loggedUserId) {
@@ -246,7 +230,7 @@ public class PlayerDaoImpl extends AbstractDaoImpl<IPlayer, Integer> implements 
 		final CriteriaQuery<IPlayer> cq = cb.createQuery(IPlayer.class);
 		final Root<Player> from = cq.from(Player.class);
 
-		cq.select(from); // define what need to be selected
+		cq.select(from);
 
 		from.fetch(Player_.game, JoinType.LEFT);
 		from.fetch(Player_.userAccount, JoinType.LEFT);

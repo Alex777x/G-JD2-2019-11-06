@@ -153,6 +153,21 @@ public class PlayerController extends AbstractController {
 		entity.setUpdated(new Date());
 		playerService.save(entity);
 		List<IPlayer> players = playerService.getPlayersByGame(entity.getGame().getId());
+
+		for (IPlayer iPlayer : players) {
+			Date lastUpdated = iPlayer.getUpdated();
+			long milli = lastUpdated.getTime();
+			Date curentTime = new Date();
+			long curentMilli = curentTime.getTime();
+			long diff = curentMilli - milli;
+
+			if (diff > 15000) {
+				// iPlayer.setInGame(false);
+				playerService.delete(iPlayer.getId());
+			}
+
+		}
+
 		List<PlayerDTO> dtos = players.stream().map(toDtoConverter).collect(Collectors.toList());
 
 		return new ResponseEntity<List<PlayerDTO>>(dtos, HttpStatus.OK);

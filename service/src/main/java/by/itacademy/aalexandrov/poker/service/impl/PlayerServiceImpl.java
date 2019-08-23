@@ -110,12 +110,6 @@ public class PlayerServiceImpl implements IPlayerService {
 	}
 
 	@Override
-	public void updateState(Integer loggedUserId) {
-		dao.updateState(loggedUserId);
-
-	}
-
-	@Override
 	public IPlayer getPlayerByUser(Integer loggedUserId) {
 		return dao.getPlayerByUser(loggedUserId);
 	}

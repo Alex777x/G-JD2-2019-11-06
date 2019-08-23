@@ -21,8 +21,6 @@ public interface IPlayerDao extends IDao<IPlayer, Integer> {
 
 	long getPlayersCount(Integer id);
 
-	void updateState(Integer loggedUserId);
-
 	IPlayer getPlayerByUser(Integer loggedUserId);
 
 	boolean findPlayer(Integer loggedUserId);
