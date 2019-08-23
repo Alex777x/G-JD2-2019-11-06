@@ -251,9 +251,15 @@ main {
 	left: 865px;
 }
 
+.btnFold {
+	position: absolute;
+	left: 403px;
+	top: 795px;
+}
+
 .btnCheck {
 	position: absolute;
-	left: 500px;
+	left: 506px;
 	top: 795px;
 }
 
@@ -382,6 +388,10 @@ main {
 	position: absolute;
     left: 755px;
     top: 648px;
+}
+
+.tableText {
+	color: yellow;
 }
 
 .input-field label.multiselect-label, .input-field label.switch-label {
