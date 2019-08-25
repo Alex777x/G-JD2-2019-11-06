@@ -1,6 +1,8 @@
 package by.itacademy.aalexandrov.poker.web.controller;
 
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,10 @@ import by.itacademy.aalexandrov.poker.service.ITransactionService;
 import by.itacademy.aalexandrov.poker.service.IUserAccountService;
 import by.itacademy.aalexandrov.poker.web.converter.GameFromDTOConverter;
 import by.itacademy.aalexandrov.poker.web.converter.GameToDTOConverter;
+import by.itacademy.aalexandrov.poker.web.converter.TransactionToDTOConverter;
+import by.itacademy.aalexandrov.poker.web.converter.UserAccountToDTOConverter;
+import by.itacademy.aalexandrov.poker.web.dto.GameDTO;
+import by.itacademy.aalexandrov.poker.web.dto.UserAccountDTO;
 import by.itacademy.aalexandrov.poker.web.security.AuthHelper;
 
 @Controller
@@ -42,6 +48,10 @@ public class InGameController extends AbstractController {
 	private IUserAccountService userAccountService;
 	@Autowired
 	private ITransactionService transactionService;
+	@Autowired
+	private UserAccountToDTOConverter userAccountToDtoConverter;
+	@Autowired
+	TransactionToDTOConverter transactionToDtoConverter;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView index(@RequestParam(name = "id", required = true) Integer gameId) {
@@ -49,168 +59,108 @@ public class InGameController extends AbstractController {
 		Integer loggedUserId = AuthHelper.getLoggedUserId();
 		IUserAccount curentUser = userAccountService.getFullInfo(loggedUserId);
 		double balance = transactionService.getSumm(curentUser.getId());
+		GameDTO dtog = gameToDtoConverter.apply(game);
+		UserAccountDTO dto = userAccountToDtoConverter.apply(curentUser);
+		final Map<String, Object> userAccount = new HashMap<>();
+		userAccount.put("user", dto);
+		userAccount.put("balance", balance);
+		userAccount.put("game", dtog);
 
-		if (playerService.findPlayer(loggedUserId)) {
-			IPlayer player = playerService.createEntity();
-			player.setGame(game);
-			player.setUserAccount(curentUser);
-			player.setPosition(null);
-			player.setInGame(true);
-			player.setState(PlayerStatus.INACTIVE);
-			player.setStack(balance);
-			playerService.save(player);
-		}
-
-		return new ModelAndView("inGame.index");
+		return new ModelAndView("inGame.index", userAccount);
 	}
 
 	@RequestMapping(value = "/setposition", method = RequestMethod.POST)
-	public ResponseEntity<Map<Integer, Boolean>> setPosition(
-			@RequestParam(name = "id", required = true) final Integer id) {
+	public ResponseEntity<Object> setPosition(@RequestParam(name = "id", required = true) final Integer id,
+			@RequestParam(name = "gameid", required = true) final Integer gameid) {
 		Integer loggedUserId = AuthHelper.getLoggedUserId();
-		IPlayer player = playerService.getPlayerByUser(loggedUserId);
-		int gameId = player.getGame().getId();
-		IGame curentGame = gameService.getFullInfo(gameId);
-		String checkCurentPosition = player.getPosition().name();
-
-		Map<Integer, Boolean> response = new HashMap<>();
-		if (!checkCurentPosition.equals("FREE")) {
-			return new ResponseEntity<Map<Integer, Boolean>>(response, HttpStatus.OK);
+		// IPlayer player = playerService.getPlayerByUserAccunt(loggedUserId);
+		IUserAccount curentUser = userAccountService.getFullInfo(loggedUserId);
+		double balance = transactionService.getSumm(curentUser.getId());
+		IGame curentGame = gameService.getFullInfo(gameid);
+		IPlayer newPlayer = null;
+		if (playerService.findPlayer(loggedUserId)) {
+			newPlayer = playerService.createEntity();
+			newPlayer.setGame(curentGame);
+			newPlayer.setUserAccount(curentUser);
+			newPlayer.setPosition(null);
+			newPlayer.setInGame(false);
+			newPlayer.setState(PlayerStatus.INACTIVE);
+			newPlayer.setStack(balance);
+			playerService.save(newPlayer);
 		}
 
-		int position = 0;
-		boolean flag = false;
-		switch (id) {
-		case 1:
-			boolean freePosition1 = curentGame.isPosition1();
-			if (!freePosition1) {
-				curentGame.setPosition1(true);
-				curentGame.setNumberOfPlayers(curentGame.getNumberOfPlayers() + 1);
-				gameService.save(curentGame);
-				player.setPosition(PlayerPosition.ONE);
-				playerService.save(player);
-				flag = true;
-				position = 1;
-				break;
-			}
-		case 2:
-			boolean freePosition2 = curentGame.isPosition2();
-			if (!freePosition2) {
-				curentGame.setPosition2(true);
-				curentGame.setNumberOfPlayers(curentGame.getNumberOfPlayers() + 1);
-				gameService.save(curentGame);
-				player.setPosition(PlayerPosition.TWO);
-				playerService.save(player);
-				flag = true;
-				position = 2;
-				break;
-			}
-		case 3:
-			boolean freePosition3 = curentGame.isPosition3();
-			if (!freePosition3) {
-				curentGame.setPosition3(true);
-				curentGame.setNumberOfPlayers(curentGame.getNumberOfPlayers() + 1);
-				gameService.save(curentGame);
-				player.setPosition(PlayerPosition.THREE);
-				playerService.save(player);
-				flag = true;
-				position = 3;
-				break;
-			}
-		case 4:
-			boolean freePosition4 = curentGame.isPosition4();
-			if (!freePosition4) {
-				curentGame.setPosition4(true);
-				curentGame.setNumberOfPlayers(curentGame.getNumberOfPlayers() + 1);
-				gameService.save(curentGame);
-				player.setPosition(PlayerPosition.FOUR);
-				playerService.save(player);
-				flag = true;
-				position = 4;
-				break;
-			}
-		case 5:
-			boolean freePosition5 = curentGame.isPosition5();
-			if (!freePosition5) {
-				curentGame.setPosition5(true);
-				curentGame.setNumberOfPlayers(curentGame.getNumberOfPlayers() + 1);
-				gameService.save(curentGame);
-				player.setPosition(PlayerPosition.FIVE);
-				playerService.save(player);
-				flag = true;
-				position = 5;
-				break;
-			}
-		case 6:
-			boolean freePosition6 = curentGame.isPosition6();
-			if (!freePosition6) {
-				curentGame.setPosition6(true);
-				curentGame.setNumberOfPlayers(curentGame.getNumberOfPlayers() + 1);
-				gameService.save(curentGame);
-				player.setPosition(PlayerPosition.SIX);
-				playerService.save(player);
-				flag = true;
-				position = 6;
-				break;
-			}
-		case 7:
-			boolean freePosition7 = curentGame.isPosition7();
-			if (!freePosition7) {
-				curentGame.setPosition7(true);
-				curentGame.setNumberOfPlayers(curentGame.getNumberOfPlayers() + 1);
-				gameService.save(curentGame);
-				player.setPosition(PlayerPosition.SEVEN);
-				playerService.save(player);
-				flag = true;
-				position = 7;
-				break;
-			}
-		case 8:
-			boolean freePosition8 = curentGame.isPosition8();
-			if (!freePosition8) {
-				curentGame.setPosition8(true);
-				curentGame.setNumberOfPlayers(curentGame.getNumberOfPlayers() + 1);
-				gameService.save(curentGame);
-				player.setPosition(PlayerPosition.EIGHT);
-				playerService.save(player);
-				flag = true;
-				position = 8;
-				break;
-			}
-		case 9:
-			boolean freePosition9 = curentGame.isPosition9();
-			if (!freePosition9) {
-				curentGame.setPosition9(true);
-				curentGame.setNumberOfPlayers(curentGame.getNumberOfPlayers() + 1);
-				gameService.save(curentGame);
-				player.setPosition(PlayerPosition.NINE);
-				playerService.save(player);
-				flag = true;
-				position = 9;
-				break;
-			}
-		case 10:
-			boolean freePosition10 = curentGame.isPosition10();
-			if (!freePosition10) {
-				curentGame.setPosition10(true);
-				curentGame.setNumberOfPlayers(curentGame.getNumberOfPlayers() + 1);
-				gameService.save(curentGame);
-				player.setPosition(PlayerPosition.TEN);
-				playerService.save(player);
-				flag = true;
-				position = 10;
-				break;
-			}
+		List<IPlayer> plaers = playerService.getPlayersByGame(gameid);
+		PlayerPosition pos = idToString(id);
+		HashSet<PlayerPosition> positions = new HashSet<>();
+
+		if (curentGame.getState().equals(GameStatus.ACTIVE)) {
+			return new ResponseEntity<Object>("ACTIVE", HttpStatus.OK);
 		}
 
-		int checkNumberOfPlayers = curentGame.getNumberOfPlayers();
-		if (checkNumberOfPlayers >= 2) {
+		for (IPlayer iPlayer : plaers) {
+			PlayerPosition i = iPlayer.getPosition();
+			positions.add(i);
+		}
+
+		boolean tryAdd = positions.add(pos);
+
+		if (tryAdd) {
+			if (newPlayer == null) {
+				return new ResponseEntity<Object>("CHANGE", HttpStatus.OK);
+			} else {
+				newPlayer.setPosition(pos);
+				newPlayer.setInGame(true);
+				playerService.save(newPlayer);
+			}
+		}
+		long playersCount = playerService.getPlayersCount(gameid);
+		if (playersCount >= 2) {
 			curentGame.setState(GameStatus.ACTIVE);
 			gameService.save(curentGame);
+		} else {
+			curentGame.setState(GameStatus.END);
+			gameService.save(curentGame);
 		}
-		response.put(position, flag);
-		return new ResponseEntity<Map<Integer, Boolean>>(response, HttpStatus.OK);
 
+		return new ResponseEntity<Object>(tryAdd, HttpStatus.OK);
+
+	}
+
+	private PlayerPosition idToString(final Integer id) {
+		PlayerPosition pos = null;
+		switch (id) {
+		case 1:
+			pos = PlayerPosition.ONE;
+			break;
+		case 2:
+			pos = PlayerPosition.TWO;
+			break;
+		case 3:
+			pos = PlayerPosition.THREE;
+			break;
+		case 4:
+			pos = PlayerPosition.FOUR;
+			break;
+		case 5:
+			pos = PlayerPosition.FIVE;
+			break;
+		case 6:
+			pos = PlayerPosition.SIX;
+			break;
+		case 7:
+			pos = PlayerPosition.SEVEN;
+			break;
+		case 8:
+			pos = PlayerPosition.EIGHT;
+			break;
+		case 9:
+			pos = PlayerPosition.NINE;
+			break;
+		case 10:
+			pos = PlayerPosition.TEN;
+			break;
+		}
+		return pos;
 	}
 
 }

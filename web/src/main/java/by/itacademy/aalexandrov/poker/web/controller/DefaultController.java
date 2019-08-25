@@ -18,10 +18,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.GameStatus;
-import by.itacademy.aalexandrov.poker.dao.api.entity.enums.PlayerStatus;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IChatInHome;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IGame;
-import by.itacademy.aalexandrov.poker.dao.api.entity.table.IPlayer;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IUserAccount;
 import by.itacademy.aalexandrov.poker.dao.api.filter.ChatInHomeFilter;
 import by.itacademy.aalexandrov.poker.dao.api.filter.GameFilter;
@@ -146,15 +144,15 @@ public class DefaultController extends AbstractController {
 		game.setBank(0);
 		gameService.save(game);
 
-		IPlayer player = playerService.createEntity();
-		player.setGame(game);
-		player.setUserAccount(curentUser);
-		player.setPosition(null);
-		player.setInGame(true);
-		player.setState(PlayerStatus.INACTIVE);
-		player.setStack(balance);
-
-		playerService.save(player);
+//		IPlayer player = playerService.createEntity();
+//		player.setGame(game);
+//		player.setUserAccount(curentUser);
+//		player.setPosition(null);
+//		player.setInGame(false);
+//		player.setState(PlayerStatus.INACTIVE);
+//		player.setStack(balance);
+//
+//		playerService.save(player);
 
 		GameDTO dto = gameToDtoConverter.apply(gameService.getFullInfo(game.getId()));
 

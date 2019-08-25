@@ -21,6 +21,15 @@ public class PlayerDTO {
 	private double stack;
 	private Date created;
 	private Date updated;
+	private String nick;
+
+	public String getNick() {
+		return nick;
+	}
+
+	public void setNick(String nick) {
+		this.nick = nick;
+	}
 
 	public Integer getId() {
 		return id;

@@ -51,4 +51,7 @@ public interface IPlayerService {
 	@Transactional
 	List<IPlayer> getPlayersByGame(Integer id);
 
+	@Transactional
+	IPlayer getPlayerByUserAccunt(Integer loggedUserId);
+
 }

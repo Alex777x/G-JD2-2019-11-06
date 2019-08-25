@@ -124,4 +124,9 @@ public class PlayerServiceImpl implements IPlayerService {
 		return dao.getPlayersByGame(id);
 	}
 
+	@Override
+	public IPlayer getPlayerByUserAccunt(Integer loggedUserId) {
+		return dao.getPlayerByUserAccunt(loggedUserId);
+	}
+
 }

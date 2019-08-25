@@ -34,8 +34,8 @@
 		<img id="card1" src="${contextPath}/resources/img/cards/shirt.png" style="width: 45px;"/>
 	</div>
 	<div id="playerData1" style="display: none;">
-		<p style="position: absolute; color: yellow; left: 416px; top: 627px;"><sec:authentication property="principal" /></p>
-		<p style="position: absolute; color: yellow; left: 416px; top: 721px;"><sec:authentication property="sum" /></p>
+		<p id = "player1Nick" style="position: absolute; color: yellow; left: 416px; top: 627px;"></p>
+		<p id = "player1Balance" style="position: absolute; color: yellow; left: 416px; top: 721px;"></p>
 	</div>
 	<div>
 		<img id="position1" onclick="f1(1)" class="img-thumbnail player1" src="${contextPath}/resources/img/sitTable.png" />
@@ -46,8 +46,8 @@
 		<img id="card2" src="${contextPath}/resources/img/cards/shirt.png" style="width: 45px;"/>
 	</div>
 	<div id="playerData2" style="display: none;">
-		<p style="position: absolute; color: yellow; left: 218px; top: 577px;"><sec:authentication property="principal" /></p>
-		<p style="position: absolute; color: yellow; left: 217px; top: 671px;"><sec:authentication property="sum" /></p>
+		<p id = "player2Nick" style="position: absolute; color: yellow; left: 218px; top: 577px;"></p>
+		<p id = "player2Balance" style="position: absolute; color: yellow; left: 217px; top: 671px;"></p>
 	</div>
 	<div>
 		<img id="position2" onclick="f1(2)" class="img-thumbnail player2" src="${contextPath}/resources/img/sitTable.png" />
@@ -58,8 +58,8 @@
 		<img id="card3" src="${contextPath}/resources/img/cards/shirt.png" style="width: 45px;"/>
 	</div>
 	<div id="playerData3" style="display: none;">
-		<p style="position: absolute; color: yellow; left: 105px; top: 363px;"><sec:authentication property="principal" /></p>
-		<p style="position: absolute; color: yellow; left: 105px; top: 456px;"><sec:authentication property="sum" /></p>
+		<p id = "player3Nick" style="position: absolute; color: yellow; left: 105px; top: 363px;"></p>
+		<p id = "player3Balance" style="position: absolute; color: yellow; left: 105px; top: 456px;"></p>
 	</div>
 	<div>
 		<img id="position3" onclick="f1(3)" class="img-thumbnail player3" src="${contextPath}/resources/img/sitTable.png" />
@@ -70,8 +70,8 @@
 		<img id="card4" src="${contextPath}/resources/img/cards/shirt.png" style="width: 45px;"/>
 	</div>
 	<div id="playerData4" style="display: none;">
-		<p style="position: absolute; color: yellow; left: 218px; top: 178px;"><sec:authentication property="principal" /></p>
-		<p style="position: absolute; color: yellow; left: 218px; top: 271px;"><sec:authentication property="sum" /></p>
+		<p id = "player4Nick" style="position: absolute; color: yellow; left: 218px; top: 178px;"></p>
+		<p id = "player4Balance" style="position: absolute; color: yellow; left: 218px; top: 271px;"></p>
 	</div>
 	<div>
 		<img id="position4" onclick="f1(4)" class="img-thumbnail player4" src="${contextPath}/resources/img/sitTable.png" />
@@ -82,8 +82,8 @@
 		<img id="card5" src="${contextPath}/resources/img/cards/shirt.png" style="width: 45px;"/>
 	</div>
 	<div id="playerData5" style="display: none;">
-		<p style="position: absolute; color: yellow; left: 418px; top: 133px;"><sec:authentication property="principal" /></p>
-		<p style="position: absolute; color: yellow; left: 418px; top: 226px;"><sec:authentication property="sum" /></p>
+		<p id = "player5Nick" style="position: absolute; color: yellow; left: 418px; top: 133px;"></p>
+		<p id = "player5Balance" style="position: absolute; color: yellow; left: 418px; top: 226px;"></p>
 	</div>
 	<div>
 		<img id="position5" onclick="f1(5)" class="img-thumbnail player5" src="${contextPath}/resources/img/sitTable.png" />
@@ -94,8 +94,8 @@
 		<img id="card6" src="${contextPath}/resources/img/cards/shirt.png" style="width: 45px;"/>
 	</div>
 	<div id="playerData6" style="display: none;">
-		<p style="position: absolute; color: yellow; left: 683px; top: 133px;"><sec:authentication property="principal" /></p>
-		<p style="position: absolute; color: yellow; left: 683px; top: 226px;"><sec:authentication property="sum" /></p>
+		<p id = "player6Nick" style="position: absolute; color: yellow; left: 683px; top: 133px;"></p>
+		<p id = "player6Balance" style="position: absolute; color: yellow; left: 683px; top: 226px;"></p>
 	</div>
 	<div>
 		<img id="position6" onclick="f1(6)" class="img-thumbnail player6" src="${contextPath}/resources/img/sitTable.png" />
@@ -106,8 +106,8 @@
 		<img id="card7" src="${contextPath}/resources/img/cards/shirt.png" style="width: 45px;"/>
 	</div>
 	<div id="playerData7" style="display: none;">
-		<p style="position: absolute; color: yellow; left: 867px; top: 178px;"><sec:authentication property="principal" /></p>
-		<p style="position: absolute; color: yellow; left: 867px; top: 271px;"><sec:authentication property="sum" /></p>
+		<p id = "player7Nick" style="position: absolute; color: yellow; left: 867px; top: 178px;"></p>
+		<p id = "player7Balance" style="position: absolute; color: yellow; left: 867px; top: 271px;"></p>
 	</div>
 	<div>
 		<img id="position7" onclick="f1(7)" class="img-thumbnail player7" src="${contextPath}/resources/img/sitTable.png" />
@@ -118,8 +118,8 @@
 		<img id="card8" src="${contextPath}/resources/img/cards/shirt.png" style="width: 45px;"/>
 	</div>
 	<div id="playerData8" style="display: none;">
-		<p style="position: absolute; color: yellow; left: 987px; top: 363px;"><sec:authentication property="principal" /></p>
-		<p style="position: absolute; color: yellow; left: 987px; top: 456px;"><sec:authentication property="sum" /></p>
+		<p id = "player8Nick" style="position: absolute; color: yellow; left: 987px; top: 363px;"></p>
+		<p id = "player8Balance" style="position: absolute; color: yellow; left: 987px; top: 456px;"></p>
 	</div>
 	<div>
 		<img id="position8" onclick="f1(8)" class="img-thumbnail player8" src="${contextPath}/resources/img/sitTable.png" />
@@ -130,8 +130,8 @@
 		<img id="card9" src="${contextPath}/resources/img/cards/shirt.png" style="width: 45px;"/>
 	</div>
 	<div id="playerData9" style="display: none;">
-		<p style="position: absolute; color: yellow; left: 868px; top: 577px;"><sec:authentication property="principal" /></p>
-		<p style="position: absolute; color: yellow; left: 868px; top: 671px;"><sec:authentication property="sum" /></p>
+		<p id = "player9Nick" style="position: absolute; color: yellow; left: 868px; top: 577px;"></p>
+		<p id = "player9Balance" style="position: absolute; color: yellow; left: 868px; top: 671px;"></p>
 	</div>
 	<div>
 		<img id="position9" onclick="f1(9)" class="img-thumbnail player9" src="${contextPath}/resources/img/sitTable.png" />
@@ -142,8 +142,8 @@
 		<img id="card10" src="${contextPath}/resources/img/cards/shirt.png" style="width: 45px;"/>
 	</div>
 	<div id="playerData10" style="display: none;">
-		<p style="position: absolute; color: yellow; left: 683px; top: 627px;"><sec:authentication property="principal" /></p>
-		<p style="position: absolute; color: yellow; left: 683px; top: 721px;"><sec:authentication property="sum" /></p>
+		<p id = "player10Nick" style="position: absolute; color: yellow; left: 683px; top: 627px;"></p>
+		<p id = "player10Balance" style="position: absolute; color: yellow; left: 683px; top: 721px;"></p>
 	</div>
 	<div>
 		<img id="position10" onclick="f1(10)" class="img-thumbnail player10" src="${contextPath}/resources/img/sitTable.png" />
@@ -170,39 +170,119 @@
 	</div>
 </div>
 
-<script>
+<script type="text/javascript">
+jQuery(document).ready(function($){ 
 	var baseUrl = '${pageContext.request.contextPath}';
 	var $curentTime = $.now();
 	setInterval(function() {
-
 		$.ajax({
 			url : baseUrl + '/player/playerout',
 			type : 'get',
 			success : function(result) {
-
+				
+				
+				for (var i = 1; i < 11; i++) {
+					$("#position" + i).attr("src", baseUrl + '/resources/img/sitTable.png');
+					$("#shirt" + i).hide();
+					$("#playerData" + i).hide();
+					}
+				result.forEach(function(player) {
+					if (player.position == "ONE") {
+						$("#position" + 1).attr("src", baseUrl + '/resources/img/avatars/position1.jpg');
+						$("#shirt" + 1).show();
+						$("#playerData" + 1).show();
+						var $nickname = $('#player1Nick').text(player.nick);
+						var $stack = $('#player1Balance').text(player.stack);
+					} 
+					if (player.position == "TWO") {
+						$("#position" + 2).attr("src", baseUrl + '/resources/img/avatars/position2.jpg');
+						$("#shirt" + 2).show();
+						$("#playerData" + 2).show();
+						var $nickname = $('#player2Nick').text(player.nick);
+						var $stack = $('#player2Balance').text(player.stack);
+					}
+					if (player.position == "THREE") {
+						$("#position" + 3).attr("src", baseUrl + '/resources/img/avatars/position3.jpg');
+						$("#shirt" + 3).show();
+						$("#playerData" + 3).show();
+						var $nickname = $('#player3Nick').text(player.nick);
+						var $stack = $('#player3Balance').text(player.stack);
+					}
+					if (player.position == "FOUR") {
+						$("#position" + 4).attr("src", baseUrl + '/resources/img/avatars/position4.jpg');
+						$("#shirt" + 4).show();
+						$("#playerData" + 4).show();
+						var $nickname = $('#player4Nick').text(player.nick);
+						var $stack = $('#player4Balance').text(player.stack);
+					} 
+					if (player.position == "FIVE") {
+						$("#position" + 5).attr("src", baseUrl + '/resources/img/avatars/position5.jpg');
+						$("#shirt" + 5).show();
+						$("#playerData" + 5).show();
+						var $nickname = $('#player5Nick').text(player.nick);
+						var $stack = $('#player5Balance').text(player.stack);
+					}
+					if (player.position == "SIX") {
+						$("#position" + 6).attr("src", baseUrl + '/resources/img/avatars/position6.jpg');
+						$("#shirt" + 6).show();
+						$("#playerData" + 6).show();
+						var $nickname = $('#player6Nick').text(player.nick);
+						var $stack = $('#player6Balance').text(player.stack);
+					} 
+					if (player.position == "SEVEN") {
+						$("#position" + 7).attr("src", baseUrl + '/resources/img/avatars/position7.jpg');
+						$("#shirt" + 7).show();
+						$("#playerData" + 7).show();
+						var $nickname = $('#player7Nick').text(player.nick);
+						var $stack = $('#player7Balance').text(player.stack);
+					} 
+					if (player.position == "EIGHT") {
+						$("#position" + 8).attr("src", baseUrl + '/resources/img/avatars/position8.jpg');
+						$("#shirt" + 8).show();
+						$("#playerData" + 8).show();
+						var $nickname = $('#player8Nick').text(player.nick);
+						var $stack = $('#player8Balance').text(player.stack);
+					} 
+					if (player.position == "NINE") {
+						$("#position" + 9).attr("src", baseUrl + '/resources/img/avatars/position9.jpg');
+						$("#shirt" + 9).show();
+						$("#playerData" + 9).show();
+						var $nickname = $('#player9Nick').text(player.nick);
+						var $stack = $('#player9Balance').text(player.stack);
+					}
+					if (player.position == "TEN") {
+						$("#position" + 10).attr("src", baseUrl + '/resources/img/avatars/position10.jpg');
+						$("#shirt" + 10).show();
+						$("#playerData" + 10).show();
+						var $nickname = $('#player10Nick').text(player.nick);
+						var $stack = $('#player10Balance').text(player.stack);
+					} 
+				});
 			}
 		});
 
-	}, 10 * 1000);
+	}, 3 * 1000);
+});
 </script>
 <script>
-	var fotoUrl = '${contextPath}/<sec:authentication property="foto" />';
+var baseUrl = '${pageContext.request.contextPath}';
 	function f1(arg) {
-
 		$.ajax({
-			url : baseUrl + '/inGame/setposition?id=' + arg,
+			url : baseUrl + '/inGame/setposition?id=' + arg + '&gameid=' + ${game.id},
 			type : 'post',
 			success : function(result) {
 				if (result == false) {
 					toastr.success('Is this seat taken!');
-				} else {
+				} else if (result == true) {
 					toastr.success('Have a nice game!');
-					//document.getElementById("position" + arg).src = fotoUrl;
-					$("#position" + arg).attr("src", baseUrl + '/<sec:authentication property="foto" />');
+					$("#position" + arg).attr("src", baseUrl + '/resources/img/avatars/position' + arg + '.jpg');
 					$("#shirt" + arg).show();
 					$("#playerData" + arg).show();
+				} else if (result == 'ACTIVE') {
+					toastr.success('The game has already started!');
+				} else {
+					toastr.success('Location changed!');
 				}
-
 			}
 		});
 

@@ -146,8 +146,12 @@ public class PlayerController extends AbstractController {
 	@RequestMapping(value = "/playerout", method = RequestMethod.GET)
 	public ResponseEntity<List<PlayerDTO>> getChatsInHome() {
 		Integer loggedUserId = AuthHelper.getLoggedUserId();
-
-		PlayerDTO dto = toDtoConverter.apply(playerService.getPlayerByUser(loggedUserId));
+		PlayerDTO dto = null;
+		try {
+			dto = toDtoConverter.apply(playerService.getPlayerByUser(loggedUserId));
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.OK);
+		}
 
 		IPlayer entity = fromDtoConverter.apply(dto);
 		entity.setUpdated(new Date());
@@ -162,13 +166,17 @@ public class PlayerController extends AbstractController {
 			long diff = curentMilli - milli;
 
 			if (diff > 15000) {
-				// iPlayer.setInGame(false);
+				iPlayer.setInGame(false);
 				playerService.delete(iPlayer.getId());
 			}
 
 		}
 
 		List<PlayerDTO> dtos = players.stream().map(toDtoConverter).collect(Collectors.toList());
+		for (PlayerDTO playerDTO : dtos) {
+			IUserAccount user = userAccountService.getFullInfo(playerDTO.getUserAccountId());
+			playerDTO.setNick(user.getNickname());
+		}
 
 		return new ResponseEntity<List<PlayerDTO>>(dtos, HttpStatus.OK);
 	}
