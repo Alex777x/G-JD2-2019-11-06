@@ -176,7 +176,7 @@ jQuery(document).ready(function($){
 	var $curentTime = $.now();
 	setInterval(function() {
 		$.ajax({
-			url : baseUrl + '/player/playerout',
+			url : baseUrl + '/player/playerout?gameid=' + ${game.id},
 			type : 'get',
 			success : function(result) {
 				

@@ -171,5 +171,11 @@
 		})
 	}, 3 * 1000);
 </script>
+<script>
+	setInterval(function() {
+		$.get("${contextPath}/updateAllPlayers", function(lastIdFromServer) {
 
+		})
+	}, 3 * 1000);
+</script>
 

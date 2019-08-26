@@ -144,19 +144,11 @@ public class PlayerController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/playerout", method = RequestMethod.GET)
-	public ResponseEntity<List<PlayerDTO>> getChatsInHome() {
+	public ResponseEntity<List<PlayerDTO>> getChatsInHome(
+			@RequestParam(name = "gameid", required = true) final Integer gameid) {
 		Integer loggedUserId = AuthHelper.getLoggedUserId();
-		PlayerDTO dto = null;
-		try {
-			dto = toDtoConverter.apply(playerService.getPlayerByUser(loggedUserId));
-		} catch (Exception e) {
-			return new ResponseEntity<>(HttpStatus.OK);
-		}
 
-		IPlayer entity = fromDtoConverter.apply(dto);
-		entity.setUpdated(new Date());
-		playerService.save(entity);
-		List<IPlayer> players = playerService.getPlayersByGame(entity.getGame().getId());
+		List<IPlayer> players = playerService.getPlayersByGame(gameid);
 
 		for (IPlayer iPlayer : players) {
 			Date lastUpdated = iPlayer.getUpdated();
@@ -165,11 +157,25 @@ public class PlayerController extends AbstractController {
 			long curentMilli = curentTime.getTime();
 			long diff = curentMilli - milli;
 
-			if (diff > 15000) {
+			if (diff > 10000) {
 				iPlayer.setInGame(false);
 				playerService.delete(iPlayer.getId());
 			}
 
+		}
+
+		PlayerDTO dto = null;
+		try {
+			dto = toDtoConverter.apply(playerService.getPlayerByUser(loggedUserId));
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+		IPlayer entity;
+		if (dto != null) {
+			entity = fromDtoConverter.apply(dto);
+			entity.setUpdated(new Date());
+			playerService.save(entity);
 		}
 
 		List<PlayerDTO> dtos = players.stream().map(toDtoConverter).collect(Collectors.toList());

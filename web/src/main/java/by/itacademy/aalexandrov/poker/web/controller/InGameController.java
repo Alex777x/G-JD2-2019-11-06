@@ -114,7 +114,7 @@ public class InGameController extends AbstractController {
 			}
 		}
 		long playersCount = playerService.getPlayersCount(gameid);
-		if (playersCount >= 2) {
+		if (playersCount > 1) {
 			curentGame.setState(GameStatus.ACTIVE);
 			gameService.save(curentGame);
 		} else {

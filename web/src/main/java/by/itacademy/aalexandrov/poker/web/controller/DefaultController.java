@@ -1,5 +1,6 @@
 package by.itacademy.aalexandrov.poker.web.controller;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -20,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.GameStatus;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IChatInHome;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IGame;
+import by.itacademy.aalexandrov.poker.dao.api.entity.table.IPlayer;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IUserAccount;
 import by.itacademy.aalexandrov.poker.dao.api.filter.ChatInHomeFilter;
 import by.itacademy.aalexandrov.poker.dao.api.filter.GameFilter;
@@ -134,25 +136,10 @@ public class DefaultController extends AbstractController {
 
 	@RequestMapping(value = "/newGame", method = RequestMethod.POST)
 	public ResponseEntity<GameDTO> createNewGame() {
-		Integer loggedUserId = AuthHelper.getLoggedUserId();
-		IUserAccount curentUser = userAccountService.getFullInfo(loggedUserId);
-
-		double balance = transactionService.getSumm(curentUser.getId());
-
 		IGame game = gameService.createEntity();
 		game.setState(GameStatus.END);
 		game.setBank(0);
 		gameService.save(game);
-
-//		IPlayer player = playerService.createEntity();
-//		player.setGame(game);
-//		player.setUserAccount(curentUser);
-//		player.setPosition(null);
-//		player.setInGame(false);
-//		player.setState(PlayerStatus.INACTIVE);
-//		player.setStack(balance);
-//
-//		playerService.save(player);
 
 		GameDTO dto = gameToDtoConverter.apply(gameService.getFullInfo(game.getId()));
 
@@ -165,16 +152,32 @@ public class DefaultController extends AbstractController {
 		return new ResponseEntity<Integer>(newestChat == null ? null : newestChat.getId(), HttpStatus.OK);
 	}
 
+	@RequestMapping(value = "/updateAllPlayers", method = RequestMethod.GET)
+	public ResponseEntity<Object> updateAllPlayers() {
+		List<IPlayer> players = playerService.getFullInfo();
+
+		for (IPlayer iPlayer : players) {
+			Date lastUpdated = iPlayer.getUpdated();
+			long milli = lastUpdated.getTime();
+			Date curentTime = new Date();
+			long curentMilli = curentTime.getTime();
+			long diff = curentMilli - milli;
+
+			if (diff > 10000) {
+				iPlayer.setInGame(false);
+				playerService.delete(iPlayer.getId());
+			}
+
+		}
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+
 	@RequestMapping(value = "/getfromserver", method = RequestMethod.GET)
 	public ResponseEntity<List<ChatInHomeDTO>> getNewestMessage(
 			@RequestParam(name = "id", required = true) final Integer id) {
-		// IChatInHome entity = chatInHomeService.getFullInfo(id);
 
 		List<IChatInHome> messagesEntities = chatInHomeService.getLastMessages(id);
 		List<ChatInHomeDTO> dtos = messagesEntities.stream().map(chatToDtoConverter).collect(Collectors.toList());
-
-		// ChatInHomeDTO dto =
-		// chatToDtoConverter.apply(chatInHomeService.getFullInfo(entity.getId()));
 
 		return new ResponseEntity<List<ChatInHomeDTO>>(dtos, HttpStatus.OK);
 	}
