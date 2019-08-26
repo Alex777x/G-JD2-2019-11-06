@@ -4,8 +4,7 @@
 <h2 class="header">User registration</h2>
 
 <div class="row">
-	<div class="col-4"></div>
-	<form:form class="col-4 registration-form" method="POST" action="${pagesRegistration}" modelAttribute="formRegistrationUserAccount">
+	<form:form class="col-md registration-form" method="POST" action="${pagesRegistration}" modelAttribute="formRegistrationUserAccount">
 		<form:input path="id" type="hidden" />
 		<form:input path="foto" type="hidden" />
 		<form:input path="userRole" type="hidden" />
@@ -39,18 +38,12 @@
 			</div>
 		</div>
 
-		<!-- 		<div class="form-check"> -->
-		<%-- 			<label class="form-check-label" for="dropdownCheck"> <spring:message code="page.registration.checbox" /></label> --%>
-		<%-- 			<form:input path="checkbox" type="checkbox" class="form-check-input" id="dropdownCheck" /> --%>
-		<%-- 			<form:errors path="checkbox" cssClass="red-text" /> --%>
-		<!-- 		</div> -->
 
 		<br>
 		<button type="submit" class="btn btn-primary">
 			<spring:message code="page.registration.submit" />
 		</button>
 	</form:form>
-	<div class="col-4"></div>
 </div>
 
 

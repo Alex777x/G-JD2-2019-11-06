@@ -30,8 +30,8 @@
 	</div>
 
 	<div id="shirt1" class="shirt1" style="display: none;">
-		<img id="card1" src="${contextPath}/resources/img/cards/shirt.png" style="width: 45px;"/>
-		<img id="card1" src="${contextPath}/resources/img/cards/shirt.png" style="width: 45px;"/>
+		<img id="card1" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;"/>
+		<img id="card1" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;"/>
 	</div>
 	<div id="playerData1" style="display: none;">
 		<p id = "player1Nick" style="position: absolute; color: yellow; left: 416px; top: 627px;"></p>
@@ -42,8 +42,8 @@
 	</div>
 	
 	<div id="shirt2" class="shirt2" style="display: none;">
-		<img id="card2" src="${contextPath}/resources/img/cards/shirt.png" style="width: 45px;"/>
-		<img id="card2" src="${contextPath}/resources/img/cards/shirt.png" style="width: 45px;"/>
+		<img id="card2" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;"/>
+		<img id="card2" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;"/>
 	</div>
 	<div id="playerData2" style="display: none;">
 		<p id = "player2Nick" style="position: absolute; color: yellow; left: 218px; top: 577px;"></p>
@@ -54,8 +54,8 @@
 	</div>
 	
 	<div id="shirt3" class="shirt3" style="display: none;">
-		<img id="card3" src="${contextPath}/resources/img/cards/shirt.png" style="width: 45px;"/>
-		<img id="card3" src="${contextPath}/resources/img/cards/shirt.png" style="width: 45px;"/>
+		<img id="card3" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;"/>
+		<img id="card3" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;"/>
 	</div>
 	<div id="playerData3" style="display: none;">
 		<p id = "player3Nick" style="position: absolute; color: yellow; left: 105px; top: 363px;"></p>
@@ -66,8 +66,8 @@
 	</div>
 	
 	<div id="shirt4" class="shirt4" style="display: none;">
-		<img id="card4" src="${contextPath}/resources/img/cards/shirt.png" style="width: 45px;"/>
-		<img id="card4" src="${contextPath}/resources/img/cards/shirt.png" style="width: 45px;"/>
+		<img id="card4" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;"/>
+		<img id="card4" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;"/>
 	</div>
 	<div id="playerData4" style="display: none;">
 		<p id = "player4Nick" style="position: absolute; color: yellow; left: 218px; top: 178px;"></p>
@@ -78,8 +78,8 @@
 	</div>
 	
 	<div id="shirt5" class="shirt5" style="display: none;">
-		<img id="card5" src="${contextPath}/resources/img/cards/shirt.png" style="width: 45px;"/>
-		<img id="card5" src="${contextPath}/resources/img/cards/shirt.png" style="width: 45px;"/>
+		<img id="card5" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;"/>
+		<img id="card5" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;"/>
 	</div>
 	<div id="playerData5" style="display: none;">
 		<p id = "player5Nick" style="position: absolute; color: yellow; left: 418px; top: 133px;"></p>
@@ -90,8 +90,8 @@
 	</div>
 	
 	<div id="shirt6" class="shirt6" style="display: none;">
-		<img id="card6" src="${contextPath}/resources/img/cards/shirt.png" style="width: 45px;"/>
-		<img id="card6" src="${contextPath}/resources/img/cards/shirt.png" style="width: 45px;"/>
+		<img id="card6" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;"/>
+		<img id="card6" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;"/>
 	</div>
 	<div id="playerData6" style="display: none;">
 		<p id = "player6Nick" style="position: absolute; color: yellow; left: 683px; top: 133px;"></p>
@@ -102,8 +102,8 @@
 	</div>
 	
 	<div id="shirt7" class="shirt7" style="display: none;">
-		<img id="card7" src="${contextPath}/resources/img/cards/shirt.png" style="width: 45px;"/>
-		<img id="card7" src="${contextPath}/resources/img/cards/shirt.png" style="width: 45px;"/>
+		<img id="card7" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;"/>
+		<img id="card7" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;"/>
 	</div>
 	<div id="playerData7" style="display: none;">
 		<p id = "player7Nick" style="position: absolute; color: yellow; left: 867px; top: 178px;"></p>
@@ -114,8 +114,8 @@
 	</div>
 	
 	<div id="shirt8" class="shirt8" style="display: none;">
-		<img id="card8" src="${contextPath}/resources/img/cards/shirt.png" style="width: 45px;"/>
-		<img id="card8" src="${contextPath}/resources/img/cards/shirt.png" style="width: 45px;"/>
+		<img id="card8" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;"/>
+		<img id="card8" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;"/>
 	</div>
 	<div id="playerData8" style="display: none;">
 		<p id = "player8Nick" style="position: absolute; color: yellow; left: 987px; top: 363px;"></p>
@@ -126,8 +126,8 @@
 	</div>
 	
 	<div id="shirt9" class="shirt9" style="display: none;">
-		<img id="card9" src="${contextPath}/resources/img/cards/shirt.png" style="width: 45px;"/>
-		<img id="card9" src="${contextPath}/resources/img/cards/shirt.png" style="width: 45px;"/>
+		<img id="card9" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;"/>
+		<img id="card9" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;"/>
 	</div>
 	<div id="playerData9" style="display: none;">
 		<p id = "player9Nick" style="position: absolute; color: yellow; left: 868px; top: 577px;"></p>
@@ -138,8 +138,8 @@
 	</div>
 	
 	<div id="shirt10" class="shirt10" style="display: none;">
-		<img id="card10" src="${contextPath}/resources/img/cards/shirt.png" style="width: 45px;"/>
-		<img id="card10" src="${contextPath}/resources/img/cards/shirt.png" style="width: 45px;"/>
+		<img id="card10" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;"/>
+		<img id="card10" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;"/>
 	</div>
 	<div id="playerData10" style="display: none;">
 		<p id = "player10Nick" style="position: absolute; color: yellow; left: 683px; top: 627px;"></p>
@@ -261,7 +261,7 @@ jQuery(document).ready(function($){
 			}
 		});
 
-	}, 3 * 1000);
+	}, 1000);
 });
 </script>
 <script>
