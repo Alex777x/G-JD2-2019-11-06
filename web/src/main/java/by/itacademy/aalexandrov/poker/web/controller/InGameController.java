@@ -93,10 +93,6 @@ public class InGameController extends AbstractController {
 		PlayerPosition pos = idToString(id);
 		HashSet<PlayerPosition> positions = new HashSet<>();
 
-		if (curentGame.getState().equals(GameStatus.ACTIVE)) {
-			return new ResponseEntity<Object>("ACTIVE", HttpStatus.OK);
-		}
-
 		for (IPlayer iPlayer : plaers) {
 			PlayerPosition i = iPlayer.getPosition();
 			positions.add(i);
@@ -120,6 +116,10 @@ public class InGameController extends AbstractController {
 		} else {
 			curentGame.setState(GameStatus.END);
 			gameService.save(curentGame);
+		}
+
+		if (curentGame.getState().equals(GameStatus.ACTIVE)) {
+			return new ResponseEntity<Object>("ACTIVE", HttpStatus.OK);
 		}
 
 		return new ResponseEntity<Object>(tryAdd, HttpStatus.OK);
