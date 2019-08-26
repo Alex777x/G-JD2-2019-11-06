@@ -188,18 +188,6 @@ public class PlayerDaoImpl extends AbstractDaoImpl<IPlayer, Integer> implements 
 		return getSingleResult(q);
 	}
 
-	// @Override
-	// public void updateState(Integer loggedUserId) {
-	// long milli = lastUpdated.getTime();
-	// Date curentTime = new Date();
-	// long curentMilli = curentTime.getTime();
-	// long diff = curentMilli - milli;
-	// if (diff > 15000) {
-	// entity.setInGame(false);
-	// update(entity);
-	// }
-	// }
-
 	@Override
 	public boolean findPlayer(Integer loggedUserId) {
 		final EntityManager em = getEntityManager();
@@ -215,9 +203,9 @@ public class PlayerDaoImpl extends AbstractDaoImpl<IPlayer, Integer> implements 
 		final TypedQuery<Long> q = em.createQuery(cq);
 		Long result = q.getSingleResult();
 		if (result == 0) {
-			return true;
-		} else {
 			return false;
+		} else {
+			return true;
 		}
 
 	}

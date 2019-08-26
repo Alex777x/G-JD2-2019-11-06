@@ -180,12 +180,12 @@ jQuery(document).ready(function($){
 			type : 'get',
 			success : function(result) {
 				
-				
 				for (var i = 1; i < 11; i++) {
 					$("#position" + i).attr("src", baseUrl + '/resources/img/sitTable.png');
 					$("#shirt" + i).hide();
 					$("#playerData" + i).hide();
 					}
+				
 				result.forEach(function(player) {
 					if (player.position == "ONE") {
 						$("#position" + 1).attr("src", baseUrl + '/resources/img/avatars/position1.jpg');
@@ -278,8 +278,8 @@ var baseUrl = '${pageContext.request.contextPath}';
 					$("#position" + arg).attr("src", baseUrl + '/resources/img/avatars/position' + arg + '.jpg');
 					$("#shirt" + arg).show();
 					$("#playerData" + arg).show();
-				} else if (result == 'ACTIVE') {
-					toastr.success('The game has already started!');
+				} else if (result == 'CHANGE') {
+					toastr.success('You can not change position after the start of the game!');
 				} else {
 					toastr.success('Location changed!');
 				}

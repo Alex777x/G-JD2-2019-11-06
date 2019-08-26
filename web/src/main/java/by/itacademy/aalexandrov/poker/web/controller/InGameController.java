@@ -73,21 +73,10 @@ public class InGameController extends AbstractController {
 	public ResponseEntity<Object> setPosition(@RequestParam(name = "id", required = true) final Integer id,
 			@RequestParam(name = "gameid", required = true) final Integer gameid) {
 		Integer loggedUserId = AuthHelper.getLoggedUserId();
-		// IPlayer player = playerService.getPlayerByUserAccunt(loggedUserId);
 		IUserAccount curentUser = userAccountService.getFullInfo(loggedUserId);
 		double balance = transactionService.getSumm(curentUser.getId());
 		IGame curentGame = gameService.getFullInfo(gameid);
-		IPlayer newPlayer = null;
-		if (playerService.findPlayer(loggedUserId)) {
-			newPlayer = playerService.createEntity();
-			newPlayer.setGame(curentGame);
-			newPlayer.setUserAccount(curentUser);
-			newPlayer.setPosition(null);
-			newPlayer.setInGame(false);
-			newPlayer.setState(PlayerStatus.INACTIVE);
-			newPlayer.setStack(balance);
-			playerService.save(newPlayer);
-		}
+		IPlayer newPlayer = playerService.createEntity();
 
 		List<IPlayer> plaers = playerService.getPlayersByGame(gameid);
 		PlayerPosition pos = idToString(id);
@@ -101,13 +90,23 @@ public class InGameController extends AbstractController {
 		boolean tryAdd = positions.add(pos);
 
 		if (tryAdd) {
-			if (newPlayer == null) {
-				return new ResponseEntity<Object>("CHANGE", HttpStatus.OK);
-			} else {
+			try {
+				if (playerService.findPlayer(loggedUserId)) {
+					IPlayer retiringPlayer = playerService.getPlayerByUser(loggedUserId);
+					playerService.delete(retiringPlayer.getId());
+				}
+
+				newPlayer.setGame(curentGame);
+				newPlayer.setUserAccount(curentUser);
 				newPlayer.setPosition(pos);
 				newPlayer.setInGame(true);
+				newPlayer.setState(PlayerStatus.INACTIVE);
+				newPlayer.setStack(balance);
 				playerService.save(newPlayer);
+			} catch (NullPointerException e) {
+				return new ResponseEntity<Object>("CHANGE", HttpStatus.OK);
 			}
+
 		}
 		long playersCount = playerService.getPlayersCount(gameid);
 		if (playersCount > 1) {
@@ -116,10 +115,6 @@ public class InGameController extends AbstractController {
 		} else {
 			curentGame.setState(GameStatus.END);
 			gameService.save(curentGame);
-		}
-
-		if (curentGame.getState().equals(GameStatus.ACTIVE)) {
-			return new ResponseEntity<Object>("ACTIVE", HttpStatus.OK);
 		}
 
 		return new ResponseEntity<Object>(tryAdd, HttpStatus.OK);
