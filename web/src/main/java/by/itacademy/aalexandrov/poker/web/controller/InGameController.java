@@ -1,5 +1,6 @@
 package by.itacademy.aalexandrov.poker.web.controller;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -14,12 +15,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import by.itacademy.aalexandrov.poker.dao.api.entity.enums.CardStatus;
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.GameStatus;
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.PlayerPosition;
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.PlayerStatus;
+import by.itacademy.aalexandrov.poker.dao.api.entity.table.ICard;
+import by.itacademy.aalexandrov.poker.dao.api.entity.table.ICardInGame;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IGame;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IPlayer;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IUserAccount;
+import by.itacademy.aalexandrov.poker.service.ICardInGameService;
+import by.itacademy.aalexandrov.poker.service.ICardService;
 import by.itacademy.aalexandrov.poker.service.IGameService;
 import by.itacademy.aalexandrov.poker.service.IPlayerService;
 import by.itacademy.aalexandrov.poker.service.ITransactionService;
@@ -52,6 +58,10 @@ public class InGameController extends AbstractController {
 	private UserAccountToDTOConverter userAccountToDtoConverter;
 	@Autowired
 	TransactionToDTOConverter transactionToDtoConverter;
+	@Autowired
+	ICardInGameService cardInGameService;
+	@Autowired
+	ICardService cardService;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView index(@RequestParam(name = "id", required = true) Integer gameId) {
@@ -108,17 +118,45 @@ public class InGameController extends AbstractController {
 			}
 
 		}
-		long playersCount = playerService.getPlayersCount(gameid);
-		if (playersCount > 1) {
-			curentGame.setState(GameStatus.ACTIVE);
-			gameService.save(curentGame);
-		} else {
-			curentGame.setState(GameStatus.END);
-			gameService.save(curentGame);
-		}
 
 		return new ResponseEntity<Object>(tryAdd, HttpStatus.OK);
 
+	}
+
+	@RequestMapping(value = "/gamestatus", method = RequestMethod.GET)
+	public ResponseEntity<Object> getChatsInHome(@RequestParam(name = "gameid", required = true) final Integer gameid) {
+		IGame curentGame = gameService.getFullInfo(gameid);
+		GameStatus gameStatus = curentGame.getState();
+
+		long playersCount = playerService.getPlayersCount(gameid);
+		if (playersCount > 1 && gameStatus.equals(GameStatus.END)) {
+			curentGame.setState(GameStatus.NEW);
+			gameService.save(curentGame);
+
+		}
+
+		List<ICardInGame> listCardsInGame;
+		if (gameStatus.equals(GameStatus.NEW)) {
+			for (int i = 0; i < 52; i++) {
+				ICardInGame newCardInGame = cardInGameService.createEntity();
+				List<ICard> listCard = cardService.getFullInfo();
+				newCardInGame.setCard(listCard.get(i));
+				newCardInGame.setGame(curentGame);
+				newCardInGame.setPlayer(null);
+				newCardInGame.setCardStatus(CardStatus.INDECK);
+				cardInGameService.save(newCardInGame);
+				curentGame.setState(GameStatus.ACTIVE);
+				gameService.save(curentGame);
+			}
+			listCardsInGame = cardInGameService.getAllCardsInGameByGame(gameid);
+			Collections.shuffle(listCardsInGame);
+		}
+
+		if (gameStatus.equals(GameStatus.ACTIVE)) {
+
+		}
+
+		return new ResponseEntity<Object>(HttpStatus.OK);
 	}
 
 	private PlayerPosition idToString(final Integer id) {

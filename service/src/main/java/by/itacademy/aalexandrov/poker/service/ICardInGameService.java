@@ -40,4 +40,7 @@ public interface ICardInGameService {
 	@Transactional
 	List<ICardInGame> getFullInfo();
 
+	@Transactional
+	List<ICardInGame> getAllCardsInGameByGame(Integer gameid);
+
 }

@@ -17,4 +17,6 @@ public interface ICardInGameDao extends IDao<ICardInGame, Integer> {
 
 	List<ICardInGame> getFullInfo();
 
+	List<ICardInGame> getAllCardsInGameByGame(Integer gameid);
+
 }

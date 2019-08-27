@@ -104,4 +104,9 @@ public class CardInGameServiceImpl implements ICardInGameService {
 		return dao.getFullInfo();
 	}
 
+	@Override
+	public List<ICardInGame> getAllCardsInGameByGame(Integer gameid) {
+		return dao.getAllCardsInGameByGame(gameid);
+	}
+
 }

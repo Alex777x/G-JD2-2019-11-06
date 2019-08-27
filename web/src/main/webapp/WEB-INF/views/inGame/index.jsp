@@ -30,125 +30,125 @@
 	</div>
 
 	<div id="shirt1" class="shirt1" style="display: none;">
-		<img id="card1" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;"/>
-		<img id="card1" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;"/>
+		<img id="card1" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" /> <img id="card1"
+			src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" />
 	</div>
 	<div id="playerData1" style="display: none;">
-		<p id = "player1Nick" style="position: absolute; color: yellow; left: 416px; top: 627px;"></p>
-		<p id = "player1Balance" style="position: absolute; color: yellow; left: 416px; top: 721px;"></p>
+		<p id="player1Nick" style="position: absolute; color: yellow; left: 416px; top: 627px;"></p>
+		<p id="player1Balance" style="position: absolute; color: yellow; left: 416px; top: 721px;"></p>
 	</div>
 	<div>
 		<img id="position1" onclick="f1(1)" class="img-thumbnail player1" src="${contextPath}/resources/img/sitTable.png" />
 	</div>
-	
+
 	<div id="shirt2" class="shirt2" style="display: none;">
-		<img id="card2" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;"/>
-		<img id="card2" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;"/>
+		<img id="card2" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" /> <img id="card2"
+			src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" />
 	</div>
 	<div id="playerData2" style="display: none;">
-		<p id = "player2Nick" style="position: absolute; color: yellow; left: 218px; top: 577px;"></p>
-		<p id = "player2Balance" style="position: absolute; color: yellow; left: 217px; top: 671px;"></p>
+		<p id="player2Nick" style="position: absolute; color: yellow; left: 218px; top: 577px;"></p>
+		<p id="player2Balance" style="position: absolute; color: yellow; left: 217px; top: 671px;"></p>
 	</div>
 	<div>
 		<img id="position2" onclick="f1(2)" class="img-thumbnail player2" src="${contextPath}/resources/img/sitTable.png" />
 	</div>
-	
+
 	<div id="shirt3" class="shirt3" style="display: none;">
-		<img id="card3" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;"/>
-		<img id="card3" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;"/>
+		<img id="card3" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" /> <img id="card3"
+			src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" />
 	</div>
 	<div id="playerData3" style="display: none;">
-		<p id = "player3Nick" style="position: absolute; color: yellow; left: 105px; top: 363px;"></p>
-		<p id = "player3Balance" style="position: absolute; color: yellow; left: 105px; top: 456px;"></p>
+		<p id="player3Nick" style="position: absolute; color: yellow; left: 105px; top: 363px;"></p>
+		<p id="player3Balance" style="position: absolute; color: yellow; left: 105px; top: 456px;"></p>
 	</div>
 	<div>
 		<img id="position3" onclick="f1(3)" class="img-thumbnail player3" src="${contextPath}/resources/img/sitTable.png" />
 	</div>
-	
+
 	<div id="shirt4" class="shirt4" style="display: none;">
-		<img id="card4" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;"/>
-		<img id="card4" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;"/>
+		<img id="card4" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" /> <img id="card4"
+			src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" />
 	</div>
 	<div id="playerData4" style="display: none;">
-		<p id = "player4Nick" style="position: absolute; color: yellow; left: 218px; top: 178px;"></p>
-		<p id = "player4Balance" style="position: absolute; color: yellow; left: 218px; top: 271px;"></p>
+		<p id="player4Nick" style="position: absolute; color: yellow; left: 218px; top: 178px;"></p>
+		<p id="player4Balance" style="position: absolute; color: yellow; left: 218px; top: 271px;"></p>
 	</div>
 	<div>
 		<img id="position4" onclick="f1(4)" class="img-thumbnail player4" src="${contextPath}/resources/img/sitTable.png" />
 	</div>
-	
+
 	<div id="shirt5" class="shirt5" style="display: none;">
-		<img id="card5" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;"/>
-		<img id="card5" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;"/>
+		<img id="card5" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" /> <img id="card5"
+			src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" />
 	</div>
 	<div id="playerData5" style="display: none;">
-		<p id = "player5Nick" style="position: absolute; color: yellow; left: 418px; top: 133px;"></p>
-		<p id = "player5Balance" style="position: absolute; color: yellow; left: 418px; top: 226px;"></p>
+		<p id="player5Nick" style="position: absolute; color: yellow; left: 418px; top: 133px;"></p>
+		<p id="player5Balance" style="position: absolute; color: yellow; left: 418px; top: 226px;"></p>
 	</div>
 	<div>
 		<img id="position5" onclick="f1(5)" class="img-thumbnail player5" src="${contextPath}/resources/img/sitTable.png" />
 	</div>
-	
+
 	<div id="shirt6" class="shirt6" style="display: none;">
-		<img id="card6" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;"/>
-		<img id="card6" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;"/>
+		<img id="card6" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" /> <img id="card6"
+			src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" />
 	</div>
 	<div id="playerData6" style="display: none;">
-		<p id = "player6Nick" style="position: absolute; color: yellow; left: 683px; top: 133px;"></p>
-		<p id = "player6Balance" style="position: absolute; color: yellow; left: 683px; top: 226px;"></p>
+		<p id="player6Nick" style="position: absolute; color: yellow; left: 683px; top: 133px;"></p>
+		<p id="player6Balance" style="position: absolute; color: yellow; left: 683px; top: 226px;"></p>
 	</div>
 	<div>
 		<img id="position6" onclick="f1(6)" class="img-thumbnail player6" src="${contextPath}/resources/img/sitTable.png" />
 	</div>
-	
+
 	<div id="shirt7" class="shirt7" style="display: none;">
-		<img id="card7" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;"/>
-		<img id="card7" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;"/>
+		<img id="card7" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" /> <img id="card7"
+			src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" />
 	</div>
 	<div id="playerData7" style="display: none;">
-		<p id = "player7Nick" style="position: absolute; color: yellow; left: 867px; top: 178px;"></p>
-		<p id = "player7Balance" style="position: absolute; color: yellow; left: 867px; top: 271px;"></p>
+		<p id="player7Nick" style="position: absolute; color: yellow; left: 867px; top: 178px;"></p>
+		<p id="player7Balance" style="position: absolute; color: yellow; left: 867px; top: 271px;"></p>
 	</div>
 	<div>
 		<img id="position7" onclick="f1(7)" class="img-thumbnail player7" src="${contextPath}/resources/img/sitTable.png" />
 	</div>
-	
+
 	<div id="shirt8" class="shirt8" style="display: none;">
-		<img id="card8" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;"/>
-		<img id="card8" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;"/>
+		<img id="card8" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" /> <img id="card8"
+			src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" />
 	</div>
 	<div id="playerData8" style="display: none;">
-		<p id = "player8Nick" style="position: absolute; color: yellow; left: 987px; top: 363px;"></p>
-		<p id = "player8Balance" style="position: absolute; color: yellow; left: 987px; top: 456px;"></p>
+		<p id="player8Nick" style="position: absolute; color: yellow; left: 987px; top: 363px;"></p>
+		<p id="player8Balance" style="position: absolute; color: yellow; left: 987px; top: 456px;"></p>
 	</div>
 	<div>
 		<img id="position8" onclick="f1(8)" class="img-thumbnail player8" src="${contextPath}/resources/img/sitTable.png" />
 	</div>
-	
+
 	<div id="shirt9" class="shirt9" style="display: none;">
-		<img id="card9" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;"/>
-		<img id="card9" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;"/>
+		<img id="card9" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" /> <img id="card9"
+			src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" />
 	</div>
 	<div id="playerData9" style="display: none;">
-		<p id = "player9Nick" style="position: absolute; color: yellow; left: 868px; top: 577px;"></p>
-		<p id = "player9Balance" style="position: absolute; color: yellow; left: 868px; top: 671px;"></p>
+		<p id="player9Nick" style="position: absolute; color: yellow; left: 868px; top: 577px;"></p>
+		<p id="player9Balance" style="position: absolute; color: yellow; left: 868px; top: 671px;"></p>
 	</div>
 	<div>
 		<img id="position9" onclick="f1(9)" class="img-thumbnail player9" src="${contextPath}/resources/img/sitTable.png" />
 	</div>
-	
+
 	<div id="shirt10" class="shirt10" style="display: none;">
-		<img id="card10" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;"/>
-		<img id="card10" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;"/>
+		<img id="card10" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" /> <img id="card10"
+			src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" />
 	</div>
 	<div id="playerData10" style="display: none;">
-		<p id = "player10Nick" style="position: absolute; color: yellow; left: 683px; top: 627px;"></p>
-		<p id = "player10Balance" style="position: absolute; color: yellow; left: 683px; top: 721px;"></p>
+		<p id="player10Nick" style="position: absolute; color: yellow; left: 683px; top: 627px;"></p>
+		<p id="player10Balance" style="position: absolute; color: yellow; left: 683px; top: 721px;"></p>
 	</div>
 	<div>
 		<img id="position10" onclick="f1(10)" class="img-thumbnail player10" src="${contextPath}/resources/img/sitTable.png" />
 	</div>
-	
+
 	<div>
 		<button id="btnFold" type="button" class="btn btn-success btn-lg btnFold">FOLD</button>
 	</div>
@@ -169,6 +169,22 @@
 			id="rangeinput1" step="1" onchange="input_text1.value = rangeinput1.value" />
 	</div>
 </div>
+
+<script>
+
+setInterval(function() {
+	$.ajax({
+		url : baseUrl + '/inGame/gamestatus?gameid=' + ${game.id},
+		type : 'get',
+		success : function(result) {
+			
+		}
+	});
+
+}, 2 * 1000);
+
+
+</script>
 
 <script type="text/javascript">
 jQuery(document).ready(function($){ 

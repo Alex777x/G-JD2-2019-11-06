@@ -34,4 +34,7 @@ public interface ICardService {
 	@Transactional
 	ICard createEntity();
 
+	@Transactional
+	List<ICard> getFullInfo();
+
 }

@@ -94,4 +94,9 @@ public class CardServiceImpl implements ICardService {
 		return dao.getCount(filter);
 	}
 
+	@Override
+	public List<ICard> getFullInfo() {
+		return dao.getFullInfo();
+	}
+
 }

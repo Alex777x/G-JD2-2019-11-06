@@ -147,7 +147,6 @@ public class PlayerController extends AbstractController {
 	public ResponseEntity<List<PlayerDTO>> getChatsInHome(
 			@RequestParam(name = "gameid", required = true) final Integer gameid) {
 		Integer loggedUserId = AuthHelper.getLoggedUserId();
-
 		List<IPlayer> players = playerService.getPlayersByGame(gameid);
 
 		for (IPlayer iPlayer : players) {

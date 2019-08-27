@@ -223,7 +223,7 @@ public class PlayerDaoImpl extends AbstractDaoImpl<IPlayer, Integer> implements 
 		from.fetch(Player_.game, JoinType.LEFT);
 		from.fetch(Player_.userAccount, JoinType.LEFT);
 		cq.where(cb.equal(from.get(Player_.game), id));
-
+		cq.orderBy(new OrderImpl(from.get(Player_.created), true));
 		cq.distinct(true);
 
 		final TypedQuery<IPlayer> q = em.createQuery(cq);
