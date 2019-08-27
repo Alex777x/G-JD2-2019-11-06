@@ -3,6 +3,4 @@
 <%@ taglib prefix="mytaglib" uri="my-custom-tags-uri"%>
 <%@ taglib prefix="jspFragments" tagdir="/WEB-INF/tags"%>
 
-<div>
-admin panel page
-</div>
+<div>admin panel page</div>
