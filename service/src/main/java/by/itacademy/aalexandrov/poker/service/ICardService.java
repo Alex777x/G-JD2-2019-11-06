@@ -37,4 +37,7 @@ public interface ICardService {
 	@Transactional
 	List<ICard> getFullInfo();
 
+	@Transactional
+	ICard getFullInfo(Integer id);
+
 }

@@ -113,4 +113,21 @@ public class CardDaoImpl extends AbstractDaoImpl<ICard, Integer> implements ICar
 		return q.getResultList();
 	}
 
+	@Override
+	public ICard getFullInfo(Integer id) {
+		final EntityManager em = getEntityManager();
+		final CriteriaBuilder cb = em.getCriteriaBuilder();
+
+		final CriteriaQuery<ICard> cq = cb.createQuery(ICard.class);
+		final Root<Card> from = cq.from(Card.class);
+
+		cq.select(from);
+		cq.distinct(true);
+		cq.where(cb.equal(from.get(Card_.id), id));
+
+		final TypedQuery<ICard> q = em.createQuery(cq);
+
+		return getSingleResult(q);
+	}
+
 }

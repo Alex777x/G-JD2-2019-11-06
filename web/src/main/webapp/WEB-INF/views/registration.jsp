@@ -1,7 +1,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<h2 class="header">User registration</h2>
+<h2 class="header" style="color: goldenrod;">User registration</h2>
 
 <div class="row">
 	<form:form class="col-md registration-form" method="POST" action="${pagesRegistration}" modelAttribute="formRegistrationUserAccount">

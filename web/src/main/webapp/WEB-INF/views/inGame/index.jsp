@@ -30,7 +30,7 @@
 	</div>
 
 	<div id="shirt1" class="shirt1" style="display: none;">
-		<img id="card1" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" /> <img id="card1"
+		<img id="playerCard1" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" /> <img id="playerCard11"
 			src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" />
 	</div>
 	<div id="playerData1" style="display: none;">
@@ -42,7 +42,7 @@
 	</div>
 
 	<div id="shirt2" class="shirt2" style="display: none;">
-		<img id="card2" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" /> <img id="card2"
+		<img id="playerCard2" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" /> <img id="playerCard22"
 			src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" />
 	</div>
 	<div id="playerData2" style="display: none;">
@@ -54,7 +54,7 @@
 	</div>
 
 	<div id="shirt3" class="shirt3" style="display: none;">
-		<img id="card3" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" /> <img id="card3"
+		<img id="playerCard3" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" /> <img id="playerCard33"
 			src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" />
 	</div>
 	<div id="playerData3" style="display: none;">
@@ -66,7 +66,7 @@
 	</div>
 
 	<div id="shirt4" class="shirt4" style="display: none;">
-		<img id="card4" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" /> <img id="card4"
+		<img id="playerCard4" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" /> <img id="playerCard44"
 			src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" />
 	</div>
 	<div id="playerData4" style="display: none;">
@@ -78,7 +78,7 @@
 	</div>
 
 	<div id="shirt5" class="shirt5" style="display: none;">
-		<img id="card5" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" /> <img id="card5"
+		<img id="playerCard5" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" /> <img id="playerCard55"
 			src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" />
 	</div>
 	<div id="playerData5" style="display: none;">
@@ -90,7 +90,7 @@
 	</div>
 
 	<div id="shirt6" class="shirt6" style="display: none;">
-		<img id="card6" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" /> <img id="card6"
+		<img id="playerCard6" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" /> <img id="playerCard66"
 			src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" />
 	</div>
 	<div id="playerData6" style="display: none;">
@@ -102,7 +102,7 @@
 	</div>
 
 	<div id="shirt7" class="shirt7" style="display: none;">
-		<img id="card7" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" /> <img id="card7"
+		<img id="playerCard7" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" /> <img id="playerCard77"
 			src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" />
 	</div>
 	<div id="playerData7" style="display: none;">
@@ -114,7 +114,7 @@
 	</div>
 
 	<div id="shirt8" class="shirt8" style="display: none;">
-		<img id="card8" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" /> <img id="card8"
+		<img id="playerCard8" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" /> <img id="playerCard88"
 			src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" />
 	</div>
 	<div id="playerData8" style="display: none;">
@@ -126,7 +126,7 @@
 	</div>
 
 	<div id="shirt9" class="shirt9" style="display: none;">
-		<img id="card9" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" /> <img id="card9"
+		<img id="playerCard9" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" /> <img id="playerCard99"
 			src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" />
 	</div>
 	<div id="playerData9" style="display: none;">
@@ -138,7 +138,7 @@
 	</div>
 
 	<div id="shirt10" class="shirt10" style="display: none;">
-		<img id="card10" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" /> <img id="card10"
+		<img id="playerCard10" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" /> <img id="playerCard101"
 			src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" />
 	</div>
 	<div id="playerData10" style="display: none;">
@@ -171,28 +171,51 @@
 </div>
 
 <script>
+// var baseUrl = '${pageContext.request.contextPath}';
+// setInterval(function() {
+// 	$.ajax({
+// 		url : baseUrl + '/inGame/gamestatus?gameid=' + ${game.id},
+// 		type : 'get',
+// 		success : function(result) {
+// 			var $card1 = $("#playerCard1").attr("src", baseUrl + result.card1);
+// 			var $card2 = $("#playerCard2").attr("src", baseUrl + result.card2);
+// 		}
+// 	});
 
-setInterval(function() {
-	$.ajax({
-		url : baseUrl + '/inGame/gamestatus?gameid=' + ${game.id},
-		type : 'get',
-		success : function(result) {
-			
-		}
-	});
-
-}, 2 * 1000);
+// }, 2 * 1000);
 
 
 </script>
 
-<script type="text/javascript">
+<script>
+var baseUrl = '${pageContext.request.contextPath}';
+	function f1(arg) {
+		$.ajax({
+			url : baseUrl + '/inGame/setposition?id=' + arg + '&gameid=' + ${game.id},
+			type : 'post',
+			success : function(result) {
+				if (result == false) {
+					toastr.success('Now the action is not available!');
+				} else {
+					toastr.success('Have a nice game!');
+					$("#position" + arg).attr("src", baseUrl + '/resources/img/avatars/position' + arg + '.jpg');
+					$("#shirt" + arg).show();
+					$("#playerData" + arg).show();
+				} 
+			}
+		});
+
+	}
+</script>
+
+
+<script>
 jQuery(document).ready(function($){ 
 	var baseUrl = '${pageContext.request.contextPath}';
 	var $curentTime = $.now();
 	setInterval(function() {
 		$.ajax({
-			url : baseUrl + '/player/playerout?gameid=' + ${game.id},
+			url : baseUrl + '/inGame/gamestatus?gameid=' + ${game.id},
 			type : 'get',
 			success : function(result) {
 				
@@ -209,6 +232,8 @@ jQuery(document).ready(function($){
 						$("#playerData" + 1).show();
 						var $nickname = $('#player1Nick').text(player.nick);
 						var $stack = $('#player1Balance').text(player.stack);
+						$("#playerCard1").attr("src", baseUrl + player.card1);
+						$("#playerCard11").attr("src", baseUrl + player.card2);
 					} 
 					if (player.position == "TWO") {
 						$("#position" + 2).attr("src", baseUrl + '/resources/img/avatars/position2.jpg');
@@ -216,6 +241,8 @@ jQuery(document).ready(function($){
 						$("#playerData" + 2).show();
 						var $nickname = $('#player2Nick').text(player.nick);
 						var $stack = $('#player2Balance').text(player.stack);
+						$("#playerCard2").attr("src", baseUrl + player.card1);
+						$("#playerCard22").attr("src", baseUrl + player.card2);
 					}
 					if (player.position == "THREE") {
 						$("#position" + 3).attr("src", baseUrl + '/resources/img/avatars/position3.jpg');
@@ -223,6 +250,8 @@ jQuery(document).ready(function($){
 						$("#playerData" + 3).show();
 						var $nickname = $('#player3Nick').text(player.nick);
 						var $stack = $('#player3Balance').text(player.stack);
+						$("#playerCard3").attr("src", baseUrl + player.card1);
+						$("#playerCard33").attr("src", baseUrl + player.card2);
 					}
 					if (player.position == "FOUR") {
 						$("#position" + 4).attr("src", baseUrl + '/resources/img/avatars/position4.jpg');
@@ -230,6 +259,8 @@ jQuery(document).ready(function($){
 						$("#playerData" + 4).show();
 						var $nickname = $('#player4Nick').text(player.nick);
 						var $stack = $('#player4Balance').text(player.stack);
+						$("#playerCard4").attr("src", baseUrl + player.card1);
+						$("#playerCard44").attr("src", baseUrl + player.card2);
 					} 
 					if (player.position == "FIVE") {
 						$("#position" + 5).attr("src", baseUrl + '/resources/img/avatars/position5.jpg');
@@ -237,6 +268,8 @@ jQuery(document).ready(function($){
 						$("#playerData" + 5).show();
 						var $nickname = $('#player5Nick').text(player.nick);
 						var $stack = $('#player5Balance').text(player.stack);
+						$("#playerCard5").attr("src", baseUrl + player.card1);
+						$("#playerCard55").attr("src", baseUrl + player.card2);
 					}
 					if (player.position == "SIX") {
 						$("#position" + 6).attr("src", baseUrl + '/resources/img/avatars/position6.jpg');
@@ -244,6 +277,8 @@ jQuery(document).ready(function($){
 						$("#playerData" + 6).show();
 						var $nickname = $('#player6Nick').text(player.nick);
 						var $stack = $('#player6Balance').text(player.stack);
+						$("#playerCard6").attr("src", baseUrl + player.card1);
+						$("#playerCard66").attr("src", baseUrl + player.card2);
 					} 
 					if (player.position == "SEVEN") {
 						$("#position" + 7).attr("src", baseUrl + '/resources/img/avatars/position7.jpg');
@@ -251,6 +286,8 @@ jQuery(document).ready(function($){
 						$("#playerData" + 7).show();
 						var $nickname = $('#player7Nick').text(player.nick);
 						var $stack = $('#player7Balance').text(player.stack);
+						$("#playerCard7").attr("src", baseUrl + player.card1);
+						$("#playerCard77").attr("src", baseUrl + player.card2);
 					} 
 					if (player.position == "EIGHT") {
 						$("#position" + 8).attr("src", baseUrl + '/resources/img/avatars/position8.jpg');
@@ -258,6 +295,8 @@ jQuery(document).ready(function($){
 						$("#playerData" + 8).show();
 						var $nickname = $('#player8Nick').text(player.nick);
 						var $stack = $('#player8Balance').text(player.stack);
+						$("#playerCard8").attr("src", baseUrl + player.card1);
+						$("#playerCard88").attr("src", baseUrl + player.card2);
 					} 
 					if (player.position == "NINE") {
 						$("#position" + 9).attr("src", baseUrl + '/resources/img/avatars/position9.jpg');
@@ -265,6 +304,8 @@ jQuery(document).ready(function($){
 						$("#playerData" + 9).show();
 						var $nickname = $('#player9Nick').text(player.nick);
 						var $stack = $('#player9Balance').text(player.stack);
+						$("#playerCard9").attr("src", baseUrl + player.card1);
+						$("#playerCard99").attr("src", baseUrl + player.card2);
 					}
 					if (player.position == "TEN") {
 						$("#position" + 10).attr("src", baseUrl + '/resources/img/avatars/position10.jpg');
@@ -272,6 +313,8 @@ jQuery(document).ready(function($){
 						$("#playerData" + 10).show();
 						var $nickname = $('#player10Nick').text(player.nick);
 						var $stack = $('#player10Balance').text(player.stack);
+						$("#playerCard10").attr("src", baseUrl + player.card1);
+						$("#playerCard101").attr("src", baseUrl + player.card2);
 					} 
 				});
 			}
@@ -279,30 +322,6 @@ jQuery(document).ready(function($){
 
 	}, 1000);
 });
-</script>
-<script>
-var baseUrl = '${pageContext.request.contextPath}';
-	function f1(arg) {
-		$.ajax({
-			url : baseUrl + '/inGame/setposition?id=' + arg + '&gameid=' + ${game.id},
-			type : 'post',
-			success : function(result) {
-				if (result == false) {
-					toastr.success('Is this seat taken!');
-				} else if (result == true) {
-					toastr.success('Have a nice game!');
-					$("#position" + arg).attr("src", baseUrl + '/resources/img/avatars/position' + arg + '.jpg');
-					$("#shirt" + arg).show();
-					$("#playerData" + arg).show();
-				} else if (result == 'CHANGE') {
-					toastr.success('You can not change position after the start of the game!');
-				} else {
-					toastr.success('Location changed!');
-				}
-			}
-		});
-
-	}
 </script>
 
 

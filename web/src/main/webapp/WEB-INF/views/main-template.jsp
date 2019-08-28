@@ -20,6 +20,7 @@
 <c:set var="pagesAdminPanel" value="${contextPath}/adminPanel" scope="request" />
 <c:set var="pagesPersonalArea" value="${contextPath}/personalArea" scope="request" />
 <c:set var="pagesInGame" value="${contextPath}/inGame" scope="request" />
+<c:set var="pagesErrors" value="${contextPath}/errors" scope="request" />
 
 
 

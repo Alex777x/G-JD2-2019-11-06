@@ -11,8 +11,8 @@ body {
 	display: flex;
 	min-height: 100vh;
 	flex-direction: column;
-	background-image: url(grey-plaster.png);
-	background-attachment: fixed;
+	background-image: url(casino_green.jpg);
+/* 	background-attachment: fixed; */
 	filter: drop-shadow(2px 4px 6px black);
 }
 
@@ -41,8 +41,10 @@ main {
 }
 
 .navbar {
-	background-color: midnightblue;
+/* 	background-color: midnightblue; */
 /* 	background: radial-gradient(blue, midnightblue); */
+	background-image: url(header-bg-1.jpg);
+	background-size: 100%;
 }
 
 .chatOut {
@@ -67,11 +69,9 @@ main {
 .chatOver {
 	height: 400px;
 	border-radius: 5px;
-	overflow-x: hidden;
 }
 
 .gamesOver {
-	height: 695px;
 	border-radius: 5px;
 }
 
@@ -125,8 +125,9 @@ main {
 }
 
 .page-footer {
-	background-color: midnightblue;
-	margin-top: 5%;
+/* 	background-color: midnightblue; */
+	background-image: url(header-bg-1.jpg);
+	background-size: 100%;
 	color: white;
 }
 
