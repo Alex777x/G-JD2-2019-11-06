@@ -170,22 +170,6 @@
 	</div>
 </div>
 
-<script>
-// var baseUrl = '${pageContext.request.contextPath}';
-// setInterval(function() {
-// 	$.ajax({
-// 		url : baseUrl + '/inGame/gamestatus?gameid=' + ${game.id},
-// 		type : 'get',
-// 		success : function(result) {
-// 			var $card1 = $("#playerCard1").attr("src", baseUrl + result.card1);
-// 			var $card2 = $("#playerCard2").attr("src", baseUrl + result.card2);
-// 		}
-// 	});
-
-// }, 2 * 1000);
-
-
-</script>
 
 <script>
 var baseUrl = '${pageContext.request.contextPath}';
@@ -232,8 +216,10 @@ jQuery(document).ready(function($){
 						$("#playerData" + 1).show();
 						var $nickname = $('#player1Nick').text(player.nick);
 						var $stack = $('#player1Balance').text(player.stack);
+						if(player.card1 != null) {
 						$("#playerCard1").attr("src", baseUrl + player.card1);
 						$("#playerCard11").attr("src", baseUrl + player.card2);
+						}
 					} 
 					if (player.position == "TWO") {
 						$("#position" + 2).attr("src", baseUrl + '/resources/img/avatars/position2.jpg');
@@ -241,8 +227,10 @@ jQuery(document).ready(function($){
 						$("#playerData" + 2).show();
 						var $nickname = $('#player2Nick').text(player.nick);
 						var $stack = $('#player2Balance').text(player.stack);
+						if(player.card1 != null) {
 						$("#playerCard2").attr("src", baseUrl + player.card1);
 						$("#playerCard22").attr("src", baseUrl + player.card2);
+						}
 					}
 					if (player.position == "THREE") {
 						$("#position" + 3).attr("src", baseUrl + '/resources/img/avatars/position3.jpg');
@@ -250,8 +238,10 @@ jQuery(document).ready(function($){
 						$("#playerData" + 3).show();
 						var $nickname = $('#player3Nick').text(player.nick);
 						var $stack = $('#player3Balance').text(player.stack);
+						if(player.card1 != null) {
 						$("#playerCard3").attr("src", baseUrl + player.card1);
 						$("#playerCard33").attr("src", baseUrl + player.card2);
+						}
 					}
 					if (player.position == "FOUR") {
 						$("#position" + 4).attr("src", baseUrl + '/resources/img/avatars/position4.jpg');
@@ -259,8 +249,10 @@ jQuery(document).ready(function($){
 						$("#playerData" + 4).show();
 						var $nickname = $('#player4Nick').text(player.nick);
 						var $stack = $('#player4Balance').text(player.stack);
+						if(player.card1 != null) {
 						$("#playerCard4").attr("src", baseUrl + player.card1);
 						$("#playerCard44").attr("src", baseUrl + player.card2);
+						}
 					} 
 					if (player.position == "FIVE") {
 						$("#position" + 5).attr("src", baseUrl + '/resources/img/avatars/position5.jpg');
@@ -268,8 +260,10 @@ jQuery(document).ready(function($){
 						$("#playerData" + 5).show();
 						var $nickname = $('#player5Nick').text(player.nick);
 						var $stack = $('#player5Balance').text(player.stack);
+						if(player.card1 != null) {
 						$("#playerCard5").attr("src", baseUrl + player.card1);
 						$("#playerCard55").attr("src", baseUrl + player.card2);
+						}
 					}
 					if (player.position == "SIX") {
 						$("#position" + 6).attr("src", baseUrl + '/resources/img/avatars/position6.jpg');
@@ -277,8 +271,10 @@ jQuery(document).ready(function($){
 						$("#playerData" + 6).show();
 						var $nickname = $('#player6Nick').text(player.nick);
 						var $stack = $('#player6Balance').text(player.stack);
+						if(player.card1 != null) {
 						$("#playerCard6").attr("src", baseUrl + player.card1);
 						$("#playerCard66").attr("src", baseUrl + player.card2);
+						}
 					} 
 					if (player.position == "SEVEN") {
 						$("#position" + 7).attr("src", baseUrl + '/resources/img/avatars/position7.jpg');
@@ -286,8 +282,10 @@ jQuery(document).ready(function($){
 						$("#playerData" + 7).show();
 						var $nickname = $('#player7Nick').text(player.nick);
 						var $stack = $('#player7Balance').text(player.stack);
+						if(player.card1 != null) {
 						$("#playerCard7").attr("src", baseUrl + player.card1);
 						$("#playerCard77").attr("src", baseUrl + player.card2);
+						}
 					} 
 					if (player.position == "EIGHT") {
 						$("#position" + 8).attr("src", baseUrl + '/resources/img/avatars/position8.jpg');
@@ -295,8 +293,10 @@ jQuery(document).ready(function($){
 						$("#playerData" + 8).show();
 						var $nickname = $('#player8Nick').text(player.nick);
 						var $stack = $('#player8Balance').text(player.stack);
+						if(player.card1 != null) {
 						$("#playerCard8").attr("src", baseUrl + player.card1);
 						$("#playerCard88").attr("src", baseUrl + player.card2);
+						}
 					} 
 					if (player.position == "NINE") {
 						$("#position" + 9).attr("src", baseUrl + '/resources/img/avatars/position9.jpg');
@@ -304,8 +304,10 @@ jQuery(document).ready(function($){
 						$("#playerData" + 9).show();
 						var $nickname = $('#player9Nick').text(player.nick);
 						var $stack = $('#player9Balance').text(player.stack);
+						if(player.card1 != null) {
 						$("#playerCard9").attr("src", baseUrl + player.card1);
 						$("#playerCard99").attr("src", baseUrl + player.card2);
+						}
 					}
 					if (player.position == "TEN") {
 						$("#position" + 10).attr("src", baseUrl + '/resources/img/avatars/position10.jpg');
@@ -313,8 +315,10 @@ jQuery(document).ready(function($){
 						$("#playerData" + 10).show();
 						var $nickname = $('#player10Nick').text(player.nick);
 						var $stack = $('#player10Balance').text(player.stack);
+						if(player.card1 != null) {
 						$("#playerCard10").attr("src", baseUrl + player.card1);
 						$("#playerCard101").attr("src", baseUrl + player.card2);
+						}
 					} 
 				});
 			}

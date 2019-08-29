@@ -180,8 +180,11 @@ public class InGameController extends AbstractController {
 			gameService.save(curentGame);
 
 		}
+		if (playersCount <= 1) {
+			curentGame.setState(GameStatus.END);
+			gameService.save(curentGame);
+		}
 
-		List<ICardInGame> listCardsInGame = cardInGameService.getAllCardsInGameByGame(gameid);
 		if (gameStatus.equals(GameStatus.NEW)) {
 			for (int i = 0; i < 52; i++) {
 				ICardInGame newCardInGame = cardInGameService.createEntity();
@@ -194,33 +197,39 @@ public class InGameController extends AbstractController {
 				curentGame.setState(GameStatus.ACTIVE);
 				gameService.save(curentGame);
 			}
-
+			List<ICardInGame> listCardsInGame = cardInGameService.getAllCardsInGameByGame(gameid);
 			Collections.shuffle(listCardsInGame);
-		}
 
-		List<IPlayer> players1 = playerService.getPlayersByGame(gameid);
-		List<PlayerDTO> dtop = players1.stream().map(playerToDtoConverter).collect(Collectors.toList());
-
-		if (gameStatus.equals(GameStatus.ACTIVE)) {
-//			players1 = playerService.getPlayersByGame(gameid);
-//			dtop = players1.stream().map(playerToDtoConverter).collect(Collectors.toList());
 			int index = 0;
-			for (PlayerDTO playerDTO : dtop) {
+			for (IPlayer iPlayer2 : players) {
 				ICard card = cardService.getFullInfo(listCardsInGame.get(index).getCard().getId());
-				playerDTO.setCard1(card.getFilename());
+				iPlayer2.setCard1(card.getFilename());
 				index++;
 				ICard card2 = cardService.getFullInfo(listCardsInGame.get(index).getCard().getId());
-				playerDTO.setCard2(card2.getFilename());
+				iPlayer2.setCard2(card2.getFilename());
 				index++;
-				IUserAccount user = userAccountService.getFullInfo(playerDTO.getUserAccountId());
-				playerDTO.setNick(user.getNickname());
+				iPlayer2.setState(PlayerStatus.DEALER);
+				playerService.save(iPlayer2);
 
-				playerDTO.setState(PlayerStatus.DEALER);
 			}
-			return new ResponseEntity<List<PlayerDTO>>(dtop, HttpStatus.OK);
+
 		}
 
+		if (gameStatus.equals(GameStatus.ACTIVE)) {
+			List<PlayerDTO> dtop = players.stream().map(playerToDtoConverter).collect(Collectors.toList());
+			setNickNamesForPlayers(dtop);
+			return new ResponseEntity<List<PlayerDTO>>(dtop, HttpStatus.OK);
+		}
+		List<PlayerDTO> dtop = players.stream().map(playerToDtoConverter).collect(Collectors.toList());
+		setNickNamesForPlayers(dtop);
 		return new ResponseEntity<List<PlayerDTO>>(dtop, HttpStatus.OK);
+	}
+
+	private void setNickNamesForPlayers(List<PlayerDTO> dtop) {
+		for (PlayerDTO playerDTO : dtop) {
+			IUserAccount user = userAccountService.getFullInfo(playerDTO.getUserAccountId());
+			playerDTO.setNick(user.getNickname());
+		}
 	}
 
 	private PlayerPosition idToString(final Integer id) {

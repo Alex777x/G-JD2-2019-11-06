@@ -42,6 +42,8 @@ public class PlayerFromDTOConverter implements Function<PlayerDTO, IPlayer> {
 		entity.setInGame(dto.isInGame());
 		entity.setState(dto.getState());
 		entity.setStack(dto.getStack());
+		entity.setCard1(dto.getCard1());
+		entity.setCard2(dto.getCard2());
 
 		return entity;
 

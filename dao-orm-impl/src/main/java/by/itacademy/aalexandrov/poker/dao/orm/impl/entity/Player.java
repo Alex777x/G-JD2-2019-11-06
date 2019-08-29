@@ -36,8 +36,34 @@ public class Player extends BaseEntity implements IPlayer {
 	@Column
 	private double stack;
 
+	@Column
+	private String card1;
+
+	@Column
+	private String card2;
+
 	@Transient
 	private String upperCaseName;
+
+	@Override
+	public String getCard1() {
+		return card1;
+	}
+
+	@Override
+	public void setCard1(String card1) {
+		this.card1 = card1;
+	}
+
+	@Override
+	public String getCard2() {
+		return card2;
+	}
+
+	@Override
+	public void setCard2(String card2) {
+		this.card2 = card2;
+	}
 
 	public String getUpperCaseName() {
 		return upperCaseName;
