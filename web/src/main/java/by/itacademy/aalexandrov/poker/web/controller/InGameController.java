@@ -164,7 +164,7 @@ public class InGameController extends AbstractController {
 		try {
 			dto = playerToDtoConverter.apply(playerService.getPlayerByUser(loggedUserId));
 		} catch (Exception e) {
-			// TODO: handle exception
+
 		}
 
 		IPlayer entity;
@@ -223,6 +223,34 @@ public class InGameController extends AbstractController {
 		List<PlayerDTO> dtop = players.stream().map(playerToDtoConverter).collect(Collectors.toList());
 		setNickNamesForPlayers(dtop);
 		return new ResponseEntity<List<PlayerDTO>>(dtop, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/getPlayerCards", method = RequestMethod.GET)
+	public ResponseEntity<PlayerDTO> getPlayerCard(
+			@RequestParam(name = "gameid", required = true) final Integer gameid) {
+		Integer loggedUserId = AuthHelper.getLoggedUserId();
+		IPlayer player = playerService.getPlayerByUserAccunt(loggedUserId);
+		PlayerDTO dto = playerToDtoConverter.apply(player);
+		return new ResponseEntity<PlayerDTO>(dto, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/getPlayerStep", method = RequestMethod.GET)
+	public ResponseEntity<List<PlayerDTO>> getPlayerStep(
+			@RequestParam(name = "gameid", required = true) final Integer gameid) {
+
+		List<IPlayer> players = playerService.getPlayersByGame(gameid);
+		List<PlayerDTO> dto = players.stream().map(playerToDtoConverter).collect(Collectors.toList());
+
+		return new ResponseEntity<List<PlayerDTO>>(dto, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/getGameState", method = RequestMethod.GET)
+	public ResponseEntity<GameDTO> getGameState(@RequestParam(name = "gameid", required = true) final Integer gameid) {
+
+		IGame game = gameService.getFullInfo(gameid);
+		GameDTO dto = gameToDtoConverter.apply(game);
+
+		return new ResponseEntity<GameDTO>(dto, HttpStatus.OK);
 	}
 
 	private void setNickNamesForPlayers(List<PlayerDTO> dtop) {
