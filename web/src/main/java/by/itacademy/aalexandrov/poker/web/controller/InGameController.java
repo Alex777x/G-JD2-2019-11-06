@@ -229,7 +229,13 @@ public class InGameController extends AbstractController {
 	public ResponseEntity<PlayerDTO> getPlayerCard(
 			@RequestParam(name = "gameid", required = true) final Integer gameid) {
 		Integer loggedUserId = AuthHelper.getLoggedUserId();
-		IPlayer player = playerService.getPlayerByUserAccunt(loggedUserId);
+		IPlayer player = null;
+		try {
+			player = playerService.getPlayerByUserAccunt(loggedUserId);
+		} catch (NullPointerException e) {
+
+		}
+
 		PlayerDTO dto = playerToDtoConverter.apply(player);
 		return new ResponseEntity<PlayerDTO>(dto, HttpStatus.OK);
 	}
