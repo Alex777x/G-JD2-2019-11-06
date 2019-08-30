@@ -29,4 +29,12 @@ public interface IPlayer extends IBaseEntity {
 
 	IGame getGame();
 
+	void setCard2(String card2);
+
+	String getCard2();
+
+	void setCard1(String card1);
+
+	String getCard1();
+
 }

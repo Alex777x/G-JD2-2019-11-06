@@ -1,10 +1,12 @@
 package by.itacademy.aalexandrov.poker.web.controller;
 
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -32,9 +34,12 @@ import by.itacademy.aalexandrov.poker.service.ITransactionService;
 import by.itacademy.aalexandrov.poker.service.IUserAccountService;
 import by.itacademy.aalexandrov.poker.web.converter.GameFromDTOConverter;
 import by.itacademy.aalexandrov.poker.web.converter.GameToDTOConverter;
+import by.itacademy.aalexandrov.poker.web.converter.PlayerFromDTOConverter;
+import by.itacademy.aalexandrov.poker.web.converter.PlayerToDTOConverter;
 import by.itacademy.aalexandrov.poker.web.converter.TransactionToDTOConverter;
 import by.itacademy.aalexandrov.poker.web.converter.UserAccountToDTOConverter;
 import by.itacademy.aalexandrov.poker.web.dto.GameDTO;
+import by.itacademy.aalexandrov.poker.web.dto.PlayerDTO;
 import by.itacademy.aalexandrov.poker.web.dto.UserAccountDTO;
 import by.itacademy.aalexandrov.poker.web.security.AuthHelper;
 
@@ -50,6 +55,10 @@ public class InGameController extends AbstractController {
 	private GameFromDTOConverter gameFromDtoConverter;
 	@Autowired
 	private IPlayerService playerService;
+	@Autowired
+	private PlayerToDTOConverter playerToDtoConverter;
+	@Autowired
+	private PlayerFromDTOConverter playerFromDtoConverter;
 	@Autowired
 	private IUserAccountService userAccountService;
 	@Autowired
@@ -97,7 +106,12 @@ public class InGameController extends AbstractController {
 			positions.add(i);
 		}
 
-		boolean tryAdd = positions.add(pos);
+		boolean tryAdd;
+		if (curentGame.getState().equals(GameStatus.ACTIVE)) {
+			tryAdd = false;
+		} else {
+			tryAdd = positions.add(pos);
+		}
 
 		if (tryAdd) {
 			try {
@@ -114,7 +128,7 @@ public class InGameController extends AbstractController {
 				newPlayer.setStack(balance);
 				playerService.save(newPlayer);
 			} catch (NullPointerException e) {
-				return new ResponseEntity<Object>("CHANGE", HttpStatus.OK);
+
 			}
 
 		}
@@ -124,9 +138,41 @@ public class InGameController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/gamestatus", method = RequestMethod.GET)
-	public ResponseEntity<Object> getChatsInHome(@RequestParam(name = "gameid", required = true) final Integer gameid) {
+	public ResponseEntity<List<PlayerDTO>> getGameStatus(
+			@RequestParam(name = "gameid", required = true) final Integer gameid) {
 		IGame curentGame = gameService.getFullInfo(gameid);
+		Integer loggedUserId = AuthHelper.getLoggedUserId();
 		GameStatus gameStatus = curentGame.getState();
+
+		List<IPlayer> players = playerService.getPlayersByGame(gameid);
+
+		for (IPlayer iPlayer : players) {
+			Date lastUpdated = iPlayer.getUpdated();
+			long milli = lastUpdated.getTime();
+			Date curentTime = new Date();
+			long curentMilli = curentTime.getTime();
+			long diff = curentMilli - milli;
+
+			if (diff > 10000) {
+				iPlayer.setInGame(false);
+				playerService.delete(iPlayer.getId());
+			}
+
+		}
+
+		PlayerDTO dto = null;
+		try {
+			dto = playerToDtoConverter.apply(playerService.getPlayerByUser(loggedUserId));
+		} catch (Exception e) {
+
+		}
+
+		IPlayer entity;
+		if (dto != null) {
+			entity = playerFromDtoConverter.apply(dto);
+			entity.setUpdated(new Date());
+			playerService.save(entity);
+		}
 
 		long playersCount = playerService.getPlayersCount(gameid);
 		if (playersCount > 1 && gameStatus.equals(GameStatus.END)) {
@@ -134,8 +180,11 @@ public class InGameController extends AbstractController {
 			gameService.save(curentGame);
 
 		}
+		if (playersCount <= 1) {
+			curentGame.setState(GameStatus.END);
+			gameService.save(curentGame);
+		}
 
-		List<ICardInGame> listCardsInGame;
 		if (gameStatus.equals(GameStatus.NEW)) {
 			for (int i = 0; i < 52; i++) {
 				ICardInGame newCardInGame = cardInGameService.createEntity();
@@ -148,15 +197,67 @@ public class InGameController extends AbstractController {
 				curentGame.setState(GameStatus.ACTIVE);
 				gameService.save(curentGame);
 			}
-			listCardsInGame = cardInGameService.getAllCardsInGameByGame(gameid);
+			List<ICardInGame> listCardsInGame = cardInGameService.getAllCardsInGameByGame(gameid);
 			Collections.shuffle(listCardsInGame);
+
+			int index = 0;
+			for (IPlayer iPlayer2 : players) {
+				ICard card = cardService.getFullInfo(listCardsInGame.get(index).getCard().getId());
+				iPlayer2.setCard1(card.getFilename());
+				index++;
+				ICard card2 = cardService.getFullInfo(listCardsInGame.get(index).getCard().getId());
+				iPlayer2.setCard2(card2.getFilename());
+				index++;
+				iPlayer2.setState(PlayerStatus.DEALER);
+				playerService.save(iPlayer2);
+
+			}
+
 		}
 
 		if (gameStatus.equals(GameStatus.ACTIVE)) {
-
+			List<PlayerDTO> dtop = players.stream().map(playerToDtoConverter).collect(Collectors.toList());
+			setNickNamesForPlayers(dtop);
+			return new ResponseEntity<List<PlayerDTO>>(dtop, HttpStatus.OK);
 		}
+		List<PlayerDTO> dtop = players.stream().map(playerToDtoConverter).collect(Collectors.toList());
+		setNickNamesForPlayers(dtop);
+		return new ResponseEntity<List<PlayerDTO>>(dtop, HttpStatus.OK);
+	}
 
-		return new ResponseEntity<Object>(HttpStatus.OK);
+	@RequestMapping(value = "/getPlayerCards", method = RequestMethod.GET)
+	public ResponseEntity<PlayerDTO> getPlayerCard(
+			@RequestParam(name = "gameid", required = true) final Integer gameid) {
+		Integer loggedUserId = AuthHelper.getLoggedUserId();
+		IPlayer player = playerService.getPlayerByUserAccunt(loggedUserId);
+		PlayerDTO dto = playerToDtoConverter.apply(player);
+		return new ResponseEntity<PlayerDTO>(dto, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/getPlayerStep", method = RequestMethod.GET)
+	public ResponseEntity<List<PlayerDTO>> getPlayerStep(
+			@RequestParam(name = "gameid", required = true) final Integer gameid) {
+
+		List<IPlayer> players = playerService.getPlayersByGame(gameid);
+		List<PlayerDTO> dto = players.stream().map(playerToDtoConverter).collect(Collectors.toList());
+
+		return new ResponseEntity<List<PlayerDTO>>(dto, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/getGameState", method = RequestMethod.GET)
+	public ResponseEntity<GameDTO> getGameState(@RequestParam(name = "gameid", required = true) final Integer gameid) {
+
+		IGame game = gameService.getFullInfo(gameid);
+		GameDTO dto = gameToDtoConverter.apply(game);
+
+		return new ResponseEntity<GameDTO>(dto, HttpStatus.OK);
+	}
+
+	private void setNickNamesForPlayers(List<PlayerDTO> dtop) {
+		for (PlayerDTO playerDTO : dtop) {
+			IUserAccount user = userAccountService.getFullInfo(playerDTO.getUserAccountId());
+			playerDTO.setNick(user.getNickname());
+		}
 	}
 
 	private PlayerPosition idToString(final Integer id) {

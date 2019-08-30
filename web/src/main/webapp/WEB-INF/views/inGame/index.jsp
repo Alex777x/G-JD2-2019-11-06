@@ -30,7 +30,7 @@
 	</div>
 
 	<div id="shirt1" class="shirt1" style="display: none;">
-		<img id="card1" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" /> <img id="card1"
+		<img id="playerCard1" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" /> <img id="playerCard11"
 			src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" />
 	</div>
 	<div id="playerData1" style="display: none;">
@@ -42,7 +42,7 @@
 	</div>
 
 	<div id="shirt2" class="shirt2" style="display: none;">
-		<img id="card2" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" /> <img id="card2"
+		<img id="playerCard2" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" /> <img id="playerCard22"
 			src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" />
 	</div>
 	<div id="playerData2" style="display: none;">
@@ -54,7 +54,7 @@
 	</div>
 
 	<div id="shirt3" class="shirt3" style="display: none;">
-		<img id="card3" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" /> <img id="card3"
+		<img id="playerCard3" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" /> <img id="playerCard33"
 			src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" />
 	</div>
 	<div id="playerData3" style="display: none;">
@@ -66,7 +66,7 @@
 	</div>
 
 	<div id="shirt4" class="shirt4" style="display: none;">
-		<img id="card4" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" /> <img id="card4"
+		<img id="playerCard4" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" /> <img id="playerCard44"
 			src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" />
 	</div>
 	<div id="playerData4" style="display: none;">
@@ -78,7 +78,7 @@
 	</div>
 
 	<div id="shirt5" class="shirt5" style="display: none;">
-		<img id="card5" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" /> <img id="card5"
+		<img id="playerCard5" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" /> <img id="playerCard55"
 			src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" />
 	</div>
 	<div id="playerData5" style="display: none;">
@@ -90,7 +90,7 @@
 	</div>
 
 	<div id="shirt6" class="shirt6" style="display: none;">
-		<img id="card6" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" /> <img id="card6"
+		<img id="playerCard6" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" /> <img id="playerCard66"
 			src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" />
 	</div>
 	<div id="playerData6" style="display: none;">
@@ -102,7 +102,7 @@
 	</div>
 
 	<div id="shirt7" class="shirt7" style="display: none;">
-		<img id="card7" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" /> <img id="card7"
+		<img id="playerCard7" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" /> <img id="playerCard77"
 			src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" />
 	</div>
 	<div id="playerData7" style="display: none;">
@@ -114,7 +114,7 @@
 	</div>
 
 	<div id="shirt8" class="shirt8" style="display: none;">
-		<img id="card8" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" /> <img id="card8"
+		<img id="playerCard8" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" /> <img id="playerCard88"
 			src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" />
 	</div>
 	<div id="playerData8" style="display: none;">
@@ -126,7 +126,7 @@
 	</div>
 
 	<div id="shirt9" class="shirt9" style="display: none;">
-		<img id="card9" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" /> <img id="card9"
+		<img id="playerCard9" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" /> <img id="playerCard99"
 			src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" />
 	</div>
 	<div id="playerData9" style="display: none;">
@@ -138,7 +138,7 @@
 	</div>
 
 	<div id="shirt10" class="shirt10" style="display: none;">
-		<img id="card10" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" /> <img id="card10"
+		<img id="playerCard10" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" /> <img id="playerCard101"
 			src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" />
 	</div>
 	<div id="playerData10" style="display: none;">
@@ -170,29 +170,36 @@
 	</div>
 </div>
 
+
 <script>
+var baseUrl = '${pageContext.request.contextPath}';
+	function f1(arg) {
+		$.ajax({
+			url : baseUrl + '/inGame/setposition?id=' + arg + '&gameid=' + ${game.id},
+			type : 'post',
+			success : function(result) {
+				if (result == false) {
+					toastr.success('Now the action is not available!');
+				} else {
+					toastr.success('Have a nice game!');
+					$("#position" + arg).attr("src", baseUrl + '/resources/img/avatars/position' + arg + '.jpg');
+					$("#shirt" + arg).show();
+					$("#playerData" + arg).show();
+				} 
+			}
+		});
 
-setInterval(function() {
-	$.ajax({
-		url : baseUrl + '/inGame/gamestatus?gameid=' + ${game.id},
-		type : 'get',
-		success : function(result) {
-			
-		}
-	});
-
-}, 2 * 1000);
-
-
+	}
 </script>
 
-<script type="text/javascript">
+
+<script>
 jQuery(document).ready(function($){ 
 	var baseUrl = '${pageContext.request.contextPath}';
 	var $curentTime = $.now();
 	setInterval(function() {
 		$.ajax({
-			url : baseUrl + '/player/playerout?gameid=' + ${game.id},
+			url : baseUrl + '/inGame/gamestatus?gameid=' + ${game.id},
 			type : 'get',
 			success : function(result) {
 				
@@ -276,33 +283,99 @@ jQuery(document).ready(function($){
 				});
 			}
 		});
-
-	}, 1000);
+		
+	}, 2 * 1000);
 });
-</script>
-<script>
-var baseUrl = '${pageContext.request.contextPath}';
-	function f1(arg) {
-		$.ajax({
-			url : baseUrl + '/inGame/setposition?id=' + arg + '&gameid=' + ${game.id},
-			type : 'post',
-			success : function(result) {
-				if (result == false) {
-					toastr.success('Is this seat taken!');
-				} else if (result == true) {
-					toastr.success('Have a nice game!');
-					$("#position" + arg).attr("src", baseUrl + '/resources/img/avatars/position' + arg + '.jpg');
-					$("#shirt" + arg).show();
-					$("#playerData" + arg).show();
-				} else if (result == 'CHANGE') {
-					toastr.success('You can not change position after the start of the game!');
-				} else {
-					toastr.success('Location changed!');
-				}
-			}
-		});
 
-	}
+</script>
+
+<script>
+
+setInterval(function() {
+	$.ajax({
+		url : baseUrl + '/inGame/getPlayerCards?gameid=' + ${game.id},
+		type : 'get',
+		success : function(player) {
+				if(player.card1 != null) {
+					if (player.position == "ONE") {
+						$("#shirt" + 1).show();
+						$("#playerCard" + 1).attr("src", baseUrl + player.card1);
+						$("#playerCard" + 11).attr("src", baseUrl + player.card2);
+					}
+					if (player.position == "TWO") {
+						$("#shirt" + 2).show();
+						$("#playerCard" + 2).attr("src", baseUrl + player.card1);
+						$("#playerCard" + 22).attr("src", baseUrl + player.card2);
+					}
+					if (player.position == "THREE") {
+						$("#shirt" + 3).show();
+						$("#playerCard" + 3).attr("src", baseUrl + player.card1);
+						$("#playerCard" + 33).attr("src", baseUrl + player.card2);
+					}
+					if (player.position == "FOUR") {
+						$("#shirt" + 4).show();
+						$("#playerCard" + 4).attr("src", baseUrl + player.card1);
+						$("#playerCard" + 44).attr("src", baseUrl + player.card2);
+					}
+					if (player.position == "FIVE") {
+						$("#shirt" + 5).show();
+						$("#playerCard" + 5).attr("src", baseUrl + player.card1);
+						$("#playerCard" + 55).attr("src", baseUrl + player.card2);
+					}
+					if (player.position == "SIX") {
+						$("#shirt" + 6).show();
+						$("#playerCard" + 6).attr("src", baseUrl + player.card1);
+						$("#playerCard" + 66).attr("src", baseUrl + player.card2);
+					}
+					if (player.position == "SEVEN") {
+						$("#shirt" + 7).show();
+						$("#playerCard" + 7).attr("src", baseUrl + player.card1);
+						$("#playerCard" + 77).attr("src", baseUrl + player.card2);
+					}
+					if (player.position == "EIGHT") {
+						$("#shirt" + 8).show();
+						$("#playerCard" + 8).attr("src", baseUrl + player.card1);
+						$("#playerCard" + 88).attr("src", baseUrl + player.card2);
+					}
+					if (player.position == "NINE") {
+						$("#shirt" + 9).show();
+						$("#playerCard" + 9).attr("src", baseUrl + player.card1);
+						$("#playerCard" + 99).attr("src", baseUrl + player.card2);
+					}
+					if (player.position == "TEN") {
+						$("#shirt" + 10).show();
+						$("#playerCard" + 10).attr("src", baseUrl + player.card1);
+						$("#playerCard" + 101).attr("src", baseUrl + player.card2);
+					}
+				}
+		}
+	});
+}, 2 * 1000);
+
+</script>
+
+<script>
+setInterval(function() {
+	$.ajax({
+		url : baseUrl + '/inGame/getGameState?gameid=' + ${game.id},
+		type : 'get',
+		success : function(game) {
+			if (game.state == "ACTIVE") {
+				$.ajax({
+					url : baseUrl + '/inGame/getPlayerStep?gameid=' + ${game.id},
+					type : 'get',
+					success : function(player) {
+					
+					}
+				});
+			}
+		}
+	});
+	
+	
+	
+}, 15 * 1000);
+
 </script>
 
 

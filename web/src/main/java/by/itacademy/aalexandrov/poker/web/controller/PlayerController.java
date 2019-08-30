@@ -1,6 +1,5 @@
 package by.itacademy.aalexandrov.poker.web.controller;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,8 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -32,7 +29,6 @@ import by.itacademy.aalexandrov.poker.web.converter.PlayerFromDTOConverter;
 import by.itacademy.aalexandrov.poker.web.converter.PlayerToDTOConverter;
 import by.itacademy.aalexandrov.poker.web.dto.PlayerDTO;
 import by.itacademy.aalexandrov.poker.web.dto.grid.GridStateDTO;
-import by.itacademy.aalexandrov.poker.web.security.AuthHelper;
 
 @Controller
 @RequestMapping(value = "/player")
@@ -143,47 +139,47 @@ public class PlayerController extends AbstractController {
 		hashMap.put("gamesChoices", gamesMap);
 	}
 
-	@RequestMapping(value = "/playerout", method = RequestMethod.GET)
-	public ResponseEntity<List<PlayerDTO>> getChatsInHome(
-			@RequestParam(name = "gameid", required = true) final Integer gameid) {
-		Integer loggedUserId = AuthHelper.getLoggedUserId();
-		List<IPlayer> players = playerService.getPlayersByGame(gameid);
-
-		for (IPlayer iPlayer : players) {
-			Date lastUpdated = iPlayer.getUpdated();
-			long milli = lastUpdated.getTime();
-			Date curentTime = new Date();
-			long curentMilli = curentTime.getTime();
-			long diff = curentMilli - milli;
-
-			if (diff > 10000) {
-				iPlayer.setInGame(false);
-				playerService.delete(iPlayer.getId());
-			}
-
-		}
-
-		PlayerDTO dto = null;
-		try {
-			dto = toDtoConverter.apply(playerService.getPlayerByUser(loggedUserId));
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-
-		IPlayer entity;
-		if (dto != null) {
-			entity = fromDtoConverter.apply(dto);
-			entity.setUpdated(new Date());
-			playerService.save(entity);
-		}
-
-		List<PlayerDTO> dtos = players.stream().map(toDtoConverter).collect(Collectors.toList());
-		for (PlayerDTO playerDTO : dtos) {
-			IUserAccount user = userAccountService.getFullInfo(playerDTO.getUserAccountId());
-			playerDTO.setNick(user.getNickname());
-		}
-
-		return new ResponseEntity<List<PlayerDTO>>(dtos, HttpStatus.OK);
-	}
+//	@RequestMapping(value = "/playerout", method = RequestMethod.GET)
+//	public ResponseEntity<List<PlayerDTO>> getChatsInHome(
+//			@RequestParam(name = "gameid", required = true) final Integer gameid) {
+//		Integer loggedUserId = AuthHelper.getLoggedUserId();
+//		List<IPlayer> players = playerService.getPlayersByGame(gameid);
+//
+//		for (IPlayer iPlayer : players) {
+//			Date lastUpdated = iPlayer.getUpdated();
+//			long milli = lastUpdated.getTime();
+//			Date curentTime = new Date();
+//			long curentMilli = curentTime.getTime();
+//			long diff = curentMilli - milli;
+//
+//			if (diff > 10000) {
+//				iPlayer.setInGame(false);
+//				playerService.delete(iPlayer.getId());
+//			}
+//
+//		}
+//
+//		PlayerDTO dto = null;
+//		try {
+//			dto = toDtoConverter.apply(playerService.getPlayerByUser(loggedUserId));
+//		} catch (Exception e) {
+//			// TODO: handle exception
+//		}
+//
+//		IPlayer entity;
+//		if (dto != null) {
+//			entity = fromDtoConverter.apply(dto);
+//			entity.setUpdated(new Date());
+//			playerService.save(entity);
+//		}
+//
+//		List<PlayerDTO> dtos = players.stream().map(toDtoConverter).collect(Collectors.toList());
+//		for (PlayerDTO playerDTO : dtos) {
+//			IUserAccount user = userAccountService.getFullInfo(playerDTO.getUserAccountId());
+//			playerDTO.setNick(user.getNickname());
+//		}
+//
+//		return new ResponseEntity<List<PlayerDTO>>(dtos, HttpStatus.OK);
+//	}
 
 }

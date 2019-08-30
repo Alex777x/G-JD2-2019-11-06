@@ -15,4 +15,6 @@ public interface ICardDao extends IDao<ICard, Integer> {
 
 	List<ICard> getFullInfo();
 
+	ICard getFullInfo(Integer id);
+
 }
