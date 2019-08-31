@@ -154,7 +154,7 @@
 				<p class="font-weight-bold">LIMITS ON RAISES</p>
 				<p class="text-left">In almost all games played today, there is a limit on the number of raises at each betting interval, and this
 					limit is invariably three raises.</p>
-				<p class="font-weight-bold">DRAW & STUD POKER</p>
+				<p class="font-weight-bold">DRAW AND STUD POKER</p>
 				<p class="text-left">The players should first decide what form of Poker they will play The main forms of Poker are Draw Poker and
 					Stud Poker. In Draw Poker, all the cards are dealt face down to the players. In Stud Poker, some of the cards are dealt face up as the
 					betting progresses, so that all of the other players get to see a part of each player's hands. Unless the host, or the rule of a club,

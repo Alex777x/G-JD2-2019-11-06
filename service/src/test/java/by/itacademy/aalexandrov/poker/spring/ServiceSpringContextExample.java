@@ -7,6 +7,7 @@ import by.itacademy.aalexandrov.poker.service.IUserAccountService;
 
 public class ServiceSpringContextExample {
 	public static void main(String[] args) {
+		@SuppressWarnings("resource")
 		ApplicationContext context = new ClassPathXmlApplicationContext("service-context.xml");
 		System.out.println(context.getBean(IUserAccountService.class));
 

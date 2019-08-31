@@ -28,13 +28,9 @@ import by.itacademy.aalexandrov.poker.dao.api.filter.GameFilter;
 import by.itacademy.aalexandrov.poker.service.IChatInHomeService;
 import by.itacademy.aalexandrov.poker.service.IGameService;
 import by.itacademy.aalexandrov.poker.service.IPlayerService;
-import by.itacademy.aalexandrov.poker.service.ITransactionService;
 import by.itacademy.aalexandrov.poker.service.IUserAccountService;
-import by.itacademy.aalexandrov.poker.web.converter.ChatInHomeFromDTOConverter;
 import by.itacademy.aalexandrov.poker.web.converter.ChatInHomeToDTOConverter;
-import by.itacademy.aalexandrov.poker.web.converter.GameFromDTOConverter;
 import by.itacademy.aalexandrov.poker.web.converter.GameToDTOConverter;
-import by.itacademy.aalexandrov.poker.web.converter.PlayerToDTOConverter;
 import by.itacademy.aalexandrov.poker.web.converter.UserAccountToDTOConverter;
 import by.itacademy.aalexandrov.poker.web.dto.ChatInHomeDTO;
 import by.itacademy.aalexandrov.poker.web.dto.GameDTO;
@@ -52,23 +48,15 @@ public class DefaultController extends AbstractController {
 	@Autowired
 	private GameToDTOConverter gameToDtoConverter;
 	@Autowired
-	private GameFromDTOConverter gameFromDtoConverter;
-	@Autowired
 	private IChatInHomeService chatInHomeService;
-	@Autowired
-	private ChatInHomeFromDTOConverter chatFromDtoConverter;
 	@Autowired
 	private ChatInHomeToDTOConverter chatToDtoConverter;
 	@Autowired
 	private IPlayerService playerService;
 	@Autowired
-	private PlayerToDTOConverter playerToDtoConverter;
-	@Autowired
 	private IUserAccountService userAccountService;
 	@Autowired
 	UserAccountToDTOConverter userAccountDtoConverter;
-	@Autowired
-	private ITransactionService transactionService;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView index(final HttpServletRequest req,

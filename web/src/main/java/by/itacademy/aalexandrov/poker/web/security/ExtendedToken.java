@@ -9,6 +9,11 @@ import by.itacademy.aalexandrov.poker.dao.api.entity.enums.UserRole;
 
 public class ExtendedToken extends UsernamePasswordAuthenticationToken {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private Integer id;
 
 	private UserRole userRole;

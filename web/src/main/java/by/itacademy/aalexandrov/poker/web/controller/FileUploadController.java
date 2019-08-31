@@ -29,7 +29,7 @@ public class FileUploadController {
 	public String handleFileUpload(@RequestParam("file") final MultipartFile file,
 			final RedirectAttributes redirectAttributes) throws IOException, GeneralSecurityException {
 		String originalFilename = file.getOriginalFilename(); // to DB
-		String contentType = file.getContentType();// to DB
+		// String contentType = file.getContentType();// to DB
 		String uuid = UUID.randomUUID().toString(); // to DB
 
 		lastUploadedFileUid = uuid;
