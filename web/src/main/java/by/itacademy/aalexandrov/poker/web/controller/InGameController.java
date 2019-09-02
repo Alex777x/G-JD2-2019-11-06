@@ -214,7 +214,7 @@ public class InGameController extends AbstractController {
 			Date dateOne = c1.getTime();
 			IGame game = gameService.getFullInfo(gameid);
 			game.setActivePlayerId(players.get(0).getId());
-			game.setTimestampEndStep(dateOne.getTime() + 30000);
+			game.setTimestampEndStep(dateOne.getTime() + 15000);
 			gameService.save(game);
 		}
 
@@ -224,7 +224,7 @@ public class InGameController extends AbstractController {
 			IGame game = gameService.getFullInfo(gameid);
 			Integer currentPlayer = game.getActivePlayerId();
 			for (PlayerDTO playerDTO : dtop) {
-				if (playerDTO.getId() == currentPlayer) {
+				if (playerDTO.getId().equals(currentPlayer)) {
 					playerDTO.setActive(true);
 				} else {
 					playerDTO.setActive(false);
@@ -253,6 +253,16 @@ public class InGameController extends AbstractController {
 		return new ResponseEntity<PlayerDTO>(dto, HttpStatus.OK);
 	}
 
+	@RequestMapping(value = "/getGameState", method = RequestMethod.GET)
+	public ResponseEntity<GameDTO> getGameState(@RequestParam(name = "gameid", required = true) final Integer gameid) {
+
+		IGame game = gameService.getFullInfo(gameid);
+		GameDTO dto = gameToDtoConverter.apply(game);
+		long playersCount = playerService.getPlayersCount(gameid);
+		dto.setPlaersCount(playersCount);
+		return new ResponseEntity<GameDTO>(dto, HttpStatus.OK);
+	}
+
 	@RequestMapping(value = "/changeActivePlayer", method = RequestMethod.GET)
 	public ResponseEntity<GameDTO> changeActivePlayer(
 			@RequestParam(name = "gameid", required = true) final Integer gameid) {
@@ -274,7 +284,7 @@ public class InGameController extends AbstractController {
 
 				Calendar c1 = Calendar.getInstance();
 				Date dateOne = c1.getTime();
-				game.setTimestampEndStep(dateOne.getTime() + 30000);
+				game.setTimestampEndStep(dateOne.getTime() + 15000);
 				gameService.save(game);
 			}
 		}

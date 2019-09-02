@@ -219,7 +219,9 @@ jQuery(document).ready(function($){
 						var $nickname = $('#player1Nick').text(player.nick);
 						var $stack = $('#player1Balance').text(player.stack);
 						if (player.active == true) {
-							$("#position").css({"backgroundColor": "deeppink", "color": "white"});
+							$("#position" + 1).addClass('activePlayer');
+						} else {
+							$("#position" + 1).removeClass('activePlayer');
 						}
 					} 
 					if (player.position == "TWO") {
@@ -229,7 +231,9 @@ jQuery(document).ready(function($){
 						var $nickname = $('#player2Nick').text(player.nick);
 						var $stack = $('#player2Balance').text(player.stack);
 						if (player.active == true) {
-							$('#position').addClass('activePlayer');
+							$("#position" + 2).addClass('activePlayer');
+						} else {
+							$("#position" + 2).removeClass('activePlayer');
 						}
 					}
 					if (player.position == "THREE") {
@@ -239,7 +243,9 @@ jQuery(document).ready(function($){
 						var $nickname = $('#player3Nick').text(player.nick);
 						var $stack = $('#player3Balance').text(player.stack);
 						if (player.active == true) {
-							$('#position').addClass('activePlayer');
+							$("#position" + 3).addClass('activePlayer');
+						} else {
+							$("#position" + 3).removeClass('activePlayer');
 						}
 					}
 					if (player.position == "FOUR") {
@@ -249,7 +255,9 @@ jQuery(document).ready(function($){
 						var $nickname = $('#player4Nick').text(player.nick);
 						var $stack = $('#player4Balance').text(player.stack);
 						if (player.active == true) {
-							$('#position').addClass('activePlayer');
+							$("#position" + 4).addClass('activePlayer');
+						} else {
+							$("#position" + 4).removeClass('activePlayer');
 						}
 					} 
 					if (player.position == "FIVE") {
@@ -259,7 +267,9 @@ jQuery(document).ready(function($){
 						var $nickname = $('#player5Nick').text(player.nick);
 						var $stack = $('#player5Balance').text(player.stack);
 						if (player.active == true) {
-							$('#position').addClass('activePlayer');
+							$("#position" + 5).addClass('activePlayer');
+						} else {
+							$("#position" + 5).removeClass('activePlayer');
 						}
 					}
 					if (player.position == "SIX") {
@@ -269,7 +279,9 @@ jQuery(document).ready(function($){
 						var $nickname = $('#player6Nick').text(player.nick);
 						var $stack = $('#player6Balance').text(player.stack);
 						if (player.active == true) {
-							$('#position').addClass('activePlayer');
+							$("#position" + 6).addClass('activePlayer');
+						} else {
+							$("#position" + 6).removeClass('activePlayer');
 						}
 					} 
 					if (player.position == "SEVEN") {
@@ -279,7 +291,9 @@ jQuery(document).ready(function($){
 						var $nickname = $('#player7Nick').text(player.nick);
 						var $stack = $('#player7Balance').text(player.stack);
 						if (player.active == true) {
-							$('#position').addClass('activePlayer');
+							$("#position" + 7).addClass('activePlayer');
+						} else {
+							$("#position" + 7).removeClass('activePlayer');
 						}
 					} 
 					if (player.position == "EIGHT") {
@@ -289,7 +303,9 @@ jQuery(document).ready(function($){
 						var $nickname = $('#player8Nick').text(player.nick);
 						var $stack = $('#player8Balance').text(player.stack);
 						if (player.active == true) {
-							$('#position').addClass('activePlayer');
+							$("#position" + 8).addClass('activePlayer');
+						} else {
+							$("#position" + 8).removeClass('activePlayer');
 						}
 					} 
 					if (player.position == "NINE") {
@@ -299,7 +315,9 @@ jQuery(document).ready(function($){
 						var $nickname = $('#player9Nick').text(player.nick);
 						var $stack = $('#player9Balance').text(player.stack);
 						if (player.active == true) {
-							$('#position').addClass('activePlayer');
+							$("#position" + 9).addClass('activePlayer');
+						} else {
+							$("#position" + 9).removeClass('activePlayer');
 						}
 					}
 					if (player.position == "TEN") {
@@ -309,7 +327,9 @@ jQuery(document).ready(function($){
 						var $nickname = $('#player10Nick').text(player.nick);
 						var $stack = $('#player10Balance').text(player.stack);
 						if (player.active == true) {
-							$('#position').addClass('activePlayer');
+							$("#position" + 10).addClass('activePlayer');
+						} else {
+							$("#position" + 10).removeClass('activePlayer');
 						}
 					} 
 				});
@@ -320,9 +340,6 @@ jQuery(document).ready(function($){
 });
 
 
-</script>
-
-<script>
 
 setInterval(function() {
 	$.ajax({
@@ -385,20 +402,12 @@ setInterval(function() {
 	});
 }, 3 * 1000);
 
-</script>
-
-<script>
 setInterval(function() {
 	$.ajax({
-		url : baseUrl + '/inGame/changeActivePlayer?gameid=' + ${game.id},
+		url : baseUrl + '/inGame/getGameState?gameid=' + ${game.id},
 		type : 'get',
 		success : function(game) {
-			if (game.state == "ACTIVE") {
-				jQuery(function ($) {
-				    var secTime = 30,
-				        display = $('#time');
-				    startTimer(secTime, display);
-				});
+			if (game.state == "ACTIVE" && game.plaersCount > 1) {
 				
 				if (game.timestampEndStep < new Date().getTime() && game.timestampEndStep != null) {
 					$.ajax({
@@ -413,10 +422,10 @@ setInterval(function() {
 		}
 	});
 	
-}, 30 * 1000);
+}, 15 * 1000);
 
 
-
+	
 function startTimer(duration, display) {
     var timer = duration, minutes, seconds;
     setInterval(function () {
