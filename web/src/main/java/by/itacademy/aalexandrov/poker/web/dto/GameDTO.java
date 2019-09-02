@@ -17,15 +17,23 @@ public class GameDTO {
 	private Date updated;
 	@NotNull
 	private long plaersCount;
-	@NotNull
-	private int numberOfPlayers;
+	private int activePlayerId;
+	private Date timestampEndStep;
 
-	public int getNumberOfPlayers() {
-		return numberOfPlayers;
+	public int getActivePlayerId() {
+		return activePlayerId;
 	}
 
-	public void setNumberOfPlayers(int numberOfPlayers) {
-		this.numberOfPlayers = numberOfPlayers;
+	public void setActivePlayerId(int activePlayerId) {
+		this.activePlayerId = activePlayerId;
+	}
+
+	public Date getTimestampEndStep() {
+		return timestampEndStep;
+	}
+
+	public void setTimestampEndStep(Date timestampEndStep) {
+		this.timestampEndStep = timestampEndStep;
 	}
 
 	public long getPlaersCount() {

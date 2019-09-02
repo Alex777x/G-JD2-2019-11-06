@@ -174,10 +174,6 @@ public abstract class AbstractTest {
 		entity.setUserRole(UserRole.MEMBER);
 		entity.setUserStatus(UserStatus.ACTIVE);
 
-		int min = 100;
-		int max = 200;
-		int diff = max - min;
-
 		entity.setSumGames((int) (100 + Math.random() * 150));
 		entity.setWonGames(RANDOM.nextInt(50) + 1);
 		userAccountService.save(entity);

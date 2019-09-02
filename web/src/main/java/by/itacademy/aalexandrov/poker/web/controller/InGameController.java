@@ -32,7 +32,6 @@ import by.itacademy.aalexandrov.poker.service.IGameService;
 import by.itacademy.aalexandrov.poker.service.IPlayerService;
 import by.itacademy.aalexandrov.poker.service.ITransactionService;
 import by.itacademy.aalexandrov.poker.service.IUserAccountService;
-import by.itacademy.aalexandrov.poker.web.converter.GameFromDTOConverter;
 import by.itacademy.aalexandrov.poker.web.converter.GameToDTOConverter;
 import by.itacademy.aalexandrov.poker.web.converter.PlayerFromDTOConverter;
 import by.itacademy.aalexandrov.poker.web.converter.PlayerToDTOConverter;
@@ -51,8 +50,6 @@ public class InGameController extends AbstractController {
 	private IGameService gameService;
 	@Autowired
 	private GameToDTOConverter gameToDtoConverter;
-	@Autowired
-	private GameFromDTOConverter gameFromDtoConverter;
 	@Autowired
 	private IPlayerService playerService;
 	@Autowired
@@ -229,7 +226,13 @@ public class InGameController extends AbstractController {
 	public ResponseEntity<PlayerDTO> getPlayerCard(
 			@RequestParam(name = "gameid", required = true) final Integer gameid) {
 		Integer loggedUserId = AuthHelper.getLoggedUserId();
-		IPlayer player = playerService.getPlayerByUserAccunt(loggedUserId);
+		IPlayer player = null;
+		try {
+			player = playerService.getPlayerByUserAccunt(loggedUserId);
+		} catch (NullPointerException e) {
+
+		}
+
 		PlayerDTO dto = playerToDtoConverter.apply(player);
 		return new ResponseEntity<PlayerDTO>(dto, HttpStatus.OK);
 	}

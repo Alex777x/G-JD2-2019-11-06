@@ -18,7 +18,8 @@ public class GameToDTOConverter implements Function<IGame, GameDTO> {
 		dto.setBank(entity.getBank());
 		dto.setCreated(entity.getCreated());
 		dto.setUpdated(entity.getUpdated());
-		dto.setNumberOfPlayers(entity.getNumberOfPlayers());
+		dto.setActivePlayerId(entity.getActivePlayerId());
+		dto.setTimestampEndStep(entity.getTimestampEndStep());
 		return dto;
 	}
 

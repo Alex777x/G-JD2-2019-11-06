@@ -96,21 +96,16 @@ public class NewsDaoImpl extends AbstractDaoImpl<INews, Integer> implements INew
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<INews> search(String text) {
 
 		EntityManager em = getEntityManager();
 		FullTextEntityManager fullTextEntityManager = org.hibernate.search.jpa.Search.getFullTextEntityManager(em);
 
-		// create native Lucene query unsing the query DSL
-		// alternatively you can write the Lucene query using the Lucene query
-		// parser
-		// or the Lucene programmatic API. The Hibernate Search DSL is
-		// recommended though
 		QueryBuilder qb = fullTextEntityManager.getSearchFactory().buildQueryBuilder().forEntity(News.class).get();
 		org.apache.lucene.search.Query luceneQuery = qb.keyword().onFields("newsText").matching(text).createQuery();
 
-		// wrap Lucene query in a javax.persistence.Query
 		javax.persistence.Query jpaQuery = fullTextEntityManager.createFullTextQuery(luceneQuery, News.class);
 
 		return jpaQuery.getResultList();

@@ -7,7 +7,6 @@ import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import javax.persistence.metamodel.SingularAttribute;
 
 import org.springframework.stereotype.Repository;
 
@@ -64,22 +63,6 @@ public class GameDaoImpl extends AbstractDaoImpl<IGame, Integer> implements IGam
 
 	}
 
-	private SingularAttribute<? super Game, ?> toMetamodelFormat(final String sortColumn) {
-		switch (sortColumn) {
-		case "created":
-			return Game_.created;
-		case "updated":
-			return Game_.updated;
-		case "id":
-			return Game_.id;
-		case "bank":
-			return Game_.bank;
-		case "state":
-			return Game_.state;
-		default:
-			throw new UnsupportedOperationException("sorting is not supported by column:" + sortColumn);
-		}
-	}
 
 	@Override
 	public IGame getFullInfo(Integer id) {

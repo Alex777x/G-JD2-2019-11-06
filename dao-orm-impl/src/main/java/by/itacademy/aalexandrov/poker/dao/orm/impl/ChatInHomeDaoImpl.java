@@ -8,8 +8,6 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Root;
-import javax.persistence.metamodel.SingularAttribute;
-
 import org.hibernate.jpa.criteria.OrderImpl;
 import org.springframework.stereotype.Repository;
 
@@ -69,22 +67,6 @@ public class ChatInHomeDaoImpl extends AbstractDaoImpl<IChatInHome, Integer> imp
 
 	}
 
-	private SingularAttribute<? super ChatInHome, ?> toMetamodelFormat(final String sortColumn) {
-		switch (sortColumn) {
-		case "created":
-			return ChatInHome_.created;
-		case "updated":
-			return ChatInHome_.updated;
-		case "id":
-			return ChatInHome_.id;
-		case "userAccount":
-			return ChatInHome_.userAccount;
-		case "message":
-			return ChatInHome_.message;
-		default:
-			throw new UnsupportedOperationException("sorting is not supported by column:" + sortColumn);
-		}
-	}
 
 	@Override
 	public IChatInHome getFullInfo(Integer id) {

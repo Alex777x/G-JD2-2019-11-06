@@ -1,5 +1,7 @@
 package by.itacademy.aalexandrov.poker.dao.orm.impl.entity;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -20,19 +22,32 @@ public class Game extends BaseEntity implements IGame {
 	private double bank;
 
 	@Column
-	private int numberOfPlayers;
+	private int activePlayerId;
+
+	@Column
+	private Date timestampEndStep;
 
 	@Transient
 	private String upperCaseName;
 
 	@Override
-	public int getNumberOfPlayers() {
-		return numberOfPlayers;
+	public Date getTimestampEndStep() {
+		return timestampEndStep;
 	}
 
 	@Override
-	public void setNumberOfPlayers(int numberOfPlayers) {
-		this.numberOfPlayers = numberOfPlayers;
+	public void setTimestampEndStep(Date timestampEndStep) {
+		this.timestampEndStep = timestampEndStep;
+	}
+
+	@Override
+	public int getActivePlayerId() {
+		return activePlayerId;
+	}
+
+	@Override
+	public void setActivePlayerId(int activePlayerId) {
+		this.activePlayerId = activePlayerId;
 	}
 
 	public String getUpperCaseName() {
