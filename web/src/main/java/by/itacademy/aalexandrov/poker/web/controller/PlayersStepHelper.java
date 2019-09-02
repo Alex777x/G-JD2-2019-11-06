@@ -10,7 +10,7 @@ public class PlayersStepHelper {
 	static IGameService gameService;
 	static IPlayerService playerService;
 
-	public static void assignCurrentUserToGameStep(Integer playerId, Integer gameId) {
+	public static void assignCurrentPlayerToGameStep(Integer playerId, Integer gameId) {
 		// set player id to game (as current active player)
 		// set timestamp (current +30sec) which means deadline for current step
 		Timestamp timestamp = new Timestamp(System.currentTimeMillis() + 30);

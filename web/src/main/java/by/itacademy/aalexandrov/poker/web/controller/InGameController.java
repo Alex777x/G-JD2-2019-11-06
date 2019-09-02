@@ -217,6 +217,7 @@ public class InGameController extends AbstractController {
 			setNickNamesForPlayers(dtop);
 			return new ResponseEntity<List<PlayerDTO>>(dtop, HttpStatus.OK);
 		}
+
 		List<PlayerDTO> dtop = players.stream().map(playerToDtoConverter).collect(Collectors.toList());
 		setNickNamesForPlayers(dtop);
 		return new ResponseEntity<List<PlayerDTO>>(dtop, HttpStatus.OK);
