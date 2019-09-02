@@ -1,7 +1,5 @@
 package by.itacademy.aalexandrov.poker.dao.api.entity.table;
 
-import java.util.Date;
-
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.GameStatus;
 
 public interface IGame extends IBaseEntity {
@@ -21,8 +19,8 @@ public interface IGame extends IBaseEntity {
 
 	int getActivePlayerId();
 
-	void setTimestampEndStep(Date timestampEndStep);
+	void setTimestampEndStep(long l);
 
-	Date getTimestampEndStep();
+	long getTimestampEndStep();
 
 }

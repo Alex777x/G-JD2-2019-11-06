@@ -89,7 +89,7 @@ main {
 
 .img-thumbnail {
 	width: 75px;
-	background-color: lavender;
+	background-color: white;
 }
 
 .navbar-text {
@@ -250,6 +250,12 @@ main {
 	position: absolute;
 	top: 200px;
 	left: 865px;
+}
+
+
+.activePlayer {
+    border-width: thick;
+    border-color: darkred;
 }
 
 .btnFold {

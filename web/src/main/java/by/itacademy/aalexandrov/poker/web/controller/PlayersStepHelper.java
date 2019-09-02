@@ -1,36 +1,42 @@
 package by.itacademy.aalexandrov.poker.web.controller;
 
-import java.sql.Timestamp;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IGame;
+import by.itacademy.aalexandrov.poker.dao.api.entity.table.IPlayer;
 import by.itacademy.aalexandrov.poker.service.IGameService;
 import by.itacademy.aalexandrov.poker.service.IPlayerService;
 
 public class PlayersStepHelper {
-	static IGameService gameService;
-	static IPlayerService playerService;
+	@Autowired
+	IGameService gameService;
+	@Autowired
+	IPlayerService playerService;
 
-	public static void assignCurrentPlayerToGameStep(Integer playerId, Integer gameId) {
+	public void assignCurrentPlayerToGameStep(Integer playerId, Integer gameId) {
 		// set player id to game (as current active player)
 		// set timestamp (current +30sec) which means deadline for current step
-		Timestamp timestamp = new Timestamp(System.currentTimeMillis() + 30);
-		IGame game = gameService.getFullInfo(gameId);
-		game.setActivePlayerId(playerId);
-		game.setTimestampEndStep(timestamp);
-		gameService.save(game);
 
 		new java.util.Timer().schedule(new java.util.TimerTask() {
 			@Override
 			public void run() {
 
 				// get current game player from DB
-				Integer currentPlayer = gameService.getFullInfo(gameId).getActivePlayerId();
+				IGame game = gameService.getFullInfo(gameId);
+				Integer currentPlayer = game.getActivePlayerId();
 
 				if (currentPlayer == playerId) {
-					// set next player as active
-					game.setActivePlayerId(playerId);
-					game.setTimestampEndStep(timestamp);
-					gameService.save(game);
+					List<IPlayer> players = playerService.getPlayersByGame(gameId);
+					for (IPlayer iPlayer : players) {
+						if (iPlayer.getId() == currentPlayer) {
+							int index = players.indexOf(iPlayer);
+							game.setActivePlayerId(index + 1);
+							gameService.save(game);
+						}
+					}
+
 				}
 
 			}

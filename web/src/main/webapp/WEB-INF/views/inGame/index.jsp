@@ -161,8 +161,8 @@
 	<div>
 		<button id="btnRaise" type="button" class="btn btn-success btn-lg btnRaise">RAISE</button>
 	</div>
-	<div>
-		Time to end of turn: <span id="time">05:00</span> minutes!
+	<div style="color: honeydew;">
+		Time to end of turn: <span id="time">30</span> sec!
 	</div>
 	<div class="formForRaise input-group">
 		<input type="number" class="form-control inputRaise" name="input_text1" id="input_text1" max="1000" value="0"
@@ -218,6 +218,9 @@ jQuery(document).ready(function($){
 						$("#playerData" + 1).show();
 						var $nickname = $('#player1Nick').text(player.nick);
 						var $stack = $('#player1Balance').text(player.stack);
+						if (player.active == true) {
+							$("#position").css({"backgroundColor": "deeppink", "color": "white"});
+						}
 					} 
 					if (player.position == "TWO") {
 						$("#position" + 2).attr("src", baseUrl + '/resources/img/avatars/position2.jpg');
@@ -225,6 +228,9 @@ jQuery(document).ready(function($){
 						$("#playerData" + 2).show();
 						var $nickname = $('#player2Nick').text(player.nick);
 						var $stack = $('#player2Balance').text(player.stack);
+						if (player.active == true) {
+							$('#position').addClass('activePlayer');
+						}
 					}
 					if (player.position == "THREE") {
 						$("#position" + 3).attr("src", baseUrl + '/resources/img/avatars/position3.jpg');
@@ -232,6 +238,9 @@ jQuery(document).ready(function($){
 						$("#playerData" + 3).show();
 						var $nickname = $('#player3Nick').text(player.nick);
 						var $stack = $('#player3Balance').text(player.stack);
+						if (player.active == true) {
+							$('#position').addClass('activePlayer');
+						}
 					}
 					if (player.position == "FOUR") {
 						$("#position" + 4).attr("src", baseUrl + '/resources/img/avatars/position4.jpg');
@@ -239,6 +248,9 @@ jQuery(document).ready(function($){
 						$("#playerData" + 4).show();
 						var $nickname = $('#player4Nick').text(player.nick);
 						var $stack = $('#player4Balance').text(player.stack);
+						if (player.active == true) {
+							$('#position').addClass('activePlayer');
+						}
 					} 
 					if (player.position == "FIVE") {
 						$("#position" + 5).attr("src", baseUrl + '/resources/img/avatars/position5.jpg');
@@ -246,6 +258,9 @@ jQuery(document).ready(function($){
 						$("#playerData" + 5).show();
 						var $nickname = $('#player5Nick').text(player.nick);
 						var $stack = $('#player5Balance').text(player.stack);
+						if (player.active == true) {
+							$('#position').addClass('activePlayer');
+						}
 					}
 					if (player.position == "SIX") {
 						$("#position" + 6).attr("src", baseUrl + '/resources/img/avatars/position6.jpg');
@@ -253,6 +268,9 @@ jQuery(document).ready(function($){
 						$("#playerData" + 6).show();
 						var $nickname = $('#player6Nick').text(player.nick);
 						var $stack = $('#player6Balance').text(player.stack);
+						if (player.active == true) {
+							$('#position').addClass('activePlayer');
+						}
 					} 
 					if (player.position == "SEVEN") {
 						$("#position" + 7).attr("src", baseUrl + '/resources/img/avatars/position7.jpg');
@@ -260,6 +278,9 @@ jQuery(document).ready(function($){
 						$("#playerData" + 7).show();
 						var $nickname = $('#player7Nick').text(player.nick);
 						var $stack = $('#player7Balance').text(player.stack);
+						if (player.active == true) {
+							$('#position').addClass('activePlayer');
+						}
 					} 
 					if (player.position == "EIGHT") {
 						$("#position" + 8).attr("src", baseUrl + '/resources/img/avatars/position8.jpg');
@@ -267,6 +288,9 @@ jQuery(document).ready(function($){
 						$("#playerData" + 8).show();
 						var $nickname = $('#player8Nick').text(player.nick);
 						var $stack = $('#player8Balance').text(player.stack);
+						if (player.active == true) {
+							$('#position').addClass('activePlayer');
+						}
 					} 
 					if (player.position == "NINE") {
 						$("#position" + 9).attr("src", baseUrl + '/resources/img/avatars/position9.jpg');
@@ -274,6 +298,9 @@ jQuery(document).ready(function($){
 						$("#playerData" + 9).show();
 						var $nickname = $('#player9Nick').text(player.nick);
 						var $stack = $('#player9Balance').text(player.stack);
+						if (player.active == true) {
+							$('#position').addClass('activePlayer');
+						}
 					}
 					if (player.position == "TEN") {
 						$("#position" + 10).attr("src", baseUrl + '/resources/img/avatars/position10.jpg');
@@ -281,6 +308,9 @@ jQuery(document).ready(function($){
 						$("#playerData" + 10).show();
 						var $nickname = $('#player10Nick').text(player.nick);
 						var $stack = $('#player10Balance').text(player.stack);
+						if (player.active == true) {
+							$('#position').addClass('activePlayer');
+						}
 					} 
 				});
 			}
@@ -288,6 +318,7 @@ jQuery(document).ready(function($){
 		
 	}, 3 * 1000);
 });
+
 
 </script>
 
@@ -359,28 +390,31 @@ setInterval(function() {
 <script>
 setInterval(function() {
 	$.ajax({
-		url : baseUrl + '/inGame/getGameState?gameid=' + ${game.id},
+		url : baseUrl + '/inGame/changeActivePlayer?gameid=' + ${game.id},
 		type : 'get',
 		success : function(game) {
 			if (game.state == "ACTIVE") {
-				$.ajax({
-					url : baseUrl + '/inGame/getPlayerStep?gameid=' + ${game.id},
-					type : 'get',
-					success : function(player) {
-						jQuery(function ($) {
-						    var fiveMinutes = 60 * 5,
-						        display = $('#time');
-						    startTimer(fiveMinutes, display);
-						});
-					}
+				jQuery(function ($) {
+				    var secTime = 30,
+				        display = $('#time');
+				    startTimer(secTime, display);
 				});
+				
+				if (game.timestampEndStep < new Date().getTime() && game.timestampEndStep != null) {
+					$.ajax({
+						url : baseUrl + '/inGame/changeActivePlayer?gameid=' + ${game.id},
+						type : 'get',
+						success : function(game) {
+							
+						}
+					});
+				}
 			}
 		}
 	});
 	
-	
-	
 }, 30 * 1000);
+
 
 
 function startTimer(duration, display) {

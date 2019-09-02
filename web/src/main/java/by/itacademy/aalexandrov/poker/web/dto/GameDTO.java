@@ -18,7 +18,7 @@ public class GameDTO {
 	@NotNull
 	private long plaersCount;
 	private int activePlayerId;
-	private Date timestampEndStep;
+	private long timestampEndStep;
 
 	public int getActivePlayerId() {
 		return activePlayerId;
@@ -28,11 +28,11 @@ public class GameDTO {
 		this.activePlayerId = activePlayerId;
 	}
 
-	public Date getTimestampEndStep() {
+	public long getTimestampEndStep() {
 		return timestampEndStep;
 	}
 
-	public void setTimestampEndStep(Date timestampEndStep) {
+	public void setTimestampEndStep(long timestampEndStep) {
 		this.timestampEndStep = timestampEndStep;
 	}
 

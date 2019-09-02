@@ -24,6 +24,15 @@ public class PlayerDTO {
 	private String nick;
 	private String card1;
 	private String card2;
+	private boolean active;
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
 
 	public String getCard1() {
 		return card1;

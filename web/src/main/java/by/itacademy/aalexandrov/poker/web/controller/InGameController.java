@@ -1,5 +1,6 @@
 package by.itacademy.aalexandrov.poker.web.controller;
 
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
@@ -209,12 +210,26 @@ public class InGameController extends AbstractController {
 				playerService.save(iPlayer2);
 
 			}
-
+			Calendar c1 = Calendar.getInstance();
+			Date dateOne = c1.getTime();
+			IGame game = gameService.getFullInfo(gameid);
+			game.setActivePlayerId(players.get(0).getId());
+			game.setTimestampEndStep(dateOne.getTime() + 30000);
+			gameService.save(game);
 		}
 
 		if (gameStatus.equals(GameStatus.ACTIVE)) {
 			List<PlayerDTO> dtop = players.stream().map(playerToDtoConverter).collect(Collectors.toList());
 			setNickNamesForPlayers(dtop);
+			IGame game = gameService.getFullInfo(gameid);
+			Integer currentPlayer = game.getActivePlayerId();
+			for (PlayerDTO playerDTO : dtop) {
+				if (playerDTO.getId() == currentPlayer) {
+					playerDTO.setActive(true);
+				} else {
+					playerDTO.setActive(false);
+				}
+			}
 			return new ResponseEntity<List<PlayerDTO>>(dtop, HttpStatus.OK);
 		}
 
@@ -238,20 +253,32 @@ public class InGameController extends AbstractController {
 		return new ResponseEntity<PlayerDTO>(dto, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/getPlayerStep", method = RequestMethod.GET)
-	public ResponseEntity<List<PlayerDTO>> getPlayerStep(
+	@RequestMapping(value = "/changeActivePlayer", method = RequestMethod.GET)
+	public ResponseEntity<GameDTO> changeActivePlayer(
 			@RequestParam(name = "gameid", required = true) final Integer gameid) {
 
-		List<IPlayer> players = playerService.getPlayersByGame(gameid);
-		List<PlayerDTO> dto = players.stream().map(playerToDtoConverter).collect(Collectors.toList());
-
-		return new ResponseEntity<List<PlayerDTO>>(dto, HttpStatus.OK);
-	}
-
-	@RequestMapping(value = "/getGameState", method = RequestMethod.GET)
-	public ResponseEntity<GameDTO> getGameState(@RequestParam(name = "gameid", required = true) final Integer gameid) {
-
 		IGame game = gameService.getFullInfo(gameid);
+		Integer currentPlayer = game.getActivePlayerId();
+
+		List<IPlayer> players = playerService.getPlayersByGame(gameid);
+		for (IPlayer iPlayer : players) {
+			if (iPlayer.getId().equals(currentPlayer)) {
+				int index = players.indexOf(iPlayer);
+				try {
+					game.setActivePlayerId(players.get(index + 1).getId());
+					gameService.save(game);
+				} catch (IndexOutOfBoundsException e) {
+					game.setState(GameStatus.ACTIVE2);
+					gameService.save(game);
+				}
+
+				Calendar c1 = Calendar.getInstance();
+				Date dateOne = c1.getTime();
+				game.setTimestampEndStep(dateOne.getTime() + 30000);
+				gameService.save(game);
+			}
+		}
+
 		GameDTO dto = gameToDtoConverter.apply(game);
 
 		return new ResponseEntity<GameDTO>(dto, HttpStatus.OK);
