@@ -1,5 +1,6 @@
 package by.itacademy.aalexandrov.poker.web.controller;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
@@ -26,10 +27,13 @@ import by.itacademy.aalexandrov.poker.dao.api.entity.table.ICard;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.ICardInGame;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IGame;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IPlayer;
+import by.itacademy.aalexandrov.poker.dao.api.entity.table.IPlayerAction;
+import by.itacademy.aalexandrov.poker.dao.api.entity.table.ITransaction;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IUserAccount;
 import by.itacademy.aalexandrov.poker.service.ICardInGameService;
 import by.itacademy.aalexandrov.poker.service.ICardService;
 import by.itacademy.aalexandrov.poker.service.IGameService;
+import by.itacademy.aalexandrov.poker.service.IPlayerActionService;
 import by.itacademy.aalexandrov.poker.service.IPlayerService;
 import by.itacademy.aalexandrov.poker.service.ITransactionService;
 import by.itacademy.aalexandrov.poker.service.IUserAccountService;
@@ -69,6 +73,8 @@ public class InGameController extends AbstractController {
 	ICardInGameService cardInGameService;
 	@Autowired
 	ICardService cardService;
+	@Autowired
+	IPlayerActionService playerActionService;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView index(@RequestParam(name = "id", required = true) Integer gameId) {
@@ -105,17 +111,20 @@ public class InGameController extends AbstractController {
 		}
 
 		boolean tryAdd;
-		if (curentGame.getState().equals(GameStatus.ACTIVE)) {
-			tryAdd = false;
-		} else {
+		if (curentGame.getState().equals(GameStatus.END)) {
 			tryAdd = positions.add(pos);
+		} else {
+			tryAdd = false;
 		}
 
 		if (tryAdd) {
 			try {
 				if (playerService.findPlayer(loggedUserId)) {
 					IPlayer retiringPlayer = playerService.getPlayerByUser(loggedUserId);
-					playerService.delete(retiringPlayer.getId());
+					// playerActionService.delete(retiringPlayer.getId());
+					retiringPlayer.setInGame(false);
+					retiringPlayer.setState(PlayerStatus.INACTIVE);
+					playerService.save(retiringPlayer);
 				}
 
 				newPlayer.setGame(curentGame);
@@ -136,8 +145,7 @@ public class InGameController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/gamestatus", method = RequestMethod.GET)
-	public ResponseEntity<List<PlayerDTO>> getGameStatus(
-			@RequestParam(name = "gameid", required = true) final Integer gameid) {
+	public ResponseEntity<Object> getGameStatus(@RequestParam(name = "gameid", required = true) final Integer gameid) {
 		IGame curentGame = gameService.getFullInfo(gameid);
 		Integer loggedUserId = AuthHelper.getLoggedUserId();
 		GameStatus gameStatus = curentGame.getState();
@@ -153,7 +161,9 @@ public class InGameController extends AbstractController {
 
 			if (diff > 10000) {
 				iPlayer.setInGame(false);
-				playerService.delete(iPlayer.getId());
+				iPlayer.setState(PlayerStatus.INACTIVE);
+				// playerActionService.delete(iPlayer.getId());
+				playerService.save(iPlayer);
 			}
 
 		}
@@ -201,14 +211,19 @@ public class InGameController extends AbstractController {
 			int index = 0;
 			for (IPlayer iPlayer2 : players) {
 				ICard card = cardService.getFullInfo(listCardsInGame.get(index).getCard().getId());
+				ICardInGame cardInGame1 = listCardsInGame.get(index);
+				cardInGame1.setCardStatus(CardStatus.PLAYERCARDCLOSED);
+				cardInGameService.save(cardInGame1);
 				iPlayer2.setCard1(card.getFilename());
 				index++;
 				ICard card2 = cardService.getFullInfo(listCardsInGame.get(index).getCard().getId());
+				ICardInGame cardInGame2 = listCardsInGame.get(index);
+				cardInGame2.setCardStatus(CardStatus.PLAYERCARDCLOSED);
+				cardInGameService.save(cardInGame2);
 				iPlayer2.setCard2(card2.getFilename());
 				index++;
 				iPlayer2.setState(PlayerStatus.DEALER);
 				playerService.save(iPlayer2);
-
 			}
 			Calendar c1 = Calendar.getInstance();
 			Date dateOne = c1.getTime();
@@ -230,12 +245,22 @@ public class InGameController extends AbstractController {
 					playerDTO.setActive(false);
 				}
 			}
-			return new ResponseEntity<List<PlayerDTO>>(dtop, HttpStatus.OK);
+			return new ResponseEntity<Object>(dtop, HttpStatus.OK);
+		}
+
+		if (gameStatus.equals(GameStatus.ACTIVE2)) {
+			List<Object> iCardsForTable = new ArrayList<Object>();
+			List<ICardInGame> listCardsInGame = cardInGameService.getAllCardsInGameByGame(gameid);
+			Collections.shuffle(listCardsInGame);
+			for (int i = 0; i < 5; i++) {
+				iCardsForTable.add(listCardsInGame.get(i));
+			}
+			return new ResponseEntity<Object>(iCardsForTable, HttpStatus.OK);
 		}
 
 		List<PlayerDTO> dtop = players.stream().map(playerToDtoConverter).collect(Collectors.toList());
 		setNickNamesForPlayers(dtop);
-		return new ResponseEntity<List<PlayerDTO>>(dtop, HttpStatus.OK);
+		return new ResponseEntity<Object>(dtop, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/getPlayerCards", method = RequestMethod.GET)
@@ -292,6 +317,50 @@ public class InGameController extends AbstractController {
 		GameDTO dto = gameToDtoConverter.apply(game);
 
 		return new ResponseEntity<GameDTO>(dto, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/getCountPlayers", method = RequestMethod.GET)
+	public ResponseEntity<Integer> getCountPlayers(
+			@RequestParam(name = "gameid", required = true) final Integer gameid) {
+		Integer playersCount = (int) playerService.getPlayersCount(gameid);
+
+		return new ResponseEntity<Integer>(playersCount, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/setBetsForTwoPlayers", method = RequestMethod.GET)
+	public ResponseEntity<List<PlayerDTO>> setBetsForTwoPlayers(
+			@RequestParam(name = "gameid", required = true) final Integer gameid) {
+		List<IPlayer> players = playerService.getPlayersByGame(gameid);
+		List<PlayerDTO> dtos = players.stream().map(playerToDtoConverter).collect(Collectors.toList());
+		dtos.get(0).setCurentBet(10);
+		dtos.get(1).setCurentBet(10);
+		dtos.get(0).setStack(dtos.get(0).getStack() - 10);
+		dtos.get(1).setStack(dtos.get(1).getStack() - 10);
+		IPlayerAction setBet = playerActionService.createEntity();
+		setBet.setPlayer(players.get(0));
+		setBet.setBet(5);
+		playerActionService.save(setBet);
+		IPlayerAction setBet2 = playerActionService.createEntity();
+		setBet2.setPlayer(players.get(1));
+		setBet2.setBet(10);
+		playerActionService.save(setBet2);
+		IUserAccount user1 = userAccountService.getFullInfo(dtos.get(0).getUserAccountId());
+		IUserAccount user2 = userAccountService.getFullInfo(dtos.get(1).getUserAccountId());
+		ITransaction transaction1 = transactionService.createEntity();
+		transaction1.setComment("preflop");
+		transaction1.setUserAccount(user1);
+		transaction1.setAmount(-10);
+		transactionService.save(transaction1);
+		ITransaction transaction2 = transactionService.createEntity();
+		transaction2.setComment("preflop");
+		transaction2.setUserAccount(user2);
+		transaction2.setAmount(-10);
+		transactionService.save(transaction2);
+		IGame curentGame = gameService.getFullInfo(gameid);
+		curentGame.setState(GameStatus.ACTIVE2);
+		curentGame.setBank(20);
+		gameService.save(curentGame);
+		return new ResponseEntity<List<PlayerDTO>>(dtos, HttpStatus.OK);
 	}
 
 	private void setNickNamesForPlayers(List<PlayerDTO> dtop) {

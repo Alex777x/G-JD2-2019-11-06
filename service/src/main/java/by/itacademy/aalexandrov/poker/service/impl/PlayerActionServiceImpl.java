@@ -28,7 +28,15 @@ public class PlayerActionServiceImpl implements IPlayerActionService {
 
 	@Override
 	public IPlayerAction createEntity() {
-		return dao.createEntity();
+		IPlayerAction createEntity = dao.createEntity();
+		createEntity.setAllIn(0);
+		createEntity.setBet(0);
+		createEntity.setCall(0);
+		createEntity.setCheck(false);
+		createEntity.setFold(false);
+		createEntity.setRaise(0);
+
+		return createEntity;
 	}
 
 	@Override
@@ -102,6 +110,11 @@ public class PlayerActionServiceImpl implements IPlayerActionService {
 	@Override
 	public List<IPlayerAction> getFullInfo() {
 		return dao.getFullInfo();
+	}
+
+	@Override
+	public IPlayerAction getActionByPlayer(Integer id) {
+		return dao.getActionByPlayer(id);
 	}
 
 }

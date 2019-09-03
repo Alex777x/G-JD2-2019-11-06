@@ -246,7 +246,8 @@ public class PlayerDaoImpl extends AbstractDaoImpl<IPlayer, Integer> implements 
 
 		cq.distinct(true);
 
-		cq.where(cb.equal(from.get(Player_.userAccount), loggedUserId));
+		cq.where(cb.equal(from.get(Player_.userAccount), loggedUserId),
+				cb.and(cb.equal(from.get(Player_.inGame), true)));
 
 		final TypedQuery<IPlayer> q = em.createQuery(cq);
 

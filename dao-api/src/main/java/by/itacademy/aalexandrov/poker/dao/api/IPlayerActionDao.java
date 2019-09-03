@@ -17,4 +17,6 @@ public interface IPlayerActionDao extends IDao<IPlayerAction, Integer> {
 
 	List<IPlayerAction> getFullInfo();
 
+	IPlayerAction getActionByPlayer(Integer id);
+
 }

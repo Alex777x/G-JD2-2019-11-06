@@ -282,6 +282,13 @@ main {
 	top: 795px;
 }
 
+.btnBet {
+	position: absolute;
+    top: 795px;
+    left: 1024px;
+    background-color: orangered;
+}
+
 .formForRaise {
 	position: absolute;
 	left: 831px;

@@ -145,4 +145,25 @@ public class PlayerActionDaoImpl extends AbstractDaoImpl<IPlayerAction, Integer>
 		return q.getResultList();
 	}
 
+	@Override
+	public IPlayerAction getActionByPlayer(Integer id) {
+		final EntityManager em = getEntityManager();
+		final CriteriaBuilder cb = em.getCriteriaBuilder();
+
+		final CriteriaQuery<IPlayerAction> cq = cb.createQuery(IPlayerAction.class);
+		final Root<PlayerAction> from = cq.from(PlayerAction.class);
+
+		cq.select(from);
+
+		from.fetch(PlayerAction_.player, JoinType.LEFT);
+
+		cq.distinct(true);
+
+		cq.where(cb.equal(from.get(PlayerAction_.player), id));
+
+		final TypedQuery<IPlayerAction> q = em.createQuery(cq);
+
+		return getSingleResult(q);
+	}
+
 }

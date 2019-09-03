@@ -25,6 +25,15 @@ public class PlayerDTO {
 	private String card1;
 	private String card2;
 	private boolean active;
+	private Integer curentBet;
+
+	public Integer getCurentBet() {
+		return curentBet;
+	}
+
+	public void setCurentBet(Integer curentBet) {
+		this.curentBet = curentBet;
+	}
 
 	public boolean isActive() {
 		return active;

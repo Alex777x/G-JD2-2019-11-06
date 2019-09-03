@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.GameStatus;
+import by.itacademy.aalexandrov.poker.dao.api.entity.enums.PlayerStatus;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IChatInHome;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IGame;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IPlayer;
@@ -27,6 +28,7 @@ import by.itacademy.aalexandrov.poker.dao.api.filter.ChatInHomeFilter;
 import by.itacademy.aalexandrov.poker.dao.api.filter.GameFilter;
 import by.itacademy.aalexandrov.poker.service.IChatInHomeService;
 import by.itacademy.aalexandrov.poker.service.IGameService;
+import by.itacademy.aalexandrov.poker.service.IPlayerActionService;
 import by.itacademy.aalexandrov.poker.service.IPlayerService;
 import by.itacademy.aalexandrov.poker.service.IUserAccountService;
 import by.itacademy.aalexandrov.poker.web.converter.ChatInHomeToDTOConverter;
@@ -57,6 +59,8 @@ public class DefaultController extends AbstractController {
 	private IUserAccountService userAccountService;
 	@Autowired
 	UserAccountToDTOConverter userAccountDtoConverter;
+	@Autowired
+	IPlayerActionService playerActionService;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView index(final HttpServletRequest req,
@@ -153,7 +157,9 @@ public class DefaultController extends AbstractController {
 
 			if (diff > 10000) {
 				iPlayer.setInGame(false);
-				playerService.delete(iPlayer.getId());
+				iPlayer.setState(PlayerStatus.INACTIVE);
+				// playerActionService.delete(iPlayer.getId());
+				playerService.save(iPlayer);
 			}
 
 		}

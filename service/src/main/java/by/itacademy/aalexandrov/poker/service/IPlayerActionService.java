@@ -39,4 +39,7 @@ public interface IPlayerActionService {
 	@Transactional
 	List<IPlayerAction> getFullInfo();
 
+	@Transactional
+	IPlayerAction getActionByPlayer(Integer id);
+
 }

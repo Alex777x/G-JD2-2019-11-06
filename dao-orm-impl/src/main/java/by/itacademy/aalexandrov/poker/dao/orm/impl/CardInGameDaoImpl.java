@@ -159,7 +159,8 @@ public class CardInGameDaoImpl extends AbstractDaoImpl<ICardInGame, Integer> imp
 
 		cq.distinct(true);
 
-		cq.where(cb.equal(from.get(CardInGame_.game), gameid));
+		cq.where(cb.equal(from.get(CardInGame_.game), gameid),
+				cb.and(cb.equal(from.get(CardInGame_.cardStatus), "INDECK")));
 		cq.orderBy(new OrderImpl(from.get(CardInGame_.id), true));
 
 		final TypedQuery<ICardInGame> q = em.createQuery(cq);
