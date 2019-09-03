@@ -40,6 +40,9 @@
 	<div>
 		<img id="position1" onclick="f1(1)" class="img-thumbnail player1" src="${contextPath}/resources/img/sitTable.png" />
 	</div>
+	<div id="bet1" class="bet1" style="display: none;">
+		<i class="fas fa-dollar-sign" style="color: gold;position: absolute;left: 419px;top: 605px;">5</i>
+	</div>
 
 	<div id="shirt2" class="shirt2" style="display: none;">
 		<img id="playerCard2" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" /> <img id="playerCard22"
@@ -51,6 +54,9 @@
 	</div>
 	<div>
 		<img id="position2" onclick="f1(2)" class="img-thumbnail player2" src="${contextPath}/resources/img/sitTable.png" />
+	</div>
+	<div id="bet2" class="bet2" style="display: none;">
+		<i class="fas fa-dollar-sign" style="color: gold;position: absolute;left: 220px;top: 560px;">5</i>
 	</div>
 
 	<div id="shirt3" class="shirt3" style="display: none;">
@@ -64,6 +70,9 @@
 	<div>
 		<img id="position3" onclick="f1(3)" class="img-thumbnail player3" src="${contextPath}/resources/img/sitTable.png" />
 	</div>
+	<div id="bet3" class="bet3" style="display: none;">
+		<i class="fas fa-dollar-sign" style="color: gold;position: absolute;left: 190px;top: 346px;">5</i>
+	</div>
 
 	<div id="shirt4" class="shirt4" style="display: none;">
 		<img id="playerCard4" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" /> <img id="playerCard44"
@@ -75,6 +84,9 @@
 	</div>
 	<div>
 		<img id="position4" onclick="f1(4)" class="img-thumbnail player4" src="${contextPath}/resources/img/sitTable.png" />
+	</div>
+	<div id="bet4" class="bet4" style="display: none;">
+		<i class="fas fa-dollar-sign" style="color: gold;position: absolute;left: 299px;top: 274px;">5</i>
 	</div>
 
 	<div id="shirt5" class="shirt5" style="display: none;">
@@ -88,6 +100,9 @@
 	<div>
 		<img id="position5" onclick="f1(5)" class="img-thumbnail player5" src="${contextPath}/resources/img/sitTable.png" />
 	</div>
+	<div id="bet5" class="bet5" style="display: none;">
+		<i class="fas fa-dollar-sign" style="color: gold;position: absolute;left: 500px;top: 233px;">5</i>
+	</div>
 
 	<div id="shirt6" class="shirt6" style="display: none;">
 		<img id="playerCard6" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" /> <img id="playerCard66"
@@ -99,6 +114,9 @@
 	</div>
 	<div>
 		<img id="position6" onclick="f1(6)" class="img-thumbnail player6" src="${contextPath}/resources/img/sitTable.png" />
+	</div>
+	<div id="bet6" class="bet6" style="display: none;">
+		<i class="fas fa-dollar-sign" style="color: gold;position: absolute;left: 765px;top: 233px;">5</i>
 	</div>
 
 	<div id="shirt7" class="shirt7" style="display: none;">
@@ -112,6 +130,9 @@
 	<div>
 		<img id="position7" onclick="f1(7)" class="img-thumbnail player7" src="${contextPath}/resources/img/sitTable.png" />
 	</div>
+	<div id="bet7" class="bet7" style="display: none;">
+		<i class="fas fa-dollar-sign" style="color: gold;position: absolute;left: 910px;top: 293px;">5</i>
+	</div>
 
 	<div id="shirt8" class="shirt8" style="display: none;">
 		<img id="playerCard8" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" /> <img id="playerCard88"
@@ -123,6 +144,9 @@
 	</div>
 	<div>
 		<img id="position8" onclick="f1(8)" class="img-thumbnail player8" src="${contextPath}/resources/img/sitTable.png" />
+	</div>
+	<div id="bet8" class="bet8" style="display: none;">
+		<i class="fas fa-dollar-sign" style="color: gold;position: absolute;left: 950px;top: 405px;">5</i>
 	</div>
 
 	<div id="shirt9" class="shirt9" style="display: none;">
@@ -136,6 +160,9 @@
 	<div>
 		<img id="position9" onclick="f1(9)" class="img-thumbnail player9" src="${contextPath}/resources/img/sitTable.png" />
 	</div>
+	<div id="bet9" class="bet9" style="display: none;">
+		<i class="fas fa-dollar-sign" style="color: gold;position: absolute;left: 868px;top: 558px;">5</i>
+	</div>
 
 	<div id="shirt10" class="shirt10" style="display: none;">
 		<img id="playerCard10" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" /> <img id="playerCard101"
@@ -147,6 +174,9 @@
 	</div>
 	<div>
 		<img id="position10" onclick="f1(10)" class="img-thumbnail player10" src="${contextPath}/resources/img/sitTable.png" />
+	</div>
+	<div id="bet10" class="bet10" style="display: none;">
+		<i class="fas fa-dollar-sign" style="color: gold;position: absolute;left: 684px;top: 608px;">5</i>
 	</div>
 
 	<div>
@@ -213,130 +243,55 @@ jQuery(document).ready(function($){
 				
 				result.forEach(function(player) {
 					if (player.position == "ONE") {
-						$("#position" + 1).attr("src", baseUrl + '/resources/img/avatars/position1.jpg');
-						$("#shirt" + 1).show();
-						$("#playerData" + 1).show();
-						var $nickname = $('#player1Nick').text(player.nick);
-						var $stack = $('#player1Balance').text(player.stack);
-						if (player.active == true) {
-							$("#position" + 1).addClass('activePlayer');
-						} else {
-							$("#position" + 1).removeClass('activePlayer');
-						}
+						f2(1, player);
 					} 
 					if (player.position == "TWO") {
-						$("#position" + 2).attr("src", baseUrl + '/resources/img/avatars/position2.jpg');
-						$("#shirt" + 2).show();
-						$("#playerData" + 2).show();
-						var $nickname = $('#player2Nick').text(player.nick);
-						var $stack = $('#player2Balance').text(player.stack);
-						if (player.active == true) {
-							$("#position" + 2).addClass('activePlayer');
-						} else {
-							$("#position" + 2).removeClass('activePlayer');
-						}
+						f2(2, player);
 					}
 					if (player.position == "THREE") {
-						$("#position" + 3).attr("src", baseUrl + '/resources/img/avatars/position3.jpg');
-						$("#shirt" + 3).show();
-						$("#playerData" + 3).show();
-						var $nickname = $('#player3Nick').text(player.nick);
-						var $stack = $('#player3Balance').text(player.stack);
-						if (player.active == true) {
-							$("#position" + 3).addClass('activePlayer');
-						} else {
-							$("#position" + 3).removeClass('activePlayer');
-						}
+						f2(3, player);
 					}
 					if (player.position == "FOUR") {
-						$("#position" + 4).attr("src", baseUrl + '/resources/img/avatars/position4.jpg');
-						$("#shirt" + 4).show();
-						$("#playerData" + 4).show();
-						var $nickname = $('#player4Nick').text(player.nick);
-						var $stack = $('#player4Balance').text(player.stack);
-						if (player.active == true) {
-							$("#position" + 4).addClass('activePlayer');
-						} else {
-							$("#position" + 4).removeClass('activePlayer');
-						}
+						f2(4, player);
 					} 
 					if (player.position == "FIVE") {
-						$("#position" + 5).attr("src", baseUrl + '/resources/img/avatars/position5.jpg');
-						$("#shirt" + 5).show();
-						$("#playerData" + 5).show();
-						var $nickname = $('#player5Nick').text(player.nick);
-						var $stack = $('#player5Balance').text(player.stack);
-						if (player.active == true) {
-							$("#position" + 5).addClass('activePlayer');
-						} else {
-							$("#position" + 5).removeClass('activePlayer');
-						}
+						f2(5, player);
 					}
 					if (player.position == "SIX") {
-						$("#position" + 6).attr("src", baseUrl + '/resources/img/avatars/position6.jpg');
-						$("#shirt" + 6).show();
-						$("#playerData" + 6).show();
-						var $nickname = $('#player6Nick').text(player.nick);
-						var $stack = $('#player6Balance').text(player.stack);
-						if (player.active == true) {
-							$("#position" + 6).addClass('activePlayer');
-						} else {
-							$("#position" + 6).removeClass('activePlayer');
-						}
+						f2(6, player);
 					} 
 					if (player.position == "SEVEN") {
-						$("#position" + 7).attr("src", baseUrl + '/resources/img/avatars/position7.jpg');
-						$("#shirt" + 7).show();
-						$("#playerData" + 7).show();
-						var $nickname = $('#player7Nick').text(player.nick);
-						var $stack = $('#player7Balance').text(player.stack);
-						if (player.active == true) {
-							$("#position" + 7).addClass('activePlayer');
-						} else {
-							$("#position" + 7).removeClass('activePlayer');
-						}
+						f2(7, player);
 					} 
 					if (player.position == "EIGHT") {
-						$("#position" + 8).attr("src", baseUrl + '/resources/img/avatars/position8.jpg');
-						$("#shirt" + 8).show();
-						$("#playerData" + 8).show();
-						var $nickname = $('#player8Nick').text(player.nick);
-						var $stack = $('#player8Balance').text(player.stack);
-						if (player.active == true) {
-							$("#position" + 8).addClass('activePlayer');
-						} else {
-							$("#position" + 8).removeClass('activePlayer');
-						}
+						f2(8, player);
 					} 
 					if (player.position == "NINE") {
-						$("#position" + 9).attr("src", baseUrl + '/resources/img/avatars/position9.jpg');
-						$("#shirt" + 9).show();
-						$("#playerData" + 9).show();
-						var $nickname = $('#player9Nick').text(player.nick);
-						var $stack = $('#player9Balance').text(player.stack);
-						if (player.active == true) {
-							$("#position" + 9).addClass('activePlayer');
-						} else {
-							$("#position" + 9).removeClass('activePlayer');
-						}
+						f2(9, player);
 					}
 					if (player.position == "TEN") {
-						$("#position" + 10).attr("src", baseUrl + '/resources/img/avatars/position10.jpg');
-						$("#shirt" + 10).show();
-						$("#playerData" + 10).show();
-						var $nickname = $('#player10Nick').text(player.nick);
-						var $stack = $('#player10Balance').text(player.stack);
-						if (player.active == true) {
-							$("#position" + 10).addClass('activePlayer');
-						} else {
-							$("#position" + 10).removeClass('activePlayer');
-						}
+						f2(10, player);
 					} 
 				});
 			}
 		});
 		
 	}, 3 * 1000);
+	
+	function f2(arg, player) {
+		$("#position" + arg).attr("src", baseUrl + '/resources/img/avatars/position' + arg + '.jpg');
+		$("#shirt" + arg).show();
+		$("#playerData" + arg).show();
+		var $nickname = $('#player' + arg + 'Nick').text(player.nick);
+		var $stack = $('#player' + arg + 'Balance').text(player.stack);
+		if (player.active == true) {
+			$("#position" + arg).addClass('activePlayer');
+		} else {
+			$("#position" + arg).removeClass('activePlayer');
+		}
+
+	}
+	
 });
 
 
@@ -348,59 +303,45 @@ setInterval(function() {
 		success : function(player) {
 				if(player.card1 != null) {
 					if (player.position == "ONE") {
-						$("#shirt" + 1).show();
-						$("#playerCard" + 1).attr("src", baseUrl + player.card1);
-						$("#playerCard" + 11).attr("src", baseUrl + player.card2);
+						f3(1, 11, player);
 					}
 					if (player.position == "TWO") {
-						$("#shirt" + 2).show();
-						$("#playerCard" + 2).attr("src", baseUrl + player.card1);
-						$("#playerCard" + 22).attr("src", baseUrl + player.card2);
+						f3(2, 22, player);
 					}
 					if (player.position == "THREE") {
-						$("#shirt" + 3).show();
-						$("#playerCard" + 3).attr("src", baseUrl + player.card1);
-						$("#playerCard" + 33).attr("src", baseUrl + player.card2);
+						f3(3, 33, player);
 					}
 					if (player.position == "FOUR") {
-						$("#shirt" + 4).show();
-						$("#playerCard" + 4).attr("src", baseUrl + player.card1);
-						$("#playerCard" + 44).attr("src", baseUrl + player.card2);
+						f3(4, 44, player);
 					}
 					if (player.position == "FIVE") {
-						$("#shirt" + 5).show();
-						$("#playerCard" + 5).attr("src", baseUrl + player.card1);
-						$("#playerCard" + 55).attr("src", baseUrl + player.card2);
+						f3(5, 55, player);
 					}
 					if (player.position == "SIX") {
-						$("#shirt" + 6).show();
-						$("#playerCard" + 6).attr("src", baseUrl + player.card1);
-						$("#playerCard" + 66).attr("src", baseUrl + player.card2);
+						f3(6, 66, player);
 					}
 					if (player.position == "SEVEN") {
-						$("#shirt" + 7).show();
-						$("#playerCard" + 7).attr("src", baseUrl + player.card1);
-						$("#playerCard" + 77).attr("src", baseUrl + player.card2);
+						f3(7, 77, player);
 					}
 					if (player.position == "EIGHT") {
-						$("#shirt" + 8).show();
-						$("#playerCard" + 8).attr("src", baseUrl + player.card1);
-						$("#playerCard" + 88).attr("src", baseUrl + player.card2);
+						f3(8, 88, player);
 					}
 					if (player.position == "NINE") {
-						$("#shirt" + 9).show();
-						$("#playerCard" + 9).attr("src", baseUrl + player.card1);
-						$("#playerCard" + 99).attr("src", baseUrl + player.card2);
+						f3(9, 99, player);
 					}
 					if (player.position == "TEN") {
-						$("#shirt" + 10).show();
-						$("#playerCard" + 10).attr("src", baseUrl + player.card1);
-						$("#playerCard" + 101).attr("src", baseUrl + player.card2);
+						f3(10, 101, player);
 					}
 				}
 		}
 	});
 }, 3 * 1000);
+
+function f3(arg, arg2, player) {
+	$("#shirt" + arg).show();
+	$("#playerCard" + arg).attr("src", baseUrl + player.card1);
+	$("#playerCard" + arg2).attr("src", baseUrl + player.card2);
+}
 
 setInterval(function() {
 	$.ajax({
