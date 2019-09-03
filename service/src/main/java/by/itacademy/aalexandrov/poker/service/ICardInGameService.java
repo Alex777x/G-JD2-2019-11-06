@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import by.itacademy.aalexandrov.poker.dao.api.entity.enums.CardStatus;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.ICardInGame;
 import by.itacademy.aalexandrov.poker.dao.api.filter.CardInGameFilter;
 
@@ -41,6 +42,6 @@ public interface ICardInGameService {
 	List<ICardInGame> getFullInfo();
 
 	@Transactional
-	List<ICardInGame> getAllCardsInGameByGame(Integer gameid);
+	List<ICardInGame> getAllCardsInGameByGame(Integer gameid, CardStatus indeck);
 
 }

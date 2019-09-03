@@ -15,6 +15,7 @@ import org.hibernate.jpa.criteria.OrderImpl;
 import org.springframework.stereotype.Repository;
 
 import by.itacademy.aalexandrov.poker.dao.api.ICardInGameDao;
+import by.itacademy.aalexandrov.poker.dao.api.entity.enums.CardStatus;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.ICardInGame;
 import by.itacademy.aalexandrov.poker.dao.api.filter.CardInGameFilter;
 import by.itacademy.aalexandrov.poker.dao.orm.impl.entity.CardInGame;
@@ -144,7 +145,7 @@ public class CardInGameDaoImpl extends AbstractDaoImpl<ICardInGame, Integer> imp
 	}
 
 	@Override
-	public List<ICardInGame> getAllCardsInGameByGame(Integer gameid) {
+	public List<ICardInGame> getAllCardsInGameByGame(Integer gameid, CardStatus indeck) {
 		final EntityManager em = getEntityManager();
 		final CriteriaBuilder cb = em.getCriteriaBuilder();
 
@@ -160,7 +161,7 @@ public class CardInGameDaoImpl extends AbstractDaoImpl<ICardInGame, Integer> imp
 		cq.distinct(true);
 
 		cq.where(cb.equal(from.get(CardInGame_.game), gameid),
-				cb.and(cb.equal(from.get(CardInGame_.cardStatus), "INDECK")));
+				cb.and(cb.equal(from.get(CardInGame_.cardStatus), indeck)));
 		cq.orderBy(new OrderImpl(from.get(CardInGame_.id), true));
 
 		final TypedQuery<ICardInGame> q = em.createQuery(cq);
