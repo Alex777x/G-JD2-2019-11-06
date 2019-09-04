@@ -233,6 +233,21 @@ var baseUrl = '${pageContext.request.contextPath}';
 jQuery(document).ready(function($){ 
 	var baseUrl = '${pageContext.request.contextPath}';
 	var $curentTime = $.now();
+	
+	function f2(arg, player) {
+		$("#position" + arg).attr("src", baseUrl + '/resources/img/avatars/position' + arg + '.jpg');
+		$("#shirt" + arg).show();
+		$("#playerData" + arg).show();
+		var $nickname = $('#player' + arg + 'Nick').text(player.nick);
+		var $stack = $('#player' + arg + 'Balance').text(player.stack);
+		if (player.active == true) {
+			$("#position" + arg).addClass('activePlayer');
+		} else {
+			$("#position" + arg).removeClass('activePlayer');
+		}
+
+	}
+	
 	setInterval(function() {
 		$.ajax({
 			url : baseUrl + '/inGame/gamestatus?gameid=' + ${game.id},
@@ -282,21 +297,13 @@ jQuery(document).ready(function($){
 		
 	}, 3 * 1000);
 	
-	function f2(arg, player) {
-		$("#position" + arg).attr("src", baseUrl + '/resources/img/avatars/position' + arg + '.jpg');
+	
+	function f3(arg, arg2, player) {
 		$("#shirt" + arg).show();
-		$("#playerData" + arg).show();
-		var $nickname = $('#player' + arg + 'Nick').text(player.nick);
-		var $stack = $('#player' + arg + 'Balance').text(player.stack);
-		if (player.active == true) {
-			$("#position" + arg).addClass('activePlayer');
-		} else {
-			$("#position" + arg).removeClass('activePlayer');
-		}
-
+		$("#playerCard" + arg).attr("src", baseUrl + player.card1);
+		$("#playerCard" + arg2).attr("src", baseUrl + player.card2);
 	}
 	
-
 setInterval(function() {
 	$.ajax({
 		url : baseUrl + '/inGame/getPlayerCards?gameid=' + ${game.id},
@@ -338,11 +345,6 @@ setInterval(function() {
 	});
 }, 3 * 1000);
 
-function f3(arg, arg2, player) {
-	$("#shirt" + arg).show();
-	$("#playerCard" + arg).attr("src", baseUrl + player.card1);
-	$("#playerCard" + arg2).attr("src", baseUrl + player.card2);
-}
 
 });
 
@@ -368,21 +370,13 @@ setInterval(function() {
 	
 }, 15 * 1000);
 
-setInterval(function() {
-	$.ajax({
-		url : baseUrl + '/inGame/getGameState?gameid=' + ${game.id},
-		type : 'get',
-		success : function(game) {
-			$('#bank').text(game.bank);
-		}
-	});
-}, 2 * 1000);
 
 setInterval(function() {
 	$.ajax({
 		url : baseUrl + '/inGame/getGameState?gameid=' + ${game.id},
 		type : 'get',
 		success : function(game) {
+			$('#bank').text(game.bank);
 			if (game.state == "ACTIVE") {
 				$("#btnBet").show();
 				$.ajax({
@@ -445,20 +439,24 @@ setInterval(function() {
 					url : baseUrl + '/inGame/gamestatus?gameid=' + ${game.id},
 					type : 'get',
 					success : function(cardsIntable) {
-						cardsIntable.forEach(function(card) {
-							$("#card1").attr("src", baseUrl + card.filename);
-						
+						  var threeCards = cardsIntable.slice(0, 3);
+						  var i = 1;
+						cardsIntable.forEach(function(threeCards) {
+							
+							$("#card" + i).attr("src", baseUrl + threeCards.filename);
+							i++;
 						});
 						}
 					});
 				}
-			
 		}
 	});
 	
 }, 2 * 1000);
 
 function f4(arg, player) {
+	$("#playerData" + arg).show();
+	$("#shirt" + arg).show();
 	$("#bet" + arg).show();
 	var $bet = $('#bets' + arg).text(player.curentBet);
 }
