@@ -10,23 +10,23 @@
 <div class="container">
 	<img src="${contextPath}/resources/img/fon-poker.png" alt="" class="rounded-pill tableIngame">
 
-	<div>
+	<div id="tableCard1" style="display: none;">
 		<img id="card1" class="card1" src="${contextPath}/resources/img/cards/shirt.png" />
 	</div>
-	<div>
+	<div id="tableCard2" style="display: none;">
 		<img id="card2" class="card2" src="${contextPath}/resources/img/cards/shirt.png" />
 	</div>
-	<div>
+	<div id="tableCard3" style="display: none;">
 		<img id="card3" class="card3" src="${contextPath}/resources/img/cards/shirt.png" />
 	</div>
-	<div>
+	<div id="tableCard4" style="display: none;">
 		<img id="card4" class="card4" src="${contextPath}/resources/img/cards/shirt.png" />
 	</div>
-	<div>
+	<div id="tableCard5" style="display: none;">
 		<img id="card5" class="card5" src="${contextPath}/resources/img/cards/shirt.png" />
 	</div>
 	<div>
-		<i id="bank" class="fas fa-piggy-bank">${game.bank}</i>
+		<i id="bank" class="fas fa-piggy-bank"></i>
 	</div>
 
 	<div id="shirt1" class="shirt1" style="display: none;">
@@ -201,8 +201,8 @@
 		<button id="btnBet" type="button" class="btn btn-success btn-lg btnBet">BET</button>
 	</div>
 
-	<div style="color: honeydew;">
-		Time to end of turn: <span id="time">15</span> sec!
+	<div id="timer" style="color: honeydew; display: show;" >
+		The game will start in: <div class="seconds">30</div> sec!
 	</div>
 </div>
 
@@ -228,248 +228,45 @@ var baseUrl = '${pageContext.request.contextPath}';
 	}
 </script>
 
-
 <script>
-jQuery(document).ready(function($){ 
-	var baseUrl = '${pageContext.request.contextPath}';
-	var $curentTime = $.now();
-	
-	function f2(arg, player) {
-		$("#position" + arg).attr("src", baseUrl + '/resources/img/avatars/position' + arg + '.jpg');
-		$("#shirt" + arg).show();
-		$("#playerData" + arg).show();
-		$("#bet" + arg).show();
-		var $nickname = $('#player' + arg + 'Nick').text(player.nick);
-		var $stack = $('#player' + arg + 'Balance').text(player.stack);
-		if (player.active == true) {
-			$("#position" + arg).addClass('activePlayer');
-		} else {
-			$("#position" + arg).removeClass('activePlayer');
-		}
-
-	}
-	
-	function f3(arg, arg2, player) {
-		$("#shirt" + arg).show();
-		$("#playerCard" + arg).attr("src", baseUrl + player.card1);
-		$("#playerCard" + arg2).attr("src", baseUrl + player.card2);
-		var $bet = $('#bets' + arg).text(player.curentBet);
-		var $bank = $('#bank').text(game.bank);
-	}
-	
-	setInterval(function() {
-		$.ajax({
-			url : baseUrl + '/inGame/gamestatus?gameid=' + ${game.id},
-			type : 'get',
-			success : function(result) {
-				
-				for (var i = 1; i < 11; i++) {
-					$("#position" + i).attr("src", baseUrl + '/resources/img/sitTable.png');
-					$("#shirt" + i).hide();
-					$("#playerData" + i).hide();
-					}
-				
-				result.forEach(function(player) { 
-					if (player.position == "ONE") {
-						f2(1, player);
-						if(player.card1 != null && ${user.id} == player.userAccountId) {
-							f3(1, 11, player);
-						}
-					} 
-					if (player.position == "TWO") {
-						f2(2, player);
-						if(player.card1 != null && ${user.id} == player.userAccountId) {
-							f3(2, 22, player);
-						}
-					}
-					if (player.position == "THREE") {
-						f2(3, player);
-						if(player.card1 != null && ${user.id} == player.userAccountId) {
-							f3(3, 33, player);
-						}
-					}
-					if (player.position == "FOUR") {
-						f2(4, player);
-						if(player.card1 != null && ${user.id} == player.userAccountId) {
-							f3(4, 44, player);
-						}
-					} 
-					if (player.position == "FIVE") {
-						f2(5, player);
-						if(player.card1 != null && ${user.id} == player.userAccountId) {
-							f3(5, 55, player);
-						}
-					}
-					if (player.position == "SIX") {
-						f2(6, player);
-						if(player.card1 != null && ${user.id} == player.userAccountId) {
-							f3(6, 66, player);
-						}
-					} 
-					if (player.position == "SEVEN") {
-						f2(7, player);
-						if(player.card1 != null && ${user.id} == player.userAccountId) {
-							f3(7, 77, player);
-						}
-					} 
-					if (player.position == "EIGHT") {
-						f2(8, player);
-						if(player.card1 != null && ${user.id} == player.userAccountId) {
-							f3(8, 88, player);
-						}
-					} 
-					if (player.position == "NINE") {
-						f2(9, player);
-						if(player.card1 != null && ${user.id} == player.userAccountId) {
-							f3(9, 99, player);
-						}
-					}
-					if (player.position == "TEN") {
-						f2(10, player);
-						if(player.card1 != null && ${user.id} == player.userAccountId) {
-							f3(10, 101, player);
-						}
-					} 
-				});
-			}
-		});
-		
-	}, 3 * 1000);
-	
-}); 
-
 setInterval(function() {
+	
 	$.ajax({
-		url : baseUrl + '/inGame/getGameState?gameid=' + ${game.id},
-		type : 'get',
-		success : function(game) {
-			if (game.state == "ACTIVE" && game.plaersCount > 1) {
+		  url: baseUrl + '/inGame/getGameState?gameid=' + ${game.id},
+		  type : 'get',
+		  success: function(game){
+		    if (game.state == "END") {
 				
-				if (game.timestampEndStep < new Date().getTime() && game.timestampEndStep != null) {
-					$.ajax({
-						url : baseUrl + '/inGame/changeActivePlayer?gameid=' + ${game.id},
-						type : 'get',
-						success : function(game) {
-							
-						}
-					});
-				}
+		    	$.ajax({
+		  		  url: baseUrl + '/inGame/getCountPlayers?gameid=' + ${game.id},
+		  		  type : 'get',
+		  		  success: function(count){
+		  		    if (count >= 2) {
+		  				
+		  		    var _Seconds = $('.seconds').text(),
+		  		    int;
+		  		    int = setInterval(function() { 
+		  		      if (_Seconds > 0) {
+		  		        _Seconds--; 
+		  		        $('.seconds').text(_Seconds); 
+		  		      } else {
+		  		        clearInterval(int); 
+		  		      $("#timer").hide(); // тут нужно сделать запрос на изменение статуса игры и старта.
+		  		      }
+		  		    }, 1000);
+		  		    	
+		  			}
+		  		  }
+		  		});
+		    	
 			}
-		}
-	});
+		  }
+		});
 	
-}, 15 * 1000);
-
-
-// setInterval(function() {
-// 	$.ajax({
-// 		url : baseUrl + '/inGame/getGameState?gameid=' + ${game.id},
-// 		type : 'get',
-// 		success : function(game) {
-// 			$('#bank').text(game.bank);
-// 			if (game.state == "ACTIVE") {
-// 				$("#btnBet").show();
-// 				$.ajax({
-// 					url : baseUrl + '/inGame/getCountPlayers?gameid=' + ${game.id},
-// 					type : 'get',
-// 					success : function(count) {
-// 						if (count == 2) {
-// 							$.ajax({
-// 								url : baseUrl + '/inGame/setBetsForTwoPlayers?gameid=' + ${game.id},
-// 								type : 'get',
-// 								success : function(players) {
-// 									players.forEach(function(player) {
-// 										if (player.position == "ONE") {
-// 											f4(1, player);
-// 										} 
-// 										if (player.position == "TWO") {
-// 											f4(2, player);
-// 										}
-// 										if (player.position == "THREE") {
-// 											f4(3, player);
-// 										}
-// 										if (player.position == "FOUR") {
-// 											f4(4, player);
-// 										} 
-// 										if (player.position == "FIVE") {
-// 											f4(5, player);
-// 										}
-// 										if (player.position == "SIX") {
-// 											f4(6, player);
-// 										} 
-// 										if (player.position == "SEVEN") {
-// 											f4(7, player);
-// 										} 
-// 										if (player.position == "EIGHT") {
-// 											f4(8, player);
-// 										} 
-// 										if (player.position == "NINE") {
-// 											f4(9, player);
-// 										}
-// 										if (player.position == "TEN") {
-// 											f4(10, player);
-// 										}
-										
-// 									});
-// 								}
-// 							});
-// 						} 
-// 					}
-// 				});
-				
-// 			} 
-// 			if (game.state == "ACTIVE2") {
-// 				$("#btnBet").hide();
-// 				$("#btnFold").show();
-// 				$("#btnCheck").show();
-// 				$("#btnCall").show();
-// 				$("#btnRaise").show();
-// 				$("#inputRaise").show();
-// 				$.ajax({
-// 					url : baseUrl + '/inGame/gamestatus?gameid=' + ${game.id},
-// 					type : 'get',
-// 					success : function(cardsIntable) {
-// 						  var threeCards = cardsIntable.slice(0, 3);
-// 						  var i = 1;
-// 						cardsIntable.forEach(function(threeCards) {
-							
-// 							$("#card" + i).attr("src", baseUrl + threeCards.filename);
-// 							i++;
-// 						});
-// 						}
-// 					});
-// 				}
-// 		}
-// 	});
-	
-// }, 2 * 1000);
-
-function f4(arg, player) {
-	$("#playerData" + arg).show();
-	$("#shirt" + arg).show();
-	$("#bet" + arg).show();
-	var $bet = $('#bets' + arg).text(player.curentBet);
-}
-	
-function startTimer(duration, display) {
-    var timer = duration, minutes, seconds;
-    setInterval(function () {
-        minutes = parseInt(timer / 60, 10);
-        seconds = parseInt(timer % 60, 10);
-
-        minutes = minutes < 10 ? "0" + minutes : minutes;
-        seconds = seconds < 10 ? "0" + seconds : seconds;
-
-        display.text(minutes + ":" + seconds);
-
-        if (--timer < 0) {
-            timer = duration;
-        }
-    }, 1000);
-}
-
-
+}, 2 * 1000);
 </script>
+
+
 
 
 

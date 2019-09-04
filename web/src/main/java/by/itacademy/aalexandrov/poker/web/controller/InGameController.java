@@ -1,14 +1,11 @@
 package by.itacademy.aalexandrov.poker.web.controller;
 
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,15 +16,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import by.itacademy.aalexandrov.poker.dao.api.entity.enums.CardStatus;
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.GameStatus;
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.PlayerPosition;
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.PlayerStatus;
-import by.itacademy.aalexandrov.poker.dao.api.entity.table.ICard;
-import by.itacademy.aalexandrov.poker.dao.api.entity.table.ICardInGame;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IGame;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IPlayer;
-import by.itacademy.aalexandrov.poker.dao.api.entity.table.ITransaction;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IUserAccount;
 import by.itacademy.aalexandrov.poker.service.ICardInGameService;
 import by.itacademy.aalexandrov.poker.service.ICardService;
@@ -42,7 +35,6 @@ import by.itacademy.aalexandrov.poker.web.converter.PlayerToDTOConverter;
 import by.itacademy.aalexandrov.poker.web.converter.TransactionToDTOConverter;
 import by.itacademy.aalexandrov.poker.web.converter.UserAccountToDTOConverter;
 import by.itacademy.aalexandrov.poker.web.dto.GameDTO;
-import by.itacademy.aalexandrov.poker.web.dto.PlayerDTO;
 import by.itacademy.aalexandrov.poker.web.dto.UserAccountDTO;
 import by.itacademy.aalexandrov.poker.web.security.AuthHelper;
 
@@ -143,108 +135,108 @@ public class InGameController extends AbstractController {
 
 	}
 
-	@RequestMapping(value = "/gamestatus", method = RequestMethod.GET)
-	public ResponseEntity<Object> getGameStatus(@RequestParam(name = "gameid", required = true) final Integer gameid) {
-		IGame curentGame = gameService.getFullInfo(gameid);
-		Integer loggedUserId = AuthHelper.getLoggedUserId();
-		GameStatus gameStatus = curentGame.getState();
-
-		List<IPlayer> players = playerService.getPlayersByGame(gameid);
-
-		updateLastActivityForPlayers(players);
-
-		PlayerDTO dto = null;
-		try {
-			dto = playerToDtoConverter.apply(playerService.getPlayerByUser(loggedUserId));
-		} catch (Exception e) {
-
-		}
-
-		IPlayer entity;
-		if (dto != null) {
-			entity = playerFromDtoConverter.apply(dto);
-			entity.setUpdated(new Date());
-			playerService.save(entity);
-		}
-
-		// changeGameStateToNewOrEnd(gameid, curentGame, gameStatus);
-		long playersCount = playerService.getPlayersCount(gameid);
-		if (playersCount > 1 && gameStatus.equals(GameStatus.END)) {
-			curentGame.setState(GameStatus.NEW);
-			gameService.save(curentGame);
-
-		}
-		if (playersCount <= 1) {
-			curentGame.setState(GameStatus.END);
-			gameService.save(curentGame);
-		}
-
-		if (gameStatus.equals(GameStatus.NEW)) {
-			createDeckForGame(curentGame);
-			List<ICardInGame> listCardsInGame = cardInGameService.getAllCardsInGameByGame(gameid, CardStatus.INDECK);
-			Collections.shuffle(listCardsInGame);
-			setFirstTwoCardsForPlayers(players, listCardsInGame);
-			setFirstPlayerAsActive(gameid, players);
-			curentGame.setState(GameStatus.SETBLINDS);
-			gameService.save(curentGame);
-
-		} else if (gameStatus.equals(GameStatus.SETBLINDS)) {
-			IGame game = gameService.getFullInfo(gameid);
-			Integer currentPlayer = game.getActivePlayerId();
-
-			IPlayer playerSmallBlind = playerService.getPlayerSmallBlind(gameid, PlayerStatus.SMALLBLIND);
-			playerSmallBlind.setCurentBet(5);
-			playerService.save(playerSmallBlind);
-			IPlayer playerBigBlind = playerService.getPlayerSmallBlind(gameid, PlayerStatus.BIGBLIND);
-			playerBigBlind.setCurentBet(10);
-			playerService.save(playerBigBlind);
-
-			ITransaction transactionForSmallBlindPlayer = transactionService.createEntity();
-			transactionForSmallBlindPlayer.setAmount(-5);
-			transactionForSmallBlindPlayer.setComment("smallblind");
-			transactionForSmallBlindPlayer.setUserAccount(playerSmallBlind.getUserAccount());
-			transactionService.save(transactionForSmallBlindPlayer);
-			ITransaction transactionForBigBlindPlayer = transactionService.createEntity();
-			transactionForBigBlindPlayer.setAmount(-10);
-			transactionForBigBlindPlayer.setComment("bigblind");
-			transactionForBigBlindPlayer.setUserAccount(playerBigBlind.getUserAccount());
-			transactionService.save(transactionForBigBlindPlayer);
-
-			List<PlayerDTO> dtop = players.stream().map(playerToDtoConverter).collect(Collectors.toList());
-			setNickNamesForPlayers(dtop);
-			getActivePlayer(dtop, currentPlayer);
-			curentGame.setState(GameStatus.ACTIVE);
-			curentGame.setBank(15);
-			gameService.save(curentGame);
-			return new ResponseEntity<Object>(dtop, HttpStatus.OK);
-
-		} else if (gameStatus.equals(GameStatus.ACTIVE)) {
-			List<PlayerDTO> dtop = players.stream().map(playerToDtoConverter).collect(Collectors.toList());
-			setNickNamesForPlayers(dtop);
-
-			return new ResponseEntity<Object>(dtop, HttpStatus.OK);
-
-		} else if (gameStatus.equals(GameStatus.ACTIVE2)) {
-			List<Object> iCardsForTable = new ArrayList<Object>();
-			List<ICardInGame> listCardsInGame = cardInGameService.getAllCardsInGameByGame(gameid, CardStatus.INDECK);
-			Collections.shuffle(listCardsInGame);
-			for (int i = 0; i < 5; i++) {
-				iCardsForTable.add(listCardsInGame.get(i));
-			}
-			return new ResponseEntity<Object>(iCardsForTable, HttpStatus.OK);
-
-		} else if (gameStatus.equals(GameStatus.ACTIVE3)) {
-
-		} else if (gameStatus.equals(GameStatus.ACTIVE4)) {
-
-		} else if (gameStatus.equals(GameStatus.OLD)) {
-
-		}
-
-		List<PlayerDTO> dtop = players.stream().map(playerToDtoConverter).collect(Collectors.toList());
-		setNickNamesForPlayers(dtop);
-		return new ResponseEntity<Object>(dtop, HttpStatus.OK);
-	}
+//	@RequestMapping(value = "/gamestatus", method = RequestMethod.GET)
+//	public ResponseEntity<Object> getGameStatus(@RequestParam(name = "gameid", required = true) final Integer gameid) {
+//		IGame curentGame = gameService.getFullInfo(gameid);
+//		Integer loggedUserId = AuthHelper.getLoggedUserId();
+//		GameStatus gameStatus = curentGame.getState();
+//
+//		List<IPlayer> players = playerService.getPlayersByGame(gameid);
+//
+//		updateLastActivityForPlayers(players);
+//
+//		PlayerDTO dto = null;
+//		try {
+//			dto = playerToDtoConverter.apply(playerService.getPlayerByUser(loggedUserId));
+//		} catch (Exception e) {
+//
+//		}
+//
+//		IPlayer entity;
+//		if (dto != null) {
+//			entity = playerFromDtoConverter.apply(dto);
+//			entity.setUpdated(new Date());
+//			playerService.save(entity);
+//		}
+//
+//		// changeGameStateToNewOrEnd(gameid, curentGame, gameStatus);
+//		long playersCount = playerService.getPlayersCount(gameid);
+//		if (playersCount > 1 && gameStatus.equals(GameStatus.END)) {
+//			curentGame.setState(GameStatus.NEW);
+//			gameService.save(curentGame);
+//
+//		}
+//		if (playersCount <= 1) {
+//			curentGame.setState(GameStatus.END);
+//			gameService.save(curentGame);
+//		}
+//
+//		if (gameStatus.equals(GameStatus.NEW)) {
+//			createDeckForGame(curentGame);
+//			List<ICardInGame> listCardsInGame = cardInGameService.getAllCardsInGameByGame(gameid, CardStatus.INDECK);
+//			Collections.shuffle(listCardsInGame);
+//			setFirstTwoCardsForPlayers(players, listCardsInGame);
+//			setFirstPlayerAsActive(gameid, players);
+//			curentGame.setState(GameStatus.SETBLINDS);
+//			gameService.save(curentGame);
+//
+//		} else if (gameStatus.equals(GameStatus.SETBLINDS)) {
+//			IGame game = gameService.getFullInfo(gameid);
+//			Integer currentPlayer = game.getActivePlayerId();
+//
+//			IPlayer playerSmallBlind = playerService.getPlayerSmallBlind(gameid, PlayerStatus.SMALLBLIND);
+//			playerSmallBlind.setCurentBet(5);
+//			playerService.save(playerSmallBlind);
+//			IPlayer playerBigBlind = playerService.getPlayerSmallBlind(gameid, PlayerStatus.BIGBLIND);
+//			playerBigBlind.setCurentBet(10);
+//			playerService.save(playerBigBlind);
+//
+//			ITransaction transactionForSmallBlindPlayer = transactionService.createEntity();
+//			transactionForSmallBlindPlayer.setAmount(-5);
+//			transactionForSmallBlindPlayer.setComment("smallblind");
+//			transactionForSmallBlindPlayer.setUserAccount(playerSmallBlind.getUserAccount());
+//			transactionService.save(transactionForSmallBlindPlayer);
+//			ITransaction transactionForBigBlindPlayer = transactionService.createEntity();
+//			transactionForBigBlindPlayer.setAmount(-10);
+//			transactionForBigBlindPlayer.setComment("bigblind");
+//			transactionForBigBlindPlayer.setUserAccount(playerBigBlind.getUserAccount());
+//			transactionService.save(transactionForBigBlindPlayer);
+//
+//			List<PlayerDTO> dtop = players.stream().map(playerToDtoConverter).collect(Collectors.toList());
+//			setNickNamesForPlayers(dtop);
+//			getActivePlayer(dtop, currentPlayer);
+//			curentGame.setState(GameStatus.ACTIVE);
+//			curentGame.setBank(15);
+//			gameService.save(curentGame);
+//			return new ResponseEntity<Object>(dtop, HttpStatus.OK);
+//
+//		} else if (gameStatus.equals(GameStatus.ACTIVE)) {
+//			List<PlayerDTO> dtop = players.stream().map(playerToDtoConverter).collect(Collectors.toList());
+//			setNickNamesForPlayers(dtop);
+//
+//			return new ResponseEntity<Object>(dtop, HttpStatus.OK);
+//
+//		} else if (gameStatus.equals(GameStatus.ACTIVE2)) {
+//			List<Object> iCardsForTable = new ArrayList<Object>();
+//			List<ICardInGame> listCardsInGame = cardInGameService.getAllCardsInGameByGame(gameid, CardStatus.INDECK);
+//			Collections.shuffle(listCardsInGame);
+//			for (int i = 0; i < 5; i++) {
+//				iCardsForTable.add(listCardsInGame.get(i));
+//			}
+//			return new ResponseEntity<Object>(iCardsForTable, HttpStatus.OK);
+//
+//		} else if (gameStatus.equals(GameStatus.ACTIVE3)) {
+//
+//		} else if (gameStatus.equals(GameStatus.ACTIVE4)) {
+//
+//		} else if (gameStatus.equals(GameStatus.OLD)) {
+//
+//		}
+//
+//		List<PlayerDTO> dtop = players.stream().map(playerToDtoConverter).collect(Collectors.toList());
+//		setNickNamesForPlayers(dtop);
+//		return new ResponseEntity<Object>(dtop, HttpStatus.OK);
+//	}
 
 //	private void changeGameStateToNewOrEnd(final Integer gameid, IGame curentGame, GameStatus gameStatus) {
 //		long playersCount = playerService.getPlayersCount(gameid);
@@ -290,22 +282,22 @@ public class InGameController extends AbstractController {
 		return new ResponseEntity<Integer>(playersCount, HttpStatus.OK);
 	}
 
-	private void setFirstPlayerAsActive(final Integer gameid, List<IPlayer> players) {
-		Calendar c1 = Calendar.getInstance();
-		Date dateOne = c1.getTime();
-		IGame game = gameService.getFullInfo(gameid);
-		game.setActivePlayerId(players.get(0).getId());
-		game.setTimestampEndStep(dateOne.getTime() + 15000);
-		gameService.save(game);
-	}
-
-	private void getActivePlayer(List<PlayerDTO> dtop, Integer currentPlayer) {
-		for (PlayerDTO playerDTO : dtop) {
-			if (playerDTO.getId().equals(currentPlayer)) {
-				playerDTO.setActive(true);
-			} else {
-				playerDTO.setActive(false);
-			}
+//	private void setFirstPlayerAsActive(final Integer gameid, List<IPlayer> players) {
+//		Calendar c1 = Calendar.getInstance();
+//		Date dateOne = c1.getTime();
+//		IGame game = gameService.getFullInfo(gameid);
+//		game.setActivePlayerId(players.get(0).getId());
+//		game.setTimestampEndStep(dateOne.getTime() + 15000);
+//		gameService.save(game);
+//	}
+//
+//	private void getActivePlayer(List<PlayerDTO> dtop, Integer currentPlayer) {
+//		for (PlayerDTO playerDTO : dtop) {
+//			if (playerDTO.getId().equals(currentPlayer)) {
+//				playerDTO.setActive(true);
+//			} else {
+//				playerDTO.setActive(false);
+//			}
 //			if (playerDTO.getState().equals(PlayerStatus.SMALLBLIND)) {
 //				playerDTO.setCurentBet(5);
 //				ITransaction transactionForSmallBlindPlayer = transactionService.createEntity();
@@ -333,8 +325,7 @@ public class InGameController extends AbstractController {
 //				gameService.save(game);
 //				greatingNextPlayer(playerDTO.getGameId(), game, currentPlayer);
 //			}
-		}
-	}
+//	}}
 
 	private void greatingNextPlayer(final Integer gameid, IGame game, Integer currentPlayer) {
 		List<IPlayer> players = playerService.getPlayersByGame(gameid);
@@ -358,57 +349,57 @@ public class InGameController extends AbstractController {
 		}
 	}
 
-	private void setFirstTwoCardsForPlayers(List<IPlayer> players, List<ICardInGame> listCardsInGame) {
-		int index = 0;
-		players.get(0).setState(PlayerStatus.SMALLBLIND);
-		players.get(1).setState(PlayerStatus.BIGBLIND);
-		for (IPlayer iPlayer2 : players) {
-			ICard card = cardService.getFullInfo(listCardsInGame.get(index).getCard().getId());
-			ICardInGame cardInGame1 = listCardsInGame.get(index);
-			cardInGame1.setCardStatus(CardStatus.PLAYERCARDCLOSED);
-			cardInGameService.save(cardInGame1);
-			iPlayer2.setCard1(card.getFilename());
-			index++;
-			ICard card2 = cardService.getFullInfo(listCardsInGame.get(index).getCard().getId());
-			ICardInGame cardInGame2 = listCardsInGame.get(index);
-			cardInGame2.setCardStatus(CardStatus.PLAYERCARDCLOSED);
-			cardInGameService.save(cardInGame2);
-			iPlayer2.setCard2(card2.getFilename());
-			index++;
-			playerService.save(iPlayer2);
-		}
-	}
-
-	private void createDeckForGame(IGame curentGame) {
-		for (int i = 0; i < 52; i++) {
-			ICardInGame newCardInGame = cardInGameService.createEntity();
-			List<ICard> listCard = cardService.getFullInfo();
-			newCardInGame.setCard(listCard.get(i));
-			newCardInGame.setGame(curentGame);
-			newCardInGame.setPlayer(null);
-			newCardInGame.setCardStatus(CardStatus.INDECK);
-			cardInGameService.save(newCardInGame);
-			// curentGame.setState(GameStatus.ACTIVE);
-			// gameService.save(curentGame);
-		}
-	}
-
-	private void updateLastActivityForPlayers(List<IPlayer> players) {
-		for (IPlayer iPlayer : players) {
-			Date lastUpdated = iPlayer.getUpdated();
-			long milli = lastUpdated.getTime();
-			Date curentTime = new Date();
-			long curentMilli = curentTime.getTime();
-			long diff = curentMilli - milli;
-
-			if (diff > 10000) {
-				iPlayer.setInGame(false);
-				iPlayer.setState(PlayerStatus.INACTIVE);
-				playerService.save(iPlayer);
-			}
-
-		}
-	}
+//	private void setFirstTwoCardsForPlayers(List<IPlayer> players, List<ICardInGame> listCardsInGame) {
+//		int index = 0;
+//		players.get(0).setState(PlayerStatus.SMALLBLIND);
+//		players.get(1).setState(PlayerStatus.BIGBLIND);
+//		for (IPlayer iPlayer2 : players) {
+//			ICard card = cardService.getFullInfo(listCardsInGame.get(index).getCard().getId());
+//			ICardInGame cardInGame1 = listCardsInGame.get(index);
+//			cardInGame1.setCardStatus(CardStatus.PLAYERCARDCLOSED);
+//			cardInGameService.save(cardInGame1);
+//			iPlayer2.setCard1(card.getFilename());
+//			index++;
+//			ICard card2 = cardService.getFullInfo(listCardsInGame.get(index).getCard().getId());
+//			ICardInGame cardInGame2 = listCardsInGame.get(index);
+//			cardInGame2.setCardStatus(CardStatus.PLAYERCARDCLOSED);
+//			cardInGameService.save(cardInGame2);
+//			iPlayer2.setCard2(card2.getFilename());
+//			index++;
+//			playerService.save(iPlayer2);
+//		}
+//	}
+//
+//	private void createDeckForGame(IGame curentGame) {
+//		for (int i = 0; i < 52; i++) {
+//			ICardInGame newCardInGame = cardInGameService.createEntity();
+//			List<ICard> listCard = cardService.getFullInfo();
+//			newCardInGame.setCard(listCard.get(i));
+//			newCardInGame.setGame(curentGame);
+//			newCardInGame.setPlayer(null);
+//			newCardInGame.setCardStatus(CardStatus.INDECK);
+//			cardInGameService.save(newCardInGame);
+//			// curentGame.setState(GameStatus.ACTIVE);
+//			// gameService.save(curentGame);
+//		}
+//	}
+//
+//	private void updateLastActivityForPlayers(List<IPlayer> players) {
+//		for (IPlayer iPlayer : players) {
+//			Date lastUpdated = iPlayer.getUpdated();
+//			long milli = lastUpdated.getTime();
+//			Date curentTime = new Date();
+//			long curentMilli = curentTime.getTime();
+//			long diff = curentMilli - milli;
+//
+//			if (diff > 10000) {
+//				iPlayer.setInGame(false);
+//				iPlayer.setState(PlayerStatus.INACTIVE);
+//				playerService.save(iPlayer);
+//			}
+//
+//		}
+//	}
 
 //	@RequestMapping(value = "/getPlayerCards", method = RequestMethod.GET)
 //	public ResponseEntity<PlayerDTO> getPlayerCard(
@@ -461,12 +452,12 @@ public class InGameController extends AbstractController {
 //		return new ResponseEntity<List<PlayerDTO>>(dtos, HttpStatus.OK);
 //	}
 
-	private void setNickNamesForPlayers(List<PlayerDTO> dtop) {
-		for (PlayerDTO playerDTO : dtop) {
-			IUserAccount user = userAccountService.getFullInfo(playerDTO.getUserAccountId());
-			playerDTO.setNick(user.getNickname());
-		}
-	}
+//	private void setNickNamesForPlayers(List<PlayerDTO> dtop) {
+//		for (PlayerDTO playerDTO : dtop) {
+//			IUserAccount user = userAccountService.getFullInfo(playerDTO.getUserAccountId());
+//			playerDTO.setNick(user.getNickname());
+//		}
+//	}
 
 	private PlayerPosition idToString(final Integer id) {
 		PlayerPosition pos = null;
