@@ -9,10 +9,8 @@ import by.itacademy.aalexandrov.poker.dao.api.filter.CardFilter;
 
 public interface ICardService {
 
-	@Transactional
 	long getCount(CardFilter filter);
 
-	@Transactional
 	List<ICard> find(CardFilter filter);
 
 	@Transactional
@@ -34,10 +32,8 @@ public interface ICardService {
 	@Transactional
 	ICard createEntity();
 
-	@Transactional
 	List<ICard> getFullInfo();
 
-	@Transactional
 	ICard getFullInfo(Integer id);
 
 }

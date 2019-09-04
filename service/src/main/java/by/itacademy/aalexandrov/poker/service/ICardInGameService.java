@@ -10,10 +10,8 @@ import by.itacademy.aalexandrov.poker.dao.api.filter.CardInGameFilter;
 
 public interface ICardInGameService {
 
-	@Transactional
 	long getCount(CardInGameFilter filter);
 
-	@Transactional
 	List<ICardInGame> find(CardInGameFilter filter);
 
 	@Transactional
@@ -35,13 +33,10 @@ public interface ICardInGameService {
 	@Transactional
 	ICardInGame createEntity();
 
-	@Transactional
 	ICardInGame getFullInfo(Integer id);
 
-	@Transactional
 	List<ICardInGame> getFullInfo();
 
-	@Transactional
 	List<ICardInGame> getAllCardsInGameByGame(Integer gameid, CardStatus indeck);
 
 }

@@ -42,8 +42,21 @@ public class Player extends BaseEntity implements IPlayer {
 	@Column
 	private String card2;
 
+	@Column
+	private int curentBet;
+
 	@Transient
 	private String upperCaseName;
+
+	@Override
+	public int getCurentBet() {
+		return curentBet;
+	}
+
+	@Override
+	public void setCurentBet(int curentBet) {
+		this.curentBet = curentBet;
+	}
 
 	@Override
 	public String getCard1() {

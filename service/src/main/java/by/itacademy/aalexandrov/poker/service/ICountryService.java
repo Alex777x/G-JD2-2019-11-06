@@ -30,7 +30,6 @@ public interface ICountryService {
 
 	List<ICountry> find(CountryFilter filter);
 
-	@Transactional
 	long getCount(CountryFilter filter);
 
 }

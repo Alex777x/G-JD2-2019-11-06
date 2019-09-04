@@ -30,10 +30,8 @@ public interface ITiketService {
 
 	List<ITiket> find(TiketFilter filter);
 
-	@Transactional
 	long getCount(TiketFilter filter);
 
-	@Transactional
 	ITiket getFullInfo(Integer id);
 
 }

@@ -9,7 +9,6 @@ import by.itacademy.aalexandrov.poker.dao.api.filter.UserAccountFilter;
 
 public interface IUserAccountService {
 
-	@Transactional
 	long getCount(UserAccountFilter filter);
 
 	List<IUserAccount> find(UserAccountFilter filter);
@@ -33,13 +32,10 @@ public interface IUserAccountService {
 	@Transactional
 	IUserAccount createEntity();
 
-	@Transactional
 	IUserAccount findNickname(String username);
 
-	@Transactional
 	IUserAccount getFullInfo(Integer id);
 
-	@Transactional
 	List<IUserAccount> getFullInfo();
 
 	@Transactional

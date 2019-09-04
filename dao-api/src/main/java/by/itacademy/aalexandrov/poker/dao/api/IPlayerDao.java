@@ -2,6 +2,7 @@ package by.itacademy.aalexandrov.poker.dao.api;
 
 import java.util.List;
 
+import by.itacademy.aalexandrov.poker.dao.api.entity.enums.PlayerStatus;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IPlayer;
 import by.itacademy.aalexandrov.poker.dao.api.filter.PlayerFilter;
 
@@ -28,5 +29,7 @@ public interface IPlayerDao extends IDao<IPlayer, Integer> {
 	List<IPlayer> getPlayersByGame(Integer id);
 
 	IPlayer getPlayerByUserAccunt(Integer loggedUserId);
+
+	IPlayer getPlayerSmallBlind(Integer gameid, PlayerStatus smallblind);
 
 }

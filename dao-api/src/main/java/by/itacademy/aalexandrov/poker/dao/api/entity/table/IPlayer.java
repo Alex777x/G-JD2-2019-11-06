@@ -37,4 +37,8 @@ public interface IPlayer extends IBaseEntity {
 
 	String getCard1();
 
+	void setCurentBet(int curentBet);
+
+	int getCurentBet();
+
 }

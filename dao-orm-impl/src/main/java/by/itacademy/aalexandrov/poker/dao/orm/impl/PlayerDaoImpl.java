@@ -15,6 +15,7 @@ import org.hibernate.jpa.criteria.OrderImpl;
 import org.springframework.stereotype.Repository;
 
 import by.itacademy.aalexandrov.poker.dao.api.IPlayerDao;
+import by.itacademy.aalexandrov.poker.dao.api.entity.enums.PlayerStatus;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IPlayer;
 import by.itacademy.aalexandrov.poker.dao.api.filter.PlayerFilter;
 import by.itacademy.aalexandrov.poker.dao.orm.impl.entity.Player;
@@ -222,7 +223,7 @@ public class PlayerDaoImpl extends AbstractDaoImpl<IPlayer, Integer> implements 
 
 		from.fetch(Player_.game, JoinType.LEFT);
 		from.fetch(Player_.userAccount, JoinType.LEFT);
-		cq.where(cb.equal(from.get(Player_.game), id));
+		cq.where(cb.equal(from.get(Player_.game), id), cb.and(cb.equal(from.get(Player_.inGame), true)));
 		cq.orderBy(new OrderImpl(from.get(Player_.position), true));
 		cq.distinct(true);
 
@@ -248,6 +249,28 @@ public class PlayerDaoImpl extends AbstractDaoImpl<IPlayer, Integer> implements 
 
 		cq.where(cb.equal(from.get(Player_.userAccount), loggedUserId),
 				cb.and(cb.equal(from.get(Player_.inGame), true)));
+
+		final TypedQuery<IPlayer> q = em.createQuery(cq);
+
+		return getSingleResult(q);
+	}
+
+	@Override
+	public IPlayer getPlayerSmallBlind(Integer gameid, PlayerStatus smallblind) {
+		final EntityManager em = getEntityManager();
+		final CriteriaBuilder cb = em.getCriteriaBuilder();
+
+		final CriteriaQuery<IPlayer> cq = cb.createQuery(IPlayer.class);
+		final Root<Player> from = cq.from(Player.class);
+
+		cq.select(from); // define what need to be selected
+
+		from.fetch(Player_.game, JoinType.LEFT);
+		from.fetch(Player_.userAccount, JoinType.LEFT);
+
+		cq.distinct(true);
+
+		cq.where(cb.equal(from.get(Player_.game), gameid), cb.and(cb.equal(from.get(Player_.state), smallblind)));
 
 		final TypedQuery<IPlayer> q = em.createQuery(cq);
 

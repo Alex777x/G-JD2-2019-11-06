@@ -9,7 +9,6 @@ import by.itacademy.aalexandrov.poker.dao.api.filter.PlayerActionFilter;
 
 public interface IPlayerActionService {
 
-	@Transactional
 	long getCount(PlayerActionFilter filter);
 
 	List<IPlayerAction> find(PlayerActionFilter filter);
@@ -33,13 +32,10 @@ public interface IPlayerActionService {
 	@Transactional
 	IPlayerAction createEntity();
 
-	@Transactional
 	IPlayerAction getFullInfo(Integer id);
 
-	@Transactional
 	List<IPlayerAction> getFullInfo();
 
-	@Transactional
 	IPlayerAction getActionByPlayer(Integer id);
 
 }

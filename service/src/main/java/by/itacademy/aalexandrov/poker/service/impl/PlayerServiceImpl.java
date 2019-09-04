@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import by.itacademy.aalexandrov.poker.dao.api.IPlayerDao;
+import by.itacademy.aalexandrov.poker.dao.api.entity.enums.PlayerStatus;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IPlayer;
 import by.itacademy.aalexandrov.poker.dao.api.filter.PlayerFilter;
 import by.itacademy.aalexandrov.poker.service.IPlayerService;
@@ -127,6 +128,11 @@ public class PlayerServiceImpl implements IPlayerService {
 	@Override
 	public IPlayer getPlayerByUserAccunt(Integer loggedUserId) {
 		return dao.getPlayerByUserAccunt(loggedUserId);
+	}
+
+	@Override
+	public IPlayer getPlayerSmallBlind(Integer gameid, PlayerStatus smallblind) {
+		return dao.getPlayerSmallBlind(gameid, smallblind);
 	}
 
 }

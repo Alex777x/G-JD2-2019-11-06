@@ -4,12 +4,12 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import by.itacademy.aalexandrov.poker.dao.api.entity.enums.PlayerStatus;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IPlayer;
 import by.itacademy.aalexandrov.poker.dao.api.filter.PlayerFilter;
 
 public interface IPlayerService {
 
-	@Transactional
 	long getCount(PlayerFilter filter);
 
 	List<IPlayer> find(PlayerFilter filter);
@@ -33,25 +33,20 @@ public interface IPlayerService {
 	@Transactional
 	IPlayer createEntity();
 
-	@Transactional
 	IPlayer getFullInfo(Integer id);
 
-	@Transactional
 	List<IPlayer> getFullInfo();
 
-	@Transactional
 	long getPlayersCount(Integer id);
 
-	@Transactional
 	IPlayer getPlayerByUser(Integer loggedUserId);
 
-	@Transactional
 	boolean findPlayer(Integer loggedUserId);
 
-	@Transactional
 	List<IPlayer> getPlayersByGame(Integer id);
 
-	@Transactional
 	IPlayer getPlayerByUserAccunt(Integer loggedUserId);
+
+	IPlayer getPlayerSmallBlind(Integer gameid, PlayerStatus smallblind);
 
 }

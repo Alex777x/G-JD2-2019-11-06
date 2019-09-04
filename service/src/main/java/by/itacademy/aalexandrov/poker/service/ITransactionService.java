@@ -9,7 +9,6 @@ import by.itacademy.aalexandrov.poker.dao.api.filter.TransactionFilter;
 
 public interface ITransactionService {
 
-	@Transactional
 	long getCount(TransactionFilter filter);
 
 	List<ITransaction> find(TransactionFilter filter);
@@ -33,13 +32,10 @@ public interface ITransactionService {
 	@Transactional
 	ITransaction createEntity();
 
-	@Transactional
 	ITransaction getFullInfo(Integer id);
 
-	@Transactional
 	List<ITransaction> getFullInfo();
 
-	@Transactional
 	double getBalance(Integer id);
 
 	Double getSumm(Integer id);

@@ -27,7 +27,6 @@ import by.itacademy.aalexandrov.poker.dao.api.entity.table.ICard;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.ICardInGame;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IGame;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IPlayer;
-import by.itacademy.aalexandrov.poker.dao.api.entity.table.IPlayerAction;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.ITransaction;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IUserAccount;
 import by.itacademy.aalexandrov.poker.service.ICardInGameService;
@@ -121,7 +120,6 @@ public class InGameController extends AbstractController {
 			try {
 				if (playerService.findPlayer(loggedUserId)) {
 					IPlayer retiringPlayer = playerService.getPlayerByUser(loggedUserId);
-					// playerActionService.delete(retiringPlayer.getId());
 					retiringPlayer.setInGame(false);
 					retiringPlayer.setState(PlayerStatus.INACTIVE);
 					playerService.save(retiringPlayer);
@@ -133,6 +131,7 @@ public class InGameController extends AbstractController {
 				newPlayer.setInGame(true);
 				newPlayer.setState(PlayerStatus.INACTIVE);
 				newPlayer.setStack(balance);
+				newPlayer.setCurentBet(0);
 				playerService.save(newPlayer);
 			} catch (NullPointerException e) {
 
@@ -152,21 +151,7 @@ public class InGameController extends AbstractController {
 
 		List<IPlayer> players = playerService.getPlayersByGame(gameid);
 
-		for (IPlayer iPlayer : players) {
-			Date lastUpdated = iPlayer.getUpdated();
-			long milli = lastUpdated.getTime();
-			Date curentTime = new Date();
-			long curentMilli = curentTime.getTime();
-			long diff = curentMilli - milli;
-
-			if (diff > 10000) {
-				iPlayer.setInGame(false);
-				iPlayer.setState(PlayerStatus.INACTIVE);
-				// playerActionService.delete(iPlayer.getId());
-				playerService.save(iPlayer);
-			}
-
-		}
+		updateLastActivityForPlayers(players);
 
 		PlayerDTO dto = null;
 		try {
@@ -182,6 +167,7 @@ public class InGameController extends AbstractController {
 			playerService.save(entity);
 		}
 
+		// changeGameStateToNewOrEnd(gameid, curentGame, gameStatus);
 		long playersCount = playerService.getPlayersCount(gameid);
 		if (playersCount > 1 && gameStatus.equals(GameStatus.END)) {
 			curentGame.setState(GameStatus.NEW);
@@ -194,61 +180,51 @@ public class InGameController extends AbstractController {
 		}
 
 		if (gameStatus.equals(GameStatus.NEW)) {
-			for (int i = 0; i < 52; i++) {
-				ICardInGame newCardInGame = cardInGameService.createEntity();
-				List<ICard> listCard = cardService.getFullInfo();
-				newCardInGame.setCard(listCard.get(i));
-				newCardInGame.setGame(curentGame);
-				newCardInGame.setPlayer(null);
-				newCardInGame.setCardStatus(CardStatus.INDECK);
-				cardInGameService.save(newCardInGame);
-				curentGame.setState(GameStatus.ACTIVE);
-				gameService.save(curentGame);
-			}
+			createDeckForGame(curentGame);
 			List<ICardInGame> listCardsInGame = cardInGameService.getAllCardsInGameByGame(gameid, CardStatus.INDECK);
 			Collections.shuffle(listCardsInGame);
+			setFirstTwoCardsForPlayers(players, listCardsInGame);
+			setFirstPlayerAsActive(gameid, players);
+			curentGame.setState(GameStatus.SETBLINDS);
+			gameService.save(curentGame);
 
-			int index = 0;
-			for (IPlayer iPlayer2 : players) {
-				ICard card = cardService.getFullInfo(listCardsInGame.get(index).getCard().getId());
-				ICardInGame cardInGame1 = listCardsInGame.get(index);
-				cardInGame1.setCardStatus(CardStatus.PLAYERCARDCLOSED);
-				cardInGameService.save(cardInGame1);
-				iPlayer2.setCard1(card.getFilename());
-				index++;
-				ICard card2 = cardService.getFullInfo(listCardsInGame.get(index).getCard().getId());
-				ICardInGame cardInGame2 = listCardsInGame.get(index);
-				cardInGame2.setCardStatus(CardStatus.PLAYERCARDCLOSED);
-				cardInGameService.save(cardInGame2);
-				iPlayer2.setCard2(card2.getFilename());
-				index++;
-				iPlayer2.setState(PlayerStatus.DEALER);
-				playerService.save(iPlayer2);
-			}
-			Calendar c1 = Calendar.getInstance();
-			Date dateOne = c1.getTime();
-			IGame game = gameService.getFullInfo(gameid);
-			game.setActivePlayerId(players.get(0).getId());
-			game.setTimestampEndStep(dateOne.getTime() + 15000);
-			gameService.save(game);
-		}
-
-		if (gameStatus.equals(GameStatus.ACTIVE)) {
-			List<PlayerDTO> dtop = players.stream().map(playerToDtoConverter).collect(Collectors.toList());
-			setNickNamesForPlayers(dtop);
+		} else if (gameStatus.equals(GameStatus.SETBLINDS)) {
 			IGame game = gameService.getFullInfo(gameid);
 			Integer currentPlayer = game.getActivePlayerId();
-			for (PlayerDTO playerDTO : dtop) {
-				if (playerDTO.getId().equals(currentPlayer)) {
-					playerDTO.setActive(true);
-				} else {
-					playerDTO.setActive(false);
-				}
-			}
-			return new ResponseEntity<Object>(dtop, HttpStatus.OK);
-		}
 
-		if (gameStatus.equals(GameStatus.ACTIVE2)) {
+			IPlayer playerSmallBlind = playerService.getPlayerSmallBlind(gameid, PlayerStatus.SMALLBLIND);
+			playerSmallBlind.setCurentBet(5);
+			playerService.save(playerSmallBlind);
+			IPlayer playerBigBlind = playerService.getPlayerSmallBlind(gameid, PlayerStatus.BIGBLIND);
+			playerBigBlind.setCurentBet(10);
+			playerService.save(playerBigBlind);
+
+			ITransaction transactionForSmallBlindPlayer = transactionService.createEntity();
+			transactionForSmallBlindPlayer.setAmount(-5);
+			transactionForSmallBlindPlayer.setComment("smallblind");
+			transactionForSmallBlindPlayer.setUserAccount(playerSmallBlind.getUserAccount());
+			transactionService.save(transactionForSmallBlindPlayer);
+			ITransaction transactionForBigBlindPlayer = transactionService.createEntity();
+			transactionForBigBlindPlayer.setAmount(-10);
+			transactionForBigBlindPlayer.setComment("bigblind");
+			transactionForBigBlindPlayer.setUserAccount(playerBigBlind.getUserAccount());
+			transactionService.save(transactionForBigBlindPlayer);
+
+			List<PlayerDTO> dtop = players.stream().map(playerToDtoConverter).collect(Collectors.toList());
+			setNickNamesForPlayers(dtop);
+			getActivePlayer(dtop, currentPlayer);
+			curentGame.setState(GameStatus.ACTIVE);
+			curentGame.setBank(15);
+			gameService.save(curentGame);
+			return new ResponseEntity<Object>(dtop, HttpStatus.OK);
+
+		} else if (gameStatus.equals(GameStatus.ACTIVE)) {
+			List<PlayerDTO> dtop = players.stream().map(playerToDtoConverter).collect(Collectors.toList());
+			setNickNamesForPlayers(dtop);
+
+			return new ResponseEntity<Object>(dtop, HttpStatus.OK);
+
+		} else if (gameStatus.equals(GameStatus.ACTIVE2)) {
 			List<Object> iCardsForTable = new ArrayList<Object>();
 			List<ICardInGame> listCardsInGame = cardInGameService.getAllCardsInGameByGame(gameid, CardStatus.INDECK);
 			Collections.shuffle(listCardsInGame);
@@ -256,6 +232,13 @@ public class InGameController extends AbstractController {
 				iCardsForTable.add(listCardsInGame.get(i));
 			}
 			return new ResponseEntity<Object>(iCardsForTable, HttpStatus.OK);
+
+		} else if (gameStatus.equals(GameStatus.ACTIVE3)) {
+
+		} else if (gameStatus.equals(GameStatus.ACTIVE4)) {
+
+		} else if (gameStatus.equals(GameStatus.OLD)) {
+
 		}
 
 		List<PlayerDTO> dtop = players.stream().map(playerToDtoConverter).collect(Collectors.toList());
@@ -263,20 +246,17 @@ public class InGameController extends AbstractController {
 		return new ResponseEntity<Object>(dtop, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/getPlayerCards", method = RequestMethod.GET)
-	public ResponseEntity<PlayerDTO> getPlayerCard(
-			@RequestParam(name = "gameid", required = true) final Integer gameid) {
-		Integer loggedUserId = AuthHelper.getLoggedUserId();
-		IPlayer player = null;
-		try {
-			player = playerService.getPlayerByUserAccunt(loggedUserId);
-		} catch (NullPointerException e) {
-
-		}
-
-		PlayerDTO dto = playerToDtoConverter.apply(player);
-		return new ResponseEntity<PlayerDTO>(dto, HttpStatus.OK);
-	}
+//	private void changeGameStateToNewOrEnd(final Integer gameid, IGame curentGame, GameStatus gameStatus) {
+//		long playersCount = playerService.getPlayersCount(gameid);
+//		if (playersCount > 1 && gameStatus.equals(GameStatus.END)) {
+//			curentGame.setState(GameStatus.NEW);
+//			gameService.save(curentGame);
+//
+//		} else if (playersCount <= 1) {
+//			curentGame.setState(GameStatus.END);
+//			gameService.save(curentGame);
+//		}
+//	}
 
 	@RequestMapping(value = "/getGameState", method = RequestMethod.GET)
 	public ResponseEntity<GameDTO> getGameState(@RequestParam(name = "gameid", required = true) final Integer gameid) {
@@ -295,24 +275,7 @@ public class InGameController extends AbstractController {
 		IGame game = gameService.getFullInfo(gameid);
 		Integer currentPlayer = game.getActivePlayerId();
 
-		List<IPlayer> players = playerService.getPlayersByGame(gameid);
-		for (IPlayer iPlayer : players) {
-			if (iPlayer.getId().equals(currentPlayer)) {
-				int index = players.indexOf(iPlayer);
-				try {
-					game.setActivePlayerId(players.get(index + 1).getId());
-					gameService.save(game);
-				} catch (IndexOutOfBoundsException e) {
-					game.setState(GameStatus.ACTIVE2);
-					gameService.save(game);
-				}
-
-				Calendar c1 = Calendar.getInstance();
-				Date dateOne = c1.getTime();
-				game.setTimestampEndStep(dateOne.getTime() + 15000);
-				gameService.save(game);
-			}
-		}
+		greatingNextPlayer(gameid, game, currentPlayer);
 
 		GameDTO dto = gameToDtoConverter.apply(game);
 
@@ -327,41 +290,176 @@ public class InGameController extends AbstractController {
 		return new ResponseEntity<Integer>(playersCount, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/setBetsForTwoPlayers", method = RequestMethod.GET)
-	public ResponseEntity<List<PlayerDTO>> setBetsForTwoPlayers(
-			@RequestParam(name = "gameid", required = true) final Integer gameid) {
-		List<IPlayer> players = playerService.getPlayersByGame(gameid);
-		List<PlayerDTO> dtos = players.stream().map(playerToDtoConverter).collect(Collectors.toList());
-		dtos.get(0).setCurentBet(10);
-		dtos.get(1).setCurentBet(10);
-		dtos.get(0).setStack(dtos.get(0).getStack() - 10);
-		dtos.get(1).setStack(dtos.get(1).getStack() - 10);
-		IPlayerAction setBet = playerActionService.createEntity();
-		setBet.setPlayer(players.get(0));
-		setBet.setBet(5);
-		playerActionService.save(setBet);
-		IPlayerAction setBet2 = playerActionService.createEntity();
-		setBet2.setPlayer(players.get(1));
-		setBet2.setBet(10);
-		playerActionService.save(setBet2);
-		IUserAccount user1 = userAccountService.getFullInfo(dtos.get(0).getUserAccountId());
-		IUserAccount user2 = userAccountService.getFullInfo(dtos.get(1).getUserAccountId());
-		ITransaction transaction1 = transactionService.createEntity();
-		transaction1.setComment("preflop");
-		transaction1.setUserAccount(user1);
-		transaction1.setAmount(-10);
-		transactionService.save(transaction1);
-		ITransaction transaction2 = transactionService.createEntity();
-		transaction2.setComment("preflop");
-		transaction2.setUserAccount(user2);
-		transaction2.setAmount(-10);
-		transactionService.save(transaction2);
-		IGame curentGame = gameService.getFullInfo(gameid);
-		curentGame.setState(GameStatus.ACTIVE2);
-		curentGame.setBank(20);
-		gameService.save(curentGame);
-		return new ResponseEntity<List<PlayerDTO>>(dtos, HttpStatus.OK);
+	private void setFirstPlayerAsActive(final Integer gameid, List<IPlayer> players) {
+		Calendar c1 = Calendar.getInstance();
+		Date dateOne = c1.getTime();
+		IGame game = gameService.getFullInfo(gameid);
+		game.setActivePlayerId(players.get(0).getId());
+		game.setTimestampEndStep(dateOne.getTime() + 15000);
+		gameService.save(game);
 	}
+
+	private void getActivePlayer(List<PlayerDTO> dtop, Integer currentPlayer) {
+		for (PlayerDTO playerDTO : dtop) {
+			if (playerDTO.getId().equals(currentPlayer)) {
+				playerDTO.setActive(true);
+			} else {
+				playerDTO.setActive(false);
+			}
+//			if (playerDTO.getState().equals(PlayerStatus.SMALLBLIND)) {
+//				playerDTO.setCurentBet(5);
+//				ITransaction transactionForSmallBlindPlayer = transactionService.createEntity();
+//				transactionForSmallBlindPlayer.setAmount(-5);
+//				transactionForSmallBlindPlayer.setComment("smallblind");
+//				transactionForSmallBlindPlayer
+//						.setUserAccount(userAccountService.getFullInfo(playerDTO.getUserAccountId()));
+//				transactionService.save(transactionForSmallBlindPlayer);
+//				IGame game = gameService.getFullInfo(playerDTO.getGameId());
+//				game.setBank(game.getBank() + 5);
+//				gameService.save(game);
+//				greatingNextPlayer(playerDTO.getGameId(), game, currentPlayer);
+//
+//			}
+//			if (playerDTO.getState().equals(PlayerStatus.BIGBLIND)) {
+//				playerDTO.setCurentBet(10);
+//				ITransaction transactionForBigBlindPlayer = transactionService.createEntity();
+//				transactionForBigBlindPlayer.setAmount(-10);
+//				transactionForBigBlindPlayer.setComment("bigblind");
+//				transactionForBigBlindPlayer
+//						.setUserAccount(userAccountService.getFullInfo(playerDTO.getUserAccountId()));
+//				transactionService.save(transactionForBigBlindPlayer);
+//				IGame game = gameService.getFullInfo(playerDTO.getGameId());
+//				game.setBank(game.getBank() + 10);
+//				gameService.save(game);
+//				greatingNextPlayer(playerDTO.getGameId(), game, currentPlayer);
+//			}
+		}
+	}
+
+	private void greatingNextPlayer(final Integer gameid, IGame game, Integer currentPlayer) {
+		List<IPlayer> players = playerService.getPlayersByGame(gameid);
+		for (IPlayer iPlayer : players) {
+			if (iPlayer.getId().equals(currentPlayer)) {
+				int index = players.indexOf(iPlayer);
+				try {
+					game.setActivePlayerId(players.get(index + 1).getId());
+					gameService.save(game);
+				} catch (IndexOutOfBoundsException e) {
+					game.setState(GameStatus.ACTIVE2);
+					game.setActivePlayerId(players.get(0).getId());
+					gameService.save(game);
+				}
+
+				Calendar c1 = Calendar.getInstance();
+				Date dateOne = c1.getTime();
+				game.setTimestampEndStep(dateOne.getTime() + 15000);
+				gameService.save(game);
+			}
+		}
+	}
+
+	private void setFirstTwoCardsForPlayers(List<IPlayer> players, List<ICardInGame> listCardsInGame) {
+		int index = 0;
+		players.get(0).setState(PlayerStatus.SMALLBLIND);
+		players.get(1).setState(PlayerStatus.BIGBLIND);
+		for (IPlayer iPlayer2 : players) {
+			ICard card = cardService.getFullInfo(listCardsInGame.get(index).getCard().getId());
+			ICardInGame cardInGame1 = listCardsInGame.get(index);
+			cardInGame1.setCardStatus(CardStatus.PLAYERCARDCLOSED);
+			cardInGameService.save(cardInGame1);
+			iPlayer2.setCard1(card.getFilename());
+			index++;
+			ICard card2 = cardService.getFullInfo(listCardsInGame.get(index).getCard().getId());
+			ICardInGame cardInGame2 = listCardsInGame.get(index);
+			cardInGame2.setCardStatus(CardStatus.PLAYERCARDCLOSED);
+			cardInGameService.save(cardInGame2);
+			iPlayer2.setCard2(card2.getFilename());
+			index++;
+			playerService.save(iPlayer2);
+		}
+	}
+
+	private void createDeckForGame(IGame curentGame) {
+		for (int i = 0; i < 52; i++) {
+			ICardInGame newCardInGame = cardInGameService.createEntity();
+			List<ICard> listCard = cardService.getFullInfo();
+			newCardInGame.setCard(listCard.get(i));
+			newCardInGame.setGame(curentGame);
+			newCardInGame.setPlayer(null);
+			newCardInGame.setCardStatus(CardStatus.INDECK);
+			cardInGameService.save(newCardInGame);
+			// curentGame.setState(GameStatus.ACTIVE);
+			// gameService.save(curentGame);
+		}
+	}
+
+	private void updateLastActivityForPlayers(List<IPlayer> players) {
+		for (IPlayer iPlayer : players) {
+			Date lastUpdated = iPlayer.getUpdated();
+			long milli = lastUpdated.getTime();
+			Date curentTime = new Date();
+			long curentMilli = curentTime.getTime();
+			long diff = curentMilli - milli;
+
+			if (diff > 10000) {
+				iPlayer.setInGame(false);
+				iPlayer.setState(PlayerStatus.INACTIVE);
+				playerService.save(iPlayer);
+			}
+
+		}
+	}
+
+//	@RequestMapping(value = "/getPlayerCards", method = RequestMethod.GET)
+//	public ResponseEntity<PlayerDTO> getPlayerCard(
+//			@RequestParam(name = "gameid", required = true) final Integer gameid) {
+//		Integer loggedUserId = AuthHelper.getLoggedUserId();
+//		IPlayer player = null;
+//		try {
+//			player = playerService.getPlayerByUserAccunt(loggedUserId);
+//		} catch (NullPointerException e) {
+//
+//		}
+//
+//		PlayerDTO dto = playerToDtoConverter.apply(player);
+//		return new ResponseEntity<PlayerDTO>(dto, HttpStatus.OK);
+//	}
+
+//	@RequestMapping(value = "/setBetsForTwoPlayers", method = RequestMethod.GET)
+//	public ResponseEntity<List<PlayerDTO>> setBetsForTwoPlayers(
+//			@RequestParam(name = "gameid", required = true) final Integer gameid) {
+//		List<IPlayer> players = playerService.getPlayersByGame(gameid);
+//		List<PlayerDTO> dtos = players.stream().map(playerToDtoConverter).collect(Collectors.toList());
+//		dtos.get(0).setCurentBet(10);
+//		dtos.get(1).setCurentBet(10);
+//		dtos.get(0).setStack(dtos.get(0).getStack() - 10);
+//		dtos.get(1).setStack(dtos.get(1).getStack() - 10);
+//		IPlayerAction setBet = playerActionService.createEntity();
+//		setBet.setPlayer(players.get(0));
+//		setBet.setBet(5);
+//		playerActionService.save(setBet);
+//		IPlayerAction setBet2 = playerActionService.createEntity();
+//		setBet2.setPlayer(players.get(1));
+//		setBet2.setBet(10);
+//		playerActionService.save(setBet2);
+//		IUserAccount user1 = userAccountService.getFullInfo(dtos.get(0).getUserAccountId());
+//		IUserAccount user2 = userAccountService.getFullInfo(dtos.get(1).getUserAccountId());
+//		ITransaction transaction1 = transactionService.createEntity();
+//		transaction1.setComment("preflop");
+//		transaction1.setUserAccount(user1);
+//		transaction1.setAmount(-10);
+//		transactionService.save(transaction1);
+//		ITransaction transaction2 = transactionService.createEntity();
+//		transaction2.setComment("preflop");
+//		transaction2.setUserAccount(user2);
+//		transaction2.setAmount(-10);
+//		transactionService.save(transaction2);
+//		IGame curentGame = gameService.getFullInfo(gameid);
+//		curentGame.setState(GameStatus.ACTIVE2);
+//		curentGame.setBank(20);
+//		gameService.save(curentGame);
+//		return new ResponseEntity<List<PlayerDTO>>(dtos, HttpStatus.OK);
+//	}
 
 	private void setNickNamesForPlayers(List<PlayerDTO> dtop) {
 		for (PlayerDTO playerDTO : dtop) {

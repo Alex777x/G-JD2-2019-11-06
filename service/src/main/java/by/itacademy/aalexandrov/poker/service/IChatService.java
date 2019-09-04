@@ -9,10 +9,8 @@ import by.itacademy.aalexandrov.poker.dao.api.filter.ChatFilter;
 
 public interface IChatService {
 
-	@Transactional
 	long getCount(ChatFilter filter);
 
-	@Transactional
 	List<IChat> find(ChatFilter filter);
 
 	@Transactional
@@ -21,7 +19,6 @@ public interface IChatService {
 	@Transactional
 	void save(IChat... entities);
 
-	@Transactional
 	List<IChat> getAll();
 
 	@Transactional
@@ -35,7 +32,6 @@ public interface IChatService {
 	@Transactional
 	IChat createEntity();
 
-	@Transactional
 	IChat getFullInfo(Integer id);
 
 }
