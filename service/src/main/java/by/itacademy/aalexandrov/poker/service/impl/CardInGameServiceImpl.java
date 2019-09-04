@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import by.itacademy.aalexandrov.poker.dao.api.ICardInGameDao;
+import by.itacademy.aalexandrov.poker.dao.api.entity.enums.CardStatus;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.ICardInGame;
 import by.itacademy.aalexandrov.poker.dao.api.filter.CardInGameFilter;
 import by.itacademy.aalexandrov.poker.service.ICardInGameService;
@@ -105,8 +106,8 @@ public class CardInGameServiceImpl implements ICardInGameService {
 	}
 
 	@Override
-	public List<ICardInGame> getAllCardsInGameByGame(Integer gameid) {
-		return dao.getAllCardsInGameByGame(gameid);
+	public List<ICardInGame> getAllCardsInGameByGame(Integer gameid, CardStatus indeck) {
+		return dao.getAllCardsInGameByGame(gameid, indeck);
 	}
 
 }

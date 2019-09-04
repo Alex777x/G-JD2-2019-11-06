@@ -205,7 +205,7 @@ public class InGameController extends AbstractController {
 				curentGame.setState(GameStatus.ACTIVE);
 				gameService.save(curentGame);
 			}
-			List<ICardInGame> listCardsInGame = cardInGameService.getAllCardsInGameByGame(gameid);
+			List<ICardInGame> listCardsInGame = cardInGameService.getAllCardsInGameByGame(gameid, CardStatus.INDECK);
 			Collections.shuffle(listCardsInGame);
 
 			int index = 0;
@@ -250,7 +250,7 @@ public class InGameController extends AbstractController {
 
 		if (gameStatus.equals(GameStatus.ACTIVE2)) {
 			List<Object> iCardsForTable = new ArrayList<Object>();
-			List<ICardInGame> listCardsInGame = cardInGameService.getAllCardsInGameByGame(gameid);
+			List<ICardInGame> listCardsInGame = cardInGameService.getAllCardsInGameByGame(gameid, CardStatus.INDECK);
 			Collections.shuffle(listCardsInGame);
 			for (int i = 0; i < 5; i++) {
 				iCardsForTable.add(listCardsInGame.get(i));

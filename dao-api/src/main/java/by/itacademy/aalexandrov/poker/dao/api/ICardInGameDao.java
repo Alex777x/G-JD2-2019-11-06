@@ -2,6 +2,7 @@ package by.itacademy.aalexandrov.poker.dao.api;
 
 import java.util.List;
 
+import by.itacademy.aalexandrov.poker.dao.api.entity.enums.CardStatus;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.ICardInGame;
 import by.itacademy.aalexandrov.poker.dao.api.filter.CardInGameFilter;
 
@@ -17,6 +18,6 @@ public interface ICardInGameDao extends IDao<ICardInGame, Integer> {
 
 	List<ICardInGame> getFullInfo();
 
-	List<ICardInGame> getAllCardsInGameByGame(Integer gameid);
+	List<ICardInGame> getAllCardsInGameByGame(Integer gameid, CardStatus indeck);
 
 }
