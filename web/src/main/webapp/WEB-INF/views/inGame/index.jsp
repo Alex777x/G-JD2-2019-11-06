@@ -10,19 +10,19 @@
 <div class="container">
 	<img src="${contextPath}/resources/img/fon-poker.png" alt="" class="rounded-pill tableIngame">
 
-	<div id="tableCard1" style="display: none;">
+	<div id="tableCard1" style="display: show;">
 		<img id="card1" class="card1" src="${contextPath}/resources/img/cards/shirt.png" />
 	</div>
-	<div id="tableCard2" style="display: none;">
+	<div id="tableCard2" style="display: show;">
 		<img id="card2" class="card2" src="${contextPath}/resources/img/cards/shirt.png" />
 	</div>
-	<div id="tableCard3" style="display: none;">
+	<div id="tableCard3" style="display: show;">
 		<img id="card3" class="card3" src="${contextPath}/resources/img/cards/shirt.png" />
 	</div>
-	<div id="tableCard4" style="display: none;">
+	<div id="tableCard4" style="display: show;">
 		<img id="card4" class="card4" src="${contextPath}/resources/img/cards/shirt.png" />
 	</div>
-	<div id="tableCard5" style="display: none;">
+	<div id="tableCard5" style="display: show;">
 		<img id="card5" class="card5" src="${contextPath}/resources/img/cards/shirt.png" />
 	</div>
 	<div>
@@ -34,14 +34,14 @@
 			src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" />
 	</div>
 	<div id="playerData1" style="display: none;">
-		<p id="player1Nick" style="position: absolute; color: yellow; left: 416px; top: 627px;"></p>
-		<p id="player1Balance" style="position: absolute; color: yellow; left: 416px; top: 721px;"></p>
+		<p id="player1Nick" style="position: absolute; color: turquoise; left: 416px; top: 627px;"></p>
+		<p id="player1Balance" style="position: absolute; color: turquoise; left: 416px; top: 721px;"></p>
 	</div>
 	<div>
 		<img id="position1" onclick="f1(1)" class="img-thumbnail player1" src="${contextPath}/resources/img/sitTable.png" />
 	</div>
 	<div id="bet1" class="bet1" style="display: none;">
-		<i id="bets1" class="fas fa-dollar-sign" style="color: gold; position: absolute; left: 419px; top: 605px;"></i>
+		<i id="bets1" class="fas fa-coins" style="color: gold; position: absolute; left: 419px; top: 605px;"></i>
 	</div>
 
 	<div id="shirt2" class="shirt2" style="display: none;">
@@ -49,14 +49,14 @@
 			src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" />
 	</div>
 	<div id="playerData2" style="display: none;">
-		<p id="player2Nick" style="position: absolute; color: yellow; left: 218px; top: 577px;"></p>
-		<p id="player2Balance" style="position: absolute; color: yellow; left: 217px; top: 671px;"></p>
+		<p id="player2Nick" style="position: absolute; color: turquoise; left: 218px; top: 577px;"></p>
+		<p id="player2Balance" style="position: absolute; color: turquoise; left: 217px; top: 671px;"></p>
 	</div>
 	<div>
 		<img id="position2" onclick="f1(2)" class="img-thumbnail player2" src="${contextPath}/resources/img/sitTable.png" />
 	</div>
 	<div id="bet2" class="bet2" style="display: none;">
-		<i id="bets2" class="fas fa-dollar-sign" style="color: gold; position: absolute; left: 220px; top: 560px;"></i>
+		<i id="bets2" class="fas fa-coins" style="color: gold; position: absolute; left: 220px; top: 560px;"></i>
 	</div>
 
 	<div id="shirt3" class="shirt3" style="display: none;">
@@ -64,14 +64,14 @@
 			src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" />
 	</div>
 	<div id="playerData3" style="display: none;">
-		<p id="player3Nick" style="position: absolute; color: yellow; left: 105px; top: 363px;"></p>
-		<p id="player3Balance" style="position: absolute; color: yellow; left: 105px; top: 456px;"></p>
+		<p id="player3Nick" style="position: absolute; color: turquoise; left: 105px; top: 363px;"></p>
+		<p id="player3Balance" style="position: absolute; color: turquoise; left: 105px; top: 456px;"></p>
 	</div>
 	<div>
 		<img id="position3" onclick="f1(3)" class="img-thumbnail player3" src="${contextPath}/resources/img/sitTable.png" />
 	</div>
 	<div id="bet3" class="bet3" style="display: none;">
-		<i id="bets3" class="fas fa-dollar-sign" style="color: gold; position: absolute; left: 190px; top: 346px;"></i>
+		<i id="bets3" class="fas fa-coins" style="color: gold; position: absolute; left: 190px; top: 346px;"></i>
 	</div>
 
 	<div id="shirt4" class="shirt4" style="display: none;">
@@ -79,14 +79,14 @@
 			src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" />
 	</div>
 	<div id="playerData4" style="display: none;">
-		<p id="player4Nick" style="position: absolute; color: yellow; left: 218px; top: 178px;"></p>
-		<p id="player4Balance" style="position: absolute; color: yellow; left: 218px; top: 271px;"></p>
+		<p id="player4Nick" style="position: absolute; color: turquoise; left: 218px; top: 178px;"></p>
+		<p id="player4Balance" style="position: absolute; color: turquoise; left: 218px; top: 271px;"></p>
 	</div>
 	<div>
 		<img id="position4" onclick="f1(4)" class="img-thumbnail player4" src="${contextPath}/resources/img/sitTable.png" />
 	</div>
 	<div id="bet4" class="bet4" style="display: none;">
-		<i id="bets4" class="fas fa-dollar-sign" style="color: gold; position: absolute; left: 299px; top: 274px;"></i>
+		<i id="bets4" class="fas fa-coins" style="color: gold; position: absolute; left: 299px; top: 274px;"></i>
 	</div>
 
 	<div id="shirt5" class="shirt5" style="display: none;">
@@ -94,14 +94,14 @@
 			src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" />
 	</div>
 	<div id="playerData5" style="display: none;">
-		<p id="player5Nick" style="position: absolute; color: yellow; left: 418px; top: 133px;"></p>
-		<p id="player5Balance" style="position: absolute; color: yellow; left: 418px; top: 226px;"></p>
+		<p id="player5Nick" style="position: absolute; color: turquoise; left: 418px; top: 133px;"></p>
+		<p id="player5Balance" style="position: absolute; color: turquoise; left: 418px; top: 226px;"></p>
 	</div>
 	<div>
 		<img id="position5" onclick="f1(5)" class="img-thumbnail player5" src="${contextPath}/resources/img/sitTable.png" />
 	</div>
 	<div id="bet5" class="bet5" style="display: none;">
-		<i id="bets5" class="fas fa-dollar-sign" style="color: gold; position: absolute; left: 500px; top: 233px;"></i>
+		<i id="bets5" class="fas fa-coins" style="color: gold; position: absolute; left: 500px; top: 233px;"></i>
 	</div>
 
 	<div id="shirt6" class="shirt6" style="display: none;">
@@ -109,14 +109,14 @@
 			src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" />
 	</div>
 	<div id="playerData6" style="display: none;">
-		<p id="player6Nick" style="position: absolute; color: yellow; left: 683px; top: 133px;"></p>
-		<p id="player6Balance" style="position: absolute; color: yellow; left: 683px; top: 226px;"></p>
+		<p id="player6Nick" style="position: absolute; color: turquoise; left: 683px; top: 133px;"></p>
+		<p id="player6Balance" style="position: absolute; color: turquoise; left: 683px; top: 226px;"></p>
 	</div>
 	<div>
 		<img id="position6" onclick="f1(6)" class="img-thumbnail player6" src="${contextPath}/resources/img/sitTable.png" />
 	</div>
 	<div id="bet6" class="bet6" style="display: none;">
-		<i id="bets6" class="fas fa-dollar-sign" style="color: gold; position: absolute; left: 765px; top: 233px;"></i>
+		<i id="bets6" class="fas fa-coins" style="color: gold; position: absolute; left: 765px; top: 233px;"></i>
 	</div>
 
 	<div id="shirt7" class="shirt7" style="display: none;">
@@ -124,14 +124,14 @@
 			src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" />
 	</div>
 	<div id="playerData7" style="display: none;">
-		<p id="player7Nick" style="position: absolute; color: yellow; left: 867px; top: 178px;"></p>
-		<p id="player7Balance" style="position: absolute; color: yellow; left: 867px; top: 271px;"></p>
+		<p id="player7Nick" style="position: absolute; color: turquoise; left: 867px; top: 178px;"></p>
+		<p id="player7Balance" style="position: absolute; color: turquoise; left: 867px; top: 271px;"></p>
 	</div>
 	<div>
 		<img id="position7" onclick="f1(7)" class="img-thumbnail player7" src="${contextPath}/resources/img/sitTable.png" />
 	</div>
 	<div id="bet7" class="bet7" style="display: none;">
-		<i id="bets7" class="fas fa-dollar-sign" style="color: gold; position: absolute; left: 910px; top: 293px;"></i>
+		<i id="bets7" class="fas fa-coins" style="color: gold; position: absolute; left: 910px; top: 293px;"></i>
 	</div>
 
 	<div id="shirt8" class="shirt8" style="display: none;">
@@ -139,14 +139,14 @@
 			src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" />
 	</div>
 	<div id="playerData8" style="display: none;">
-		<p id="player8Nick" style="position: absolute; color: yellow; left: 987px; top: 363px;"></p>
-		<p id="player8Balance" style="position: absolute; color: yellow; left: 987px; top: 456px;"></p>
+		<p id="player8Nick" style="position: absolute; color: turquoise; left: 987px; top: 363px;"></p>
+		<p id="player8Balance" style="position: absolute; color: turquoise; left: 987px; top: 456px;"></p>
 	</div>
 	<div>
 		<img id="position8" onclick="f1(8)" class="img-thumbnail player8" src="${contextPath}/resources/img/sitTable.png" />
 	</div>
 	<div id="bet8" class="bet8" style="display: none;">
-		<i id="bets8" class="fas fa-dollar-sign" style="color: gold; position: absolute; left: 950px; top: 405px;"></i>
+		<i id="bets8" class="fas fa-coins" style="color: gold; position: absolute; left: 950px; top: 405px;"></i>
 	</div>
 
 	<div id="shirt9" class="shirt9" style="display: none;">
@@ -154,14 +154,14 @@
 			src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" />
 	</div>
 	<div id="playerData9" style="display: none;">
-		<p id="player9Nick" style="position: absolute; color: yellow; left: 868px; top: 577px;"></p>
-		<p id="player9Balance" style="position: absolute; color: yellow; left: 868px; top: 671px;"></p>
+		<p id="player9Nick" style="position: absolute; color: turquoise; left: 868px; top: 577px;"></p>
+		<p id="player9Balance" style="position: absolute; color: turquoise; left: 868px; top: 671px;"></p>
 	</div>
 	<div>
 		<img id="position9" onclick="f1(9)" class="img-thumbnail player9" src="${contextPath}/resources/img/sitTable.png" />
 	</div>
 	<div id="bet9" class="bet9" style="display: none;">
-		<i id="bets9" class="fas fa-dollar-sign" style="color: gold; position: absolute; left: 868px; top: 558px;"></i>
+		<i id="bets9" class="fas fa-coins" style="color: gold; position: absolute; left: 868px; top: 558px;"></i>
 	</div>
 
 	<div id="shirt10" class="shirt10" style="display: none;">
@@ -169,14 +169,14 @@
 			src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" />
 	</div>
 	<div id="playerData10" style="display: none;">
-		<p id="player10Nick" style="position: absolute; color: yellow; left: 683px; top: 627px;"></p>
-		<p id="player10Balance" style="position: absolute; color: yellow; left: 683px; top: 721px;"></p>
+		<p id="player10Nick" style="position: absolute; color: turquoise; left: 683px; top: 627px;"></p>
+		<p id="player10Balance" style="position: absolute; color: turquoise; left: 683px; top: 721px;"></p>
 	</div>
 	<div>
 		<img id="position10" onclick="f1(10)" class="img-thumbnail player10" src="${contextPath}/resources/img/sitTable.png" />
 	</div>
 	<div id="bet10" class="bet10" style="display: none;">
-		<i id="bets10" class="fas fa-dollar-sign" style="color: gold; position: absolute; left: 684px; top: 608px;"></i>
+		<i id="bets10" class="fas fa-coins" style="color: gold; position: absolute; left: 684px; top: 608px;"></i>
 	</div>
 
 	<div id="btnFold" style="display: none;">
@@ -201,9 +201,11 @@
 		<button id="btnBet" type="button" class="btn btn-success btn-lg btnBet">BET</button>
 	</div>
 
-	<div id="timer" style="color: honeydew; display: show;" >
-		The game will start in: <div class="seconds">30</div> sec!
+	<div id="startBtn" class="startBtn" style="display: none;">
+		<button id="startBtn" type="button" class="btn btn-primary btn-lg">Start game</button>
+		<div id="digital-clock" style="color: white;"></div>
 	</div>
+	<div style="color: white;">End of turn after: <span style="color: white;" id="time">15</span> sec!</div>
 </div>
 
 
@@ -221,6 +223,7 @@ var baseUrl = '${pageContext.request.contextPath}';
 					$("#position" + arg).attr("src", baseUrl + '/resources/img/avatars/position' + arg + '.jpg');
 					$("#shirt" + arg).show();
 					$("#playerData" + arg).show();
+					$("#startBtn").show();
 				} 
 			}
 		});
@@ -229,44 +232,237 @@ var baseUrl = '${pageContext.request.contextPath}';
 </script>
 
 <script>
-setInterval(function() {
-	
-	$.ajax({
-		  url: baseUrl + '/inGame/getGameState?gameid=' + ${game.id},
-		  type : 'get',
-		  success: function(game){
-		    if (game.state == "END") {
-				
-		    	$.ajax({
-		  		  url: baseUrl + '/inGame/getCountPlayers?gameid=' + ${game.id},
-		  		  type : 'get',
-		  		  success: function(count){
-		  		    if (count >= 2) {
-		  				
-		  		    var _Seconds = $('.seconds').text(),
-		  		    int;
-		  		    int = setInterval(function() { 
-		  		      if (_Seconds > 0) {
-		  		        _Seconds--; 
-		  		        $('.seconds').text(_Seconds); 
-		  		      } else {
-		  		        clearInterval(int); 
-		  		      $("#timer").hide(); // тут нужно сделать запрос на изменение статуса игры и старта.
-		  		      }
-		  		    }, 1000);
-		  		    	
-		  			}
-		  		  }
-		  		});
-		    	
+	var baseUrl = '${pageContext.request.contextPath}';
+
+	function f2(arg, player) {
+		$("#position" + arg).attr("src", baseUrl + '/resources/img/avatars/position' + arg + '.jpg');
+		$("#shirt" + arg).show();
+		$("#playerData" + arg).show();
+		$("#bet" + arg).show();
+		var $bet = $('#bets' + arg).text(player.curentBet);
+		var $nickname = $('#player' + arg + 'Nick').text(player.nick);
+		var $stack = $('#player' + arg + 'Balance').text(player.stack);
+		if (player.active == true) {
+			$("#position" + arg).addClass('activePlayer');
+			//$("#btnBet").show();
+			if (player.state == "SMALLBLIND") {
+				$.ajax({
+					url : baseUrl + '/inGame/setSmallBlind?gameid=' + ${game.id},
+					type : 'get',
+ 					success : function(count) {
+						
+ 					}
+				});
+			} else if (player.state == "BIGBLIND") {
+				$.ajax({
+					url : baseUrl + '/inGame/setBigBlind?gameid=' + ${game.id},
+					type : 'get',
+ 					success : function(count) {
+						
+ 					}
+				});
+			} else if (player.state == "USUAL") {
+				$("#btnFold").show();
+				$("#btnCheck").show();
+				$("#btnCall").show();
+				$("#btnRaise").show();
+				$("#inputRaise").show();
+				setTimeout(fsetNextActivePlayer, 15000);
+				var fiveMinutes = 15,
+				display = $('#time');
+				startTimer(fiveMinutes, display);
 			}
-		  }
+		} else {
+			$("#position" + arg).removeClass('activePlayer');
+			//$("#btnBet").hide();
+			$("#btnFold").hide();
+			$("#btnCheck").hide();
+			$("#btnCall").hide();
+			$("#btnRaise").hide();
+			$("#inputRaise").hide();
+		}
+
+	}
+
+	function f3(arg, arg2, player) {
+		$("#shirt" + arg).show();
+		$("#playerCard" + arg).attr("src", baseUrl + player.card1);
+		$("#playerCard" + arg2).attr("src", baseUrl + player.card2);
+		
+	}
+	
+	
+		
+		
+		 $("#startBtn").click(function () {
+					$.ajax({
+							url : baseUrl + '/inGame/getCountPlayers?gameid=' + ${game.id},
+							type : 'get',
+		 					success : function(count) {
+								if (count == 1) {
+									toastr.success('Players must be 2 or more!');
+								} else {
+									$("#startBtn").hide();
+									toastr.success('The game starts! Have a nice game!');
+									$.ajax({
+										url : baseUrl + '/inGame/changeGameToNew?gameid=' + ${game.id},
+										type : 'post',
+// 											success : function(game) {
+												
+// 											}
+									});
+									
+								}
+		 					}
+						});
+			});
+		
+	
+	setInterval(function() {
+		$.ajax({
+			url : baseUrl + '/inGame/getPlayerData?gameid=' + ${game.id},
+			type : 'get',
+			success : function(result) {
+			
+				for (var i = 1; i < 11; i++) {
+					$("#position" + i).attr("src", baseUrl + '/resources/img/sitTable.png');
+					$("#shirt" + i).hide();
+					$("#playerData" + i).hide();
+					}
+			
+				result.forEach(function(player) { 
+					if (player.position == "ONE") {
+						f2(1, player);
+						if(player.card1 != null && ${user.id} == player.userAccountId) {
+							f3(1, 11, player);
+						}
+					} 
+					if (player.position == "TWO") {
+						f2(2, player);
+						if(player.card1 != null && ${user.id} == player.userAccountId) {
+							f3(2, 22, player);
+						}
+					}
+					if (player.position == "THREE") {
+						f2(3, player);
+						if(player.card1 != null && ${user.id} == player.userAccountId) {
+							f3(3, 33, player);
+						}
+					}
+					if (player.position == "FOUR") {
+						f2(4, player);
+						if(player.card1 != null && ${user.id} == player.userAccountId) {
+							f3(4, 44, player);
+						}
+					} 
+					if (player.position == "FIVE") {
+						f2(5, player);
+						if(player.card1 != null && ${user.id} == player.userAccountId) {
+							f3(5, 55, player);
+						}
+					}
+					if (player.position == "SIX") {
+						f2(6, player);
+						if(player.card1 != null && ${user.id} == player.userAccountId) {
+							f3(6, 66, player);
+						}
+					} 
+					if (player.position == "SEVEN") {
+						f2(7, player);
+						if(player.card1 != null && ${user.id} == player.userAccountId) {
+							f3(7, 77, player);
+						}
+					} 
+					if (player.position == "EIGHT") {
+						f2(8, player);
+						if(player.card1 != null && ${user.id} == player.userAccountId) {
+							f3(8, 88, player);
+						}
+					} 
+					if (player.position == "NINE") {
+						f2(9, player);
+						if(player.card1 != null && ${user.id} == player.userAccountId) {
+							f3(9, 99, player);
+						}
+					}
+					if (player.position == "TEN") {
+						f2(10, player);
+						if(player.card1 != null && ${user.id} == player.userAccountId) {
+							f3(10, 101, player);
+						}
+					} 
+				});
+			}
 		});
 	
-}, 2 * 1000);
+	}, 2 * 1000);
+	
+	function fsetNextActivePlayer() {
+		$.ajax({
+				url : baseUrl + '/inGame/changeActivePlayer?gameid=' + ${game.id},
+				type : 'get',
+				success : function(game) {
+				
+				}
+			});
+		}
+	
+	function getDateTime() {
+        var now     = new Date(); 
+        var day     = now.getDate();
+        var hour    = now.getHours();
+        var minute  = now.getMinutes();
+        var second  = now.getSeconds(); 
+        if(hour.toString().length == 1) {
+             hour = '0'+hour;
+        }
+        if(minute.toString().length == 1) {
+             minute = '0'+minute;
+        }
+        if(second.toString().length == 1) {
+             second = '0'+second;
+        }   
+        var dateTime = hour+':'+minute+':'+second;   
+         return dateTime;
+    }
+	
+	setInterval(function(){
+        currentTime = getDateTime();
+        document.getElementById("digital-clock").innerHTML = currentTime;
+    }, 1000);
+	
+	setInterval(function(){
+		$.ajax({
+			url : baseUrl + '/inGame/getGameState?gameid=' + ${game.id},
+			type : 'get',
+				success : function(game) {
+					if (game.state == "ACTIVE") {
+						$("#startBtn").hide();
+						var $bank = $('#bank').text(game.bank);
+					} else {
+						
+					}
+				}
+		});
+    }, 1000);
+	
+	function startTimer(duration, display) {
+	    var timer = duration, seconds;
+	    setInterval(function () {
+	       
+	        seconds = parseInt(timer % 60, 10);
+	        
+	        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+	        display.text( seconds);
+
+	        if (--timer < 0) {
+	            timer = duration;
+	        }
+	    }, 1000);
+	}
+
 </script>
-
-
 
 
 

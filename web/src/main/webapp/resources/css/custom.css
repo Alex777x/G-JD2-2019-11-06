@@ -296,6 +296,11 @@ main {
 	width: 175px;
 }
 
+.startBtn {
+	position: absolute;
+    top: 140px;
+}
+
 .card1 {
 	background-color: transparent;
     position: absolute;
