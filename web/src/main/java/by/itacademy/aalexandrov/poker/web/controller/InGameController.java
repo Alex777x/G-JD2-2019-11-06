@@ -430,19 +430,23 @@ public class InGameController extends AbstractController {
 					game.setActivePlayerId(players.get(index + 1).getId());
 					gameService.save(game);
 				} catch (IndexOutOfBoundsException e) {
-					if (game.getState().equals(GameStatus.NEW)) {
-						game.setState(GameStatus.ACTIVE);
-						game.setActivePlayerId(players.get(0).getId());
-						gameService.save(game);
-					} else if (game.getState().equals(GameStatus.ACTIVE)) {
+					GameStatus gameState = game.getState();
+					if (gameState.equals(GameStatus.ACTIVE)) {
 						game.setState(GameStatus.ACTIVE2);
 						game.setActivePlayerId(players.get(0).getId());
 						gameService.save(game);
-					} else if (game.getState().equals(GameStatus.ACTIVE2)) {
+
+					} else if (gameState.equals(GameStatus.ACTIVE)) {
+						game.setState(GameStatus.ACTIVE2);
+						game.setActivePlayerId(players.get(0).getId());
+						gameService.save(game);
+
+					} else if (gameState.equals(GameStatus.ACTIVE2)) {
 						game.setState(GameStatus.ACTIVE3);
 						game.setActivePlayerId(players.get(0).getId());
 						gameService.save(game);
-					} else if (game.getState().equals(GameStatus.ACTIVE3)) {
+
+					} else if (gameState.equals(GameStatus.ACTIVE3)) {
 						game.setState(GameStatus.ACTIVE4);
 						game.setActivePlayerId(players.get(0).getId());
 						gameService.save(game);
@@ -515,57 +519,6 @@ public class InGameController extends AbstractController {
 
 		}
 	}
-
-//	@RequestMapping(value = "/getPlayerCards", method = RequestMethod.GET)
-//	public ResponseEntity<PlayerDTO> getPlayerCard(
-//			@RequestParam(name = "gameid", required = true) final Integer gameid) {
-//		Integer loggedUserId = AuthHelper.getLoggedUserId();
-//		IPlayer player = null;
-//		try {
-//			player = playerService.getPlayerByUserAccunt(loggedUserId);
-//		} catch (NullPointerException e) {
-//
-//		}
-//
-//		PlayerDTO dto = playerToDtoConverter.apply(player);
-//		return new ResponseEntity<PlayerDTO>(dto, HttpStatus.OK);
-//	}
-
-//	@RequestMapping(value = "/setBetsForTwoPlayers", method = RequestMethod.GET)
-//	public ResponseEntity<List<PlayerDTO>> setBetsForTwoPlayers(
-//			@RequestParam(name = "gameid", required = true) final Integer gameid) {
-//		List<IPlayer> players = playerService.getPlayersByGame(gameid);
-//		List<PlayerDTO> dtos = players.stream().map(playerToDtoConverter).collect(Collectors.toList());
-//		dtos.get(0).setCurentBet(10);
-//		dtos.get(1).setCurentBet(10);
-//		dtos.get(0).setStack(dtos.get(0).getStack() - 10);
-//		dtos.get(1).setStack(dtos.get(1).getStack() - 10);
-//		IPlayerAction setBet = playerActionService.createEntity();
-//		setBet.setPlayer(players.get(0));
-//		setBet.setBet(5);
-//		playerActionService.save(setBet);
-//		IPlayerAction setBet2 = playerActionService.createEntity();
-//		setBet2.setPlayer(players.get(1));
-//		setBet2.setBet(10);
-//		playerActionService.save(setBet2);
-//		IUserAccount user1 = userAccountService.getFullInfo(dtos.get(0).getUserAccountId());
-//		IUserAccount user2 = userAccountService.getFullInfo(dtos.get(1).getUserAccountId());
-//		ITransaction transaction1 = transactionService.createEntity();
-//		transaction1.setComment("preflop");
-//		transaction1.setUserAccount(user1);
-//		transaction1.setAmount(-10);
-//		transactionService.save(transaction1);
-//		ITransaction transaction2 = transactionService.createEntity();
-//		transaction2.setComment("preflop");
-//		transaction2.setUserAccount(user2);
-//		transaction2.setAmount(-10);
-//		transactionService.save(transaction2);
-//		IGame curentGame = gameService.getFullInfo(gameid);
-//		curentGame.setState(GameStatus.ACTIVE2);
-//		curentGame.setBank(20);
-//		gameService.save(curentGame);
-//		return new ResponseEntity<List<PlayerDTO>>(dtos, HttpStatus.OK);
-//	}
 
 	private void setNickNamesForPlayers(List<PlayerDTO> dtop) {
 		for (PlayerDTO playerDTO : dtop) {

@@ -267,10 +267,10 @@ var baseUrl = '${pageContext.request.contextPath}';
 				$("#btnCall").show();
 				$("#btnRaise").show();
 				$("#inputRaise").show();
-				setTimeout(fsetNextActivePlayer, 15000);
-				var fiveMinutes = 15,
-				display = $('#time');
-				startTimer(fiveMinutes, display);
+				//setTimeout(fsetNextActivePlayer, 15000);
+				//var fiveMinutes = 15,
+				//display = $('#time');
+				//startTimer(fiveMinutes, display);
 			}
 		} else {
 			$("#position" + arg).removeClass('activePlayer');
