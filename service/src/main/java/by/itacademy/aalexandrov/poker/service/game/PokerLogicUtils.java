@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 
+import by.itacademy.aalexandrov.poker.dao.api.entity.enums.Rank;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.ICard;
 
 public class PokerLogicUtils {
@@ -36,14 +37,48 @@ public class PokerLogicUtils {
 				+ cards.stream().map(e -> e.toString()).reduce("", String::concat));
 	}
 
-	private static boolean isStraightFlush(List<ICard> cards) {
+	private static boolean isRoyalFlush(List<ICard> cards) {
 		// if all cards of the same suite then....
-		HashSet<Object> ranks = new HashSet<>();
+		HashSet<Object> suits = new HashSet<>();
 		for (ICard iCard : cards) {
-			ranks.add(iCard.getRank());
+			suits.add(iCard.getSuit());
 		}
 
-		if (ranks.size() != 1) {
+		if (suits.size() != 1) {
+			return false;
+		}
+
+		// sort all cards
+		Collections.sort(cards);
+		if (Rank.TEN.equals(cards.get(0))) {
+			return false;
+		}
+
+		ICard previous = null;
+		for (ICard c : cards) {
+			if (previous != null) {
+
+				int diff = c.getRank().ordinal() - previous.getRank().ordinal();
+
+				if (diff != 1) {
+					return false;
+				}
+
+			}
+			previous = c;
+
+		}
+		return true;
+	}
+
+	private static boolean isStraightFlush(List<ICard> cards) {
+		// if all cards of the same suite then....
+		HashSet<Object> suits = new HashSet<>();
+		for (ICard iCard : cards) {
+			suits.add(iCard.getSuit());
+		}
+
+		if (suits.size() != 1) {
 			return false;
 		}
 
@@ -65,11 +100,6 @@ public class PokerLogicUtils {
 
 		}
 		return true;
-	}
-
-	private static boolean isRoyalFlush(List<ICard> cards) {
-		// TODO Auto-generated method stub
-		return false;
 	}
 
 	private static boolean isFourOfAKind(List<ICard> cards) {

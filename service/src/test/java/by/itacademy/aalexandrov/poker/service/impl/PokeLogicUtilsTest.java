@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.Rank;
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.Suits;
@@ -32,21 +32,31 @@ public class PokeLogicUtilsTest extends AbstractTest {
 		_10_hearts = cardService.createEntity();
 		_10_hearts.setRank(Rank.TEN);
 		_10_hearts.setSuit(Suits.HEARTS);
+		_jack_hearts = cardService.createEntity();
 		_jack_hearts.setRank(Rank.JACK);
 		_jack_hearts.setSuit(Suits.HEARTS);
+		_queen_hearts = cardService.createEntity();
 		_queen_hearts.setRank(Rank.QUEEN);
 		_queen_hearts.setSuit(Suits.HEARTS);
+		_king_hearts = cardService.createEntity();
 		_king_hearts.setRank(Rank.KING);
 		_king_hearts.setSuit(Suits.HEARTS);
+		_ace_hearts = cardService.createEntity();
 		_ace_hearts.setRank(Rank.ACE);
 		_ace_hearts.setSuit(Suits.HEARTS);
+		_7_clubs = cardService.createEntity();
 		_7_clubs.setRank(Rank.SEVEN);
 		_7_clubs.setSuit(Suits.CLUBS);
+		_8_clubs = cardService.createEntity();
 		_8_clubs.setRank(Rank.EIGHT);
 		_8_clubs.setSuit(Suits.CLUBS);
+		_9_clubs = cardService.createEntity();
 		_9_clubs.setRank(Rank.NINE);
+		_9_clubs.setSuit(Suits.CLUBS);
+		_10_clubs = cardService.createEntity();
 		_10_clubs.setRank(Rank.TEN);
 		_10_clubs.setSuit(Suits.CLUBS);
+		_jack_clubs = cardService.createEntity();
 		_jack_clubs.setRank(Rank.JACK);
 		_jack_clubs.setSuit(Suits.CLUBS);
 	}
