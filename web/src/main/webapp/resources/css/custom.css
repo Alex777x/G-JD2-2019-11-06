@@ -252,6 +252,15 @@ main {
 	left: 865px;
 }
 
+.notActiveX {
+	position: absolute;
+	color: red;
+    font-size: xx-large;
+    font-weight: bold;
+    z-index: 100;
+    font-family: cursive;
+}
+
 
 .activePlayer {
     border-width: thick;

@@ -43,6 +43,7 @@
 	<div id="bet1" class="bet1" style="display: none;">
 		<i id="bets1" class="fas fa-coins" style="color: gold; position: absolute; left: 419px; top: 605px;"></i>
 	</div>
+	<div class="notActiveX" id="notActive1" style="display: none;top: 663px;left: 436px;"><h1>X</h1></div>
 
 	<div id="shirt2" class="shirt2" style="display: none;">
 		<img id="playerCard2" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" /> <img id="playerCard22"
@@ -58,6 +59,7 @@
 	<div id="bet2" class="bet2" style="display: none;">
 		<i id="bets2" class="fas fa-coins" style="color: gold; position: absolute; left: 220px; top: 560px;"></i>
 	</div>
+	<div class="notActiveX" id="notActive2" style="display: none;top: 614px;left: 241px;">X</div>
 
 	<div id="shirt3" class="shirt3" style="display: none;">
 		<img id="playerCard3" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" /> <img id="playerCard33"
@@ -73,6 +75,7 @@
 	<div id="bet3" class="bet3" style="display: none;">
 		<i id="bets3" class="fas fa-coins" style="color: gold; position: absolute; left: 190px; top: 346px;"></i>
 	</div>
+	<div class="notActiveX" id="notActive3" style="display: none;top: 397px;left: 127px;">X</div>
 
 	<div id="shirt4" class="shirt4" style="display: none;">
 		<img id="playerCard4" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" /> <img id="playerCard44"
@@ -88,6 +91,7 @@
 	<div id="bet4" class="bet4" style="display: none;">
 		<i id="bets4" class="fas fa-coins" style="color: gold; position: absolute; left: 299px; top: 274px;"></i>
 	</div>
+	<div class="notActiveX" id="notActive4" style="display: none;top: 210px;left: 242px;">X</div>
 
 	<div id="shirt5" class="shirt5" style="display: none;">
 		<img id="playerCard5" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" /> <img id="playerCard55"
@@ -103,6 +107,7 @@
 	<div id="bet5" class="bet5" style="display: none;">
 		<i id="bets5" class="fas fa-coins" style="color: gold; position: absolute; left: 500px; top: 233px;"></i>
 	</div>
+	<div class="notActiveX" id="notActive5" style="display: none;left: 438px;top: 166px;">X</div>
 
 	<div id="shirt6" class="shirt6" style="display: none;">
 		<img id="playerCard6" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" /> <img id="playerCard66"
@@ -118,6 +123,7 @@
 	<div id="bet6" class="bet6" style="display: none;">
 		<i id="bets6" class="fas fa-coins" style="color: gold; position: absolute; left: 765px; top: 233px;"></i>
 	</div>
+	<div class="notActiveX" id="notActive6" style="display: none;left: 705px;top: 167px;">X</div>
 
 	<div id="shirt7" class="shirt7" style="display: none;">
 		<img id="playerCard7" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" /> <img id="playerCard77"
@@ -133,6 +139,7 @@
 	<div id="bet7" class="bet7" style="display: none;">
 		<i id="bets7" class="fas fa-coins" style="color: gold; position: absolute; left: 910px; top: 293px;"></i>
 	</div>
+	<div class="notActiveX" id="notActive7" style="display: none;left: 888px;top: 212px;">X</div>
 
 	<div id="shirt8" class="shirt8" style="display: none;">
 		<img id="playerCard8" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" /> <img id="playerCard88"
@@ -148,6 +155,7 @@
 	<div id="bet8" class="bet8" style="display: none;">
 		<i id="bets8" class="fas fa-coins" style="color: gold; position: absolute; left: 950px; top: 405px;"></i>
 	</div>
+	<div class="notActiveX" id="notActive8" style="display: none;left: 1009px;top: 398px;">X</div>
 
 	<div id="shirt9" class="shirt9" style="display: none;">
 		<img id="playerCard9" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" /> <img id="playerCard99"
@@ -163,6 +171,7 @@
 	<div id="bet9" class="bet9" style="display: none;">
 		<i id="bets9" class="fas fa-coins" style="color: gold; position: absolute; left: 868px; top: 558px;"></i>
 	</div>
+	<div class="notActiveX" id="notActive9" style="display: none;left: 889px;top: 613px;">X</div>
 
 	<div id="shirt10" class="shirt10" style="display: none;">
 		<img id="playerCard10" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" /> <img id="playerCard101"
@@ -178,18 +187,19 @@
 	<div id="bet10" class="bet10" style="display: none;">
 		<i id="bets10" class="fas fa-coins" style="color: gold; position: absolute; left: 684px; top: 608px;"></i>
 	</div>
+	<div class="notActiveX" id="notActive10" style="display: none;left: 705px;top: 663px;">X</div>
 
 	<div id="btnFold" style="display: none;">
-		<button id="btnFold" type="button" class="btn btn-success btn-lg btnFold">FOLD</button>
+		<button onclick="foldBtn()" id="btnFold" type="button" class="btn btn-success btn-lg btnFold">FOLD</button>
 	</div>
 	<div id="btnCheck" style="display: none;">
-		<button id="btnCheck" type="button" class="btn btn-success btn-lg btnCheck">CHECK</button>
+		<button onclick="checkBtn()" id="btnCheck" type="button" class="btn btn-success btn-lg btnCheck">CHECK</button>
 	</div>
 	<div id="btnCall" style="display: none;">
-		<button id="btnCall" type="button" class="btn btn-success btn-lg btnCall">CALL</button>
+		<button onclick="callBtn()" id="btnCall" type="button" class="btn btn-success btn-lg btnCall">CALL</button>
 	</div>
 	<div id="btnRaise" style="display: none;">
-		<button id="btnRaise" type="button" class="btn btn-success btn-lg btnRaise">RAISE</button>
+		<button onclick="raiseBtn(#input_text1.value)" id="btnRaise" type="button" class="btn btn-success btn-lg btnRaise">RAISE</button>
 	</div>
 	<div id="inputRaise" class="formForRaise input-group" style="display: none;">
 		<input type="number" class="form-control inputRaise" name="input_text1" id="input_text1" max="1000" value="0"
@@ -198,14 +208,14 @@
 			id="rangeinput1" step="1" onchange="input_text1.value = rangeinput1.value" />
 	</div>
 	<div id="btnBet" style="display: none;">
-		<button id="btnBet" type="button" class="btn btn-success btn-lg btnBet">BET</button>
+		<button onclick="btnBet()" id="btnBet" type="button" class="btn btn-success btn-lg btnBet">BET</button>
 	</div>
 
 	<div id="startBtn" class="startBtn" style="display: none;">
 		<button id="startBtn" type="button" class="btn btn-primary btn-lg">Start game</button>
 		<div id="digital-clock" style="color: white;"></div>
 	</div>
-	<div style="color: white;">End of turn after: <span style="color: white;" id="time">15</span> sec!</div>
+	<div id="firstDeal" style="color: white;display: none;">Первый этап. Нужно сделать минимальную ставку "BET" или сбросить карты "FOLD".</div>
 </div>
 
 
@@ -232,6 +242,82 @@ var baseUrl = '${pageContext.request.contextPath}';
 </script>
 
 <script>
+
+var baseUrl = '${pageContext.request.contextPath}';
+
+function btnBet() {
+	$.ajax({
+		url : baseUrl + '/inGame/isActive?gameid=' + ${game.id},
+		type : 'post',
+		success : function(result) {
+			if (result == true) {
+				$.ajax({
+					url : baseUrl + '/inGame/setFirstBet?gameid=' + ${game.id},
+					type : 'post',
+					success : function(result) {
+						 
+					}
+				});
+			} else {
+				toastr.error('Another player is active now!');
+			}
+		}
+	});
+}
+
+function foldBtn() {
+	$.ajax({
+		url : baseUrl + '/inGame/isActive?gameid=' + ${game.id},
+		type : 'post',
+		success : function(result) {
+			if (result == true) {
+				$.ajax({
+					url : baseUrl + '/inGame/clickFold?gameid=' + ${game.id},
+					type : 'post',
+					success : function(result) {
+						 
+					}
+				});
+			} else {
+				toastr.error('Another player is active now!');
+			}
+		}
+	});
+}
+
+function checkBtn() {
+	$.ajax({
+		url : baseUrl + '/inGame/setposition?gameid=' + ${game.id},
+		type : 'post',
+		success : function(result) {
+			 
+		}
+	});
+}
+
+function btnCall() {
+	$.ajax({
+		url : baseUrl + '/inGame/setposition?gameid=' + ${game.id},
+		type : 'post',
+		success : function(result) {
+			 
+		}
+	});
+}
+
+function raiseBtn(value) {
+	$.ajax({
+		url : baseUrl + '/inGame/setposition?gameid=' + ${game.id},
+		type : 'post',
+		success : function(result) {
+			 
+		}
+	});
+}
+
+</script>
+
+<script>
 	var baseUrl = '${pageContext.request.contextPath}';
 
 	function f2(arg, player) {
@@ -244,42 +330,18 @@ var baseUrl = '${pageContext.request.contextPath}';
 		var $stack = $('#player' + arg + 'Balance').text(player.stack);
 		if (player.active == true) {
 			$("#position" + arg).addClass('activePlayer');
-			//$("#btnBet").show();
-			if (player.state == "SMALLBLIND") {
-				$.ajax({
-					url : baseUrl + '/inGame/setSmallBlind?gameid=' + ${game.id},
-					type : 'get',
- 					success : function(count) {
-						
- 					}
-				});
-			} else if (player.state == "BIGBLIND") {
-				$.ajax({
-					url : baseUrl + '/inGame/setBigBlind?gameid=' + ${game.id},
-					type : 'get',
- 					success : function(count) {
-						
- 					}
-				});
-			} else if (player.state == "USUAL") {
-				$("#btnFold").show();
-				$("#btnCheck").show();
-				$("#btnCall").show();
-				$("#btnRaise").show();
-				$("#inputRaise").show();
-				//setTimeout(fsetNextActivePlayer, 15000);
-				//var fiveMinutes = 15,
-				//display = $('#time');
-				//startTimer(fiveMinutes, display);
-			}
+			
 		} else {
 			$("#position" + arg).removeClass('activePlayer');
-			//$("#btnBet").hide();
-			$("#btnFold").hide();
-			$("#btnCheck").hide();
-			$("#btnCall").hide();
-			$("#btnRaise").hide();
-			$("#inputRaise").hide();
+			
+		}
+		if (player.state == "USUAL") {
+			//setTimeout(fsetNextActivePlayer, 15000);
+			//var fiveMinutes = 15,
+			//display = $('#time');
+			//startTimer(fiveMinutes, display);
+		} else if (player.state == "FINISHED") {
+			$("#notActive" + arg).show();
 		}
 
 	}
@@ -328,6 +390,7 @@ var baseUrl = '${pageContext.request.contextPath}';
 					$("#position" + i).attr("src", baseUrl + '/resources/img/sitTable.png');
 					$("#shirt" + i).hide();
 					$("#playerData" + i).hide();
+					//$("#notActive" + i).hide();
 					}
 			
 				result.forEach(function(player) { 
@@ -397,15 +460,15 @@ var baseUrl = '${pageContext.request.contextPath}';
 	
 	}, 2 * 1000);
 	
-	function fsetNextActivePlayer() {
-		$.ajax({
-				url : baseUrl + '/inGame/changeActivePlayer?gameid=' + ${game.id},
-				type : 'get',
-				success : function(game) {
+// 	function fsetNextActivePlayer() {
+// 		$.ajax({
+// 				url : baseUrl + '/inGame/changeActivePlayer?gameid=' + ${game.id},
+// 				type : 'get',
+// 				success : function(game) {
 				
-				}
-			});
-		}
+// 				}
+// 			});
+// 		}
 	
 	function getDateTime() {
         var now     = new Date(); 
@@ -439,8 +502,27 @@ var baseUrl = '${pageContext.request.contextPath}';
 					if (game.state == "ACTIVE") {
 						$("#startBtn").hide();
 						var $bank = $('#bank').text(game.bank);
-					} else {
+						$("#btnFold").show();
+						$("#btnBet").show();
+						$("#firstDeal").show();
 						
+					} else if (game.state == "ACTIVE2") {
+						$("#startBtn").hide();
+						var $bank = $('#bank').text(game.bank);
+						$("#btnFold").show();
+						$("#btnBet").hide();
+						$("#firstDeal").hide();
+						$("#btnCheck").show();
+						$("#btnCall").show();
+						$("#btnRaise").show();
+						$("#inputRaise").show();
+						$.ajax({
+							url : baseUrl + '/inGame/getThreeCards?gameid=' + ${game.id},
+							type : 'get',
+							success : function(result) {
+								 
+							}
+						});
 					}
 				}
 		});

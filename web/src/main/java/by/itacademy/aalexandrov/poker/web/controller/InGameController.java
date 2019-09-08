@@ -1,5 +1,6 @@
 package by.itacademy.aalexandrov.poker.web.controller;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
@@ -17,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.google.common.collect.Iterables;
 
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.CardStatus;
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.GameStatus;
@@ -185,7 +188,7 @@ public class InGameController extends AbstractController {
 		List<ICardInGame> listCardsInGame = cardInGameService.getAllCardsInGameByGame(gameid, CardStatus.INDECK);
 		Collections.shuffle(listCardsInGame);
 		List<IPlayer> players = playerService.getPlayersByGame(gameid);
-		setFirstTwoCardsForPlayers(players, listCardsInGame);
+		setFirstTwoCardsForPlayers(players, listCardsInGame, gameid);
 		Calendar c1 = Calendar.getInstance();
 		Date dateOne = c1.getTime();
 		curentGame.setActivePlayerId(players.get(0).getId());
@@ -195,63 +198,45 @@ public class InGameController extends AbstractController {
 		return new ResponseEntity<Object>(HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/setSmallBlind", method = RequestMethod.GET)
-	public ResponseEntity<Object> setSmallBlind(@RequestParam(name = "gameid", required = true) final Integer gameid) {
-		IPlayer playerSmallBlind = playerService.getPlayerSmallBlind(gameid, PlayerStatus.SMALLBLIND);
-		playerSmallBlind.setCurentBet(5);
-		playerService.save(playerSmallBlind);
-		ITransaction transactionForSmallBlindPlayer = transactionService.createEntity();
-		transactionForSmallBlindPlayer.setAmount(-5);
-		transactionForSmallBlindPlayer.setComment("smallblind");
-		transactionForSmallBlindPlayer.setUserAccount(playerSmallBlind.getUserAccount());
-		transactionService.save(transactionForSmallBlindPlayer);
-		IGame curentGame = gameService.getFullInfo(gameid);
-		curentGame.setBank(5);
-		Integer currentPlayer = curentGame.getActivePlayerId();
-		greatingNextPlayer(gameid, curentGame, currentPlayer);
-		return new ResponseEntity<Object>(HttpStatus.OK);
-	}
-
-	@RequestMapping(value = "/setBigBlind", method = RequestMethod.GET)
-	public ResponseEntity<Object> setBigBlind(@RequestParam(name = "gameid", required = true) final Integer gameid) {
-		IPlayer playerBigBlind = playerService.getPlayerSmallBlind(gameid, PlayerStatus.BIGBLIND);
-		playerBigBlind.setCurentBet(10);
-		playerService.save(playerBigBlind);
+	@RequestMapping(value = "/setFirstBet", method = RequestMethod.POST)
+	public ResponseEntity<Object> setFirstBet(@RequestParam(name = "gameid", required = true) final Integer gameid) {
+		Integer loggedUserId = AuthHelper.getLoggedUserId();
+		IPlayer curentPlayer = playerService.getPlayerByUser(loggedUserId);
+		curentPlayer.setCurentBet(10);
+		playerService.save(curentPlayer);
 		ITransaction transactionForBigBlindPlayer = transactionService.createEntity();
 		transactionForBigBlindPlayer.setAmount(-10);
-		transactionForBigBlindPlayer.setComment("bigblind");
-		transactionForBigBlindPlayer.setUserAccount(playerBigBlind.getUserAccount());
+		transactionForBigBlindPlayer.setComment("firstbet");
+		transactionForBigBlindPlayer.setUserAccount(curentPlayer.getUserAccount());
 		transactionService.save(transactionForBigBlindPlayer);
 		IGame curentGame = gameService.getFullInfo(gameid);
 		curentGame.setBank(curentGame.getBank() + 10);
-		Integer currentPlayer = curentGame.getActivePlayerId();
-		greatingNextPlayer(gameid, curentGame, currentPlayer);
+		gameService.save(curentGame);
+		greatingNextPlayerForActiveGame(gameid, loggedUserId);
 		return new ResponseEntity<Object>(HttpStatus.OK);
 	}
 
-//	@RequestMapping(value = "/setCardsSetActivePlayer", method = RequestMethod.GET)
-//	public ResponseEntity<Object> setCardsSetActivePlayer(
-//			@RequestParam(name = "gameid", required = true) final Integer gameid) {
-//		IGame curentGame = gameService.getFullInfo(gameid);
-//		createDeckForGame(curentGame);
-//		List<ICardInGame> listCardsInGame = cardInGameService.getAllCardsInGameByGame(gameid, CardStatus.INDECK);
-//		Collections.shuffle(listCardsInGame);
-//		List<IPlayer> players = playerService.getPlayersByGame(gameid);
-//		setFirstTwoCardsForPlayers(players, listCardsInGame);
-//		setFirstPlayerAsActive(gameid, players);
-//		curentGame.setState(GameStatus.ACTIVE);
-//		gameService.save(curentGame);
-//		return new ResponseEntity<Object>(HttpStatus.OK);
-//	}
+	@RequestMapping(value = "/isActive", method = RequestMethod.POST)
+	public ResponseEntity<Object> isActive(@RequestParam(name = "gameid", required = true) final Integer gameid) {
+		IGame curentGame = gameService.getFullInfo(gameid);
+		Integer loggedUserId = AuthHelper.getLoggedUserId();
+		IPlayer curentPlayer = playerService.getPlayerByUser(loggedUserId);
+		if (curentPlayer.getId().equals(curentGame.getActivePlayerId())) {
+			return new ResponseEntity<Object>(true, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<Object>(false, HttpStatus.OK);
+		}
+	}
 
-//	@RequestMapping(value = "/changeGameToActive", method = RequestMethod.GET)
-//	public ResponseEntity<Object> changeGameToActive(
-//			@RequestParam(name = "gameid", required = true) final Integer gameid) {
-//		IGame curentGame = gameService.getFullInfo(gameid);
-//		curentGame.setState(GameStatus.ACTIVE);
-//		gameService.save(curentGame);
-//		return new ResponseEntity<Object>(HttpStatus.OK);
-//	}
+	@RequestMapping(value = "/clickFold", method = RequestMethod.POST)
+	public ResponseEntity<Object> clickFold(@RequestParam(name = "gameid", required = true) final Integer gameid) {
+		Integer loggedUserId = AuthHelper.getLoggedUserId();
+		IPlayer curentPlayer = playerService.getPlayerByUser(loggedUserId);
+		curentPlayer.setState(PlayerStatus.FINISHED);
+		playerService.save(curentPlayer);
+		greatingNextPlayerForActiveGame(gameid, loggedUserId);
+		return new ResponseEntity<Object>(HttpStatus.OK);
+	}
 
 //	@RequestMapping(value = "/gamestatus", method = RequestMethod.GET)
 //	public ResponseEntity<Object> getGameStatus(@RequestParam(name = "gameid", required = true) final Integer gameid) {
@@ -356,18 +341,6 @@ public class InGameController extends AbstractController {
 //		return new ResponseEntity<Object>(dtop, HttpStatus.OK);
 //	}
 
-//	private void changeGameStateToNewOrEnd(final Integer gameid, IGame curentGame, GameStatus gameStatus) {
-//		long playersCount = playerService.getPlayersCount(gameid);
-//		if (playersCount > 1 && gameStatus.equals(GameStatus.END)) {
-//			curentGame.setState(GameStatus.NEW);
-//			gameService.save(curentGame);
-//
-//		} else if (playersCount <= 1) {
-//			curentGame.setState(GameStatus.END);
-//			gameService.save(curentGame);
-//		}
-//	}
-
 	@RequestMapping(value = "/getGameState", method = RequestMethod.GET)
 	public ResponseEntity<GameDTO> getGameState(@RequestParam(name = "gameid", required = true) final Integer gameid) {
 
@@ -375,22 +348,29 @@ public class InGameController extends AbstractController {
 		GameDTO dto = gameToDtoConverter.apply(game);
 		long playersCount = playerService.getPlayersCount(gameid);
 		dto.setPlaersCount(playersCount);
-		return new ResponseEntity<GameDTO>(dto, HttpStatus.OK);
-	}
-
-	@RequestMapping(value = "/changeActivePlayer", method = RequestMethod.GET)
-	public ResponseEntity<GameDTO> changeActivePlayer(
-			@RequestParam(name = "gameid", required = true) final Integer gameid) {
-
-		IGame game = gameService.getFullInfo(gameid);
-		Integer currentPlayer = game.getActivePlayerId();
-
-		greatingNextPlayer(gameid, game, currentPlayer);
-
-		GameDTO dto = gameToDtoConverter.apply(game);
 
 		return new ResponseEntity<GameDTO>(dto, HttpStatus.OK);
 	}
+
+	@RequestMapping(value = "/getThreeCards", method = RequestMethod.GET)
+	public ResponseEntity<Object> getThreeCards(@RequestParam(name = "gameid", required = true) final Integer gameid) {
+
+		return new ResponseEntity<Object>(HttpStatus.OK);
+	}
+
+//	@RequestMapping(value = "/changeActivePlayer", method = RequestMethod.GET)
+//	public ResponseEntity<GameDTO> changeActivePlayer(
+//			@RequestParam(name = "gameid", required = true) final Integer gameid) {
+//
+//		IGame game = gameService.getFullInfo(gameid);
+//		Integer currentPlayer = game.getActivePlayerId();
+//
+//		greatingNextPlayer(gameid, game, currentPlayer);
+//
+//		GameDTO dto = gameToDtoConverter.apply(game);
+//
+//		return new ResponseEntity<GameDTO>(dto, HttpStatus.OK);
+//	}
 
 	@RequestMapping(value = "/getCountPlayers", method = RequestMethod.GET)
 	public ResponseEntity<Integer> getCountPlayers(
@@ -399,16 +379,6 @@ public class InGameController extends AbstractController {
 
 		return new ResponseEntity<Integer>(playersCount, HttpStatus.OK);
 	}
-
-//	private void setFirstPlayerAsActive(final Integer gameid) {
-//		Calendar c1 = Calendar.getInstance();
-//		Date dateOne = c1.getTime();
-//		List<IPlayer> players = playerService.getPlayersByGame(gameid);
-//		IGame game = gameService.getFullInfo(gameid);
-//		game.setActivePlayerId(players.get(0).getId());
-//		game.setTimestampEndStep(dateOne.getTime() + 15000);
-//		gameService.save(game);
-//	}
 
 	private void getActivePlayer(List<PlayerDTO> dtop, Integer currentPlayer) {
 		for (PlayerDTO playerDTO : dtop) {
@@ -421,48 +391,30 @@ public class InGameController extends AbstractController {
 		}
 	}
 
-	private void greatingNextPlayer(final Integer gameid, IGame game, Integer currentPlayer) {
+	private void greatingNextPlayerForActiveGame(final Integer gameid, Integer currentPlayer) {
 		List<IPlayer> players = playerService.getPlayersByGame(gameid);
-		for (IPlayer iPlayer : players) {
-			if (iPlayer.getId().equals(currentPlayer)) {
-				int index = players.indexOf(iPlayer);
-				try {
-					game.setActivePlayerId(players.get(index + 1).getId());
-					gameService.save(game);
-				} catch (IndexOutOfBoundsException e) {
-					GameStatus gameState = game.getState();
-					if (gameState.equals(GameStatus.ACTIVE)) {
-						game.setState(GameStatus.ACTIVE2);
-						game.setActivePlayerId(players.get(0).getId());
-						gameService.save(game);
-
-					} else if (gameState.equals(GameStatus.ACTIVE)) {
-						game.setState(GameStatus.ACTIVE2);
-						game.setActivePlayerId(players.get(0).getId());
-						gameService.save(game);
-
-					} else if (gameState.equals(GameStatus.ACTIVE2)) {
-						game.setState(GameStatus.ACTIVE3);
-						game.setActivePlayerId(players.get(0).getId());
-						gameService.save(game);
-
-					} else if (gameState.equals(GameStatus.ACTIVE3)) {
-						game.setState(GameStatus.ACTIVE4);
-						game.setActivePlayerId(players.get(0).getId());
-						gameService.save(game);
-					}
-
+		IGame curentGame = gameService.getFullInfo(gameid);
+		Integer loggedUserId = AuthHelper.getLoggedUserId();
+		IPlayer curentPlayer = playerService.getPlayerByUser(loggedUserId);
+		IPlayer lastPlayer = Iterables.getLast(players);
+		if (!curentPlayer.getId().equals(lastPlayer.getId())) {
+			for (IPlayer iPlayer : players) {
+				if (iPlayer.getId().equals(curentPlayer.getId())) {
+					int index = players.indexOf(iPlayer);
+					curentGame.setActivePlayerId(players.get(index + 1).getId());
+					gameService.save(curentGame);
 				}
-
-				Calendar c1 = Calendar.getInstance();
-				Date dateOne = c1.getTime();
-				game.setTimestampEndStep(dateOne.getTime() + 15000);
-				gameService.save(game);
 			}
+
+		} else {
+			curentGame.setActivePlayerId(players.get(0).getId());
+			curentGame.setState(GameStatus.ACTIVE2);
+			gameService.save(curentGame);
 		}
+
 	}
 
-	private void setFirstTwoCardsForPlayers(List<IPlayer> players, List<ICardInGame> listCardsInGame) {
+	private void setFirstTwoCardsForPlayers(List<IPlayer> players, List<ICardInGame> listCardsInGame, Integer gameid) {
 		int index = 0;
 		for (IPlayer iPlayer2 : players) {
 			ICard card = cardService.getFullInfo(listCardsInGame.get(index).getCard().getId());
@@ -482,12 +434,16 @@ public class InGameController extends AbstractController {
 			iPlayer2.setState(PlayerStatus.USUAL);
 			playerService.save(iPlayer2);
 		}
-		IPlayer playerSmallBlind = players.get(0);
-		IPlayer playerBigBlind = players.get(1);
-		playerSmallBlind.setState(PlayerStatus.SMALLBLIND);
-		playerService.save(playerSmallBlind);
-		playerBigBlind.setState(PlayerStatus.BIGBLIND);
-		playerService.save(playerBigBlind);
+		List<Object> iCardsForTable = new ArrayList<Object>();
+		List<ICardInGame> listCardsInGameForTable = cardInGameService.getAllCardsInGameByGame(gameid,
+				CardStatus.INDECK);
+		Collections.shuffle(listCardsInGameForTable);
+		for (int i = 0; i < 5; i++) {
+			iCardsForTable.add(listCardsInGameForTable.get(i));
+			ICardInGame cardInGame = listCardsInGameForTable.get(i);
+			cardInGame.setCardStatus(CardStatus.INBOARDCLOSED);
+			cardInGameService.save(cardInGame);
+		}
 
 	}
 
