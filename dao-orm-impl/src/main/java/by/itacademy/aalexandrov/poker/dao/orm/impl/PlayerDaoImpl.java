@@ -201,7 +201,8 @@ public class PlayerDaoImpl extends AbstractDaoImpl<IPlayer, Integer> implements 
 
 		from.fetch(Player_.game, JoinType.LEFT);
 		from.fetch(Player_.userAccount, JoinType.LEFT);
-		cq.where(cb.equal(from.get(Player_.game), id), cb.and(cb.equal(from.get(Player_.inGame), true)));
+		cq.where(cb.equal(from.get(Player_.game), id),
+				cb.and(cb.equal(from.get(Player_.inGame), true), cb.and(cb.equal(from.get(Player_.inGame), true))));
 		cq.orderBy(new OrderImpl(from.get(Player_.position), true));
 		cq.distinct(true);
 
@@ -256,7 +257,7 @@ public class PlayerDaoImpl extends AbstractDaoImpl<IPlayer, Integer> implements 
 	}
 
 	@Override
-	public IPlayer getPlayerSmallBlind(Integer gameid, PlayerStatus smallblind) {
+	public List<IPlayer> getPlayerSmallBlind(Integer gameid, PlayerStatus smallblind) {
 		final EntityManager em = getEntityManager();
 		final CriteriaBuilder cb = em.getCriteriaBuilder();
 
@@ -270,11 +271,12 @@ public class PlayerDaoImpl extends AbstractDaoImpl<IPlayer, Integer> implements 
 
 		cq.distinct(true);
 
-		cq.where(cb.equal(from.get(Player_.game), gameid), cb.and(cb.equal(from.get(Player_.state), smallblind)));
-
+		cq.where(cb.equal(from.get(Player_.game), gameid), cb.and(cb.equal(from.get(Player_.state), smallblind),
+				cb.and(cb.equal(from.get(Player_.inGame), true))));
+		cq.orderBy(new OrderImpl(from.get(Player_.position), true));
 		final TypedQuery<IPlayer> q = em.createQuery(cq);
 
-		return getSingleResult(q);
+		return q.getResultList();
 	}
 
 }

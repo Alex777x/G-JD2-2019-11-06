@@ -43,7 +43,9 @@
 	<div id="bet1" class="bet1" style="display: none;">
 		<i id="bets1" class="fas fa-coins" style="color: gold; position: absolute; left: 419px; top: 605px;"></i>
 	</div>
-	<div class="notActiveX" id="notActive1" style="display: none;top: 663px;left: 436px;"><h1>X</h1></div>
+	<div class="notActiveX" id="notActive1" style="display: none; top: 663px; left: 436px;">
+		<h1>X</h1>
+	</div>
 
 	<div id="shirt2" class="shirt2" style="display: none;">
 		<img id="playerCard2" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" /> <img id="playerCard22"
@@ -59,7 +61,7 @@
 	<div id="bet2" class="bet2" style="display: none;">
 		<i id="bets2" class="fas fa-coins" style="color: gold; position: absolute; left: 220px; top: 560px;"></i>
 	</div>
-	<div class="notActiveX" id="notActive2" style="display: none;top: 614px;left: 241px;">X</div>
+	<div class="notActiveX" id="notActive2" style="display: none; top: 614px; left: 241px;">X</div>
 
 	<div id="shirt3" class="shirt3" style="display: none;">
 		<img id="playerCard3" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" /> <img id="playerCard33"
@@ -75,7 +77,7 @@
 	<div id="bet3" class="bet3" style="display: none;">
 		<i id="bets3" class="fas fa-coins" style="color: gold; position: absolute; left: 190px; top: 346px;"></i>
 	</div>
-	<div class="notActiveX" id="notActive3" style="display: none;top: 397px;left: 127px;">X</div>
+	<div class="notActiveX" id="notActive3" style="display: none; top: 397px; left: 127px;">X</div>
 
 	<div id="shirt4" class="shirt4" style="display: none;">
 		<img id="playerCard4" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" /> <img id="playerCard44"
@@ -91,7 +93,7 @@
 	<div id="bet4" class="bet4" style="display: none;">
 		<i id="bets4" class="fas fa-coins" style="color: gold; position: absolute; left: 299px; top: 274px;"></i>
 	</div>
-	<div class="notActiveX" id="notActive4" style="display: none;top: 210px;left: 242px;">X</div>
+	<div class="notActiveX" id="notActive4" style="display: none; top: 210px; left: 242px;">X</div>
 
 	<div id="shirt5" class="shirt5" style="display: none;">
 		<img id="playerCard5" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" /> <img id="playerCard55"
@@ -107,7 +109,7 @@
 	<div id="bet5" class="bet5" style="display: none;">
 		<i id="bets5" class="fas fa-coins" style="color: gold; position: absolute; left: 500px; top: 233px;"></i>
 	</div>
-	<div class="notActiveX" id="notActive5" style="display: none;left: 438px;top: 166px;">X</div>
+	<div class="notActiveX" id="notActive5" style="display: none; left: 438px; top: 166px;">X</div>
 
 	<div id="shirt6" class="shirt6" style="display: none;">
 		<img id="playerCard6" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" /> <img id="playerCard66"
@@ -123,7 +125,7 @@
 	<div id="bet6" class="bet6" style="display: none;">
 		<i id="bets6" class="fas fa-coins" style="color: gold; position: absolute; left: 765px; top: 233px;"></i>
 	</div>
-	<div class="notActiveX" id="notActive6" style="display: none;left: 705px;top: 167px;">X</div>
+	<div class="notActiveX" id="notActive6" style="display: none; left: 705px; top: 167px;">X</div>
 
 	<div id="shirt7" class="shirt7" style="display: none;">
 		<img id="playerCard7" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" /> <img id="playerCard77"
@@ -139,7 +141,7 @@
 	<div id="bet7" class="bet7" style="display: none;">
 		<i id="bets7" class="fas fa-coins" style="color: gold; position: absolute; left: 910px; top: 293px;"></i>
 	</div>
-	<div class="notActiveX" id="notActive7" style="display: none;left: 888px;top: 212px;">X</div>
+	<div class="notActiveX" id="notActive7" style="display: none; left: 888px; top: 212px;">X</div>
 
 	<div id="shirt8" class="shirt8" style="display: none;">
 		<img id="playerCard8" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" /> <img id="playerCard88"
@@ -155,7 +157,7 @@
 	<div id="bet8" class="bet8" style="display: none;">
 		<i id="bets8" class="fas fa-coins" style="color: gold; position: absolute; left: 950px; top: 405px;"></i>
 	</div>
-	<div class="notActiveX" id="notActive8" style="display: none;left: 1009px;top: 398px;">X</div>
+	<div class="notActiveX" id="notActive8" style="display: none; left: 1009px; top: 398px;">X</div>
 
 	<div id="shirt9" class="shirt9" style="display: none;">
 		<img id="playerCard9" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" /> <img id="playerCard99"
@@ -171,7 +173,7 @@
 	<div id="bet9" class="bet9" style="display: none;">
 		<i id="bets9" class="fas fa-coins" style="color: gold; position: absolute; left: 868px; top: 558px;"></i>
 	</div>
-	<div class="notActiveX" id="notActive9" style="display: none;left: 889px;top: 613px;">X</div>
+	<div class="notActiveX" id="notActive9" style="display: none; left: 889px; top: 613px;">X</div>
 
 	<div id="shirt10" class="shirt10" style="display: none;">
 		<img id="playerCard10" src="${contextPath}/resources/img/cards/shirt.png" style="width: 50px;" /> <img id="playerCard101"
@@ -187,7 +189,7 @@
 	<div id="bet10" class="bet10" style="display: none;">
 		<i id="bets10" class="fas fa-coins" style="color: gold; position: absolute; left: 684px; top: 608px;"></i>
 	</div>
-	<div class="notActiveX" id="notActive10" style="display: none;left: 705px;top: 663px;">X</div>
+	<div class="notActiveX" id="notActive10" style="display: none; left: 705px; top: 663px;">X</div>
 
 	<div id="btnFold" style="display: none;">
 		<button onclick="foldBtn()" id="btnFold" type="button" class="btn btn-success btn-lg btnFold">FOLD</button>
@@ -215,7 +217,8 @@
 		<button id="startBtn" type="button" class="btn btn-primary btn-lg">Start game</button>
 		<div id="digital-clock" style="color: white;"></div>
 	</div>
-	<div id="firstDeal" style="color: white;display: none;">Первый этап. Нужно сделать минимальную ставку "BET" или сбросить карты "FOLD".</div>
+	<div id="firstDeal" style="color: white; display: none;">Первый этап. Нужно сделать минимальную ставку "BET" или сбросить карты
+		"FOLD".</div>
 </div>
 
 
@@ -519,8 +522,12 @@ function raiseBtn(value) {
 						$.ajax({
 							url : baseUrl + '/inGame/getThreeCards?gameid=' + ${game.id},
 							type : 'get',
-							success : function(result) {
-								 
+							success : function(threeCards) {
+								var i = 1;
+								threeCards.forEach(function(card) {
+									$("#card" + i).attr("src", baseUrl + card.filename);
+									i++;
+								});
 							}
 						});
 					}

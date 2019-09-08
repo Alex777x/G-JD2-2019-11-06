@@ -47,6 +47,6 @@ public interface IPlayerService {
 
 	IPlayer getPlayerByUserAccunt(Integer loggedUserId);
 
-	IPlayer getPlayerSmallBlind(Integer gameid, PlayerStatus smallblind);
+	List<IPlayer> getPlayerSmallBlind(Integer gameid, PlayerStatus smallblind);
 
 }

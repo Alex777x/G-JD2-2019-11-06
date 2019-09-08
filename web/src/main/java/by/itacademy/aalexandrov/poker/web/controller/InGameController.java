@@ -38,11 +38,14 @@ import by.itacademy.aalexandrov.poker.service.IPlayerActionService;
 import by.itacademy.aalexandrov.poker.service.IPlayerService;
 import by.itacademy.aalexandrov.poker.service.ITransactionService;
 import by.itacademy.aalexandrov.poker.service.IUserAccountService;
+import by.itacademy.aalexandrov.poker.web.converter.CardInGameToDTOConverter;
+import by.itacademy.aalexandrov.poker.web.converter.CardToDTOConverter;
 import by.itacademy.aalexandrov.poker.web.converter.GameToDTOConverter;
 import by.itacademy.aalexandrov.poker.web.converter.PlayerFromDTOConverter;
 import by.itacademy.aalexandrov.poker.web.converter.PlayerToDTOConverter;
 import by.itacademy.aalexandrov.poker.web.converter.TransactionToDTOConverter;
 import by.itacademy.aalexandrov.poker.web.converter.UserAccountToDTOConverter;
+import by.itacademy.aalexandrov.poker.web.dto.CardDTO;
 import by.itacademy.aalexandrov.poker.web.dto.GameDTO;
 import by.itacademy.aalexandrov.poker.web.dto.PlayerDTO;
 import by.itacademy.aalexandrov.poker.web.dto.UserAccountDTO;
@@ -73,7 +76,11 @@ public class InGameController extends AbstractController {
 	@Autowired
 	ICardInGameService cardInGameService;
 	@Autowired
+	CardInGameToDTOConverter cardInGameToDtoConverter;
+	@Autowired
 	ICardService cardService;
+	@Autowired
+	CardToDTOConverter cardToDtoConverter;
 	@Autowired
 	IPlayerActionService playerActionService;
 
@@ -353,9 +360,18 @@ public class InGameController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/getThreeCards", method = RequestMethod.GET)
-	public ResponseEntity<Object> getThreeCards(@RequestParam(name = "gameid", required = true) final Integer gameid) {
-
-		return new ResponseEntity<Object>(HttpStatus.OK);
+	public ResponseEntity<List<CardDTO>> getThreeCards(
+			@RequestParam(name = "gameid", required = true) final Integer gameid) {
+		List<ICardInGame> threeCards = cardInGameService.getAllCardsInGameByGame(gameid, CardStatus.INBOARDCLOSED);
+		ICard card1 = cardService.getFullInfo(threeCards.get(0).getCard().getId());
+		ICard card2 = cardService.getFullInfo(threeCards.get(1).getCard().getId());
+		ICard card3 = cardService.getFullInfo(threeCards.get(2).getCard().getId());
+		List<ICard> flop = new ArrayList<ICard>();
+		flop.add(card1);
+		flop.add(card2);
+		flop.add(card3);
+		List<CardDTO> dtos = flop.stream().map(cardToDtoConverter).collect(Collectors.toList());
+		return new ResponseEntity<List<CardDTO>>(dtos, HttpStatus.OK);
 	}
 
 //	@RequestMapping(value = "/changeActivePlayer", method = RequestMethod.GET)

@@ -131,7 +131,7 @@ public class PlayerServiceImpl implements IPlayerService {
 	}
 
 	@Override
-	public IPlayer getPlayerSmallBlind(Integer gameid, PlayerStatus smallblind) {
+	public List<IPlayer> getPlayerSmallBlind(Integer gameid, PlayerStatus smallblind) {
 		return dao.getPlayerSmallBlind(gameid, smallblind);
 	}
 
