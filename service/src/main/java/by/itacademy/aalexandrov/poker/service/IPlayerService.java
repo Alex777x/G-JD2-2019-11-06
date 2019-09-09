@@ -49,4 +49,7 @@ public interface IPlayerService {
 
 	List<IPlayer> getPlayerSmallBlind(Integer gameid, PlayerStatus smallblind);
 
+	@Transactional
+	List<IPlayer> getPlayersByGameWithStateUsual(Integer gameid, PlayerStatus usual);
+
 }

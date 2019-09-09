@@ -32,4 +32,6 @@ public interface IPlayerDao extends IDao<IPlayer, Integer> {
 
 	List<IPlayer> getPlayerSmallBlind(Integer gameid, PlayerStatus smallblind);
 
+	List<IPlayer> getPlayersByGameWithStateUsual(Integer gameid, PlayerStatus usual);
+
 }

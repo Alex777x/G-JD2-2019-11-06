@@ -239,114 +239,30 @@ public class InGameController extends AbstractController {
 	public ResponseEntity<Object> clickFold(@RequestParam(name = "gameid", required = true) final Integer gameid) {
 		Integer loggedUserId = AuthHelper.getLoggedUserId();
 		IPlayer curentPlayer = playerService.getPlayerByUser(loggedUserId);
+		greatingNextPlayerForActiveGame(gameid, loggedUserId);
 		curentPlayer.setState(PlayerStatus.FINISHED);
 		playerService.save(curentPlayer);
-		greatingNextPlayerForActiveGame(gameid, loggedUserId);
 		return new ResponseEntity<Object>(HttpStatus.OK);
 	}
 
-//	@RequestMapping(value = "/gamestatus", method = RequestMethod.GET)
-//	public ResponseEntity<Object> getGameStatus(@RequestParam(name = "gameid", required = true) final Integer gameid) {
-//		IGame curentGame = gameService.getFullInfo(gameid);
-//		Integer loggedUserId = AuthHelper.getLoggedUserId();
-//		GameStatus gameStatus = curentGame.getState();
-//
-//		List<IPlayer> players = playerService.getPlayersByGame(gameid);
-//
-//		updateLastActivityForPlayers(players);
-//
-//		PlayerDTO dto = null;
-//		try {
-//			dto = playerToDtoConverter.apply(playerService.getPlayerByUser(loggedUserId));
-//		} catch (Exception e) {
-//
-//		}
-//
-//		IPlayer entity;
-//		if (dto != null) {
-//			entity = playerFromDtoConverter.apply(dto);
-//			entity.setUpdated(new Date());
-//			playerService.save(entity);
-//		}
-//
-//		// changeGameStateToNewOrEnd(gameid, curentGame, gameStatus);
-//		long playersCount = playerService.getPlayersCount(gameid);
-//		if (playersCount > 1 && gameStatus.equals(GameStatus.END)) {
-//			curentGame.setState(GameStatus.NEW);
-//			gameService.save(curentGame);
-//
-//		}
-//		if (playersCount <= 1) {
-//			curentGame.setState(GameStatus.END);
-//			gameService.save(curentGame);
-//		}
-//
-//		if (gameStatus.equals(GameStatus.NEW)) {
-//			createDeckForGame(curentGame);
-//			List<ICardInGame> listCardsInGame = cardInGameService.getAllCardsInGameByGame(gameid, CardStatus.INDECK);
-//			Collections.shuffle(listCardsInGame);
-//			setFirstTwoCardsForPlayers(players, listCardsInGame);
-//			setFirstPlayerAsActive(gameid, players);
-//			curentGame.setState(GameStatus.SETBLINDS);
-//			gameService.save(curentGame);
-//
-//		} else if (gameStatus.equals(GameStatus.SETBLINDS)) {
-//			IGame game = gameService.getFullInfo(gameid);
-//			Integer currentPlayer = game.getActivePlayerId();
-//
-//			IPlayer playerSmallBlind = playerService.getPlayerSmallBlind(gameid, PlayerStatus.SMALLBLIND);
-//			playerSmallBlind.setCurentBet(5);
-//			playerService.save(playerSmallBlind);
-//			IPlayer playerBigBlind = playerService.getPlayerSmallBlind(gameid, PlayerStatus.BIGBLIND);
-//			playerBigBlind.setCurentBet(10);
-//			playerService.save(playerBigBlind);
-//
-//			ITransaction transactionForSmallBlindPlayer = transactionService.createEntity();
-//			transactionForSmallBlindPlayer.setAmount(-5);
-//			transactionForSmallBlindPlayer.setComment("smallblind");
-//			transactionForSmallBlindPlayer.setUserAccount(playerSmallBlind.getUserAccount());
-//			transactionService.save(transactionForSmallBlindPlayer);
-//			ITransaction transactionForBigBlindPlayer = transactionService.createEntity();
-//			transactionForBigBlindPlayer.setAmount(-10);
-//			transactionForBigBlindPlayer.setComment("bigblind");
-//			transactionForBigBlindPlayer.setUserAccount(playerBigBlind.getUserAccount());
-//			transactionService.save(transactionForBigBlindPlayer);
-//
-//			List<PlayerDTO> dtop = players.stream().map(playerToDtoConverter).collect(Collectors.toList());
-//			setNickNamesForPlayers(dtop);
-//			getActivePlayer(dtop, currentPlayer);
-//			curentGame.setState(GameStatus.ACTIVE);
-//			curentGame.setBank(15);
-//			gameService.save(curentGame);
-//			return new ResponseEntity<Object>(dtop, HttpStatus.OK);
-//
-//		} else if (gameStatus.equals(GameStatus.ACTIVE)) {
-//			List<PlayerDTO> dtop = players.stream().map(playerToDtoConverter).collect(Collectors.toList());
-//			setNickNamesForPlayers(dtop);
-//
-//			return new ResponseEntity<Object>(dtop, HttpStatus.OK);
-//
-//		} else if (gameStatus.equals(GameStatus.ACTIVE2)) {
-//			List<Object> iCardsForTable = new ArrayList<Object>();
-//			List<ICardInGame> listCardsInGame = cardInGameService.getAllCardsInGameByGame(gameid, CardStatus.INDECK);
-//			Collections.shuffle(listCardsInGame);
-//			for (int i = 0; i < 5; i++) {
-//				iCardsForTable.add(listCardsInGame.get(i));
-//			}
-//			return new ResponseEntity<Object>(iCardsForTable, HttpStatus.OK);
-//
-//		} else if (gameStatus.equals(GameStatus.ACTIVE3)) {
-//
-//		} else if (gameStatus.equals(GameStatus.ACTIVE4)) {
-//
-//		} else if (gameStatus.equals(GameStatus.OLD)) {
-//
-//		}
-//
-//		List<PlayerDTO> dtop = players.stream().map(playerToDtoConverter).collect(Collectors.toList());
-//		setNickNamesForPlayers(dtop);
-//		return new ResponseEntity<Object>(dtop, HttpStatus.OK);
-//	}
+	@RequestMapping(value = "/clickCheck", method = RequestMethod.POST)
+	public ResponseEntity<Object> clickCheck(@RequestParam(name = "gameid", required = true) final Integer gameid) {
+		Integer loggedUserId = AuthHelper.getLoggedUserId();
+		IPlayer curentPlayer = playerService.getPlayerByUser(loggedUserId);
+		List<IPlayer> players = playerService.getPlayersByGameWithStateUsual(gameid, PlayerStatus.USUAL);
+		if (curentPlayer.getId().equals(players.get(0).getId())) {
+			greatingNextPlayerForActiveGame(gameid, loggedUserId);
+		} else {
+			// int index = players.indexOf(curentPlayer);
+			if (curentPlayer.getCurentBet() == players.get(0).getCurentBet()) {
+				greatingNextPlayerForActiveGame(gameid, loggedUserId);
+				return new ResponseEntity<Object>(true, HttpStatus.OK);
+			} else {
+				return new ResponseEntity<Object>(false, HttpStatus.OK);
+			}
+		}
+		return new ResponseEntity<Object>(true, HttpStatus.OK);
+	}
 
 	@RequestMapping(value = "/getGameState", method = RequestMethod.GET)
 	public ResponseEntity<GameDTO> getGameState(@RequestParam(name = "gameid", required = true) final Integer gameid) {
@@ -372,6 +288,53 @@ public class InGameController extends AbstractController {
 		flop.add(card3);
 		List<CardDTO> dtos = flop.stream().map(cardToDtoConverter).collect(Collectors.toList());
 		return new ResponseEntity<List<CardDTO>>(dtos, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/getFourCards", method = RequestMethod.GET)
+	public ResponseEntity<List<CardDTO>> getFourCards(
+			@RequestParam(name = "gameid", required = true) final Integer gameid) {
+		List<ICardInGame> fourCards = cardInGameService.getAllCardsInGameByGame(gameid, CardStatus.INBOARDCLOSED);
+		ICard card1 = cardService.getFullInfo(fourCards.get(0).getCard().getId());
+		ICard card2 = cardService.getFullInfo(fourCards.get(1).getCard().getId());
+		ICard card3 = cardService.getFullInfo(fourCards.get(2).getCard().getId());
+		ICard card4 = cardService.getFullInfo(fourCards.get(3).getCard().getId());
+		List<ICard> flop = new ArrayList<ICard>();
+		flop.add(card1);
+		flop.add(card2);
+		flop.add(card3);
+		flop.add(card4);
+		List<CardDTO> dtos = flop.stream().map(cardToDtoConverter).collect(Collectors.toList());
+		return new ResponseEntity<List<CardDTO>>(dtos, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/getFiveCards", method = RequestMethod.GET)
+	public ResponseEntity<List<CardDTO>> getFiveCards(
+			@RequestParam(name = "gameid", required = true) final Integer gameid) {
+		List<ICardInGame> fourCards = cardInGameService.getAllCardsInGameByGame(gameid, CardStatus.INBOARDCLOSED);
+		ICard card1 = cardService.getFullInfo(fourCards.get(0).getCard().getId());
+		ICard card2 = cardService.getFullInfo(fourCards.get(1).getCard().getId());
+		ICard card3 = cardService.getFullInfo(fourCards.get(2).getCard().getId());
+		ICard card4 = cardService.getFullInfo(fourCards.get(3).getCard().getId());
+		ICard card5 = cardService.getFullInfo(fourCards.get(4).getCard().getId());
+		List<ICard> flop = new ArrayList<ICard>();
+		flop.add(card1);
+		flop.add(card2);
+		flop.add(card3);
+		flop.add(card4);
+		flop.add(card5);
+		List<CardDTO> dtos = flop.stream().map(cardToDtoConverter).collect(Collectors.toList());
+		return new ResponseEntity<List<CardDTO>>(dtos, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/changeGameToChackhand", method = RequestMethod.GET)
+	public ResponseEntity<Object> changeGameToChackhand(
+			@RequestParam(name = "gameid", required = true) final Integer gameid) {
+
+		IGame game = gameService.getFullInfo(gameid);
+		game.setState(GameStatus.CHECKHAND);
+		gameService.save(game);
+
+		return new ResponseEntity<Object>(HttpStatus.OK);
 	}
 
 //	@RequestMapping(value = "/changeActivePlayer", method = RequestMethod.GET)
@@ -408,7 +371,7 @@ public class InGameController extends AbstractController {
 	}
 
 	private void greatingNextPlayerForActiveGame(final Integer gameid, Integer currentPlayer) {
-		List<IPlayer> players = playerService.getPlayersByGame(gameid);
+		List<IPlayer> players = playerService.getPlayersByGameWithStateUsual(gameid, PlayerStatus.USUAL);
 		IGame curentGame = gameService.getFullInfo(gameid);
 		Integer loggedUserId = AuthHelper.getLoggedUserId();
 		IPlayer curentPlayer = playerService.getPlayerByUser(loggedUserId);
@@ -423,9 +386,28 @@ public class InGameController extends AbstractController {
 			}
 
 		} else {
-			curentGame.setActivePlayerId(players.get(0).getId());
-			curentGame.setState(GameStatus.ACTIVE2);
-			gameService.save(curentGame);
+			GameStatus gameStatus = curentGame.getState();
+			if (gameStatus.equals(GameStatus.NEW)) {
+				curentGame.setActivePlayerId(players.get(0).getId());
+				curentGame.setState(GameStatus.ACTIVE);
+				gameService.save(curentGame);
+			} else if (gameStatus.equals(GameStatus.ACTIVE)) {
+				curentGame.setActivePlayerId(players.get(0).getId());
+				curentGame.setState(GameStatus.ACTIVE2);
+				gameService.save(curentGame);
+			} else if (gameStatus.equals(GameStatus.ACTIVE2)) {
+				curentGame.setActivePlayerId(players.get(0).getId());
+				curentGame.setState(GameStatus.ACTIVE3);
+				gameService.save(curentGame);
+			} else if (gameStatus.equals(GameStatus.ACTIVE3)) {
+				curentGame.setActivePlayerId(players.get(0).getId());
+				curentGame.setState(GameStatus.ACTIVE4);
+				gameService.save(curentGame);
+			} else if (gameStatus.equals(GameStatus.ACTIVE4)) {
+				curentGame.setActivePlayerId(players.get(0).getId());
+				curentGame.setState(GameStatus.CHECKHAND);
+				gameService.save(curentGame);
+			}
 		}
 
 	}

@@ -290,10 +290,24 @@ function foldBtn() {
 
 function checkBtn() {
 	$.ajax({
-		url : baseUrl + '/inGame/setposition?gameid=' + ${game.id},
+		url : baseUrl + '/inGame/isActive?gameid=' + ${game.id},
 		type : 'post',
 		success : function(result) {
-			 
+			if (result == true) {
+				$.ajax({
+					url : baseUrl + '/inGame/clickCheck?gameid=' + ${game.id},
+					type : 'post',
+					success : function(result) {
+						 if (result == true) {
+							
+						} else {
+							toastr.error('You must either call or raise your bet!');
+						}
+					}
+				});
+			} else {
+				toastr.error('Another player is active now!');
+			}
 		}
 	});
 }
@@ -528,6 +542,55 @@ function raiseBtn(value) {
 									$("#card" + i).attr("src", baseUrl + card.filename);
 									i++;
 								});
+							}
+						});
+					} else if (game.state == "ACTIVE3") {
+						$("#startBtn").hide();
+						var $bank = $('#bank').text(game.bank);
+						$("#btnFold").show();
+						$("#btnBet").hide();
+						$("#firstDeal").hide();
+						$("#btnCheck").show();
+						$("#btnCall").show();
+						$("#btnRaise").show();
+						$("#inputRaise").show();
+						$.ajax({
+							url : baseUrl + '/inGame/getFourCards?gameid=' + ${game.id},
+							type : 'get',
+							success : function(threeCards) {
+								var i = 1;
+								threeCards.forEach(function(card) {
+									$("#card" + i).attr("src", baseUrl + card.filename);
+									i++;
+								});
+							}
+						});
+					} else if (game.state == "ACTIVE4") {
+						$("#startBtn").hide();
+						var $bank = $('#bank').text(game.bank);
+						$("#btnFold").show();
+						$("#btnBet").hide();
+						$("#firstDeal").hide();
+						$("#btnCheck").show();
+						$("#btnCall").show();
+						$("#btnRaise").show();
+						$("#inputRaise").show();
+						$.ajax({
+							url : baseUrl + '/inGame/getFiveCards?gameid=' + ${game.id},
+							type : 'get',
+							success : function(threeCards) {
+								var i = 1;
+								threeCards.forEach(function(card) {
+									$("#card" + i).attr("src", baseUrl + card.filename);
+									i++;
+								});
+							}
+						});
+						$.ajax({
+							url : baseUrl + '/inGame/changeGameToChackhand?gameid=' + ${game.id},
+							type : 'get',
+							success : function(result) {
+								
 							}
 						});
 					}

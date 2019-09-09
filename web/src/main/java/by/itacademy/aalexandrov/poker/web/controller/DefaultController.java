@@ -26,6 +26,7 @@ import by.itacademy.aalexandrov.poker.dao.api.entity.table.IPlayer;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IUserAccount;
 import by.itacademy.aalexandrov.poker.dao.api.filter.ChatInHomeFilter;
 import by.itacademy.aalexandrov.poker.dao.api.filter.GameFilter;
+import by.itacademy.aalexandrov.poker.service.ICardInGameService;
 import by.itacademy.aalexandrov.poker.service.IChatInHomeService;
 import by.itacademy.aalexandrov.poker.service.IGameService;
 import by.itacademy.aalexandrov.poker.service.IPlayerActionService;
@@ -61,6 +62,8 @@ public class DefaultController extends AbstractController {
 	UserAccountToDTOConverter userAccountDtoConverter;
 	@Autowired
 	IPlayerActionService playerActionService;
+	@Autowired
+	ICardInGameService cardIngameService;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView index(final HttpServletRequest req,
@@ -158,10 +161,24 @@ public class DefaultController extends AbstractController {
 			if (diff > 10000) {
 				iPlayer.setInGame(false);
 				iPlayer.setState(PlayerStatus.INACTIVE);
-				// playerActionService.delete(iPlayer.getId());
 				playerService.save(iPlayer);
 			}
 
+		}
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/updateAllGames", method = RequestMethod.GET)
+	public ResponseEntity<Object> updateAllGames() {
+		List<IGame> games = gameService.getFullInfo();
+		for (IGame iGame : games) {
+			Integer playersCount = (int) playerService.getPlayersCount(iGame.getId());
+			if (playersCount == 0) {
+				iGame.setActivePlayerId(0);
+				iGame.setBank(0);
+				iGame.setState(GameStatus.END);
+				gameService.save(iGame);
+			}
 		}
 		return new ResponseEntity<>(HttpStatus.OK);
 	}

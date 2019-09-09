@@ -63,7 +63,6 @@ public class GameDaoImpl extends AbstractDaoImpl<IGame, Integer> implements IGam
 
 	}
 
-
 	@Override
 	public IGame getFullInfo(Integer id) {
 		final EntityManager em = getEntityManager();
@@ -88,6 +87,23 @@ public class GameDaoImpl extends AbstractDaoImpl<IGame, Integer> implements IGam
 
 		final Root<Game> from = cq.from(Game.class);
 		cq.select(from);
+
+		final TypedQuery<IGame> q = em.createQuery(cq);
+
+		return q.getResultList();
+	}
+
+	@Override
+	public List<IGame> getFullInfo() {
+		final EntityManager em = getEntityManager();
+		final CriteriaBuilder cb = em.getCriteriaBuilder();
+
+		final CriteriaQuery<IGame> cq = cb.createQuery(IGame.class);
+		final Root<Game> from = cq.from(Game.class);
+
+		cq.select(from);
+
+		cq.distinct(true);
 
 		final TypedQuery<IGame> q = em.createQuery(cq);
 

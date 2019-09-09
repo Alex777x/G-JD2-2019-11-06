@@ -279,4 +279,27 @@ public class PlayerDaoImpl extends AbstractDaoImpl<IPlayer, Integer> implements 
 		return q.getResultList();
 	}
 
+	@Override
+	public List<IPlayer> getPlayersByGameWithStateUsual(Integer gameid, PlayerStatus usual) {
+		final EntityManager em = getEntityManager();
+		final CriteriaBuilder cb = em.getCriteriaBuilder();
+
+		final CriteriaQuery<IPlayer> cq = cb.createQuery(IPlayer.class);
+		final Root<Player> from = cq.from(Player.class);
+
+		cq.select(from);
+
+		from.fetch(Player_.game, JoinType.LEFT);
+		from.fetch(Player_.userAccount, JoinType.LEFT);
+
+		cq.distinct(true);
+
+		cq.where(cb.equal(from.get(Player_.game), gameid),
+				cb.and(cb.equal(from.get(Player_.state), usual), cb.and(cb.equal(from.get(Player_.inGame), true))));
+		cq.orderBy(new OrderImpl(from.get(Player_.position), true));
+		final TypedQuery<IPlayer> q = em.createQuery(cq);
+
+		return q.getResultList();
+	}
+
 }

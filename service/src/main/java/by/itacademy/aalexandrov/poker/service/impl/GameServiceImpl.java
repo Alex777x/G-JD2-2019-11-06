@@ -95,6 +95,11 @@ public class GameServiceImpl implements IGameService {
 	}
 
 	@Override
+	public List<IGame> getFullInfo() {
+		return dao.getFullInfo();
+	}
+
+	@Override
 	public IGame getFullInfo(Integer id) {
 		return dao.getFullInfo(id);
 	}

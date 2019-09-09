@@ -36,4 +36,6 @@ public interface IGameService {
 
 	List<IGame> findByActivePlayer();
 
+	List<IGame> getFullInfo();
+
 }

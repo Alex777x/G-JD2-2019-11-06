@@ -135,4 +135,9 @@ public class PlayerServiceImpl implements IPlayerService {
 		return dao.getPlayerSmallBlind(gameid, smallblind);
 	}
 
+	@Override
+	public List<IPlayer> getPlayersByGameWithStateUsual(Integer gameid, PlayerStatus usual) {
+		return dao.getPlayersByGameWithStateUsual(gameid, usual);
+	}
+
 }
