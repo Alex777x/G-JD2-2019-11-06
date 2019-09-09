@@ -169,4 +169,25 @@ public class CardInGameDaoImpl extends AbstractDaoImpl<ICardInGame, Integer> imp
 		return q.getResultList();
 	}
 
+	@Override
+	public List<ICardInGame> getPlayerCards(Integer id) {
+		final EntityManager em = getEntityManager();
+		final CriteriaBuilder cb = em.getCriteriaBuilder();
+
+		final CriteriaQuery<ICardInGame> cq = cb.createQuery(ICardInGame.class);
+		final Root<CardInGame> from = cq.from(CardInGame.class);
+
+		cq.select(from);
+
+		from.fetch(CardInGame_.card, JoinType.LEFT);
+		from.fetch(CardInGame_.game, JoinType.LEFT);
+		from.fetch(CardInGame_.player, JoinType.LEFT);
+
+		cq.distinct(true);
+		cq.where(cb.equal(from.get(CardInGame_.player), id));
+		final TypedQuery<ICardInGame> q = em.createQuery(cq);
+
+		return q.getResultList();
+	}
+
 }

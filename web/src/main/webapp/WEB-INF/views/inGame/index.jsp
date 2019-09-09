@@ -198,15 +198,15 @@
 		<button onclick="checkBtn()" id="btnCheck" type="button" class="btn btn-success btn-lg btnCheck">CHECK</button>
 	</div>
 	<div id="btnCall" style="display: none;">
-		<button onclick="callBtn()" id="btnCall" type="button" class="btn btn-success btn-lg btnCall">CALL</button>
+		<button onclick="callBtn()" id="callBtn" type="button" class="btn btn-success btn-lg btnCall">CALL</button>
 	</div>
 	<div id="btnRaise" style="display: none;">
-		<button onclick="raiseBtn(#input_text1.value)" id="btnRaise" type="button" class="btn btn-success btn-lg btnRaise">RAISE</button>
+		<button onclick="raiseBtn()" id="btnRaise" type="button" class="btn btn-success btn-lg btnRaise">RAISE</button>
 	</div>
 	<div id="inputRaise" class="formForRaise input-group" style="display: none;">
-		<input type="number" class="form-control inputRaise" name="input_text1" id="input_text1" max="1000" value="0"
+		<input id="inputRaise1" type="number" class="form-control inputRaise" name="input_text1" id="input_text1" max="1000" value="15"
 			onchange="rangeinput1.value = input_text1.value" style="margin-bottom: 5px; border-radius: 5px" /> <input type="range"
-			oninput="input_text1.value = rangeinput1.value" class="form-control-range slider" type="range" min="0" max="1000" value="0"
+			oninput="input_text1.value = rangeinput1.value" class="form-control-range slider" type="range" min="0" max="1000" value="15"
 			id="rangeinput1" step="1" onchange="input_text1.value = rangeinput1.value" />
 	</div>
 	<div id="btnBet" style="display: none;">
@@ -312,22 +312,44 @@ function checkBtn() {
 	});
 }
 
-function btnCall() {
+function callBtn() {
 	$.ajax({
-		url : baseUrl + '/inGame/setposition?gameid=' + ${game.id},
+		url : baseUrl + '/inGame/isActive?gameid=' + ${game.id},
 		type : 'post',
 		success : function(result) {
-			 
+			if (result == true) {
+				$.ajax({
+					url : baseUrl + '/inGame/clickCall?gameid=' + ${game.id},
+					type : 'post',
+					success : function(result) {
+						
+					}
+				});
+			} else {
+				toastr.error('Another player is active now!');
+			}
 		}
 	});
 }
 
 function raiseBtn(value) {
 	$.ajax({
-		url : baseUrl + '/inGame/setposition?gameid=' + ${game.id},
+		url : baseUrl + '/inGame/isActive?gameid=' + ${game.id},
 		type : 'post',
 		success : function(result) {
-			 
+			if (result == true) {
+				$.ajax({
+					url : baseUrl + '/inGame/clickRaise?gameid=' + ${game.id} + '&value=' + $("#inputRaise1").val(),
+					type : 'post',
+					success : function(result) {
+						if (result == false) {
+							toastr.error('The bet cannot be less than the previous one!');
+						} 
+					}
+				});
+			} else {
+				toastr.error('Another player is active now!');
+			}
 		}
 	});
 }
@@ -586,17 +608,47 @@ function raiseBtn(value) {
 								});
 							}
 						});
+					} else if (game.state == "CHECKHAND") {
 						$.ajax({
-							url : baseUrl + '/inGame/changeGameToChackhand?gameid=' + ${game.id},
+							url : baseUrl + '/inGame/getFiveCards?gameid=' + ${game.id},
 							type : 'get',
-							success : function(result) {
-								
+							success : function(threeCards) {
+								var i = 1;
+								threeCards.forEach(function(card) {
+									$("#card" + i).attr("src", baseUrl + card.filename);
+									i++;
+								});
 							}
 						});
+						
+						$("#btnFold").hide();
+						$("#btnBet").hide();
+						$("#btnCheck").hide();
+						$("#btnCall").hide();
+						$("#btnRaise").hide();
+						$("#inputRaise").hide();
 					}
 				}
 		});
-    }, 1000);
+    }, 2 * 1000);
+	
+	setInterval(function(){
+		$.ajax({
+			url : baseUrl + '/inGame/getGameState?gameid=' + ${game.id},
+			type : 'get',
+			success : function(game) {
+				if (game.state == "CHECKHAND") {
+					$.ajax({
+						url : baseUrl + '/inGame/getWinner?gameid=' + ${game.id},
+						type : 'get',
+						success : function(game) {
+							
+						}
+					});
+				}
+			}
+		});
+    },3 * 1000);
 	
 	function startTimer(duration, display) {
 	    var timer = duration, seconds;

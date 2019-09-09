@@ -30,7 +30,7 @@ public class PokerLogicUtils {
 		} else if (isPair(cards)) {
 			return CardsCombination.pair;
 		} else if (isHighCard(cards)) {
-
+			return CardsCombination.high_card;
 		}
 
 		throw new IllegalArgumentException("can't resolve the combination for cards:"
@@ -50,7 +50,7 @@ public class PokerLogicUtils {
 
 		// sort all cards
 		Collections.sort(cards);
-		if (Rank.TEN.equals(cards.get(0))) {
+		if (Rank.TEN.equals(cards.get(0).getRank())) {
 			return false;
 		}
 
