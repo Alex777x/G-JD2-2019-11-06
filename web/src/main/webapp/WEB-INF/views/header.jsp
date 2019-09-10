@@ -30,7 +30,7 @@
 
 		<div class="collapse navbar-collapse" id="navbarResponsive">
 			<ul class="navbar-nav ml-auto">
-				<li class="nav-item"><a class="nav-link" href="${contextPath}/"><spring:message code="page.home.home" /></a></li>
+				<li class="nav-item"><a class="nav-link" href="${contextPath}/"><i class="fas fa-home"></i></a></li>
 				<sec:authorize access="isAnonymous()">
 					<li class="nav-item"><a class="nav-link" href="${contextPath}/login"><spring:message code="page.home.login" /></a></li>
 					<li class="nav-item"><a class="nav-link" href="${contextPath}/registration"><spring:message code="page.home.registration" /></a></li>
@@ -42,7 +42,7 @@
 					<li class="nav-item"><a class="nav-link" href="${pagesHowToPlay}"><spring:message code="page.home.howToPlay" /></a></li>
 					<li class="nav-item"><a class="nav-link" href="${pagesTopPlayers}"><spring:message code="page.home.topPlayers" /></a></li>
 					<li class="nav-item"><a class="nav-link" href="${pagesPersonalArea}"><spring:message code="page.home.personalArea" /></a></li>
-					<li class="nav-item"><a class="nav-link" href="${pagesSupport}"><spring:message code="page.home.support" /></a></li>
+<%-- 					<li class="nav-item"><a class="nav-link" href="${pagesSupport}"><spring:message code="page.home.support" /></a></li> --%>
 
 					<sec:authorize access="hasRole('ROLE_ADMIN')">
 						<li class="nav-item"><a class="nav-link" href="${pagesAdminPanel}"><spring:message code="page.home.adminPanel" /></a></li>

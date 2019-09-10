@@ -62,7 +62,7 @@ public class UserAccountController extends AbstractController {
 		final UserAccountFilter filter = new UserAccountFilter();
 		prepareFilter(gridState, filter);
 
-		final List<IUserAccount> entities = userAccountService.find(filter);
+		final List<IUserAccount> entities = userAccountService.getFullInfo();
 		final List<UserAccountDTO> dtos = entities.stream().map(toDtoConverter).collect(Collectors.toList());
 		gridState.setTotalCount(userAccountService.getCount(filter));
 
@@ -90,13 +90,13 @@ public class UserAccountController extends AbstractController {
 		} else {
 			final IUserAccount entity = fromDtoConverter.apply(formUserAccount);
 			userAccountService.save(entity);
-			return "redirect:/userAccount";
+			return "redirect:/adminPanel";
 		}
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ModelAndView viewDetails(@PathVariable(name = "id", required = true) final Integer id) {
-		final IUserAccount dbModel = userAccountService.get(id);
+		final IUserAccount dbModel = userAccountService.getFullInfo(id);
 		final UserAccountDTO dto = toDtoConverter.apply(dbModel);
 		final Map<String, Object> hashMap = new HashMap<>();
 		hashMap.put("formUserAccount", dto);
@@ -107,7 +107,7 @@ public class UserAccountController extends AbstractController {
 
 	@RequestMapping(value = "/{id}/edit", method = RequestMethod.GET)
 	public ModelAndView edit(@PathVariable(name = "id", required = true) final Integer id) {
-		final UserAccountDTO dto = toDtoConverter.apply(userAccountService.get(id));
+		final UserAccountDTO dto = toDtoConverter.apply(userAccountService.getFullInfo(id));
 
 		final Map<String, Object> hashMap = new HashMap<>();
 		hashMap.put("formUserAccount", dto);
@@ -123,7 +123,7 @@ public class UserAccountController extends AbstractController {
 	}
 
 	private void loadCommonFormUserAccounts(final Map<String, Object> hashMap) {
-		final List<ICountry> countries = countryService.getAll();
+		final List<ICountry> countries = countryService.getFullInfo();
 
 		final Map<Integer, String> countriesMap = countries.stream()
 				.collect(Collectors.toMap(ICountry::getId, ICountry::getCountry));

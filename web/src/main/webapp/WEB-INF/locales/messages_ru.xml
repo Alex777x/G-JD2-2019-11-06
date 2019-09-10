@@ -23,14 +23,14 @@
 	<entry key="page.news.back">Назад</entry>
 	
 	<entry key="page.home.language">Язык</entry>
-	<entry key="page.home.home">Домашняя Страница</entry>
+	<entry key="page.home.home">Домашняя</entry>
 	<entry key="page.home.login">Залогиниться</entry>
 	<entry key="page.home.registration">Регистрация</entry>
 	<entry key="page.home.notLogged">Залогиненный юзер: Вы анонимус.</entry>
 	<entry key="page.home.news">Новости</entry>
-	<entry key="page.home.howToPlay">Правила Покера</entry>
-	<entry key="page.home.topPlayers">Топ Игроков</entry>
-	<entry key="page.home.personalArea">Личный Кабинет</entry>
+	<entry key="page.home.howToPlay">Правила</entry>
+	<entry key="page.home.topPlayers">Топ</entry>
+	<entry key="page.home.personalArea">Кабинет</entry>
 	<entry key="page.home.support">Поддержка</entry>
 	<entry key="page.home.adminPanel">Админ Панель</entry>
 	<entry key="page.home.name">Имя:</entry>

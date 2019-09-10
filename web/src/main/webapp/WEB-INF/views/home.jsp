@@ -147,11 +147,12 @@
 	var baseUrl = '${pageContext.request.contextPath}';
 	var latestId = '${newestMessage}';
 	setInterval(function() {
-		$.get("${contextPath}/lastId", function(lastIdFromServer) {
-			if (latestId < lastIdFromServer) {
+ 		$.get("${contextPath}/lastId", function(lastIdFromServer) {
+ 			if (latestId < lastIdFromServer) {
 
-				success: $.ajax({
-					url : baseUrl + '/getfromserver?id=' + lastIdFromServer,
+				success: 
+					$.ajax({
+					url : baseUrl + '/getfromserver?id=' + latestId,
 					type : 'get',
 					success : function(result) {
 						result.forEach(function(row) {
@@ -167,8 +168,8 @@
 				});
 
 				latestId = lastIdFromServer;
-			}
-		})
+ 			}
+ 		})
 	}, 3 * 1000);
 </script>
 <script>

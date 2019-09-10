@@ -27,10 +27,16 @@ public class UserAccountFromDTOConverter implements Function<UserAccountDTO, IUs
 		entity.setNickname(dto.getNickname());
 		entity.setPassword(dto.getPassword());
 		entity.setEmail(dto.getEmail());
+		entity.setFoto(dto.getFoto());
 
 		ICountry country = countryService.createEntity();
 		country.setId(dto.getCountry());
 		entity.setCountry(country);
+
+		entity.setUserRole(dto.getUserRole());
+		entity.setUserStatus(dto.getUserStatus());
+		entity.setSumGames(dto.getSumGames());
+		entity.setWonGames(dto.getWonGames());
 
 		return entity;
 	}

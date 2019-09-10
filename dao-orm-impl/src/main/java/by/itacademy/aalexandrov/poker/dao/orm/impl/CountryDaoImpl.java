@@ -92,4 +92,21 @@ public class CountryDaoImpl extends AbstractDaoImpl<ICountry, Integer> implement
 		}
 	}
 
+	@Override
+	public List<ICountry> getFullInfo() {
+		final EntityManager em = getEntityManager();
+		final CriteriaBuilder cb = em.getCriteriaBuilder();
+
+		final CriteriaQuery<ICountry> cq = cb.createQuery(ICountry.class);
+		final Root<Country> from = cq.from(Country.class);
+
+		cq.select(from); // define what need to be selected
+
+		cq.distinct(true);
+
+		final TypedQuery<ICountry> q = em.createQuery(cq);
+
+		return q.getResultList();
+	}
+
 }

@@ -44,13 +44,13 @@ public class PokerLogicUtils {
 			suits.add(iCard.getSuit());
 		}
 
-		if (suits.size() != 1) {
-			return false;
-		}
+//		if (suits.size() != 1) {
+//			return false;
+//		}
 
 		// sort all cards
 		Collections.sort(cards);
-		if (Rank.TEN.equals(cards.get(0).getRank())) {
+		if (!Rank.ACE.equals(cards.get(cards.size() - 1).getRank())) {
 			return false;
 		}
 

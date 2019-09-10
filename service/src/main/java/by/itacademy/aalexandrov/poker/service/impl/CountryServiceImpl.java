@@ -94,4 +94,9 @@ public class CountryServiceImpl implements ICountryService {
 		return dao.getCount(filter);
 	}
 
+	@Override
+	public List<ICountry> getFullInfo() {
+		return dao.getFullInfo();
+	}
+
 }

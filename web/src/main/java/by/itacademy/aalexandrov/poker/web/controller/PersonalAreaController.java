@@ -1,6 +1,5 @@
 package by.itacademy.aalexandrov.poker.web.controller;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,7 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.ITransaction;
@@ -65,7 +63,7 @@ public class PersonalAreaController extends AbstractController {
 		return new ResponseEntity<UserAccountDTO>(dto, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/updateBalance", method = RequestMethod.POST)
+	@RequestMapping(value = "/updateBalance", method = RequestMethod.GET)
 	public ResponseEntity<TransactionDTO> updateBalance(
 			@RequestParam(name = "summ", required = true) final Integer summ) {
 		int id = AuthHelper.getLoggedUserId();
@@ -80,11 +78,11 @@ public class PersonalAreaController extends AbstractController {
 		return new ResponseEntity<TransactionDTO>(dto, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/upload", method = RequestMethod.POST)
-	public void handleUpload(@RequestParam("file") MultipartFile file) throws IOException {
-		if (!file.isEmpty()) {
-			byte[] bytes = file.getBytes(); // alternatively, file.getInputStream();
-			// application logic
-		}
-	}
+//	@RequestMapping(value = "/upload", method = RequestMethod.POST)
+//	public void handleUpload(@RequestParam("file") MultipartFile file) throws IOException {
+//		if (!file.isEmpty()) {
+//			byte[] bytes = file.getBytes(); // alternatively, file.getInputStream();
+//			// application logic
+//		}
+//	}
 }

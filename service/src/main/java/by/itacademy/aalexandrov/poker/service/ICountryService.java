@@ -32,4 +32,6 @@ public interface ICountryService {
 
 	long getCount(CountryFilter filter);
 
+	List<ICountry> getFullInfo();
+
 }

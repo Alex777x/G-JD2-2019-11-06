@@ -44,25 +44,23 @@
 			<br>
 			<hr>
 			<br>
-			<p class="ptext">Change Foto</p>
-			<div class="custom-file">
-				<input type="file" class="custom-file-input" id="customFile">
-				<label class="custom-file-label" for="customFile">Choose
-					foto</label>
-			</div>
-			<div>
-				<br>
-			</div>
-			<button class="btn btn-primary" type="submit">Change</button>
-			<br>
-			<hr>
-			<br>
+<!-- 			<p class="ptext">Change Foto</p> -->
+<!-- 			<div class="custom-file"> -->
+<!-- 				<input type="file" class="custom-file-input" id="customFile"> -->
+<!-- 				<label class="custom-file-label" for="customFile">Choose -->
+<!-- 					foto</label> -->
+<!-- 			</div> -->
+<!-- 			<div> -->
+<!-- 				<br> -->
+<!-- 			</div> -->
+<!-- 			<button class="btn btn-primary" type="submit">Change</button> -->
+<!-- 			<br> -->
+<!-- 			<hr> -->
+<!-- 			<br> -->
 			<p class="ptext">Add Money</p>
-			<form action="${pagesPersonalArea}/upload" method="post" enctype="multipart/form-data">
 				<input id="newBalance" class="form-control" type="text"
 					placeholder="Enter amount">
 				<button id="addBalance" class="btn btn-primary" type="submit">Add</button>
-			</form>
 			<br>
 			<hr>
 			<br>
@@ -78,10 +76,7 @@
 <script>
 	var baseUrl = '${pageContext.request.contextPath}';
 	var $message = $("#newNickName").serialize();
-	var userId = $
-	{
-		userAccount.id
-	};
+	var userId = ${userAccount.id};
 	$('#setNickName').click(
 			function() {
 				$.ajax({
@@ -98,16 +93,13 @@
 <script>
 	var baseUrl = '${pageContext.request.contextPath}';
 	var $addBalance = $("#addBalance").serialize();
-	var userId = $
-	{
-		userAccount.id
-	};
+	var userId = ${userAccount.id};
 	$('#addBalance').click(
 			function() {
 				$.ajax({
 					url : baseUrl + '/personalArea/updateBalance?summ='
 							+ $("#newBalance").val(),
-					type : 'post',
+					type : 'get',
 					success : function(result) {
 						toastr.success('Balance successfully updated!')
 					}

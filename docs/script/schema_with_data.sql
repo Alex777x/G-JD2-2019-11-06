@@ -5,7 +5,7 @@
 -- Dumped from database version 11.2
 -- Dumped by pg_dump version 11.2
 
--- Started on 2019-09-09 23:51:28
+-- Started on 2019-09-10 14:02:02
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -710,58 +710,6 @@ INSERT INTO public.card (id, suit, rank, filename, created, updated) VALUES (78,
 -- Data for Name: card_in_game; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO public.card_in_game (id, card_id, game_id, player_id, card_status, created, updated) VALUES (20086, 73, 273, 653, 'PLAYERCARDCLOSED', '2019-09-09 21:09:32.415', '2019-09-09 21:09:32.682');
-INSERT INTO public.card_in_game (id, card_id, game_id, player_id, card_status, created, updated) VALUES (20092, 59, 273, 653, 'PLAYERCARDCLOSED', '2019-09-09 21:09:32.446', '2019-09-09 21:09:32.689');
-INSERT INTO public.card_in_game (id, card_id, game_id, player_id, card_status, created, updated) VALUES (20091, 31, 273, 654, 'PLAYERCARDCLOSED', '2019-09-09 21:09:32.441', '2019-09-09 21:09:32.699');
-INSERT INTO public.card_in_game (id, card_id, game_id, player_id, card_status, created, updated) VALUES (20106, 70, 273, 654, 'PLAYERCARDCLOSED', '2019-09-09 21:09:32.529', '2019-09-09 21:09:32.707');
-INSERT INTO public.card_in_game (id, card_id, game_id, player_id, card_status, created, updated) VALUES (20122, 50, 273, NULL, 'INBOARDCLOSED', '2019-09-09 21:09:32.613', '2019-09-09 21:09:32.72');
-INSERT INTO public.card_in_game (id, card_id, game_id, player_id, card_status, created, updated) VALUES (20114, 71, 273, NULL, 'INBOARDCLOSED', '2019-09-09 21:09:32.574', '2019-09-09 21:09:32.725');
-INSERT INTO public.card_in_game (id, card_id, game_id, player_id, card_status, created, updated) VALUES (20100, 37, 273, NULL, 'INBOARDCLOSED', '2019-09-09 21:09:32.491', '2019-09-09 21:09:32.729');
-INSERT INTO public.card_in_game (id, card_id, game_id, player_id, card_status, created, updated) VALUES (20090, 29, 273, NULL, 'INBOARDCLOSED', '2019-09-09 21:09:32.437', '2019-09-09 21:09:32.732');
-INSERT INTO public.card_in_game (id, card_id, game_id, player_id, card_status, created, updated) VALUES (20084, 45, 273, NULL, 'INBOARDCLOSED', '2019-09-09 21:09:32.404', '2019-09-09 21:09:32.735');
-INSERT INTO public.card_in_game (id, card_id, game_id, player_id, card_status, created, updated) VALUES (20074, 68, 273, NULL, 'INDECK', '2019-09-09 21:09:32.348', '2019-09-09 21:09:32.348');
-INSERT INTO public.card_in_game (id, card_id, game_id, player_id, card_status, created, updated) VALUES (20075, 33, 273, NULL, 'INDECK', '2019-09-09 21:09:32.355', '2019-09-09 21:09:32.355');
-INSERT INTO public.card_in_game (id, card_id, game_id, player_id, card_status, created, updated) VALUES (20076, 40, 273, NULL, 'INDECK', '2019-09-09 21:09:32.362', '2019-09-09 21:09:32.362');
-INSERT INTO public.card_in_game (id, card_id, game_id, player_id, card_status, created, updated) VALUES (20077, 67, 273, NULL, 'INDECK', '2019-09-09 21:09:32.368', '2019-09-09 21:09:32.368');
-INSERT INTO public.card_in_game (id, card_id, game_id, player_id, card_status, created, updated) VALUES (20078, 38, 273, NULL, 'INDECK', '2019-09-09 21:09:32.374', '2019-09-09 21:09:32.374');
-INSERT INTO public.card_in_game (id, card_id, game_id, player_id, card_status, created, updated) VALUES (20079, 78, 273, NULL, 'INDECK', '2019-09-09 21:09:32.379', '2019-09-09 21:09:32.379');
-INSERT INTO public.card_in_game (id, card_id, game_id, player_id, card_status, created, updated) VALUES (20080, 61, 273, NULL, 'INDECK', '2019-09-09 21:09:32.384', '2019-09-09 21:09:32.384');
-INSERT INTO public.card_in_game (id, card_id, game_id, player_id, card_status, created, updated) VALUES (20081, 41, 273, NULL, 'INDECK', '2019-09-09 21:09:32.389', '2019-09-09 21:09:32.389');
-INSERT INTO public.card_in_game (id, card_id, game_id, player_id, card_status, created, updated) VALUES (20082, 77, 273, NULL, 'INDECK', '2019-09-09 21:09:32.394', '2019-09-09 21:09:32.394');
-INSERT INTO public.card_in_game (id, card_id, game_id, player_id, card_status, created, updated) VALUES (20083, 30, 273, NULL, 'INDECK', '2019-09-09 21:09:32.4', '2019-09-09 21:09:32.4');
-INSERT INTO public.card_in_game (id, card_id, game_id, player_id, card_status, created, updated) VALUES (20085, 51, 273, NULL, 'INDECK', '2019-09-09 21:09:32.409', '2019-09-09 21:09:32.409');
-INSERT INTO public.card_in_game (id, card_id, game_id, player_id, card_status, created, updated) VALUES (20087, 60, 273, NULL, 'INDECK', '2019-09-09 21:09:32.42', '2019-09-09 21:09:32.42');
-INSERT INTO public.card_in_game (id, card_id, game_id, player_id, card_status, created, updated) VALUES (20088, 64, 273, NULL, 'INDECK', '2019-09-09 21:09:32.426', '2019-09-09 21:09:32.426');
-INSERT INTO public.card_in_game (id, card_id, game_id, player_id, card_status, created, updated) VALUES (20089, 57, 273, NULL, 'INDECK', '2019-09-09 21:09:32.432', '2019-09-09 21:09:32.432');
-INSERT INTO public.card_in_game (id, card_id, game_id, player_id, card_status, created, updated) VALUES (20093, 27, 273, NULL, 'INDECK', '2019-09-09 21:09:32.452', '2019-09-09 21:09:32.452');
-INSERT INTO public.card_in_game (id, card_id, game_id, player_id, card_status, created, updated) VALUES (20094, 54, 273, NULL, 'INDECK', '2019-09-09 21:09:32.457', '2019-09-09 21:09:32.457');
-INSERT INTO public.card_in_game (id, card_id, game_id, player_id, card_status, created, updated) VALUES (20095, 53, 273, NULL, 'INDECK', '2019-09-09 21:09:32.463', '2019-09-09 21:09:32.463');
-INSERT INTO public.card_in_game (id, card_id, game_id, player_id, card_status, created, updated) VALUES (20096, 46, 273, NULL, 'INDECK', '2019-09-09 21:09:32.468', '2019-09-09 21:09:32.468');
-INSERT INTO public.card_in_game (id, card_id, game_id, player_id, card_status, created, updated) VALUES (20097, 75, 273, NULL, 'INDECK', '2019-09-09 21:09:32.474', '2019-09-09 21:09:32.474');
-INSERT INTO public.card_in_game (id, card_id, game_id, player_id, card_status, created, updated) VALUES (20098, 66, 273, NULL, 'INDECK', '2019-09-09 21:09:32.48', '2019-09-09 21:09:32.48');
-INSERT INTO public.card_in_game (id, card_id, game_id, player_id, card_status, created, updated) VALUES (20099, 63, 273, NULL, 'INDECK', '2019-09-09 21:09:32.486', '2019-09-09 21:09:32.486');
-INSERT INTO public.card_in_game (id, card_id, game_id, player_id, card_status, created, updated) VALUES (20101, 47, 273, NULL, 'INDECK', '2019-09-09 21:09:32.499', '2019-09-09 21:09:32.499');
-INSERT INTO public.card_in_game (id, card_id, game_id, player_id, card_status, created, updated) VALUES (20102, 55, 273, NULL, 'INDECK', '2019-09-09 21:09:32.505', '2019-09-09 21:09:32.505');
-INSERT INTO public.card_in_game (id, card_id, game_id, player_id, card_status, created, updated) VALUES (20104, 42, 273, NULL, 'INDECK', '2019-09-09 21:09:32.517', '2019-09-09 21:09:32.517');
-INSERT INTO public.card_in_game (id, card_id, game_id, player_id, card_status, created, updated) VALUES (20105, 76, 273, NULL, 'INDECK', '2019-09-09 21:09:32.523', '2019-09-09 21:09:32.523');
-INSERT INTO public.card_in_game (id, card_id, game_id, player_id, card_status, created, updated) VALUES (20108, 28, 273, NULL, 'INDECK', '2019-09-09 21:09:32.541', '2019-09-09 21:09:32.541');
-INSERT INTO public.card_in_game (id, card_id, game_id, player_id, card_status, created, updated) VALUES (20109, 69, 273, NULL, 'INDECK', '2019-09-09 21:09:32.548', '2019-09-09 21:09:32.548');
-INSERT INTO public.card_in_game (id, card_id, game_id, player_id, card_status, created, updated) VALUES (20110, 36, 273, NULL, 'INDECK', '2019-09-09 21:09:32.553', '2019-09-09 21:09:32.553');
-INSERT INTO public.card_in_game (id, card_id, game_id, player_id, card_status, created, updated) VALUES (20111, 39, 273, NULL, 'INDECK', '2019-09-09 21:09:32.559', '2019-09-09 21:09:32.559');
-INSERT INTO public.card_in_game (id, card_id, game_id, player_id, card_status, created, updated) VALUES (20112, 44, 273, NULL, 'INDECK', '2019-09-09 21:09:32.565', '2019-09-09 21:09:32.565');
-INSERT INTO public.card_in_game (id, card_id, game_id, player_id, card_status, created, updated) VALUES (20113, 62, 273, NULL, 'INDECK', '2019-09-09 21:09:32.569', '2019-09-09 21:09:32.569');
-INSERT INTO public.card_in_game (id, card_id, game_id, player_id, card_status, created, updated) VALUES (20115, 34, 273, NULL, 'INDECK', '2019-09-09 21:09:32.579', '2019-09-09 21:09:32.579');
-INSERT INTO public.card_in_game (id, card_id, game_id, player_id, card_status, created, updated) VALUES (20116, 65, 273, NULL, 'INDECK', '2019-09-09 21:09:32.584', '2019-09-09 21:09:32.584');
-INSERT INTO public.card_in_game (id, card_id, game_id, player_id, card_status, created, updated) VALUES (20117, 58, 273, NULL, 'INDECK', '2019-09-09 21:09:32.588', '2019-09-09 21:09:32.588');
-INSERT INTO public.card_in_game (id, card_id, game_id, player_id, card_status, created, updated) VALUES (20118, 52, 273, NULL, 'INDECK', '2019-09-09 21:09:32.594', '2019-09-09 21:09:32.594');
-INSERT INTO public.card_in_game (id, card_id, game_id, player_id, card_status, created, updated) VALUES (20119, 43, 273, NULL, 'INDECK', '2019-09-09 21:09:32.599', '2019-09-09 21:09:32.599');
-INSERT INTO public.card_in_game (id, card_id, game_id, player_id, card_status, created, updated) VALUES (20120, 74, 273, NULL, 'INDECK', '2019-09-09 21:09:32.602', '2019-09-09 21:09:32.602');
-INSERT INTO public.card_in_game (id, card_id, game_id, player_id, card_status, created, updated) VALUES (20121, 48, 273, NULL, 'INDECK', '2019-09-09 21:09:32.607', '2019-09-09 21:09:32.607');
-INSERT INTO public.card_in_game (id, card_id, game_id, player_id, card_status, created, updated) VALUES (20123, 72, 273, NULL, 'INDECK', '2019-09-09 21:09:32.617', '2019-09-09 21:09:32.617');
-INSERT INTO public.card_in_game (id, card_id, game_id, player_id, card_status, created, updated) VALUES (20124, 56, 273, NULL, 'INDECK', '2019-09-09 21:09:32.623', '2019-09-09 21:09:32.623');
-INSERT INTO public.card_in_game (id, card_id, game_id, player_id, card_status, created, updated) VALUES (20125, 32, 273, NULL, 'INDECK', '2019-09-09 21:09:32.63', '2019-09-09 21:09:32.63');
-INSERT INTO public.card_in_game (id, card_id, game_id, player_id, card_status, created, updated) VALUES (20103, 35, 273, 652, 'PLAYERCARDCLOSED', '2019-09-09 21:09:32.512', '2019-09-09 21:09:32.664');
-INSERT INTO public.card_in_game (id, card_id, game_id, player_id, card_status, created, updated) VALUES (20107, 49, 273, 652, 'PLAYERCARDCLOSED', '2019-09-09 21:09:32.535', '2019-09-09 21:09:32.673');
 
 
 --
@@ -778,9 +726,10 @@ INSERT INTO public.card_in_game (id, card_id, game_id, player_id, card_status, c
 -- Data for Name: chat_in_home; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO public.chat_in_home (id, user_account_id, message, created, updated) VALUES (1, 1, 'TEST1', '2019-08-22 21:16:19.809', '2019-08-22 21:16:19.809');
-INSERT INTO public.chat_in_home (id, user_account_id, message, created, updated) VALUES (2, 1, 'Hello', '2019-08-23 18:37:08.766', '2019-08-23 18:37:08.766');
-INSERT INTO public.chat_in_home (id, user_account_id, message, created, updated) VALUES (3, 1, 'TEST2', '2019-08-23 18:39:08.066', '2019-08-23 18:39:08.066');
+INSERT INTO public.chat_in_home (id, user_account_id, message, created, updated) VALUES (15, 12, 'Привет', '2019-09-10 13:59:55.868', '2019-09-10 13:59:55.868');
+INSERT INTO public.chat_in_home (id, user_account_id, message, created, updated) VALUES (16, 4, 'Приветствую', '2019-09-10 14:00:22.166', '2019-09-10 14:00:22.166');
+INSERT INTO public.chat_in_home (id, user_account_id, message, created, updated) VALUES (17, 1, 'Все хорошо?', '2019-09-10 14:00:45.609', '2019-09-10 14:00:45.609');
+INSERT INTO public.chat_in_home (id, user_account_id, message, created, updated) VALUES (18, 4, 'Да', '2019-09-10 14:00:54.037', '2019-09-10 14:00:54.037');
 
 
 --
@@ -993,7 +942,6 @@ INSERT INTO public.country (id, country, created, updated) VALUES (196, 'Zimbabw
 -- Data for Name: game; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO public.game (id, state, bank, created, updated, active_player_id, timestamp_end_step) VALUES (273, 'END', 0, '2019-09-09 21:09:09.823', '2019-09-09 23:49:43.906', 0, 1568052587738);
 
 
 --
@@ -1010,10 +958,6 @@ INSERT INTO public.game (id, state, bank, created, updated, active_player_id, ti
 -- Data for Name: player; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO public.player (id, game_id, user_account_id, "position", in_game, state, stack, created, updated, card1, card2, curent_bet) VALUES (653, 273, 2, 1, false, 'INACTIVE', 125, '2019-09-09 21:09:20.377', '2019-09-09 23:49:33.915', '/resources/img/cards/kingOfHearts.png', '/resources/img/cards/9OfClubs.png', 0);
-INSERT INTO public.player (id, game_id, user_account_id, "position", in_game, state, stack, created, updated, card1, card2, curent_bet) VALUES (654, 273, 3, 2, false, 'INACTIVE', 465, '2019-09-09 21:09:29.75', '2019-09-09 23:49:33.918', '/resources/img/cards/2OfClubs.png', '/resources/img/cards/jackOfSpades.png', 10);
-INSERT INTO public.player (id, game_id, user_account_id, "position", in_game, state, stack, created, updated, card1, card2, curent_bet) VALUES (655, 273, 1, 0, false, 'INACTIVE', 20, '2019-09-09 23:27:30.22', '2019-09-09 23:49:33.921', NULL, NULL, 0);
-INSERT INTO public.player (id, game_id, user_account_id, "position", in_game, state, stack, created, updated, card1, card2, curent_bet) VALUES (652, 273, 1, 0, false, 'INACTIVE', 30, '2019-09-09 21:09:12.024', '2019-09-09 23:49:42.91', '/resources/img/cards/3OfClubs.png', '/resources/img/cards/6OfHearts.png', 0);
 
 
 --
@@ -1867,6 +1811,11 @@ INSERT INTO public.transaction (id, user_account_id, amount, comment, created, u
 INSERT INTO public.transaction (id, user_account_id, amount, comment, created, updated) VALUES (847, 2, -10, 'firstbet', '2019-09-09 21:09:36.055', '2019-09-09 21:09:36.055');
 INSERT INTO public.transaction (id, user_account_id, amount, comment, created, updated) VALUES (848, 3, -10, 'firstbet', '2019-09-09 21:09:39.278', '2019-09-09 21:09:39.278');
 INSERT INTO public.transaction (id, user_account_id, amount, comment, created, updated) VALUES (849, 2, -15, 'raise', '2019-09-09 21:09:47.095', '2019-09-09 21:09:47.095');
+INSERT INTO public.transaction (id, user_account_id, amount, comment, created, updated) VALUES (850, 1, 1000, 'Add from personal area', '2019-09-10 12:36:39.758', '2019-09-10 12:36:39.758');
+INSERT INTO public.transaction (id, user_account_id, amount, comment, created, updated) VALUES (851, 1, 1000, 'Add from personal area', '2019-09-10 12:37:24.061', '2019-09-10 12:37:24.061');
+INSERT INTO public.transaction (id, user_account_id, amount, comment, created, updated) VALUES (852, 1, 1000, 'Add from personal area', '2019-09-10 12:38:52.665', '2019-09-10 12:38:52.665');
+INSERT INTO public.transaction (id, user_account_id, amount, comment, created, updated) VALUES (853, 1, 1000, 'Add from personal area', '2019-09-10 12:40:36.901', '2019-09-10 12:40:36.901');
+INSERT INTO public.transaction (id, user_account_id, amount, comment, created, updated) VALUES (854, 1, 1000, 'Add from personal area', '2019-09-10 12:42:24.25', '2019-09-10 12:42:24.25');
 
 
 --
@@ -1875,9 +1824,23 @@ INSERT INTO public.transaction (id, user_account_id, amount, comment, created, u
 -- Data for Name: user_account; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO public.user_account (id, nickname, password, email, foto, country_id, user_role, user_status, sum_games, won_games, created, updated) VALUES (1, 'Admin', '$2a$10$QE39xe3rcgW8Cv6hXqQNLubg02aBmNtrfBDCMMwGMNEOA6oG0Lts.', 'aaaa@a.com', 'resources/img/foto.png', 107, 'ADMIN', 'ACTIVE', 0, 0, '2019-08-22 21:16:05.456', '2019-08-22 21:16:05.456');
-INSERT INTO public.user_account (id, nickname, password, email, foto, country_id, user_role, user_status, sum_games, won_games, created, updated) VALUES (2, 'Test', '$2a$10$OgNTZQU7I.q7TzILBgU7He4IJJS.1DktexjLp./OgFD.qUUitz8mu', 'makaka@a.com', 'resources/img/foto.png', 1, 'ADMIN', 'ACTIVE', 0, 0, '2019-08-22 23:03:24.411', '2019-08-22 23:03:24.411');
-INSERT INTO public.user_account (id, nickname, password, email, foto, country_id, user_role, user_status, sum_games, won_games, created, updated) VALUES (3, 'Test2', '$2a$10$aK2j.mTJ8waf7D9al2yOieXQlrc9CADMT7zRXDj.y.QJJkimkQpCy', 'test2@aol.com', 'resources/img/foto.png', 70, 'MEMBER', 'ACTIVE', 0, 0, '2019-09-03 13:17:22.73', '2019-09-03 13:17:22.73');
+INSERT INTO public.user_account (id, nickname, password, email, foto, country_id, user_role, user_status, sum_games, won_games, created, updated) VALUES (4, 'Player1', '$2a$10$ArD/5cvDVw0Nf0js1YAN1uGpKy1Ss3qTtMCpqO/nW09XO/0buR2Ku', '1@g.com', 'resources/img/foto.png', 189, 'MEMBER', 'ACTIVE', 54, 4, '2019-09-10 12:47:02.508', '2019-09-10 12:47:02.508');
+INSERT INTO public.user_account (id, nickname, password, email, foto, country_id, user_role, user_status, sum_games, won_games, created, updated) VALUES (8, 'Player2', '$2a$10$1sC8Yy1s2GVtLVZlmHb9fOsZJrqNlr4va8NdR.QvF1NHXz6QODrSm', '2@g.com', '', 187, 'MEMBER', 'ACTIVE', 72, 15, '2019-09-10 13:07:34.888', '2019-09-10 13:07:34.888');
+INSERT INTO public.user_account (id, nickname, password, email, foto, country_id, user_role, user_status, sum_games, won_games, created, updated) VALUES (9, 'Player3', '$2a$10$0OX7RFHikXRyt0zshcPILOcRwuwTknfYNvoA1d656aw.6eJflMfSe', '3@g.com', '', 191, 'MEMBER', 'ACTIVE', 28, 3, '2019-09-10 13:08:46.484', '2019-09-10 13:08:46.484');
+INSERT INTO public.user_account (id, nickname, password, email, foto, country_id, user_role, user_status, sum_games, won_games, created, updated) VALUES (10, 'Player4', '$2a$10$.ns9ngMzKZSOGE5h6fbp0OvqNkhzKQCMnd85mPCQPzHZTrDXxiOnS', '4@g.com', '', 53, 'MEMBER', 'ACTIVE', 251, 20, '2019-09-10 13:09:19.74', '2019-09-10 13:09:19.74');
+INSERT INTO public.user_account (id, nickname, password, email, foto, country_id, user_role, user_status, sum_games, won_games, created, updated) VALUES (11, 'Player5', '$2a$10$MKhXcwrX3lsYIHvCJ7GsgOXnkieAo.7dXMV.sbQ.vFBmds3gz2B8q', '5@g.com', '', 117, 'MEMBER', 'ACTIVE', 28, 6, '2019-09-10 13:09:46.708', '2019-09-10 13:09:46.708');
+INSERT INTO public.user_account (id, nickname, password, email, foto, country_id, user_role, user_status, sum_games, won_games, created, updated) VALUES (12, 'Player6', '$2a$10$xRZtm8W/.7sUGdu8u7Zl/OQ.2td6X48NWNsw860wf.UXQJOjtAc8q', '6@g.com', '', 102, 'MEMBER', 'ACTIVE', 85, 24, '2019-09-10 13:10:26.528', '2019-09-10 13:10:26.528');
+INSERT INTO public.user_account (id, nickname, password, email, foto, country_id, user_role, user_status, sum_games, won_games, created, updated) VALUES (13, 'Player7', '$2a$10$JksegFTZCaHXLYEcHQ0Aj.D7EBHU03JDew48NWb3dhqM/sZh5Sxpq', '7@g.com', '', 106, 'MEMBER', 'ACTIVE', 84, 12, '2019-09-10 13:10:59.025', '2019-09-10 13:10:59.025');
+INSERT INTO public.user_account (id, nickname, password, email, foto, country_id, user_role, user_status, sum_games, won_games, created, updated) VALUES (14, 'Player8', '$2a$10$BShzKiEoAUs9Pw6YmUhoX.slrMjJUI4wm7bh42NeqnQiNAsnzrkZO', '8@g.com', '', 109, 'MEMBER', 'ACTIVE', 54, 2, '2019-09-10 13:11:37.931', '2019-09-10 13:11:37.931');
+INSERT INTO public.user_account (id, nickname, password, email, foto, country_id, user_role, user_status, sum_games, won_games, created, updated) VALUES (15, 'Player9', '$2a$10$of/wPoNFXTSrHnWnCJIQQuuaZ.lE5cmjcF9DB.vEQvXcf/iDAo.ba', '9@g.com', '', 105, 'MEMBER', 'ACTIVE', 66, 6, '2019-09-10 13:12:05.829', '2019-09-10 13:12:05.829');
+INSERT INTO public.user_account (id, nickname, password, email, foto, country_id, user_role, user_status, sum_games, won_games, created, updated) VALUES (16, 'Player10', '$2a$10$j2Oz04pPZ8eBz3nB1BcCsevGug7lk7F.p2yahsBEJ56kvLfOXVPAO', '10@g.com', '', 193, 'MEMBER', 'ACTIVE', 50, 9, '2019-09-10 13:12:37.042', '2019-09-10 13:12:37.042');
+INSERT INTO public.user_account (id, nickname, password, email, foto, country_id, user_role, user_status, sum_games, won_games, created, updated) VALUES (17, 'Player11', '$2a$10$62KW5yLSz1qXMcYsL.RSXeOfY31iVc.uwK2NYwVXP9MShVHJWUShW', '11@g.com', '', 7, 'MEMBER', 'ACTIVE', 34, 8, '2019-09-10 13:13:10.452', '2019-09-10 13:13:10.452');
+INSERT INTO public.user_account (id, nickname, password, email, foto, country_id, user_role, user_status, sum_games, won_games, created, updated) VALUES (18, 'Player13', '$2a$10$iDXOukFKrVApgJeTkv2eaObWO2q784X5MGyu2t4ltoWo9sLoCO/ba', '13@g.com', '', 7, 'MEMBER', 'ACTIVE', 44, 20, '2019-09-10 13:13:37.019', '2019-09-10 13:13:37.019');
+INSERT INTO public.user_account (id, nickname, password, email, foto, country_id, user_role, user_status, sum_games, won_games, created, updated) VALUES (19, 'Player14', '$2a$10$844C2sV1H8QJYdzD9pm/FumLo9.FxT3z0.CwxlxaFzirRYO91mMmi', '14@g.com', '', 7, 'MEMBER', 'ACTIVE', 41, 10, '2019-09-10 13:15:22.425', '2019-09-10 13:15:22.425');
+INSERT INTO public.user_account (id, nickname, password, email, foto, country_id, user_role, user_status, sum_games, won_games, created, updated) VALUES (20, 'Player15', '$2a$10$Eb7JulJxBHOz/BpJTymq2.8knNBsLS7MmpCHDc7wfnuBppmBN518O', '15@g.com', '', 196, 'MEMBER', 'ACTIVE', 55, 20, '2019-09-10 13:15:49.992', '2019-09-10 13:15:49.992');
+INSERT INTO public.user_account (id, nickname, password, email, foto, country_id, user_role, user_status, sum_games, won_games, created, updated) VALUES (1, 'Admin', '$2a$10$QE39xe3rcgW8Cv6hXqQNLubg02aBmNtrfBDCMMwGMNEOA6oG0Lts.', 'aaaa@a.com', 'resources/img/foto.png', 107, 'ADMIN', 'ACTIVE', 45, 11, '2019-08-22 21:16:05.456', '2019-08-22 21:16:05.456');
+INSERT INTO public.user_account (id, nickname, password, email, foto, country_id, user_role, user_status, sum_games, won_games, created, updated) VALUES (2, 'Test', '$2a$10$OgNTZQU7I.q7TzILBgU7He4IJJS.1DktexjLp./OgFD.qUUitz8mu', 'makaka@a.com', 'resources/img/foto.png', 1, 'ADMIN', 'ACTIVE', 15, 1, '2019-08-22 23:03:24.411', '2019-08-22 23:03:24.411');
+INSERT INTO public.user_account (id, nickname, password, email, foto, country_id, user_role, user_status, sum_games, won_games, created, updated) VALUES (3, 'Test2', '$2a$10$aK2j.mTJ8waf7D9al2yOieXQlrc9CADMT7zRXDj.y.QJJkimkQpCy', 'test2@aol.com', 'resources/img/foto.png', 70, 'MEMBER', 'ACTIVE', 25, 5, '2019-09-03 13:17:22.73', '2019-09-03 13:17:22.73');
 
 
 --
@@ -1922,7 +1885,7 @@ SELECT pg_catalog.setval('public.chat_id_seq', 1, false);
 -- Name: chat_in_home_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.chat_in_home_id_seq', 3, true);
+SELECT pg_catalog.setval('public.chat_in_home_id_seq', 18, true);
 
 
 --
@@ -1976,7 +1939,7 @@ SELECT pg_catalog.setval('public.tiket_id_seq', 1, false);
 -- Name: transaction_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.transaction_id_seq', 849, true);
+SELECT pg_catalog.setval('public.transaction_id_seq', 854, true);
 
 
 --
@@ -1985,7 +1948,7 @@ SELECT pg_catalog.setval('public.transaction_id_seq', 849, true);
 -- Name: user_account_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.user_account_id_seq', 3, true);
+SELECT pg_catalog.setval('public.user_account_id_seq', 20, true);
 
 
 --
@@ -2231,7 +2194,7 @@ ALTER TABLE ONLY public.user_account
     ADD CONSTRAINT user_account_fk0 FOREIGN KEY (country_id) REFERENCES public.country(id);
 
 
--- Completed on 2019-09-09 23:51:29
+-- Completed on 2019-09-10 14:02:03
 
 --
 -- PostgreSQL database dump complete

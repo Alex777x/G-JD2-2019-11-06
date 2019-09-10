@@ -29,8 +29,8 @@
 	<entry key="page.home.registration">Registration</entry>
 	<entry key="page.home.notLogged">Logged user: You are not logged in!</entry>
 	<entry key="page.home.news">News</entry>
-	<entry key="page.home.howToPlay">Poker Rules</entry>
-	<entry key="page.home.topPlayers">Top Players</entry>
+	<entry key="page.home.howToPlay">Rules</entry>
+	<entry key="page.home.topPlayers">Top</entry>
 	<entry key="page.home.personalArea">Personal Area</entry>
 	<entry key="page.home.support">Support</entry>
 	<entry key="page.home.adminPanel">Admin Panel</entry>
