@@ -1,10 +1,14 @@
 package by.itacademy.aalexandrov.poker.service.game;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.Rank;
+import by.itacademy.aalexandrov.poker.dao.api.entity.enums.Suits;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.ICard;
 
 public class PokerLogicUtils {
@@ -38,24 +42,68 @@ public class PokerLogicUtils {
 	}
 
 	private static boolean isRoyalFlush(List<ICard> cards) {
-		// if all cards of the same suite then....
-		HashSet<Object> suits = new HashSet<>();
+		Map<Suits, Integer> suits = new HashMap<>();
+		int iclubs = 1;
+		int idiamonds = 1;
+		int ihearts = 1;
+		int ispades = 1;
 		for (ICard iCard : cards) {
-			suits.add(iCard.getSuit());
+			if (iCard.getSuit().equals(Suits.CLUBS)) {
+				if (!suits.containsKey(Suits.CLUBS)) {
+					suits.put(Suits.CLUBS, iclubs);
+				} else {
+					iclubs++;
+					suits.replace(Suits.CLUBS, iclubs);
+				}
+
+			} else if (iCard.getSuit().equals(Suits.DIAMONDS)) {
+				if (!suits.containsKey(Suits.DIAMONDS)) {
+					suits.put(Suits.DIAMONDS, idiamonds);
+				} else {
+					idiamonds++;
+					suits.replace(Suits.DIAMONDS, idiamonds);
+				}
+
+			} else if (iCard.getSuit().equals(Suits.HEARTS)) {
+				if (!suits.containsKey(Suits.HEARTS)) {
+					suits.put(Suits.HEARTS, ihearts);
+				} else {
+					ihearts++;
+					suits.replace(Suits.HEARTS, ihearts);
+				}
+			} else if (iCard.getSuit().equals(Suits.SPADES)) {
+				if (!suits.containsKey(Suits.SPADES)) {
+					suits.put(Suits.SPADES, ispades);
+				} else {
+					ispades++;
+					suits.replace(Suits.SPADES, ispades);
+				}
+			}
 		}
 
-		if (suits.size() != 1) {
-			return false;
+		Suits suit = null;
+		for (Map.Entry<Suits, Integer> entry : suits.entrySet()) {
+			if (entry.getValue() == 5) {
+				suit = entry.getKey();
+				break;
+			} else {
+				return false;
+			}
+		}
+		List<ICard> fiveCardsameSuit = new ArrayList<ICard>();
+		for (ICard iCard : cards) {
+			if (iCard.getSuit().equals(suit)) {
+				fiveCardsameSuit.add(iCard);
+			}
 		}
 
-		// sort all cards
-		Collections.sort(cards);
-		if (!Rank.ACE.equals(cards.get(cards.size() - 1).getRank())) {
+		Collections.sort(fiveCardsameSuit);
+		if (!Rank.ACE.equals(fiveCardsameSuit.get(fiveCardsameSuit.size() - 1).getRank())) {
 			return false;
 		}
 
 		ICard previous = null;
-		for (ICard c : cards) {
+		for (ICard c : fiveCardsameSuit) {
 			if (previous != null) {
 
 				int diff = c.getRank().ordinal() - previous.getRank().ordinal();
