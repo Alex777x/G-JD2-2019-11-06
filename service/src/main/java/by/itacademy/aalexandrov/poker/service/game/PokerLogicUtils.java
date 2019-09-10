@@ -44,9 +44,9 @@ public class PokerLogicUtils {
 			suits.add(iCard.getSuit());
 		}
 
-//		if (suits.size() != 1) {
-//			return false;
-//		}
+		if (suits.size() != 1) {
+			return false;
+		}
 
 		// sort all cards
 		Collections.sort(cards);
