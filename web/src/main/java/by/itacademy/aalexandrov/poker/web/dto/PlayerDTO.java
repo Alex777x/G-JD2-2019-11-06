@@ -4,6 +4,7 @@ import java.util.Date;
 
 import javax.validation.constraints.NotNull;
 
+import by.itacademy.aalexandrov.poker.dao.api.entity.enums.CardsCombination;
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.PlayerPosition;
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.PlayerStatus;
 
@@ -26,6 +27,15 @@ public class PlayerDTO {
 	private String card2;
 	private boolean active;
 	private Integer curentBet;
+	private CardsCombination curentHand;
+
+	public CardsCombination getCurentHand() {
+		return curentHand;
+	}
+
+	public void setCurentHand(CardsCombination curentHand) {
+		this.curentHand = curentHand;
+	}
 
 	public Integer getCurentBet() {
 		return curentBet;

@@ -1,5 +1,6 @@
 package by.itacademy.aalexandrov.poker.dao.api.entity.table;
 
+import by.itacademy.aalexandrov.poker.dao.api.entity.enums.CardsCombination;
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.PlayerPosition;
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.PlayerStatus;
 
@@ -40,5 +41,9 @@ public interface IPlayer extends IBaseEntity {
 	void setCurentBet(int curentBet);
 
 	int getCurentBet();
+
+	void setCurentHand(CardsCombination curentHand);
+
+	CardsCombination getCurentHand();
 
 }

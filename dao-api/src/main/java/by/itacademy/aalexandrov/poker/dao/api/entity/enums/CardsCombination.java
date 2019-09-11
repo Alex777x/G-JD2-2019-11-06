@@ -1,4 +1,4 @@
-package by.itacademy.aalexandrov.poker.service.game;
+package by.itacademy.aalexandrov.poker.dao.api.entity.enums;
 
 public enum CardsCombination {
 

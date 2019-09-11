@@ -8,10 +8,10 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import by.itacademy.aalexandrov.poker.dao.api.entity.enums.CardsCombination;
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.Rank;
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.Suits;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.ICard;
-import by.itacademy.aalexandrov.poker.service.game.CardsCombination;
 import by.itacademy.aalexandrov.poker.service.game.PokerLogicUtils;
 
 public class PokeLogicUtilsTest extends AbstractTest {
@@ -136,31 +136,28 @@ public class PokeLogicUtilsTest extends AbstractTest {
 	}
 
 	@Test
-	// @Ignore
 	public void testRoyalFlash() {
 		List<ICard> cards = new ArrayList<>();
-		cards.add(_10_hearts);
+		cards.add(_ace_hearts);
 		cards.add(_jack_hearts);
 		cards.add(_queen_hearts);
+		cards.add(_10_hearts);
 		cards.add(_king_hearts);
-		cards.add(_ace_hearts);
 
 		cards.add(_7_clubs);
 		cards.add(_8_clubs);
-		// add others
 
 		assertEquals(CardsCombination.royal_flush, PokerLogicUtils.resolveCombination(cards));
 
 	}
 
 	@Test
-	// @Ignore
 	public void testStraigFlash() {
 		List<ICard> cards = new ArrayList<>();
-		cards.add(_7_clubs);
-		cards.add(_8_clubs);
 		cards.add(_9_clubs);
+		cards.add(_8_clubs);
 		cards.add(_10_clubs);
+		cards.add(_7_clubs);
 		cards.add(_jack_clubs);
 
 		cards.add(_10_hearts);
@@ -170,140 +167,133 @@ public class PokeLogicUtilsTest extends AbstractTest {
 
 	}
 
-//	@Test
-//	// @Ignore
-//	public void fourOfAKind() {
-//		List<ICard> cards = new ArrayList<>();
-//		cards.add(_king_hearts);
-//		cards.add(_king_clubs);
-//		cards.add(_king_spades);
-//		cards.add(_king_diamonds);
-//		cards.add(_7_clubs);
-//
-//		cards.add(_10_hearts);
-//		cards.add(_jack_hearts);
-//
-//		assertEquals(CardsCombination.four_of_a_kind, PokerLogicUtils.resolveCombination(cards));
-//
-//	}
-//
-//	@Test
-//	// @Ignore
-//	public void fullHouse() {
-//		List<ICard> cards = new ArrayList<>();
-//		cards.add(_king_hearts);
-//		cards.add(_king_clubs);
-//		cards.add(_king_spades);
-//		cards.add(_10_hearts);
-//		cards.add(_10_clubs);
-//
-//		cards.add(_7_clubs);
-//		cards.add(_jack_hearts);
-//
-//		assertEquals(CardsCombination.full_house, PokerLogicUtils.resolveCombination(cards));
-//
-//	}
-//
-//	@Test
-//	// @Ignore
-//	public void flush() {
-//		List<ICard> cards = new ArrayList<>();
-//		cards.add(_jack_spades);
-//		cards.add(_7_spades);
-//		cards.add(_ace_spades);
-//		cards.add(_2_spades);
-//		cards.add(_9_spades);
-//
-//		cards.add(_king_hearts);
-//		cards.add(_jack_hearts);
-//
-//		assertEquals(CardsCombination.flush, PokerLogicUtils.resolveCombination(cards));
-//
-//	}
-//
-//	@Test
-//	// @Ignore
-//	public void straight() {
-//		List<ICard> cards = new ArrayList<>();
-//		cards.add(_5_diamonds);
-//		cards.add(_6_clubs);
-//		cards.add(_7_spades);
-//		cards.add(_8_hearts);
-//		cards.add(_9_diamonds);
-//
-//		cards.add(_king_hearts);
-//		cards.add(_jack_hearts);
-//
-//		assertEquals(CardsCombination.straight, PokerLogicUtils.resolveCombination(cards));
-//
-//	}
-//
-//	@Test
-//	// @Ignore
-//	public void threeOfAKind() {
-//		List<ICard> cards = new ArrayList<>();
-//		cards.add(_king_clubs);
-//		cards.add(_king_hearts);
-//		cards.add(_king_spades);
-//		cards.add(_6_clubs);
-//		cards.add(_9_diamonds);
-//
-//		cards.add(_2_spades);
-//		cards.add(_jack_hearts);
-//
-//		assertEquals(CardsCombination.three_of_a_kind, PokerLogicUtils.resolveCombination(cards));
-//
-//	}
-//
-//	@Test
-//	// @Ignore
-//	public void twoPair() {
-//		List<ICard> cards = new ArrayList<>();
-//		cards.add(_king_clubs);
-//		cards.add(_king_hearts);
-//		cards.add(_10_hearts);
-//		cards.add(_10_clubs);
-//		cards.add(_9_diamonds);
-//
-//		cards.add(_2_spades);
-//		cards.add(_jack_hearts);
-//
-//		assertEquals(CardsCombination.two_pair, PokerLogicUtils.resolveCombination(cards));
-//
-//	}
-//
-//	@Test
-//	// @Ignore
-//	public void pair() {
-//		List<ICard> cards = new ArrayList<>();
-//		cards.add(_king_clubs);
-//		cards.add(_king_hearts);
-//		cards.add(_7_clubs);
-//		cards.add(_10_clubs);
-//		cards.add(_9_diamonds);
-//
-//		cards.add(_2_spades);
-//		cards.add(_jack_hearts);
-//
-//		assertEquals(CardsCombination.pair, PokerLogicUtils.resolveCombination(cards));
-//
-//	}
-//
-//	@Test
-//	// @Ignore
-//	public void highCard() {
-//		List<ICard> cards = new ArrayList<>();
-//		cards.add(_king_clubs);
-//		cards.add(_5_diamonds);
-//		cards.add(_7_clubs);
-//		cards.add(_10_clubs);
-//		cards.add(_9_diamonds);
-//
-//		cards.add(_2_spades);
-//		cards.add(_jack_hearts);
-//
-//		assertEquals(CardsCombination.high_card, PokerLogicUtils.resolveCombination(cards));
-//
-//	}
+	@Test
+	public void fourOfAKind() {
+		List<ICard> cards = new ArrayList<>();
+		cards.add(_king_hearts);
+		cards.add(_king_clubs);
+		cards.add(_king_spades);
+		cards.add(_10_hearts);
+		cards.add(_7_clubs);
+
+		cards.add(_king_diamonds);
+		cards.add(_jack_hearts);
+
+		assertEquals(CardsCombination.four_of_a_kind, PokerLogicUtils.resolveCombination(cards));
+
+	}
+
+	@Test
+	public void fullHouse() {
+		List<ICard> cards = new ArrayList<>();
+		cards.add(_king_hearts);
+		cards.add(_king_clubs);
+		cards.add(_7_clubs);
+		cards.add(_10_hearts);
+		cards.add(_10_clubs);
+
+		cards.add(_king_spades);
+		cards.add(_jack_hearts);
+
+		assertEquals(CardsCombination.full_house, PokerLogicUtils.resolveCombination(cards));
+
+	}
+
+	@Test
+	public void flush() {
+		List<ICard> cards = new ArrayList<>();
+		cards.add(_jack_spades);
+		cards.add(_7_spades);
+		cards.add(_ace_spades);
+		cards.add(_king_hearts);
+		cards.add(_9_spades);
+
+		cards.add(_2_spades);
+		cards.add(_jack_hearts);
+
+		assertEquals(CardsCombination.flush, PokerLogicUtils.resolveCombination(cards));
+
+	}
+
+	@Test
+	public void straight() {
+		List<ICard> cards = new ArrayList<>();
+		cards.add(_5_diamonds);
+		cards.add(_6_clubs);
+		cards.add(_king_hearts);
+		cards.add(_8_hearts);
+		cards.add(_9_diamonds);
+
+		cards.add(_7_spades);
+		cards.add(_2_spades);
+
+		assertEquals(CardsCombination.straight, PokerLogicUtils.resolveCombination(cards));
+
+	}
+
+	@Test
+	public void threeOfAKind() {
+		List<ICard> cards = new ArrayList<>();
+		cards.add(_king_clubs);
+		cards.add(_king_hearts);
+		cards.add(_king_spades);
+		cards.add(_6_clubs);
+		cards.add(_9_diamonds);
+
+		cards.add(_2_spades);
+		cards.add(_jack_hearts);
+
+		assertEquals(CardsCombination.three_of_a_kind, PokerLogicUtils.resolveCombination(cards));
+
+	}
+
+	@Test
+	public void twoPair() {
+		List<ICard> cards = new ArrayList<>();
+		cards.add(_king_clubs);
+		cards.add(_king_hearts);
+		cards.add(_10_hearts);
+		cards.add(_10_clubs);
+		cards.add(_9_diamonds);
+
+		cards.add(_2_spades);
+		cards.add(_jack_hearts);
+
+		assertEquals(CardsCombination.two_pair, PokerLogicUtils.resolveCombination(cards));
+
+	}
+
+	@Test
+	// @Ignore
+	public void pair() {
+		List<ICard> cards = new ArrayList<>();
+		cards.add(_king_clubs);
+		cards.add(_king_hearts);
+		cards.add(_7_clubs);
+		cards.add(_10_clubs);
+		cards.add(_9_diamonds);
+
+		cards.add(_2_spades);
+		cards.add(_jack_hearts);
+
+		assertEquals(CardsCombination.pair, PokerLogicUtils.resolveCombination(cards));
+
+	}
+
+	@Test
+	public void highCard() {
+		List<ICard> cards = new ArrayList<>();
+		cards.add(_king_clubs);
+		cards.add(_5_diamonds);
+		cards.add(_7_clubs);
+		cards.add(_10_clubs);
+		cards.add(_9_diamonds);
+
+		cards.add(_2_spades);
+		cards.add(_jack_hearts);
+
+		assertEquals(CardsCombination.high_card, PokerLogicUtils.resolveCombination(cards));
+
+	}
 
 }

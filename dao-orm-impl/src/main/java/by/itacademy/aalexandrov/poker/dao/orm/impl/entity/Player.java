@@ -8,6 +8,7 @@ import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 
+import by.itacademy.aalexandrov.poker.dao.api.entity.enums.CardsCombination;
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.PlayerPosition;
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.PlayerStatus;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IGame;
@@ -45,8 +46,21 @@ public class Player extends BaseEntity implements IPlayer {
 	@Column
 	private int curentBet;
 
+	@Column
+	private CardsCombination curentHand;
+
 	@Transient
 	private String upperCaseName;
+
+	@Override
+	public CardsCombination getCurentHand() {
+		return curentHand;
+	}
+
+	@Override
+	public void setCurentHand(CardsCombination curentHand) {
+		this.curentHand = curentHand;
+	}
 
 	@Override
 	public int getCurentBet() {

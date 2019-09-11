@@ -422,6 +422,13 @@ main {
 	color: yellow;
 }
 
+.curentHandInTable {
+	position: absolute;
+    left: 545px;
+    top: 530px;
+    color: white;
+}
+
 .input-field label.multiselect-label, .input-field label.switch-label {
 	position: absolute;
 	top: -26px;
