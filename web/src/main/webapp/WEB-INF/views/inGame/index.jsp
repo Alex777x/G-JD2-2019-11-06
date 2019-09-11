@@ -367,8 +367,8 @@ function raiseBtn(value) {
 		$("#shirt" + arg).show();
 		$("#playerData" + arg).show();
 		$("#bet" + arg).show();
-		$("#curentHandInTable").show();
-		var $bet = $('#curentHand').text(player.curentHand);
+// 		$("#curentHandInTable").show();
+// 		var $bet = $('#curentHand').text(player.curentHand);
 		var $bet = $('#bets' + arg).text(player.curentBet);
 		var $nickname = $('#player' + arg + 'Nick').text(player.nick);
 		var $stack = $('#player' + arg + 'Balance').text(player.stack);

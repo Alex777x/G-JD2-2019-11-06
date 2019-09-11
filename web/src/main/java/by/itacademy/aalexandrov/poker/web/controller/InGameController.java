@@ -184,33 +184,9 @@ public class InGameController extends AbstractController {
 			gameService.save(curentGame);
 		}
 
-		getUsersCurentHand(gameid, players);
+		// getUsersCurentHand(gameid, players);
 
 		return new ResponseEntity<Object>(dtos, HttpStatus.OK);
-	}
-
-	private void getUsersCurentHand(final Integer gameid, List<IPlayer> players) {
-		List<ICardInGame> tableCards = cardInGameService.getAllCardsInGameByGame(gameid, CardStatus.INBOARDCLOSED);
-		List<ICard> cards = new ArrayList<ICard>();
-		for (ICardInGame iCardInGame : tableCards) {
-			ICard card = cardService.getFullInfo(iCardInGame.getCard().getId());
-			cards.add(card);
-		}
-
-		for (IPlayer iPlayer : players) {
-			List<ICardInGame> twoPlayerCards = cardInGameService.getPlayerCards(iPlayer.getId());
-			List<ICard> cardsPlayer = new ArrayList<ICard>();
-			for (ICardInGame iCardInGame : twoPlayerCards) {
-				ICard card = cardService.getFullInfo(iCardInGame.getCard().getId());
-				cardsPlayer.add(card);
-			}
-			List<ICard> handCard = new ArrayList<ICard>();
-			handCard.addAll(cards);
-			handCard.addAll(cardsPlayer);
-			CardsCombination combination = PokerLogicUtils.resolveCombination(handCard);
-			iPlayer.setCurentHand(combination);
-			playerService.save(iPlayer);
-		}
 	}
 
 	@RequestMapping(value = "/changeGameToNew", method = RequestMethod.POST)
@@ -387,39 +363,46 @@ public class InGameController extends AbstractController {
 		return new ResponseEntity<GameDTO>(dto, HttpStatus.OK);
 	}
 
-//	@RequestMapping(value = "/getWinner", method = RequestMethod.GET)
-//	public ResponseEntity<Object> getWinner(@RequestParam(name = "gameid", required = true) final Integer gameid) {
-//		List<ICardInGame> tableCards = cardInGameService.getAllCardsInGameByGame(gameid, CardStatus.INBOARDCLOSED);
-//		List<ICard> cards = new ArrayList<ICard>();
-//		for (ICardInGame iCardInGame : tableCards) {
-//			ICard card = cardService.getFullInfo(iCardInGame.getCard().getId());
-//			cards.add(card);
-//		}
-//
-//		List<IPlayer> players = playerService.getPlayersByGameWithStateUsual(gameid, PlayerStatus.USUAL);
-//
-//		for (IPlayer iPlayer : players) {
-//			List<ICardInGame> twoPlayerCards = cardInGameService.getPlayerCards(iPlayer.getId());
-//			List<ICard> cardsPlayer = new ArrayList<ICard>();
-//			for (ICardInGame iCardInGame : twoPlayerCards) {
-//				ICard card = cardService.getFullInfo(iCardInGame.getCard().getId());
-//				cardsPlayer.add(card);
-//			}
-//			List<ICard> handCard = new ArrayList<ICard>();
-//			handCard.addAll(cards);
-//			handCard.addAll(cardsPlayer);
-//			CardsCombination combination = PokerLogicUtils.resolveCombination(handCard);
-//			iPlayer.setCurentHand(combination);
-//			playerService.save(iPlayer);
-//		}
-//
-//		return new ResponseEntity<Object>(HttpStatus.OK);
-//	}
+	@RequestMapping(value = "/getWinner", method = RequestMethod.GET)
+	public ResponseEntity<Object> getWinner(@RequestParam(name = "gameid", required = true) final Integer gameid) {
+		List<IPlayer> players = playerService.getPlayersByGameWithStateUsual(gameid, PlayerStatus.USUAL);
+		getUsersCurentHand(gameid, players);
+
+		return new ResponseEntity<Object>(HttpStatus.OK);
+	}
+
+	private void getUsersCurentHand(final Integer gameid, List<IPlayer> players) {
+		List<ICardInGame> tableCards = cardInGameService.getAllCardsInGameByGame(gameid, CardStatus.INBOARDCLOSED);
+		List<ICard> cards = new ArrayList<ICard>();
+		for (ICardInGame iCardInGame : tableCards) {
+			ICard card = cardService.getFullInfo(iCardInGame.getCard().getId());
+			cards.add(card);
+		}
+
+		for (IPlayer iPlayer : players) {
+			List<ICardInGame> twoPlayerCards = cardInGameService.getPlayerCards(iPlayer.getId());
+			List<ICard> cardsPlayer = new ArrayList<ICard>();
+			for (ICardInGame iCardInGame : twoPlayerCards) {
+				ICard card = cardService.getFullInfo(iCardInGame.getCard().getId());
+				cardsPlayer.add(card);
+			}
+			List<ICard> handCard = new ArrayList<ICard>();
+			handCard.addAll(cards);
+			handCard.addAll(cardsPlayer);
+			CardsCombination combination = PokerLogicUtils.resolveCombination(handCard);
+			iPlayer.setCurentHand(combination);
+			playerService.save(iPlayer);
+		}
+	}
 
 	@RequestMapping(value = "/getThreeCards", method = RequestMethod.GET)
 	public ResponseEntity<List<CardDTO>> getThreeCards(
 			@RequestParam(name = "gameid", required = true) final Integer gameid) {
 		List<ICardInGame> threeCards = cardInGameService.getAllCardsInGameByGame(gameid, CardStatus.INBOARDCLOSED);
+//		for (ICardInGame iCardInGame : threeCards) {
+//			iCardInGame.setCardStatus(CardStatus.INBOARDOPEN);
+//			cardInGameService.save(iCardInGame);
+//		}
 		ICard card1 = cardService.getFullInfo(threeCards.get(0).getCard().getId());
 		ICard card2 = cardService.getFullInfo(threeCards.get(1).getCard().getId());
 		ICard card3 = cardService.getFullInfo(threeCards.get(2).getCard().getId());
