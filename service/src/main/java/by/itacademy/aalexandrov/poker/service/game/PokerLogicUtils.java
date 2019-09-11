@@ -3,7 +3,6 @@ package by.itacademy.aalexandrov.poker.service.game;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -43,49 +42,15 @@ public class PokerLogicUtils {
 
 	private static boolean isRoyalFlush(List<ICard> cards) {
 		Map<Suits, Integer> suits = new HashMap<>();
-		int iclubs = 1;
-		int idiamonds = 1;
-		int ihearts = 1;
-		int ispades = 1;
-		for (ICard iCard : cards) {
-			if (iCard.getSuit().equals(Suits.CLUBS)) {
-				if (!suits.containsKey(Suits.CLUBS)) {
-					suits.put(Suits.CLUBS, iclubs);
-				} else {
-					iclubs++;
-					suits.replace(Suits.CLUBS, iclubs);
-				}
-
-			} else if (iCard.getSuit().equals(Suits.DIAMONDS)) {
-				if (!suits.containsKey(Suits.DIAMONDS)) {
-					suits.put(Suits.DIAMONDS, idiamonds);
-				} else {
-					idiamonds++;
-					suits.replace(Suits.DIAMONDS, idiamonds);
-				}
-
-			} else if (iCard.getSuit().equals(Suits.HEARTS)) {
-				if (!suits.containsKey(Suits.HEARTS)) {
-					suits.put(Suits.HEARTS, ihearts);
-				} else {
-					ihearts++;
-					suits.replace(Suits.HEARTS, ihearts);
-				}
-			} else if (iCard.getSuit().equals(Suits.SPADES)) {
-				if (!suits.containsKey(Suits.SPADES)) {
-					suits.put(Suits.SPADES, ispades);
-				} else {
-					ispades++;
-					suits.replace(Suits.SPADES, ispades);
-				}
-			}
-		}
+		countSuits(cards, suits);
 
 		Suits suit = null;
 		for (Map.Entry<Suits, Integer> entry : suits.entrySet()) {
 			if (entry.getValue() == 5) {
 				suit = entry.getKey();
 				break;
+			} else if (entry.getValue() != 5) {
+				continue;
 			} else {
 				return false;
 			}
@@ -120,21 +85,31 @@ public class PokerLogicUtils {
 	}
 
 	private static boolean isStraightFlush(List<ICard> cards) {
-		// if all cards of the same suite then....
-		HashSet<Object> suits = new HashSet<>();
+		Map<Suits, Integer> suits = new HashMap<>();
+		countSuits(cards, suits);
+
+		Suits suit = null;
+		for (Map.Entry<Suits, Integer> entry : suits.entrySet()) {
+			if (entry.getValue() == 5) {
+				suit = entry.getKey();
+				break;
+			} else if (entry.getValue() != 5) {
+				continue;
+			} else {
+				return false;
+			}
+		}
+		List<ICard> fiveCardsameSuit = new ArrayList<ICard>();
 		for (ICard iCard : cards) {
-			suits.add(iCard.getSuit());
+			if (iCard.getSuit().equals(suit)) {
+				fiveCardsameSuit.add(iCard);
+			}
 		}
 
-		if (suits.size() != 1) {
-			return false;
-		}
-
-		// sort all cards
-		Collections.sort(cards);
+		Collections.sort(fiveCardsameSuit);
 
 		ICard previous = null;
-		for (ICard c : cards) {
+		for (ICard c : fiveCardsameSuit) {
 			if (previous != null) {
 
 				int diff = c.getRank().ordinal() - previous.getRank().ordinal();
@@ -188,6 +163,46 @@ public class PokerLogicUtils {
 	private static boolean isFullHouse(List<ICard> cards) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	private static void countSuits(List<ICard> cards, Map<Suits, Integer> suits) {
+		int iclubs = 1;
+		int idiamonds = 1;
+		int ihearts = 1;
+		int ispades = 1;
+		for (ICard iCard : cards) {
+			if (iCard.getSuit().equals(Suits.CLUBS)) {
+				if (!suits.containsKey(Suits.CLUBS)) {
+					suits.put(Suits.CLUBS, iclubs);
+				} else {
+					iclubs++;
+					suits.replace(Suits.CLUBS, iclubs);
+				}
+
+			} else if (iCard.getSuit().equals(Suits.DIAMONDS)) {
+				if (!suits.containsKey(Suits.DIAMONDS)) {
+					suits.put(Suits.DIAMONDS, idiamonds);
+				} else {
+					idiamonds++;
+					suits.replace(Suits.DIAMONDS, idiamonds);
+				}
+
+			} else if (iCard.getSuit().equals(Suits.HEARTS)) {
+				if (!suits.containsKey(Suits.HEARTS)) {
+					suits.put(Suits.HEARTS, ihearts);
+				} else {
+					ihearts++;
+					suits.replace(Suits.HEARTS, ihearts);
+				}
+			} else if (iCard.getSuit().equals(Suits.SPADES)) {
+				if (!suits.containsKey(Suits.SPADES)) {
+					suits.put(Suits.SPADES, ispades);
+				} else {
+					ispades++;
+					suits.replace(Suits.SPADES, ispades);
+				}
+			}
+		}
 	}
 
 }

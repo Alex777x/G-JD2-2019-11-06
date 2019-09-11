@@ -153,23 +153,23 @@ public class PokeLogicUtilsTest extends AbstractTest {
 
 	}
 
-//	@Test
-//	// @Ignore
-//	public void testStraigFlash() {
-//		List<ICard> cards = new ArrayList<>();
-//		cards.add(_7_clubs);
-//		cards.add(_8_clubs);
-//		cards.add(_9_clubs);
-//		cards.add(_10_clubs);
-//		cards.add(_jack_clubs);
-//
-//		cards.add(_10_hearts);
-//		cards.add(_jack_hearts);
-//
-//		assertEquals(CardsCombination.straight_flush, PokerLogicUtils.resolveCombination(cards));
-//
-//	}
-//
+	@Test
+	// @Ignore
+	public void testStraigFlash() {
+		List<ICard> cards = new ArrayList<>();
+		cards.add(_7_clubs);
+		cards.add(_8_clubs);
+		cards.add(_9_clubs);
+		cards.add(_10_clubs);
+		cards.add(_jack_clubs);
+
+		cards.add(_10_hearts);
+		cards.add(_jack_hearts);
+
+		assertEquals(CardsCombination.straight_flush, PokerLogicUtils.resolveCombination(cards));
+
+	}
+
 //	@Test
 //	// @Ignore
 //	public void fourOfAKind() {
