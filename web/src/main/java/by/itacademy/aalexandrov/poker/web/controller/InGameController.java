@@ -399,10 +399,6 @@ public class InGameController extends AbstractController {
 	public ResponseEntity<List<CardDTO>> getThreeCards(
 			@RequestParam(name = "gameid", required = true) final Integer gameid) {
 		List<ICardInGame> threeCards = cardInGameService.getAllCardsInGameByGame(gameid, CardStatus.INBOARDCLOSED);
-//		for (ICardInGame iCardInGame : threeCards) {
-//			iCardInGame.setCardStatus(CardStatus.INBOARDOPEN);
-//			cardInGameService.save(iCardInGame);
-//		}
 		ICard card1 = cardService.getFullInfo(threeCards.get(0).getCard().getId());
 		ICard card2 = cardService.getFullInfo(threeCards.get(1).getCard().getId());
 		ICard card3 = cardService.getFullInfo(threeCards.get(2).getCard().getId());

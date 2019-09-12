@@ -28,8 +28,8 @@
 	<div>
 		<i id="bank" class="fas fa-piggy-bank"></i>
 	</div>
-	<div class="curentHandInTable" id="curentHandInTable" style="display: show;">
-		<span id="curentHand"></span>
+	<div class="curentHandInTable" id="curentHandInTable" style="display: none;">
+		<span>Побеждает игрок с комбинацией: </span><span id="curentHand"></span>
 	</div>
 
 	<div id="shirt1" class="shirt1" style="display: none;">
@@ -367,8 +367,10 @@ function raiseBtn(value) {
 		$("#shirt" + arg).show();
 		$("#playerData" + arg).show();
 		$("#bet" + arg).show();
-// 		$("#curentHandInTable").show();
-// 		var $bet = $('#curentHand').text(player.curentHand);
+// 		if (player.curentHand != null) {
+// 	 	$("#curentHandInTable").show();
+// 	 	var $bet = $('#curentHand').text(player.curentHand);
+// 		}
 		var $bet = $('#bets' + arg).text(player.curentBet);
 		var $nickname = $('#player' + arg + 'Nick').text(player.nick);
 		var $stack = $('#player' + arg + 'Balance').text(player.stack);
