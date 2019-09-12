@@ -3,8 +3,11 @@ package by.itacademy.aalexandrov.poker.service.game;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.CardsCombination;
 import by.itacademy.aalexandrov.poker.dao.api.entity.enums.Rank;
@@ -192,11 +195,23 @@ public class PokerLogicUtils {
 	}
 
 	private static boolean isStraight(List<ICard> cards) {
-		Collections.sort(cards);
+		Set<Rank> ranks = new HashSet<Rank>();
+		List<ICard> cards1 = new ArrayList<ICard>();
+		cards1.addAll(cards);
+		for (Iterator<ICard> iterator = cards1.iterator(); iterator.hasNext();) {
+			ICard value = iterator.next();
+			if (!ranks.add(value.getRank())) {
+				iterator.remove();
+			}
+		}
+		Collections.sort(cards1);
+		if (ranks.size() < 5) {
+			return false;
+		}
 
 		ICard previous = null;
 		int countSequenceCard = 1;
-		for (ICard c : cards) {
+		for (ICard c : cards1) {
 			if (previous != null) {
 
 				int diff = c.getRank().ordinal() - previous.getRank().ordinal();

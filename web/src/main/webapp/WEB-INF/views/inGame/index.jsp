@@ -649,7 +649,10 @@ function raiseBtn(value) {
 						url : baseUrl + '/inGame/getWinner?gameid=' + ${game.id},
 						type : 'get',
 						success : function(game) {
-							
+					 		if (game.combinations != null) {
+					 	 	$("#curentHandInTable").show();
+					 	 	var $bet = $('#curentHand').text(game.combinations);
+					 		}
 						}
 					});
 				}

@@ -45,3 +45,4 @@ service/logs/
 web/logs/
 dao-orm-impl/.classpath
 dao-orm-impl/bin/
+*.log
