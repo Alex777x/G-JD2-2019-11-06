@@ -40,8 +40,6 @@ public class PokerLogicUtils {
 			return CardsCombination.high_card;
 		}
 
-//		throw new IllegalArgumentException("can't resolve the combination for cards:"
-//				+ cards.stream().map(e -> e.toString()).reduce("", String::concat));
 	}
 
 	private static boolean isRoyalFlush(List<ICard> cards) {
@@ -294,10 +292,10 @@ public class PokerLogicUtils {
 	}
 
 	private static void countSuits(List<ICard> cards, Map<Suits, Integer> suits) {
-		int iclubs = 1;
-		int idiamonds = 1;
-		int ihearts = 1;
-		int ispades = 1;
+		int iclubs = 0;
+		int idiamonds = 0;
+		int ihearts = 0;
+		int ispades = 0;
 		for (ICard iCard : cards) {
 			if (iCard.getSuit().equals(Suits.CLUBS)) {
 				if (!suits.containsKey(Suits.CLUBS)) {

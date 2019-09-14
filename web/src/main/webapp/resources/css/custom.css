@@ -308,6 +308,7 @@ main {
 .startBtn {
 	position: absolute;
     top: 140px;
+    left: 40px;
 }
 
 .card1 {

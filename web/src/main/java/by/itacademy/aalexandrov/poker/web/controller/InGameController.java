@@ -121,7 +121,7 @@ public class InGameController extends AbstractController {
 		}
 
 		boolean tryAdd;
-		if (curentGame.getState().equals(GameStatus.END)) {
+		if (curentGame.getState().equals(GameStatus.END) || curentGame.getState().equals(GameStatus.CHECKHAND)) {
 			tryAdd = positions.add(pos);
 		} else {
 			tryAdd = false;
@@ -363,8 +363,8 @@ public class InGameController extends AbstractController {
 		return new ResponseEntity<GameDTO>(dto, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/getWinner", method = RequestMethod.GET)
-	public ResponseEntity<Object> getWinner(@RequestParam(name = "gameid", required = true) final Integer gameid) {
+	@RequestMapping(value = "/setWinner", method = RequestMethod.GET)
+	public ResponseEntity<Object> setWinner(@RequestParam(name = "gameid", required = true) final Integer gameid) {
 		List<IPlayer> players = playerService.getPlayersByGameWithStateUsual(gameid, PlayerStatus.USUAL);
 		getUsersCurentHand(gameid, players);
 //		CardsCombination combination = PokerLogicPowerHand.resolveCombination(players);
@@ -404,12 +404,34 @@ public class InGameController extends AbstractController {
 //		curentGame.setState(GameStatus.END);
 //		gameService.save(curentGame);
 
-		for (IPlayer iPlayer : players) {
-			iPlayer.setState(PlayerStatus.INACTIVE);
-			playerService.save(iPlayer);
-		}
+//		for (IPlayer iPlayer : players) {
+//			iPlayer.setState(PlayerStatus.INACTIVE);
+//			playerService.save(iPlayer);
+//		}
 
 		return new ResponseEntity<Object>(HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/getWinner", method = RequestMethod.GET)
+	public ResponseEntity<Object> getWinner(@RequestParam(name = "gameid", required = true) final Integer gameid) {
+		List<IPlayer> players = playerService.getPlayersByGameWithStateUsual(gameid, PlayerStatus.USUAL);
+		List<CardsCombination> allCombinations = new ArrayList<CardsCombination>();
+		for (IPlayer iPlayer : players) {
+			allCombinations.add(iPlayer.getCurentHand());
+		}
+
+		Collections.sort(allCombinations);
+		String result = allCombinations.get(0).name();
+
+//		for (IPlayer iPlayer : players) {
+//			iPlayer.setState(PlayerStatus.INACTIVE);
+//			playerService.save(iPlayer);
+//		}
+//		IGame curentGame = gameService.getFullInfo(gameid);
+//		curentGame.setState(GameStatus.END);
+//		curentGame.setBank(0);
+//		gameService.save(curentGame);
+		return new ResponseEntity<Object>(result, HttpStatus.OK);
 	}
 
 	private void getUsersCurentHand(final Integer gameid, List<IPlayer> players) {

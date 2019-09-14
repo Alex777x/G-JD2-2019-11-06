@@ -29,7 +29,7 @@
 		<i id="bank" class="fas fa-piggy-bank"></i>
 	</div>
 	<div class="curentHandInTable" id="curentHandInTable" style="display: none;">
-		<span>Побеждает игрок с комбинацией: </span><span id="curentHand"></span>
+		<span>Победная комбинация: </span><span id="curentHand"></span>
 	</div>
 
 	<div id="shirt1" class="shirt1" style="display: none;">
@@ -367,10 +367,10 @@ function raiseBtn(value) {
 		$("#shirt" + arg).show();
 		$("#playerData" + arg).show();
 		$("#bet" + arg).show();
-// 		if (player.curentHand != null) {
-// 	 	$("#curentHandInTable").show();
-// 	 	var $bet = $('#curentHand').text(player.curentHand);
-// 		}
+//  		if (player.curentHand != null) {
+//  	 	$("#curentHandInTable").show();
+//  	 	var $bet = $('#curentHand').text(player.curentHand);
+//   		}
 		var $bet = $('#bets' + arg).text(player.curentBet);
 		var $nickname = $('#player' + arg + 'Nick').text(player.nick);
 		var $stack = $('#player' + arg + 'Balance').text(player.stack);
@@ -619,11 +619,28 @@ function raiseBtn(value) {
 						$.ajax({
 							url : baseUrl + '/inGame/getFiveCards?gameid=' + ${game.id},
 							type : 'get',
-							success : function(threeCards) {
+							success : function(Cards) {
 								var i = 1;
-								threeCards.forEach(function(card) {
+								Cards.forEach(function(card) {
 									$("#card" + i).attr("src", baseUrl + card.filename);
 									i++;
+								});
+								$.ajax({
+									url : baseUrl + '/inGame/setWinner?gameid=' + ${game.id},
+									type : 'get',
+									success : function(response) {
+										$.ajax({
+											url : baseUrl + '/inGame/getWinner?gameid=' + ${game.id},
+											type : 'get',
+											success : function(result) {
+		 								 		if (result != null) {
+		 								 	 		$("#curentHandInTable").show();
+		 								 	 		var $bet = $('#curentHand').text(result);
+		 								 		}
+												
+											}
+										});
+									}
 								});
 							}
 						});
@@ -634,31 +651,38 @@ function raiseBtn(value) {
 						$("#btnCall").hide();
 						$("#btnRaise").hide();
 						$("#inputRaise").hide();
+						$("#startBtn").show();
+						
+					} else if (game.state == "END") {
+						$("#startBtn").show();
+						for (var i = 0; i < 5; i++) {
+							$("#card" + i).attr("src", baseUrl + '/resources/img/cards/shirt.png');
+						}
 					}
 				}
 		});
     }, 2 * 1000);
 	
-	setInterval(function(){
-		$.ajax({
-			url : baseUrl + '/inGame/getGameState?gameid=' + ${game.id},
-			type : 'get',
-			success : function(game) {
-				if (game.state == "CHECKHAND") {
-					$.ajax({
-						url : baseUrl + '/inGame/getWinner?gameid=' + ${game.id},
-						type : 'get',
-						success : function(game) {
-					 		if (game.combination != null) {
-					 	 	$("#curentHandInTable").show();
-					 	 	var $bet = $('#curentHand').text(game.combination);
-					 		}
-						}
-					});
-				}
-			}
-		});
-    },3 * 1000);
+// 	setInterval(function(){
+// 		$.ajax({
+// 			url : baseUrl + '/inGame/getGameState?gameid=' + ${game.id},
+// 			type : 'get',
+// 			success : function(game) {
+// 				if (game.state == "CHECKHAND") {
+// 					$.ajax({
+// 						url : baseUrl + '/inGame/getWinner?gameid=' + ${game.id},
+// 						type : 'get',
+// 						success : function(game) {
+// 					 		if (game.combination != null) {
+// 					 	 	$("#curentHandInTable").show();
+// 					 	 	var $bet = $('#curentHand').text(game.combination);
+// 					 		}
+// 						}
+// 					});
+// 				}
+// 			}
+// 		});
+//     },3 * 1000);
 	
 	function startTimer(duration, display) {
 	    var timer = duration, seconds;
