@@ -415,6 +415,7 @@ public class InGameController extends AbstractController {
 	@RequestMapping(value = "/getWinner", method = RequestMethod.GET)
 	public ResponseEntity<Object> getWinner(@RequestParam(name = "gameid", required = true) final Integer gameid) {
 		List<IPlayer> players = playerService.getPlayersByGameWithStateUsual(gameid, PlayerStatus.USUAL);
+		IGame curentGame = gameService.getFullInfo(gameid);
 		List<CardsCombination> allCombinations = new ArrayList<CardsCombination>();
 		for (IPlayer iPlayer : players) {
 			allCombinations.add(iPlayer.getCurentHand());
@@ -423,14 +424,22 @@ public class InGameController extends AbstractController {
 		Collections.sort(allCombinations);
 		String result = allCombinations.get(0).name();
 
-//		for (IPlayer iPlayer : players) {
-//			iPlayer.setState(PlayerStatus.INACTIVE);
-//			playerService.save(iPlayer);
-//		}
-		IGame curentGame = gameService.getFullInfo(gameid);
-//		curentGame.setState(GameStatus.END);
+		for (IPlayer iPlayer : players) {
+			iPlayer.setCurentBet(0);
+			playerService.save(iPlayer);
+		}
+
+		int countWinner = 0;
+		for (IPlayer iPlayer : players) {
+			if (iPlayer.getCurentHand().name().equals(result)) {
+				countWinner++;
+			}
+		}
+		int sumWin = (int) (curentGame.getBank() / countWinner);
+
 		curentGame.setBank(0);
 		gameService.save(curentGame);
+
 		return new ResponseEntity<Object>(result, HttpStatus.OK);
 	}
 

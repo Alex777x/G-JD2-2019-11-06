@@ -6,7 +6,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
-
+<sec:authorize access="!isAnonymous()">
 <div class="container">
 	<img src="${contextPath}/resources/img/fon-poker.png" alt="" class="rounded-pill tableIngame">
 
@@ -223,7 +223,7 @@
 	<div id="firstDeal" style="color: white; display: none;">Первый этап. Нужно сделать минимальную ставку "BET" или сбросить карты
 		"FOLD".</div>
 </div>
-
+</sec:authorize>
 
 <script>
 var baseUrl = '${pageContext.request.contextPath}';
@@ -423,6 +423,7 @@ function raiseBtn(value) {
 												for (var i = 1; i < 11; i++) {
 													$("#notActive" + i).hide();
 													}
+												$("#curentHandInTable").hide();
 											}
 									});
 									
