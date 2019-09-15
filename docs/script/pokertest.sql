@@ -5,7 +5,7 @@
 -- Dumped from database version 11.2
 -- Dumped by pg_dump version 11.2
 
--- Started on 2019-09-15 14:15:23
+-- Started on 2019-09-15 14:16:33
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -3052,7 +3052,7 @@ ALTER TABLE ONLY public.user_account
     ADD CONSTRAINT user_account_fk0 FOREIGN KEY (country_id) REFERENCES public.country(id);
 
 
--- Completed on 2019-09-15 14:15:23
+-- Completed on 2019-09-15 14:16:33
 
 --
 -- PostgreSQL database dump complete
