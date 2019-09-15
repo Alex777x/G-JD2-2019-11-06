@@ -427,10 +427,10 @@ public class InGameController extends AbstractController {
 //			iPlayer.setState(PlayerStatus.INACTIVE);
 //			playerService.save(iPlayer);
 //		}
-//		IGame curentGame = gameService.getFullInfo(gameid);
+		IGame curentGame = gameService.getFullInfo(gameid);
 //		curentGame.setState(GameStatus.END);
-//		curentGame.setBank(0);
-//		gameService.save(curentGame);
+		curentGame.setBank(0);
+		gameService.save(curentGame);
 		return new ResponseEntity<Object>(result, HttpStatus.OK);
 	}
 

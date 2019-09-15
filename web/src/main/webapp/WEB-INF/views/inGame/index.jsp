@@ -415,9 +415,15 @@ function raiseBtn(value) {
 									$.ajax({
 										url : baseUrl + '/inGame/changeGameToNew?gameid=' + ${game.id},
 										type : 'post',
-// 											success : function(game) {
-												
-// 											}
+											success : function(game) {
+												for (var i = 1; i < 6; i++) {
+													$("#card" + i).attr("src", baseUrl + '/resources/img/cards/shirt.png');
+													
+													}
+												for (var i = 1; i < 11; i++) {
+													$("#notActive" + i).hide();
+													}
+											}
 									});
 									
 								}

@@ -300,6 +300,7 @@ public class PokerLogicUtils {
 			if (iCard.getSuit().equals(Suits.CLUBS)) {
 				if (!suits.containsKey(Suits.CLUBS)) {
 					suits.put(Suits.CLUBS, iclubs);
+					iclubs++;
 				} else {
 					iclubs++;
 					suits.replace(Suits.CLUBS, iclubs);
@@ -308,6 +309,7 @@ public class PokerLogicUtils {
 			} else if (iCard.getSuit().equals(Suits.DIAMONDS)) {
 				if (!suits.containsKey(Suits.DIAMONDS)) {
 					suits.put(Suits.DIAMONDS, idiamonds);
+					idiamonds++;
 				} else {
 					idiamonds++;
 					suits.replace(Suits.DIAMONDS, idiamonds);
@@ -316,6 +318,7 @@ public class PokerLogicUtils {
 			} else if (iCard.getSuit().equals(Suits.HEARTS)) {
 				if (!suits.containsKey(Suits.HEARTS)) {
 					suits.put(Suits.HEARTS, ihearts);
+					ihearts++;
 				} else {
 					ihearts++;
 					suits.replace(Suits.HEARTS, ihearts);
@@ -323,6 +326,7 @@ public class PokerLogicUtils {
 			} else if (iCard.getSuit().equals(Suits.SPADES)) {
 				if (!suits.containsKey(Suits.SPADES)) {
 					suits.put(Suits.SPADES, ispades);
+					ispades++;
 				} else {
 					ispades++;
 					suits.replace(Suits.SPADES, ispades);
