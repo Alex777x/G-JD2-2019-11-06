@@ -16,26 +16,26 @@
 				<img src="${contextPath}/resources/img/spades.png" alt="">
 			</div>
 			<div class="personalAreadata">
-				<p>Никнейм: ${userAccount.nickname}</p>
+				<p><spring:message code="page.registration.nickname" />: ${userAccount.nickname}</p>
 				<p>
-					Дата регистрации:
+					<spring:message code="page.home.dateReg" />:
 					<fmt:formatDate pattern="dd-MMMM" value="${userAccount.created}" />
 				</p>
-				<p>Игр сыграно: ${userAccount.sumGames}</p>
-				<p>Игр выиграно: ${userAccount.wonGames}</p>
+				<p><spring:message code="page.home.sumGame" />: ${userAccount.sumGames}</p>
+				<p><spring:message code="page.home.wonGame" />: ${userAccount.wonGames}</p>
 			</div>
 
-			<div class="dopInfo">
-				<p>If you find a mistake or have</p>
-				<p>questions about the site,</p>
-				<p>please write a ticket to us.</p>
-			</div>
+<!-- 			<div class="dopInfo"> -->
+<!-- 				<p>If you find a mistake or have</p> -->
+<!-- 				<p>questions about the site,</p> -->
+<!-- 				<p>please write a ticket to us.</p> -->
+<!-- 			</div> -->
 
 		</div>
 
 
 		<div class="col-sm personAreaSet">
-			<p class="ptext">Change Name</p>
+			<p class="ptext"><spring:message code="page.home.changeName" /></p>
 			<div class="form-group">
 				<input id="newNickName" class="form-control" type="text"
 					placeholder="Set a new Nickname">
@@ -57,15 +57,14 @@
 <!-- 			<br> -->
 <!-- 			<hr> -->
 <!-- 			<br> -->
-			<p class="ptext">Add Money</p>
+			<p class="ptext"><spring:message code="page.home.addMoney" /></p>
 				<input id="newBalance" class="form-control" type="text"
 					placeholder="Enter amount">
 				<button id="addBalance" class="btn btn-primary" type="submit">Add</button>
 			<br>
 			<hr>
 			<br>
-			<p class="ptext">If you want to delete your account, click the
-				button below.</p>
+			<p class="ptext"><spring:message code="page.home.deleteAcc" /></p>
 			<button class="btn btn-danger" type="submit">Delete Account</button>
 		</div>
 

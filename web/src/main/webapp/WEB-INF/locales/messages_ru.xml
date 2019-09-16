@@ -38,4 +38,13 @@
 	<entry key="page.home.logout">Выйти</entry>
 	<entry key="page.home.balance">Баланс</entry>
 	
+	<entry key="page.home.inGame">Победная комбинация:</entry>
+	<entry key="page.home.step">Первый этап. Нужно сделать минимальную ставку "BET" или сбросить карты "FOLD".</entry>
+	<entry key="page.home.dateReg">Дата регистрации</entry>
+	<entry key="page.home.sumGame">Игр сыграно</entry>
+	<entry key="page.home.wonGame">Игр выиграно</entry>
+	<entry key="page.home.changeName">Сменить Никнейм</entry>
+	<entry key="page.home.addMoney">Добавить средства</entry>
+	<entry key="page.home.deleteAcc">Удалить аккаунт</entry>
+	
 </properties>

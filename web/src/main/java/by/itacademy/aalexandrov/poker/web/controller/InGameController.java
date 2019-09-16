@@ -193,6 +193,7 @@ public class InGameController extends AbstractController {
 	public ResponseEntity<Object> changeGameToNew(
 			@RequestParam(name = "gameid", required = true) final Integer gameid) {
 		IGame curentGame = gameService.getFullInfo(gameid);
+		cardInGameService.deleteDeckForGame(curentGame.getId());
 		curentGame.setState(GameStatus.NEW);
 		gameService.save(curentGame);
 		createDeckForGame(curentGame);
@@ -367,47 +368,6 @@ public class InGameController extends AbstractController {
 	public ResponseEntity<Object> setWinner(@RequestParam(name = "gameid", required = true) final Integer gameid) {
 		List<IPlayer> players = playerService.getPlayersByGameWithStateUsual(gameid, PlayerStatus.USUAL);
 		getUsersCurentHand(gameid, players);
-//		CardsCombination combination = PokerLogicPowerHand.resolveCombination(players);
-//		IGame curentGame = gameService.getFullInfo(gameid);
-//		if (combinations.size() == 1) {
-//			int playersCount = players.size();
-//			int bank = (int) curentGame.getBank();
-//			int win = bank / playersCount;
-//			for (IPlayer iPlayer : players) {
-//				iPlayer.setStack(iPlayer.getStack() + win);
-//				iPlayer.setCurentBet(0);
-//				// iPlayer.setState(PlayerStatus.INACTIVE);
-//				playerService.save(iPlayer);
-//				ITransaction transactionForWinner = transactionService.createEntity();
-//				transactionForWinner.setAmount(+win);
-//				transactionForWinner.setComment("win");
-//				transactionForWinner.setUserAccount(iPlayer.getUserAccount());
-//				transactionService.save(transactionForWinner);
-//			}
-//			curentGame.setBank(0);
-//			curentGame.setState(GameStatus.END);
-//			gameService.save(curentGame);
-
-//		} else {
-//			int bank = (int) curentGame.getBank();
-//			IPlayer winPlayer = PokerLogicPowerHand.resolveCombination(players);
-//			winPlayer.setStack(winPlayer.getStack() + bank);
-//			winPlayer.setCurentBet(0);
-//			playerService.save(winPlayer);
-//			ITransaction transactionForWinner = transactionService.createEntity();
-//			transactionForWinner.setAmount(+bank);
-//			transactionForWinner.setComment("win");
-//			transactionForWinner.setUserAccount(winPlayer.getUserAccount());
-//			transactionService.save(transactionForWinner);
-//		}
-//		curentGame.setBank(0);
-//		curentGame.setState(GameStatus.END);
-//		gameService.save(curentGame);
-
-//		for (IPlayer iPlayer : players) {
-//			iPlayer.setState(PlayerStatus.INACTIVE);
-//			playerService.save(iPlayer);
-//		}
 
 		return new ResponseEntity<Object>(HttpStatus.OK);
 	}
@@ -436,6 +396,18 @@ public class InGameController extends AbstractController {
 			}
 		}
 		int sumWin = (int) (curentGame.getBank() / countWinner);
+		for (IPlayer iPlayer : players) {
+			if (iPlayer.getCurentHand().name().equals(result)) {
+				if (sumWin != 0) {
+					ITransaction transactionForWinner = transactionService.createEntity();
+					transactionForWinner.setAmount(+sumWin);
+					transactionForWinner.setComment("win");
+					transactionForWinner.setUserAccount(iPlayer.getUserAccount());
+					transactionService.save(transactionForWinner);
+				}
+
+			}
+		}
 
 		curentGame.setBank(0);
 		gameService.save(curentGame);

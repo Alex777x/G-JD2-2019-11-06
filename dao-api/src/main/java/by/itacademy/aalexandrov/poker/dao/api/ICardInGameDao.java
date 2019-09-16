@@ -22,4 +22,6 @@ public interface ICardInGameDao extends IDao<ICardInGame, Integer> {
 
 	List<ICardInGame> getPlayerCards(Integer id);
 
+	void deleteDeckForGame(Integer id);
+
 }

@@ -115,4 +115,11 @@ public class CardInGameServiceImpl implements ICardInGameService {
 		return dao.getPlayerCards(id);
 	}
 
+	@Override
+	public void deleteDeckForGame(Integer id) {
+		LOGGER.info("delete all CardInGames for Game");
+		dao.deleteDeckForGame(id);
+
+	}
+
 }

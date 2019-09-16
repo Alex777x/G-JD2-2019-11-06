@@ -190,4 +190,11 @@ public class CardInGameDaoImpl extends AbstractDaoImpl<ICardInGame, Integer> imp
 		return q.getResultList();
 	}
 
+	@Override
+	public void deleteDeckForGame(Integer id) {
+		entityManager.createQuery(String.format("delete from CardInGame e where e.game.id = :id"))
+				.setParameter("id", id).executeUpdate();
+
+	}
+
 }

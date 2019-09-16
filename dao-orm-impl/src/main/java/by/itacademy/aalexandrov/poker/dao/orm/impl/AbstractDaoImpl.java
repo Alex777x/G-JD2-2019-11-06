@@ -13,7 +13,7 @@ import by.itacademy.aalexandrov.poker.dao.api.filter.AbstractFilter;
 public abstract class AbstractDaoImpl<T, ID> implements IDao<T, ID> {
 
 	@PersistenceContext
-	private EntityManager entityManager;
+	protected EntityManager entityManager;
 
 	private final Class<? extends T> entityClass;
 

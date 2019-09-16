@@ -39,4 +39,13 @@
 	<entry key="page.home.logout">Logout</entry>
 	<entry key="page.home.balance">Balance</entry>
 	
+	<entry key="page.home.inGame">Winning combination:</entry>
+	<entry key="page.home.step">First step. You need to make a minimum bet of "BET" or fold "FOLD".</entry>
+	<entry key="page.home.dateReg">Registration date</entry>
+	<entry key="page.home.sumGame">Games played</entry>
+	<entry key="page.home.wonGame">Games won</entry>
+	<entry key="page.home.changeName">Change Name</entry>
+	<entry key="page.home.addMoney">Add Money</entry>
+	<entry key="page.home.deleteAcc">Delete account</entry>
+	
 </properties>

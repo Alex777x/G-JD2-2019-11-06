@@ -41,4 +41,7 @@ public interface ICardInGameService {
 
 	List<ICardInGame> getPlayerCards(Integer id);
 
+	@Transactional
+	void deleteDeckForGame(Integer id);
+
 }
