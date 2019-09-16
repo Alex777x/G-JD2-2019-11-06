@@ -47,4 +47,18 @@
 	<entry key="page.home.addMoney">Добавить средства</entry>
 	<entry key="page.home.deleteAcc">Удалить аккаунт</entry>
 	
+	<entry key="page.home.listGame">Список игр</entry>
+	<entry key="page.home.playersGame">Игроков в игре</entry>
+	<entry key="page.home.currentBank">Текущий банк</entry>
+	<entry key="page.home.created">Создана</entry>
+	<entry key="page.home.action">Действие</entry>
+	<entry key="page.home.inGame">В игру</entry>
+	<entry key="page.home.newtable">Новый стол</entry>
+	<entry key="page.home.chat">Чат</entry>
+	<entry key="page.home.message">Сообщение</entry>
+	<entry key="page.home.time">Время</entry>
+	<entry key="page.home.send">Отправить</entry>
+	<entry key="page.home.roll">У каждого есть шанс выиграть приз в размере 1000$. Если выпадет число 777, вы счастливчик!</entry>
+	<entry key="page.home.spin">Крутить</entry>
+	
 </properties>

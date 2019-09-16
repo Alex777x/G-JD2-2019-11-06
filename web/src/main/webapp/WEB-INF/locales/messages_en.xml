@@ -48,4 +48,18 @@
 	<entry key="page.home.addMoney">Add Money</entry>
 	<entry key="page.home.deleteAcc">Delete account</entry>
 	
+	<entry key="page.home.listGame">List of games</entry>
+	<entry key="page.home.playersGame">Players in game</entry>
+	<entry key="page.home.currentBank">Current Bank</entry>
+	<entry key="page.home.created">Created</entry>
+	<entry key="page.home.action">Action</entry>
+	<entry key="page.home.inGame">In Game</entry>
+	<entry key="page.home.newtable">New Table</entry>
+	<entry key="page.home.chat">Chat</entry>
+	<entry key="page.home.message">Message</entry>
+	<entry key="page.home.time">Time</entry>
+	<entry key="page.home.send">Send</entry>
+	<entry key="page.home.roll">Everyone has a chance to win a prize of $ 1,000. If the number 777 appears, you are lucky!</entry>
+	<entry key="page.home.spin">Spin</entry>
+	
 </properties>
