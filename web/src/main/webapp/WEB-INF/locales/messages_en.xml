@@ -40,7 +40,6 @@
 	<entry key="page.home.balance">Balance</entry>
 	
 	<entry key="page.home.inGame">Winning combination:</entry>
-	<entry key="page.home.step">First step. You need to make a minimum bet of "BET" or fold "FOLD".</entry>
 	<entry key="page.home.dateReg">Registration date</entry>
 	<entry key="page.home.sumGame">Games played</entry>
 	<entry key="page.home.wonGame">Games won</entry>
@@ -61,5 +60,8 @@
 	<entry key="page.home.send">Send</entry>
 	<entry key="page.home.roll">Everyone has a chance to win a prize of $ 1,000. If the number 777 appears, you are lucky!</entry>
 	<entry key="page.home.spin">Spin</entry>
+	
+	<entry key="page.inGame.winHand">Winning combination</entry>
+	<entry key="page.inGame.step">First step. You need to make a minimum bet of "BET" or fold "FOLD".</entry>
 	
 </properties>

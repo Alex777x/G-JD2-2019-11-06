@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import by.itacademy.aalexandrov.poker.dao.api.entity.enums.UserRole;
+import by.itacademy.aalexandrov.poker.dao.api.entity.enums.UserStatus;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.ICountry;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.ITransaction;
 import by.itacademy.aalexandrov.poker.dao.api.entity.table.IUserAccount;
@@ -54,6 +56,11 @@ public class RegistrationController {
 			loadCommonFormUserAccounts(hashMap);
 			return new ModelAndView("registration", hashMap);
 		} else {
+			formRegistrationUserAccount.setSumGames(0);
+			formRegistrationUserAccount.setWonGames(0);
+			formRegistrationUserAccount.setUserRole(UserRole.MEMBER);
+			formRegistrationUserAccount.setUserStatus(UserStatus.ACTIVE);
+			formRegistrationUserAccount.setFoto("resources/img/foto.png");
 			final IUserAccount entity = fromDtoConverter.apply(formRegistrationUserAccount);
 			userAccountService.save(entity);
 

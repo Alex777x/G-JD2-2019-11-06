@@ -39,7 +39,6 @@
 	<entry key="page.home.balance">Баланс</entry>
 	
 	<entry key="page.home.inGame">Победная комбинация:</entry>
-	<entry key="page.home.step">Первый этап. Нужно сделать минимальную ставку "BET" или сбросить карты "FOLD".</entry>
 	<entry key="page.home.dateReg">Дата регистрации</entry>
 	<entry key="page.home.sumGame">Игр сыграно</entry>
 	<entry key="page.home.wonGame">Игр выиграно</entry>
@@ -60,5 +59,8 @@
 	<entry key="page.home.send">Отправить</entry>
 	<entry key="page.home.roll">У каждого есть шанс выиграть приз в размере 1000$. Если выпадет число 777, вы счастливчик!</entry>
 	<entry key="page.home.spin">Крутить</entry>
+	
+	<entry key="page.inGame.winHand">Победная комбинация</entry>
+	<entry key="page.inGame.step">Первый этап. Нужно сделать минимальную ставку "BET" или сбросить карты "FOLD".</entry>
 	
 </properties>

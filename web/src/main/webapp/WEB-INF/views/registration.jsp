@@ -9,6 +9,8 @@
 		<form:input path="foto" type="hidden" />
 		<form:input path="userRole" type="hidden" />
 		<form:input path="userStatus" type="hidden" />
+		<form:input path="sumGames" type="hidden" />
+		<form:input path="wonGames" type="hidden" />
 
 		<div class="form-row">
 			<div class="form-group col-md-6">

@@ -29,7 +29,7 @@
 		<i id="bank" class="fas fa-piggy-bank"></i>
 	</div>
 	<div class="curentHandInTable" id="curentHandInTable" style="display: none;">
-		<span><spring:message code="page.news.inGame" /> </span><span id="curentHand"></span>
+		<span><spring:message code="page.inGame.winHand" /> </span><span id="curentHand"></span>
 	</div>
 
 	<div id="shirt1" class="shirt1" style="display: none;">
@@ -220,7 +220,7 @@
 		<button id="startBtn" type="button" class="btn btn-primary btn-lg">Start game</button>
 		<div id="digital-clock" style="color: white;"></div>
 	</div>
-	<div id="firstDeal" style="color: white; display: none;"><spring:message code="page.news.step" /></div>
+	<div id="firstDeal" style="color: white; display: none;"><spring:message code="page.inGame.step" /></div>
 </div>
 </sec:authorize>
 
